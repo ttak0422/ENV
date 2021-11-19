@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }: {
-    home.packages = [ 
-        # pkgs.hello 
-    ];
+  home.packages = [
+    # pkgs.hello 
+  ];
 }

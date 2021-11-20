@@ -74,7 +74,7 @@
       let pkgs = nixpkgs.legacyPackages.${system};
       in {
         devShell = pkgs.mkShell {
-          buildInputs = [ pkgs.nixfmt ];
+          buildInputs = with pkgs; [ nixfmt pre-commit ];
           shellHook = "";
         };
       });

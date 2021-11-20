@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
   imports = [ ./prelude.nix ];
   homebrew = {
-
+    brews = [ ]; # "yabai" "skhd"
     taps = [ "homebrew/core" "homebrew/cask" "homebrew/cask-fonts" ];
     casks = [
       "alacritty"

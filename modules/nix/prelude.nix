@@ -6,5 +6,9 @@
     '';
     # Hack to support legacy worklows that use `<nixpkgs>` etc.
     nixPath = { nixpkgs = "$HOME/.config/nixpkgs/nixpkgs.nix"; };
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 10d";
+    };
   };
 }

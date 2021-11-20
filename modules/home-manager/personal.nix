@@ -1,1 +1,3 @@
-{ config, pkgs, lib, ... }: { imports = [ ./shell ]; }
+{ config, pkgs, lib, ... }: {
+  imports = [ ./application ./dev ./shell ./tool ./vim ];
+}

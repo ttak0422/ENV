@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/master";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixpkgs-21.05-darwin";
     darwin.url = "github:LnL7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
@@ -12,6 +13,7 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
@@ -23,7 +25,8 @@
 
       nixpkgsConfig = {
         config = { allowUnfree = true; };
-        overlays = attrValues self.overlays;
+        overlays = attrValues self.overlays
+          ++ [ inputs.neovim-nightly-overlay.overlay ];
       };
 
       mkHomeManagerConfig =
@@ -38,11 +41,13 @@
           userHomebrewConfig
           home-manager.darwinModules.home-manager
           {
+            nixpkgs = nixpkgsConfig;
             users.users.${user}.home = "/Users/${user}";
             home-manager = {
               useUserPackages = true;
               useGlobalPkgs = true;
               users.${user} = mkHomeManagerConfig args;
+              extraSpecialArgs = args.specialArgs;
             };
           }
         ];
@@ -55,23 +60,31 @@
             inherit (nixpkgsConfig) config;
           };
         };
+        pkgs-stable = final: prev: {
+          pkgs-stable = import inputs.nixpkgs-stable {
+            inherit (prev.stdenv) system;
+            inherit (nixpkgsConfig) config;
+          };
+        };
       };
 
       darwinConfigurations = {
-        darwinM1 = darwinSystem {
+        darwinM1 = let
           system = "aarch64-darwin";
-          inputs = inputs;
+          # https://github.com/nix-community/home-manager/issues/1698
+          specialArgs = { inherit inputs; };
           modules = mkDarwinModules {
             user = "ttak0422";
             host = "mbp";
             userConfig = ./modules/darwin/personal.nix;
             userHmConfig = ./modules/home-manager/personal.nix;
             userHomebrewConfig = ./modules/homebrew/personal.nix;
+            inherit specialArgs;
           } ++ [
             ./modules/nix/prelude.nix
             { homebrew.brewPrefix = "/opt/homebrew/bin"; }
           ];
-        };
+        in darwinSystem { inherit system modules specialArgs; };
         darwinIntelCI = darwinSystem {
           system = "x86_64-darwin";
           modules = mkDarwinModules {

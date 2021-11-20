@@ -16,7 +16,7 @@
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
     let
-      inherit (nixpkgs.lib) attrValues;
+      inherit (nixpkgs.lib) attrValues optionalAttrs;
       inherit (darwin.lib) darwinSystem;
       inherit (home-manager.lib) homeManagerConfiguration;
       inherit (flake-utils.lib) eachDefaultSystem eachSystem allSystems;
@@ -35,8 +35,6 @@
         home-manager.darwinModules.home-manager
         ({ config, pkgs, lib, ... }: {
           nixpkgs = nixpkgsConfig;
-          # Hack to support legacy worklows that use `<nixpkgs>` etc.
-          nix.nixPath = { nixpkgs = "$HOME/.config/nixpkgs/nixpkgs.nix"; };
           users.users.${user}.home = "/Users/${user}";
           home-manager = {
             useGlobalPkgs = true;
@@ -62,7 +60,7 @@
           modules = mkDarwinModules {
             user = "ttak0422";
             host = "mbp";
-          };
+          } ++ [ ./modules/nix/prelude.nix ];
         };
         darwinIntelCI = darwinSystem {
           system = "x86_64-darwin";

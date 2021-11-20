@@ -27,21 +27,25 @@
       };
 
       mkHomeManagerConfig =
-        args@{ user, userConfig ? "./modules/home-manager/tiny.nix", ... }: {
-          imports = [ ];
+        args@{ userHmConfig ? ./modules/home-manager/tiny.nix, ... }: {
+          imports = [ userHmConfig ];
         };
-      mkDarwinModules = args@{ user, host, ... }: [
-        ./modules/darwin/prelude.nix
-        home-manager.darwinModules.home-manager
-        ({ config, pkgs, lib, ... }: {
-          nixpkgs = nixpkgsConfig;
-          users.users.${user}.home = "/Users/${user}";
-          home-manager = {
-            useGlobalPkgs = true;
-            users.${user} = mkHomeManagerConfig args;
-          };
-        })
-      ];
+
+      mkDarwinModules = args@{ user, host
+        , userConfig ? ./modules/darwin/tiny.nix
+        , userHomebrewConfig ? ./modules/homebrew/tiny.nix, ... }: [
+          userConfig
+          userHomebrewConfig
+          home-manager.darwinModules.home-manager
+          {
+            users.users.${user}.home = "/Users/${user}";
+            home-manager = {
+              useUserPackages = true;
+              useGlobalPkgs = true;
+              users.${user} = mkHomeManagerConfig args;
+            };
+          }
+        ];
 
     in {
       overlays = {
@@ -60,7 +64,13 @@
           modules = mkDarwinModules {
             user = "ttak0422";
             host = "mbp";
-          } ++ [ ./modules/nix/prelude.nix ];
+            userConfig = ./modules/darwin/personal.nix;
+            userHmConfig = ./modules/home-manager/personal.nix;
+            userHomebrewConfig = ./modules/homebrew/personal.nix;
+          } ++ [
+            ./modules/nix/prelude.nix
+            { homebrew.brewPrefix = "/opt/homebrew/bin"; }
+          ];
         };
         darwinIntelCI = darwinSystem {
           system = "x86_64-darwin";

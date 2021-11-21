@@ -5,7 +5,12 @@
       "lunchy"
       "yabai" # wip...
     ];
-    taps = [ "homebrew/core" "homebrew/cask" "homebrew/cask-fonts" ];
+    taps = [
+      "homebrew/cask-fonts"
+      "homebrew/cask"
+      "homebrew/core"
+      "koekeishiya/formulae"
+    ];
     casks = [
       "alacritty"
       "cyberduck"

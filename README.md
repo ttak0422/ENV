@@ -1,6 +1,11 @@
-# ENV
-my environment...
+<h1 align="center">ENV</h1>
+<p align="center">my environment...</p>
 
+<p align="center">
+
+<img alt="nix" src="https://builtwithnix.org/badge.svg">
+<img alt="status" src="https://img.shields.io/github/workflow/status/ttak0422/ENV/CI?style=for-the-badge">
+</p>
 
 ## Setup
 

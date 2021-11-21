@@ -103,6 +103,17 @@
             host = "${userName}-intel";
           };
         in darwinSystem { inherit system specialArgs modules; };
+
+        # macos (x86_64)
+        ci = let
+          system = "x86_64-darwin";
+          userName' = "runner";
+          specialArgs = { inherit inputs userName' userEmail; };
+          modules = mkPersonalDarwinModules {
+            inherit userName specialArgs;
+            host = "${userName'}-intel";
+          };
+        in darwinSystem { inherit system specialArgs modules; };
       };
     } // eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};

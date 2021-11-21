@@ -26,6 +26,6 @@ jobs:
           name: ttak0422
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           
-      - run: nix build .#darwinConfigurations.darwinIntel.system
+      - run: nix build .#darwinConfigurations.ci.system
       
-      - run: ./result/sw/bin/darwin-rebuild switch --flake .#darwinIntel
+      - run: ./result/sw/bin/darwin-rebuild switch --flake .#ci

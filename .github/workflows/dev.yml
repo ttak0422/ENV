@@ -25,6 +25,13 @@ jobs:
         with:
           name: ttak0422
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      # 参考 (https://github.com/kclejeune/system/blob/3b6cf43603870075c2ffc837c9461b70bc6cc7cd/bin/do.py)
+      - run: |
+          APFS_UTIL="/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util"
+          echo 'run\tprivate/var/run' | sudo tee -a /etc/synthetic.conf
+          $APFS_UTIL -B || true
+          $APFS_UTIL -t || true
           
       - run: nix build .#darwinConfigurations.ci.system
       

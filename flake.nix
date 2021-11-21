@@ -112,10 +112,14 @@
             inherit inputs userEmail;
             userName = userName';
           };
-          modules = mkPersonalDarwinModules {
+          modules = mkDarwinModules {
             inherit specialArgs;
-            userName = userName';
-            host = "${userName'}-intel";
+            user = userName';
+            host = "${userName}-intel";
+            userConfig = ./modules/darwin/personal.nix;
+            userHmConfig = ./modules/home-manager/personal.nix;
+            # キャッシュできないため無視
+            # userHomebrewConfig = ./modules/homebrew/personal.nix;
           };
         in darwinSystem { inherit system specialArgs modules; };
       };

@@ -18,6 +18,9 @@
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
     let
+      userName = "ttak0422";
+      userEmail = "ttak0422@gmail.com";
+
       inherit (nixpkgs.lib) attrValues optionalAttrs;
       inherit (darwin.lib) darwinSystem;
       inherit (home-manager.lib) homeManagerConfiguration;
@@ -47,11 +50,20 @@
               useUserPackages = true;
               useGlobalPkgs = true;
               users.${user} = mkHomeManagerConfig args;
+              # https://github.com/nix-community/home-manager/issues/1698
               extraSpecialArgs = args.specialArgs;
             };
           }
         ];
 
+      mkPersonalDarwinModules = { userName, host, specialArgs, ... }:
+        mkDarwinModules {
+          inherit host specialArgs;
+          user = userName;
+          userConfig = ./modules/darwin/personal.nix;
+          userHmConfig = ./modules/home-manager/personal.nix;
+          userHomebrewConfig = ./modules/homebrew/personal.nix;
+        };
     in {
       overlays = {
         pkgs-master = final: prev: {
@@ -69,31 +81,28 @@
       };
 
       darwinConfigurations = {
+        # aarch64-darwin
         darwinM1 = let
-          userName = "ttak0422";
-          userEmail = "bgdaewalkman@gmail.com";
           system = "aarch64-darwin";
-          # https://github.com/nix-community/home-manager/issues/1698
           specialArgs = { inherit inputs userName userEmail; };
-          modules = mkDarwinModules {
-            user = "ttak0422";
+          modules = mkPersonalDarwinModules {
+            inherit userName specialArgs;
             host = "mbp";
-            userConfig = ./modules/darwin/personal.nix;
-            userHmConfig = ./modules/home-manager/personal.nix;
-            userHomebrewConfig = ./modules/homebrew/personal.nix;
-            inherit specialArgs;
           } ++ [
             ./modules/nix/prelude.nix
             { homebrew.brewPrefix = "/opt/homebrew/bin"; }
           ];
         in darwinSystem { inherit system modules specialArgs; };
-        darwinIntelCI = darwinSystem {
+
+        # x86_64-darwin
+        darwinIntelCI = let
           system = "x86_64-darwin";
-          modules = mkDarwinModules {
-            user = "ci";
-            host = "ci";
+          specialArgs = { inherit inputs userName userEmail; };
+          modules = mkPersonalDarwinModules {
+            inherit userName specialArgs;
+            host = "${userName}-intel";
           };
-        };
+        in darwinSystem { inherit system specialArgs modules; };
       };
     } // eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};

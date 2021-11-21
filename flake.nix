@@ -95,7 +95,7 @@
         in darwinSystem { inherit system modules specialArgs; };
 
         # x86_64-darwin
-        darwinIntelCI = let
+        darwinIntel = let
           system = "x86_64-darwin";
           specialArgs = { inherit inputs userName userEmail; };
           modules = mkPersonalDarwinModules {

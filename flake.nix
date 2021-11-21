@@ -108,9 +108,13 @@
         ci = let
           system = "x86_64-darwin";
           userName' = "runner";
-          specialArgs = { inherit inputs userName' userEmail; };
+          specialArgs = {
+            inherit inputs userEmail;
+            userName = userName';
+          };
           modules = mkPersonalDarwinModules {
-            inherit userName specialArgs;
+            inherit specialArgs;
+            userName = userName';
             host = "${userName'}-intel";
           };
         in darwinSystem { inherit system specialArgs modules; };

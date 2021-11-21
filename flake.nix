@@ -70,9 +70,11 @@
 
       darwinConfigurations = {
         darwinM1 = let
+          userName = "ttak0422";
+          userEmail = "bgdaewalkman@gmail.com";
           system = "aarch64-darwin";
           # https://github.com/nix-community/home-manager/issues/1698
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs userName userEmail; };
           modules = mkDarwinModules {
             user = "ttak0422";
             host = "mbp";

@@ -3,7 +3,7 @@
     autohide = true;
     mineffect = "suck";
     mouse-over-hilite-stack = true;
-    orientation = "bottom";
+    orientation = "left";
     show-process-indicators = true;
     show-recents = false;
     showhidden = false;

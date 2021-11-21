@@ -4,7 +4,7 @@ let
   fontSize = 16;
   padding = fontSize / 2;
   fontFamily = "Hack Nerd Font Mono";
-  backgroundOpacity = 0.9;
+  backgroundOpacity = 1.0;
   config = ''
     # Colors (One Dark - https://github.com/atom/atom/tree/master/packages/one-dark-syntax)
     colors:

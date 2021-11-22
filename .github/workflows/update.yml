@@ -1,0 +1,46 @@
+name: Update
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+jobs:
+  update-darwin:
+    strategy:
+      matrix:
+        os: [ macos-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Get date
+        id: date
+        run:  echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
+      - name: Setup git
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      
+      - name: Setup nix
+        uses: cachix/install-nix-action@v16
+      
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v10
+        with:
+          name: ttak0422
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          
+      - name: Update flake
+        run: |
+          nix flake update --commit-lock-file
+          
+      - name: Create PR
+        run: |
+          hub push
+          hub pull-request -b develop -m "Scheduled update (${{ steps.date.outputs.date }})"
+          env: 
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        

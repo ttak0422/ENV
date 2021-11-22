@@ -65,6 +65,12 @@
           userHomebrewConfig = ./modules/homebrew/personal.nix;
         };
     in {
+      checks = {
+        x86_64-darwin = {
+          ci = self.darwinConfigurations.ci.config.system.build.toplevel;
+        };
+      };
+
       overlays = {
         pkgs-master = final: prev: {
           pkgs-master = import inputs.nixpkgs {

@@ -1,11 +1,16 @@
-<h1 align="center">ENV</h1>
-<p align="center">my environment...</p>
-
+<div align="center">
+<h1>ENV</h1>
+<p>my environment...</p>
 <p align="center">
-
 <img alt="nix" src="https://builtwithnix.org/badge.svg">
-<img alt="status" src="https://img.shields.io/github/workflow/status/ttak0422/ENV/CI?style=for-the-badge">
+<br>
+<a href="https://nixos.org">
+<img src="https://img.shields.io/badge/channel-unstable-white?style=flat&logo=NixOS&logoColor">
+</a>
+<img alt="status" src="https://img.shields.io/github/workflow/status/ttak0422/ENV/CI?style=flat">
+<img alt="license" src="https://img.shields.io/github/license/ttak0422/ENV">
 </p>
+</div>
 
 ## Setup
 

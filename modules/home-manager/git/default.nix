@@ -1,5 +1,6 @@
 { config, pkgs, lib, userName, userEmail, ... }: {
   imports = [ ./tig.nix ];
+  home.packages = with pkgs; [ ghq ];
   programs.git = {
     inherit userName userEmail;
     enable = true;

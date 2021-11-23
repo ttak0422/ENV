@@ -2,7 +2,6 @@
   home.packages = with pkgs; [
     bat # cat clone
     coreutils-full # cat, ls, mv, wget, ...
-    direnv # env switcher
     exa # ls clone
     fd # find clone
     hey # load test tool
@@ -16,5 +15,5 @@
     wget # GNU Wget
     yq # JSON processor
   ];
-  imports = [ ./fzf.nix ./pet.nix ./ripgrep.nix ];
+  imports = [ ./direnv.nix ./fzf.nix ./pet.nix ./ripgrep.nix ];
 }

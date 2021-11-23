@@ -28,6 +28,12 @@
         while [ $# -gt 0 ]; do s=\"$s,$1\"; shift; done;\
         curl -L \"https://www.gitignore.io/api/$s\"; }; f"
       '';
+      # e.g. git delete-merged-branch develop
+      # 参考 (https://qiita.com/hajimeni/items/73d2155fc59e152630c4)
+      delete-merged-branch = ''
+        !f () { git checkout $1; git branch --merged|egrep -v \
+        '\\*|develop|main'|xargs git branch -d; };f
+      '';
     };
   };
 }

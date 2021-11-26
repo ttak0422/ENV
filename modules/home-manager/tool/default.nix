@@ -4,6 +4,7 @@
     coreutils-full # cat, ls, mv, wget, ...
     exa # ls clone
     fd # find clone
+    figlet # ascii
     hey # load test tool
     htop # top clone
     jq # JSON processor

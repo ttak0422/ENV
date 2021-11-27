@@ -7,6 +7,9 @@ let
     # colorscheme
     neovim-ayu
 
+    # startift
+    vim-startify
+
     # 定番設定
     vim-sensible
 
@@ -16,8 +19,17 @@ let
     # インデント可視化
     indentLine
 
+    # yank可視化
+    vim-highlightedyank
+
+    # git差分可視化
+    vim-gitgutter
+
     # vim向けeditorconfig
     editorconfig-vim
+
+    # 対応括弧可視化
+    rainbow
 
     # zoom
     zoomwintab-vim
@@ -28,20 +40,19 @@ let
 
     # asyncomplete-vim
     fzf-vim
-    rainbow
     traces-vim
     vim-closetag
-    vim-devicons
-    vim-easymotion
-    vim-gitgutter
-    vim-startify
 
     # coc plugins
     emmet-vim
     coc-emmet
     coc-yaml
 
-    # nerdtree
+    # easymotion
+    vim-easymotion
+
+    # nerdtree    
+    vim-devicons
     nerdtree
     nerdtree-git-plugin
     vim-nerdtree-tabs
@@ -80,12 +91,13 @@ let
 
     " file (content) search
     nnoremap <C-f> :Rg<CR>
+
     " file search
     nnoremap <Leader>p :Files<CR> 
 
     """"""""""""""""""
     " Window keybind "
-    """"""""""2"""""""
+    """"""""""""""""""
 
     " zoom (zoomwintabの標準の割り当てを用いない)
     let g:zoomwintab_remap = 0
@@ -109,6 +121,27 @@ let
     nnoremap <Leader>v :<C-u>vs<CR> 
     " sp
     nnoremap <Leader>h :<C-u>sp<CR> 
+
+    """"""""""""""
+    " easymotion "
+    """"""""""""""
+    let g:EasyMotion_do_mapping = 0
+    let g:EasyMotion_use_migemo = 1
+
+    " 1文字
+    nmap <Leader>s <Plug>(easymotion-overwin-f)
+    " 2文字
+    nmap <Leader>S <Plug>(easymotion-overwin-f2)
+
+    " easymotionでもsmartcase
+    let g:EasyMotion_smartcase = 1
+
+    " カーソル下を検索
+    map <Leader>j <Plug>(easymotion-j)
+
+    " カーソル上を検索
+    map <Leader>k <Plug>(easymotion-k)
+
 
     " 開いているファイルのディレクトリに自動で移動 (相対パスが機能するように)
     autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
@@ -177,6 +210,7 @@ let
     set incsearch                 " インクリメンタルサーチ
     set hlsearch                  " 検索結果をハイライト
     nnoremap <ESC><ESC> :nohl<CR> " ESC2回押しでハイライトを消す
+
     " grepをrgに置き換え
     let &grepprg = 'rg --vimgrep --hidden'
     set grepformat=%f:%l:%c:%m

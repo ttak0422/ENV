@@ -174,7 +174,7 @@ let
     set laststatus=2
     set showtabline=2
     let g:lightline = {
-    \ 'colorscheme': 'one',
+    \ 'colorscheme': 'ayu_mirage',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ]
     \ },

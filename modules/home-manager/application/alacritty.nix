@@ -2,37 +2,46 @@
 let
   configPath = ".config/alacritty/alacritty.yml";
   fontSize = 16;
-  padding = fontSize / 2;
+  paddingX = fontSize / 2;
   fontFamily = "Hack Nerd Font Mono";
   backgroundOpacity = 1.0;
   config = ''
-    # Colors (One Dark - https://github.com/atom/atom/tree/master/packages/one-dark-syntax)
+    # ayu-mirage (neovim-ayuに寄せる)
     colors:
       primary:
-        background: '#282c34'
-        foreground: '#abb2bf'
+        background: '#1F2430'
+        foreground: '#CBCCC6'
       cursor:
-        text:       CellBackground
-        cursor:     '#528bff' # syntax-cursor-color
+        text: CellBackground
+        cursor: '#528bff'
       selection:
-        text:       CellForeground
-        background: '#3e4451' # syntax-selection-color
+        text: CellForeground
+        background: '#707A8C'
       normal:
-        black:      '#5c6370' # mono-3
-        red:        '#e06c75' # red 1
-        green:      '#98c379'
-        yellow:     '#e5c07b' # orange 2
-        blue:       '#61afef'
-        magenta:    '#c678dd'
-        cyan:       '#56b6c2'
-        white:      '#828997' # mono-2
+        black: '#1F2430'
+        red: '#F28779'
+        green: '#BAE67E'
+        yellow: '#FFCC66'
+        blue: '#5CCFE6'
+        magenta: '#D4BFFF'
+        cyan: '#95E6CB'
+        white: '#CBCCC6'
+      bright:
+        8black: '#607080'
+        9red: '#FF3333'
+        0green: '#BAE67E'
+        1yellow: '#FFCC66'
+        2blue: '#5CCFE6'
+        3magenta: '#D4BFFF'
+        4cyan: '#95E6CB'
+        5white: '#5C6773'
     env:
       TERM: screen-256color
     window:
       decorations: ${if pkgs.stdenv.isLinux then "none" else "buttonless"}
       padding:
-        x: ${toString padding}
-        y: ${toString padding}
+        x: ${toString paddingX}
+        y: 0
     background_opacity: ${toString backgroundOpacity}
     key_bindings:
       - { key: Minus, mods: Command|Shift, action: IncreaseFontSize } # JISキーボードで文字サイズを変更するため

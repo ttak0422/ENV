@@ -19,6 +19,9 @@ let
     # vim向けeditorconfig
     editorconfig-vim
 
+    # zoom
+    zoomwintab-vim
+
     # lightline
     lightline-vim
     lightline-bufferline
@@ -61,20 +64,51 @@ let
     " カーソル行可視化
     set cursorline
 
-    " Global keybind
+    """"""""""""
+    " Commands "
+    """"""""""""
 
+    " Rgにてファイルの中身のみを検索対象に 
+    " 参考 (https://github.com/joshukraine/dotfiles/commit/2f38f6eae33dd91275d45e42d0bbabd741ce9909)
+    command! -bang -nargs=* Rg
+      \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+      \ fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
-    " Leader keybind
+    """"""""""""""""""
+    " Global keybind "
+    """"""""""""""""""
+
+    " file (content) search
+    nnoremap <C-f> :Rg<CR>
+    " file search
+    nnoremap <Leader>p :Files<CR> 
+
+    """"""""""""""""""
+    " Window keybind "
+    """"""""""2"""""""
+
+    " zoom (zoomwintabの標準の割り当てを用いない)
+    let g:zoomwintab_remap = 0
+    nnoremap <C-w>z :ZoomWinTabToggle<CR>
+
+    """"""""""""""""""
+    " Leader keybind "
+    """"""""""""""""""
+
     let mapleader="\<Space>"
 
-    nnoremap <Leader>a ggVG         " 全選択
-    nnoremap <Leader>, :bprev<CR>   " 次タブのバッファを表示
-    nnoremap <Leader>. :bnext<CR>   " 前タブのバッファを表示
-    nnoremap <Leader>q :bd<CR>      " バッファを閉じる
-    nnoremap <Leader>v :<C-u>vs<CR> " vsp
-    nnoremap <Leader>h :<C-u>sp<CR> " sp
-    nnoremap <Leader>p :Files<CR>   " file search
-
+    " 全選択
+    nnoremap <Leader>a ggVG         
+    " 次タブのバッファを表示
+    nnoremap <Leader>, :bprev<CR>   
+    " 前タブのバッファを表示
+    nnoremap <Leader>. :bnext<CR>   
+    " バッファを閉じる
+    nnoremap <Leader>q :bd<CR>      
+    " vsp
+    nnoremap <Leader>v :<C-u>vs<CR> 
+    " sp
+    nnoremap <Leader>h :<C-u>sp<CR> 
 
     " 開いているファイルのディレクトリに自動で移動 (相対パスが機能するように)
     autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
@@ -204,9 +238,6 @@ in {
     withNodeJs = true;
     withPython3 = true;
     withRuby = true;
-    coc = {
-      enable = true;
-
-    };
+    coc = { enable = true; };
   };
 }

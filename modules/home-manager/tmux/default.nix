@@ -78,6 +78,8 @@ let
 
   # tmux.conf
   extraConfig = ''
+    set-option -ga terminal-overrides ",screen-256color:Tc"
+
     #########
     # basic #
     #########

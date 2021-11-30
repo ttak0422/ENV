@@ -1,5 +1,7 @@
 { config, pkgs, lib, ... }:
 let
+  inherit (builtins) concatStringsSep map;
+  wrap = txt: "'${txt}'";
   plugins = with pkgs.vimPlugins; [
     # support Nix
     vim-nix
@@ -34,24 +36,28 @@ let
     # zoom
     zoomwintab-vim
 
+    # ale
+    ale
+
     # lightline
     lightline-vim
     lightline-bufferline
+    lightline-ale
 
     # asyncomplete-vim
     fzf-vim
     traces-vim
     vim-closetag
 
-    # coc plugins
+    # coc
+    coc-nvim
+
     emmet-vim
-    coc-emmet
-    coc-yaml
 
     # easymotion
     vim-easymotion
 
-    # nerdtree    
+    # nerdtree
     vim-devicons
     nerdtree
     nerdtree-git-plugin
@@ -60,6 +66,9 @@ let
 
     # winresizer.vim
   ];
+
+  cocExtensions = [ "coc-highlight" "coc-json" "coc-yaml" "coc-go" ];
+
   extraConfig = ''
     " カラースキーム
     colorscheme ayu-mirage " termguicolors、backgroudも設定される
@@ -79,7 +88,7 @@ let
     " Commands "
     """"""""""""
 
-    " Rgにてファイルの中身のみを検索対象に 
+    " Rgにてファイルの中身のみを検索対象に
     " 参考 (https://github.com/joshukraine/dotfiles/commit/2f38f6eae33dd91275d45e42d0bbabd741ce9909)
     command! -bang -nargs=* Rg
       \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
@@ -93,7 +102,7 @@ let
     nnoremap <C-f> :Rg<CR>
 
     " file search
-    nnoremap <Leader>p :Files<CR> 
+    nnoremap <Leader>p :Files<CR>
 
     """"""""""""""""""
     " Window keybind "
@@ -110,17 +119,17 @@ let
     let mapleader="\<Space>"
 
     " 全選択
-    nnoremap <Leader>a ggVG         
+    nnoremap <Leader>a ggVG
     " 次タブのバッファを表示
-    nnoremap <Leader>, :bprev<CR>   
+    nnoremap <Leader>, :bprev<CR>
     " 前タブのバッファを表示
-    nnoremap <Leader>. :bnext<CR>   
+    nnoremap <Leader>. :bnext<CR>
     " バッファを閉じる
-    nnoremap <Leader>q :bd<CR>      
+    nnoremap <Leader>q :bd<CR>
     " vsp
-    nnoremap <Leader>v :<C-u>vs<CR> 
+    nnoremap <Leader>v :<C-u>vs<CR>
     " sp
-    nnoremap <Leader>h :<C-u>sp<CR> 
+    nnoremap <Leader>h :<C-u>sp<CR>
 
     """"""""""""""
     " easymotion "
@@ -145,7 +154,7 @@ let
 
     " 開いているファイルのディレクトリに自動で移動 (相対パスが機能するように)
     autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
-    autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)       
+    autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
 
     " mouse有効化
     set mouse=a
@@ -166,38 +175,74 @@ let
     " バッファ切り替え時に保存不要に
     set hidden
 
+    " モードをstatusに表示しない
+    set noshowmode
+
     " better-whitespace
     let g:better_whitespace_enabled=1
     let g:strip_whitespace_on_save=1
 
+    """""""
+    " ale "
+    """""""
+    let g:ale_sign_column_always = 1
+    let g:ale_set_loclist = 0
+    let g:ale_set_quickfix = 1
+    let g:ale_open_list = 1
+    " エラーと警告がなくなっても開いたままにする
+    let g:ale_keep_list_window_open = 1
+
+    """"""""""""
+    " coc.nvim "
+    """"""""""""
+    let g:coc_global_extensions = [ ${
+      concatStringsSep "," (map wrap cocExtensions)
+    } ]
+
     " lightline
     set laststatus=2
     set showtabline=2
+    let g:lightline#ale#indicator_checking = "\uf110"
+    let g:lightline#ale#indicator_infos = "\uf129"
+    let g:lightline#ale#indicator_warnings = "\uf071"
+    let g:lightline#ale#indicator_errors = "\uf05e"
+    let g:lightline#ale#indicator_ok = "\uf00c"
     let g:lightline = {
     \ 'colorscheme': 'ayu_mirage',
     \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ]
+    \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
+    \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
+    \              [ 'fileformat', 'fileencoding', 'filetype'] ],
     \ },
     \ 'tabline': {
     \   'left': [ [ 'buffers'] ],
     \   'right': [ [ 'close' ] ],
     \ },
-    \ 'separator': { 
-    \   'left': "\ue0b0", 
-    \   'right': "\ue0b2",
+    \ 'separator': {
+    \   'left': "\ue0b4",
+    \   'right': "\ue0b6",
     \ },
-    \ 'subseparator': { 
-    \   'left': "\ue0b1", 
-    \   'right': "\ue0b3",
+    \ 'subseparator': {
+    \   'left': "\ue0b5",
+    \   'right': "\ue0b7",
     \ },
     \ 'component_function': {
     \   'filename': 'LightlineFilename'
     \ },
     \ 'component_expand': {
-    \   'buffers': 'lightline#bufferline#buffers'
+    \   'buffers': 'lightline#bufferline#buffers',
+    \   'linter_checking': 'lightline#ale#checking',
+    \   'linter_infos': 'lightline#ale#infos',
+    \   'linter_warnings': 'lightline#ale#warnings',
+    \   'linter_errors': 'lightline#ale#errors',
+    \   'linter_ok': 'lightline#ale#ok',
     \ },
     \ 'component_type': {
     \   'buffers': 'tabsel',
+    \   'linter_infos': 'right',
+    \   'linter_warnings': 'warning',
+    \   'linter_errors': 'error',
+    \   'linter_ok': 'right',
     \ },
     \ }
     function! LightlineFilename()
@@ -235,31 +280,66 @@ let
       return centered_lines
     endfunction
     let g:startify_custom_header = s:filter_header([
-    \ '|               ▒       ▒▒▒▒      ▒▒',   
-    \ '|             ▒▓▓▓▒     ░▒▒▒▒   ▒▒▒▒░',   
-    \ '|             ▒▓▓▓▓▒     ░▒▒▒▒  ▒▒▒▒░',   
-    \ '|              ▒▓▓▓▓      ░▒▒▒░▒▒▒▒░',   
-    \ '|               ▓▓▓▓▓      ▒▒▒▒▒▒▒░',   
-    \ '|          ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒      ▒',   
-    \ '|         ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░     ▓▓▒',   
-    \ '|        ▒▒▒▒▒▒▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓   ▓▓▓▓',   
-    \ '|              ▒▒▒▒▒▓         ▒▒▒▒▒▓ ▓▓▓▓▓',   
-    \ '|             ▒▒▒▒▒▓           ▒▒▒▒░▓▓▓▓▓',   
-    \ '|     ▒▒▒▒▒▒▒▒▒▒▒▒░             ▒▒░▓▓▓▓▓▒▒▒▒▒',   
-    \ '|    ░▒▒▒▒▒▒▒▒▒▒▒░               ▒▓▓▓▓▓▓▓▓▓▓▓▓',   
-    \ '|    ░▒▒▒▒▒▒▒▒▒▒░▒               ▒▓▓▓▓▓▓▓▓▓▓▓▓     _______   ___    __',   
-    \ '|     ▒▒▒▒▒▒▒▒▒░▓▓▓             ▒▓▓▓▓▒            / ____/ | / / |  / /',   
-    \ '|         ░▒▒▒▒▒▓▓▓▓           ▒▓▓▓▓▒            / __/ /  |/ /| | / /',   
-    \ '|        ░▒▒▒▒  ▓▓▓▓▒         ▒▓▓▓▓▒            / /___/ /|  / | |/ /',   
-    \ '|        ▒▒▒▒▒   ▓▓▓▓▒▓▓▓▓▓▓▓▓░░░░░▓▓▓▓▓▓▓     /_____/_/ |_/  |___/',   
-    \ '|         ▒▒▒    ▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒',   
-    \ '|          ▒     ▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒       _    __           ___',   
-    \ '|               ▓▓▓▓▓▓▓▓▒     ░▒▒▒▒            | |  / /__  _____ |__ \',   
-    \ '|              ▒▓▓▓▓▒▓▓▓▓      ░▒▒▒░           | | / / _ \/ ___/ __/ /',   
-    \ '|             ▒▓▓▓▓  ▒▓▓▓▓      ░▒▒▒░          | |/ /  __/ /  _ / __/',   
+    \ '|               ▒       ▒▒▒▒      ▒▒',
+    \ '|             ▒▓▓▓▒     ░▒▒▒▒   ▒▒▒▒░',
+    \ '|             ▒▓▓▓▓▒     ░▒▒▒▒  ▒▒▒▒░',
+    \ '|              ▒▓▓▓▓      ░▒▒▒░▒▒▒▒░',
+    \ '|               ▓▓▓▓▓      ▒▒▒▒▒▒▒░',
+    \ '|          ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒      ▒',
+    \ '|         ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░     ▓▓▒',
+    \ '|        ▒▒▒▒▒▒▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓   ▓▓▓▓',
+    \ '|              ▒▒▒▒▒▓         ▒▒▒▒▒▓ ▓▓▓▓▓',
+    \ '|             ▒▒▒▒▒▓           ▒▒▒▒░▓▓▓▓▓',
+    \ '|     ▒▒▒▒▒▒▒▒▒▒▒▒░             ▒▒░▓▓▓▓▓▒▒▒▒▒',
+    \ '|    ░▒▒▒▒▒▒▒▒▒▒▒░               ▒▓▓▓▓▓▓▓▓▓▓▓▓',
+    \ '|    ░▒▒▒▒▒▒▒▒▒▒░▒               ▒▓▓▓▓▓▓▓▓▓▓▓▓     _______   ___    __',
+    \ '|     ▒▒▒▒▒▒▒▒▒░▓▓▓             ▒▓▓▓▓▒            / ____/ | / / |  / /',
+    \ '|         ░▒▒▒▒▒▓▓▓▓           ▒▓▓▓▓▒            / __/ /  |/ /| | / /',
+    \ '|        ░▒▒▒▒  ▓▓▓▓▒         ▒▓▓▓▓▒            / /___/ /|  / | |/ /',
+    \ '|        ▒▒▒▒▒   ▓▓▓▓▒▓▓▓▓▓▓▓▓░░░░░▓▓▓▓▓▓▓     /_____/_/ |_/  |___/',
+    \ '|         ▒▒▒    ▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒',
+    \ '|          ▒     ▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒       _    __           ___',
+    \ '|               ▓▓▓▓▓▓▓▓▒     ░▒▒▒▒            | |  / /__  _____ |__ \',
+    \ '|              ▒▓▓▓▓▒▓▓▓▓      ░▒▒▒░           | | / / _ \/ ___/ __/ /',
+    \ '|             ▒▓▓▓▓  ▒▓▓▓▓      ░▒▒▒░          | |/ /  __/ /  _ / __/',
     \ '|             ▒▓▓▓    ▒▓▓▓▓      ▒▒▒▓          |___/\___/_/  (_)____/',
     \ ])
   '';
+  cocSettings = {
+    suggest = { enablePreselect = false; };
+    languagesever = {
+      go = {
+        command = "gopls";
+        rootPatterns = [ "go.mod" ];
+        filetypes = [ "go" ];
+      };
+    };
+  };
+  # suggest = {
+  #   enablePreselect = false;
+  #   enablePreview = false;
+  #   floatEnable = true;
+  #   disableKind = false;
+  #   disableMenu = false;
+  #   disableMenuShortcut = false;
+  #   preferCompleteThanJumpPlaceholder = false;
+  #   fixInsertedWord = true;
+  #   localityBonus = true;
+  #   triggerAfterInsertEnter = false;
+  #   echodocSupport = false;
+  #   acceptSuggestionOnCommitCharacter = false;
+  #   noselect = true;
+  #   keepCompleteopt = false;
+  #   removeDuplicateItems = true;
+  #   snippetsSupport = true;
+  #   asciiCharactersOnly = false;
+  # };
+  # languagesever = {
+  #   go = {
+
+  #   };
+  # };
+  # };
 in {
   home.packages = with pkgs;
     [
@@ -272,6 +352,9 @@ in {
     withNodeJs = true;
     withPython3 = true;
     withRuby = true;
-    coc = { enable = true; };
+    coc = {
+      enable = true;
+      settings = cocSettings;
+    };
   };
 }

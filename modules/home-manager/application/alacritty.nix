@@ -2,7 +2,7 @@
 let
   configPath = ".config/alacritty/alacritty.yml";
   fontSize = 16;
-  paddingX = fontSize / 2;
+  padding = fontSize / 2;
   fontFamily = "Hack Nerd Font Mono";
   backgroundOpacity = 1.0;
   config = ''
@@ -40,8 +40,8 @@ let
     window:
       decorations: ${if pkgs.stdenv.isLinux then "none" else "buttonless"}
       padding:
-        x: ${toString paddingX}
-        y: 0
+        x: ${toString padding}
+        y: ${toString padding}
     background_opacity: ${toString backgroundOpacity}
     key_bindings:
       - { key: Minus, mods: Command|Shift, action: IncreaseFontSize } # JISキーボードで文字サイズを変更するため

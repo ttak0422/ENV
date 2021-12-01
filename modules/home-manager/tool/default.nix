@@ -8,6 +8,8 @@
     hey # load test tool
     htop # top clone
     jq # JSON processor
+    lazydocker # docker tui
+    lazygit # git tui
     neofetch # system information tool
     nixfmt
     pkg-config # compile helper

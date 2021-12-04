@@ -1,6 +1,6 @@
 name: Check
 on:
-  pull_request: 
+  pull_request:
     branches: [ develop ]
   push:
     branches: [ develop ]
@@ -22,11 +22,14 @@ jobs:
           filters: |
             nix:
               - '**.nix'
-      
-      - name: Setup nix 
+
+      - name: Setup Nix
         if: steps.changes.outputs.nix == 'true'
         uses: cachix/install-nix-action@v16
-      
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
       - name: Setup Cachix
         if: steps.changes.outputs.nix == 'true'
         uses: cachix/cachix-action@v10
@@ -44,7 +47,7 @@ jobs:
       #     APFS_UTIL="/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util"
       #     echo -e 'run\tprivate/var/run' | sudo tee -a /etc/synthetic.conf
       #     $APFS_UTIL -B || true
-      #     
+      #
       # - run: nix build .#darwinConfigurations.ci.system
-      
+
       # - run: ./result/sw/bin/darwin-rebuild switch --flake .#ci

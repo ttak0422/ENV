@@ -15,8 +15,8 @@ jobs:
           commit-message: Scheduled Apply
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          base: develop
-          branch: main
+          base: main
+          branch: develop
           delete-branch: false
           labels: |
             automerge

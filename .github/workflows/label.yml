@@ -10,16 +10,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Apply
-        id: apply
-        uses: peter-evans/create-pull-request@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Scheduled Apply
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          base: main
-          branch: develop
-          delete-branch: false
-          labels: |
-            automerge
+          ruby-version: 2.7
+          bundler-cache: true
+
+      - name: Scheduled Apply
+        env:
+          GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_PR_RELEASE_BRANCH_PRODUCTION: main
+          GIT_PR_RELEASE_BRANCH_STAGING: develop
+        run: |
+          gem install -N git-pr-release
+          git-pr-release

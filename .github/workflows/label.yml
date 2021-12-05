@@ -1,0 +1,22 @@
+name: Label
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+jobs:
+  createAutoMergePR:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply
+        id: apply
+        uses: petter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Scheduled Apply
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          base: develop
+          branch: main
+          delete-branch: false
+          labels: |
+            automerge

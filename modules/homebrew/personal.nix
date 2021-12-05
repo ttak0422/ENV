@@ -17,6 +17,7 @@
       "firefox"
       "font-fira-code"
       "font-hack-nerd-font"
+      "iterm2"
       "jetbrains-toolbox"
       "karabiner-elements"
       "keycastr"

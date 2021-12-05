@@ -67,7 +67,7 @@ let
     # winresizer.vim
   ];
 
-  cocExtensions = [ "coc-highlight" "coc-json" "coc-yaml" "coc-go" ];
+  cocExtensions = [ "coc-highlight" "coc-json" "coc-yaml" "coc-go" "coc-toml" ];
 
   extraConfig = ''
     " カラースキーム

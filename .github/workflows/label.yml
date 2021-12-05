@@ -7,6 +7,9 @@ jobs:
   createAutoMergePR:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Apply
         id: apply
         uses: peter-evans/create-pull-request@v3

@@ -102,7 +102,7 @@ let
     nnoremap <C-f> :Rg<CR>
 
     " file search
-    nnoremap <Leader>p :Files<CR>
+    nnoremap <C-p> :Files<CR>
 
     """"""""""""""""""
     " Window keybind "
@@ -315,31 +315,6 @@ let
       };
     };
   };
-  # suggest = {
-  #   enablePreselect = false;
-  #   enablePreview = false;
-  #   floatEnable = true;
-  #   disableKind = false;
-  #   disableMenu = false;
-  #   disableMenuShortcut = false;
-  #   preferCompleteThanJumpPlaceholder = false;
-  #   fixInsertedWord = true;
-  #   localityBonus = true;
-  #   triggerAfterInsertEnter = false;
-  #   echodocSupport = false;
-  #   acceptSuggestionOnCommitCharacter = false;
-  #   noselect = true;
-  #   keepCompleteopt = false;
-  #   removeDuplicateItems = true;
-  #   snippetsSupport = true;
-  #   asciiCharactersOnly = false;
-  # };
-  # languagesever = {
-  #   go = {
-
-  #   };
-  # };
-  # };
 in {
   home.packages = with pkgs;
     [

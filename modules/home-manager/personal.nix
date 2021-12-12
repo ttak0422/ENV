@@ -10,5 +10,5 @@
     ./vim
     ./window-manager
   ];
-  home.packages = with pkgs; [ cachix ];
+  home.packages = with pkgs; [ cachix asciinema ];
 }

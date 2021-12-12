@@ -1,8 +1,15 @@
 { config, pkgs, lib, ... }:
 let
-  inherit (builtins) concatStringsSep map;
+  inherit (builtins) concatStringsSep map fetchTarball;
+  inherit (pkgs.vimUtils) buildVimPlugin;
   wrap = txt: "'${txt}'";
-  plugins = with pkgs.vimPlugins; [
+  mkVimPlugin = cfg:
+    buildVimPlugin {
+      pname = cfg.name;
+      version = cfg.version;
+      src = cfg.src;
+    };
+  plugins = (with pkgs.vimPlugins; [
     # support Nix
     vim-nix
 
@@ -65,9 +72,27 @@ let
     vim-nerdtree-syntax-highlight
 
     # winresizer.vim
-  ];
 
-  cocExtensions = [ "coc-highlight" "coc-json" "coc-yaml" "coc-go" "coc-toml" ];
+    # terminal
+    vim-floaterm
+  ]) ++ map mkVimPlugin [{
+    name = "vim-choosewin";
+    version = "1.5.0";
+    src = fetchTarball {
+      url =
+        "https://github.com/t9md/vim-choosewin/archive/refs/tags/v1.5.tar.gz";
+      sha256 = "1lqj0yxkpr007y867b9lmxw7yrfnsnq603bsa2mpbalhv5xgayif";
+    };
+  }];
+
+  cocExtensions = [
+    "coc-highlight"
+    "coc-json"
+    "coc-yaml"
+    "coc-go"
+    "coc-toml"
+    "coc-floaterm"
+  ];
 
   extraConfig = ''
     " カラースキーム
@@ -101,8 +126,11 @@ let
     " file (content) search
     nnoremap <C-f> :Rg<CR>
 
-    " file search
-    nnoremap <C-p> :Files<CR>
+    " NERDTree
+    nnoremap <C-b> :NERDTreeTabsToggle<CR>
+
+    " Buffer
+    nnoremap <C-Tab> :Buffers<CR>
 
     """"""""""""""""""
     " Window keybind "
@@ -130,6 +158,13 @@ let
     nnoremap <Leader>v :<C-u>vs<CR>
     " sp
     nnoremap <Leader>h :<C-u>sp<CR>
+    " floaterm
+    nnoremap <Leader>t :FloatermToggle<CR>
+    " file search
+    nnoremap <Leader>p :Files<CR>
+    " choosewin
+    nnoremap <Leader>- :ChooseWin<CR>
+    nnoremap <Leader><Leader>- :ChooseWinSwap<CR>
 
     """"""""""""""
     " easymotion "
@@ -190,7 +225,7 @@ let
     let g:ale_set_quickfix = 1
     let g:ale_open_list = 1
     " エラーと警告がなくなっても開いたままにする
-    let g:ale_keep_list_window_open = 1
+    let g:ale_keep_list_window_open = 0
 
     """"""""""""
     " coc.nvim "
@@ -198,6 +233,11 @@ let
     let g:coc_global_extensions = [ ${
       concatStringsSep "," (map wrap cocExtensions)
     } ]
+
+    """"""""""""
+    " floaterm "
+    """"""""""""
+    let g:floaterm_autoclose = 1
 
     " lightline
     set laststatus=2

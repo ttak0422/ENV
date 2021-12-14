@@ -10,6 +10,12 @@ let
       src = cfg.src;
     };
   plugins = (with pkgs.vimPlugins; [
+    # yank
+    vim-oscyank
+
+    # tab
+    supertab
+
     # support Nix
     vim-nix
 
@@ -75,15 +81,48 @@ let
 
     # terminal
     vim-floaterm
-  ]) ++ map mkVimPlugin [{
-    name = "vim-choosewin";
-    version = "1.5.0";
-    src = fetchTarball {
-      url =
-        "https://github.com/t9md/vim-choosewin/archive/refs/tags/v1.5.tar.gz";
-      sha256 = "1lqj0yxkpr007y867b9lmxw7yrfnsnq603bsa2mpbalhv5xgayif";
-    };
-  }];
+
+    # zen
+    goyo-vim
+    limelight-vim
+  ]) ++ map mkVimPlugin [
+    {
+      name = "vim-choosewin";
+      version = "1.5.0";
+      src = fetchTarball {
+        url =
+          "https://github.com/t9md/vim-choosewin/archive/refs/tags/v1.5.tar.gz";
+        sha256 = "1lqj0yxkpr007y867b9lmxw7yrfnsnq603bsa2mpbalhv5xgayif";
+      };
+    }
+    {
+      name = "winresizer";
+      version = "1.1.1";
+      src = fetchTarball {
+        url =
+          "https://github.com/simeji/winresizer/archive/refs/tags/v1.1.1.tar.gz";
+        sha256 = "08mbhckjawyawjgii8qqsdzvqvs8d0vra0fab75cdi4x08f0az94";
+      };
+    }
+    {
+      name = "vim-doc";
+      version = "1.0.0";
+      src = fetchTarball {
+        url =
+          "https://github.com/vim-jp/vimdoc-ja/archive/bc4132b074d99ff399c63a0f6611bb890118b324.tar.gz";
+        sha256 = "0nmrc8mps08hmw2hyl9pyvjlx9hhknzvdy4xfjig6q36kn537yy6";
+      };
+    }
+    {
+      name = "comfortable-motion-vim";
+      version = "1.0.0";
+      src = fetchTarball {
+        url =
+          "https://github.com/yuttie/comfortable-motion.vim/archive/e20aeafb07c6184727b29f7674530150f7ab2036.tar.gz";
+        sha256 = "13chwy7laxh30464xmdzjhzfcmlcfzy11i8g4a4r11m1cigcjljb";
+      };
+    }
+  ];
 
   cocExtensions = [
     "coc-highlight"
@@ -95,6 +134,16 @@ let
   ];
 
   extraConfig = ''
+    """"""""""""
+    " helplang "
+    """"""""""""
+    set helplang=ja
+
+    """"""""""""
+    " supertab "
+    """"""""""""
+    let g:SuperTabDefaultCompletionType = "<c-n>"
+
     " カラースキーム
     colorscheme ayu-mirage " termguicolors、backgroudも設定される
 
@@ -165,6 +214,18 @@ let
     " choosewin
     nnoremap <Leader>- :ChooseWin<CR>
     nnoremap <Leader><Leader>- :ChooseWinSwap<CR>
+    " easymotion
+    " 1文字
+    nmap <Leader>s <Plug>(easymotion-overwin-f)
+    " 2文字
+    nmap <Leader><Leader>s <Plug>(easymotion-overwin-f2)
+    " カーソル下を検索
+    map <Leader>j <Plug>(easymotion-j)
+    " カーソル上を検索
+    map <Leader>k <Plug>(easymotion-k)
+
+    " yank
+    vnoremap <Leader>y :OSCYank<CR>
 
     """"""""""""""
     " easymotion "
@@ -172,20 +233,8 @@ let
     let g:EasyMotion_do_mapping = 0
     let g:EasyMotion_use_migemo = 1
 
-    " 1文字
-    nmap <Leader>s <Plug>(easymotion-overwin-f)
-    " 2文字
-    nmap <Leader>S <Plug>(easymotion-overwin-f2)
-
     " easymotionでもsmartcase
     let g:EasyMotion_smartcase = 1
-
-    " カーソル下を検索
-    map <Leader>j <Plug>(easymotion-j)
-
-    " カーソル上を検索
-    map <Leader>k <Plug>(easymotion-k)
-
 
     " 開いているファイルのディレクトリに自動で移動 (相対パスが機能するように)
     autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
@@ -217,6 +266,14 @@ let
     let g:better_whitespace_enabled=1
     let g:strip_whitespace_on_save=1
 
+    """"""""""""""""""""""
+    " comfortable-motion "
+    """"""""""""""""""""""
+    let g:comfortable_motion_scroll_down_key = "j"
+    let g:comfortable_motion_scroll_up_key = "k"
+    noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
+    noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
+
     """""""
     " ale "
     """""""
@@ -226,6 +283,11 @@ let
     let g:ale_open_list = 1
     " エラーと警告がなくなっても開いたままにする
     let g:ale_keep_list_window_open = 0
+
+    " Goyo
+    let g:goyo_width = 120
+    autocmd! User GoyoEnter Limelight
+    autocmd! User GoyoLeave Limelight!
 
     """"""""""""
     " coc.nvim "
@@ -294,7 +356,7 @@ let
     set smartcase
     set incsearch                 " インクリメンタルサーチ
     set hlsearch                  " 検索結果をハイライト
-    nnoremap <ESC><ESC> :nohl<CR> " ESC2回押しでハイライトを消す
+    nnoremap <silent> <ESC><ESC> :nohl<CR> " ESC2回押しでハイライトを消す
 
     " grepをrgに置き換え
     let &grepprg = 'rg --vimgrep --hidden'

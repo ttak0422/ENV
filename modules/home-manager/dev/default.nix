@@ -1,3 +1,4 @@
 { config, pkgs, lib, ... }: {
-  imports = [ ./dotnet.nix ./go.nix ./jvm.nix ./node.nix ./python.nix ];
+  imports =
+    [ ./deno.nix ./dotnet.nix ./go.nix ./jvm.nix ./node.nix ./python.nix ];
 }

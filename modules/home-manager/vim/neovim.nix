@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   inherit (builtins) concatStringsSep map fetchTarball;
+  inherit (lib.lists) singleton;
   inherit (pkgs.vimUtils) buildVimPlugin;
   wrap = txt: "'${txt}'";
   mkVimPlugin = cfg:
@@ -9,6 +10,7 @@ let
       version = cfg.version;
       src = cfg.src;
     };
+  mkVimPlugin' = buildVimPlugin;
   plugins = (with pkgs.vimPlugins; [
     # yank
     vim-oscyank
@@ -85,44 +87,64 @@ let
     # zen
     goyo-vim
     limelight-vim
-  ]) ++ map mkVimPlugin [
-    {
-      name = "vim-choosewin";
-      version = "1.5.0";
+  ])
+  # wip...
+    ++ map mkVimPlugin [
+      {
+        name = "vim-choosewin";
+        version = "1.5.0";
+        src = fetchTarball {
+          url =
+            "https://github.com/t9md/vim-choosewin/archive/refs/tags/v1.5.tar.gz";
+          sha256 = "1lqj0yxkpr007y867b9lmxw7yrfnsnq603bsa2mpbalhv5xgayif";
+        };
+      }
+      {
+        name = "winresizer";
+        version = "1.1.1";
+        src = fetchTarball {
+          url =
+            "https://github.com/simeji/winresizer/archive/refs/tags/v1.1.1.tar.gz";
+          sha256 = "08mbhckjawyawjgii8qqsdzvqvs8d0vra0fab75cdi4x08f0az94";
+        };
+      }
+      {
+        name = "vim-doc";
+        version = "1.0.0";
+        src = fetchTarball {
+          url =
+            "https://github.com/vim-jp/vimdoc-ja/archive/bc4132b074d99ff399c63a0f6611bb890118b324.tar.gz";
+          sha256 = "0nmrc8mps08hmw2hyl9pyvjlx9hhknzvdy4xfjig6q36kn537yy6";
+        };
+      }
+      {
+        name = "comfortable-motion-vim";
+        version = "1.0.0";
+        src = fetchTarball {
+          url =
+            "https://github.com/yuttie/comfortable-motion.vim/archive/e20aeafb07c6184727b29f7674530150f7ab2036.tar.gz";
+          sha256 = "13chwy7laxh30464xmdzjhzfcmlcfzy11i8g4a4r11m1cigcjljb";
+        };
+      }
+      {
+        name = "denops-helloworld-vim";
+        version = "2.0.0";
+        src = fetchTarball {
+          url =
+            "https://github.com/vim-denops/denops-helloworld.vim/archive/refs/tags/v2.0.0.tar.gz";
+          sha256 = "0wslmcj2iwfb6gam0ff5cgqfgahkf37430hyy3azarsdchl95dwx";
+        };
+      }
+    ] ++ singleton (mkVimPlugin' {
+      pname = "denops-vim";
+      version = "2.1.2";
       src = fetchTarball {
         url =
-          "https://github.com/t9md/vim-choosewin/archive/refs/tags/v1.5.tar.gz";
-        sha256 = "1lqj0yxkpr007y867b9lmxw7yrfnsnq603bsa2mpbalhv5xgayif";
+          "https://github.com/vim-denops/denops.vim/archive/refs/tags/v2.1.2.tar.gz";
+        sha256 = "00szxrclnrq0wsdpwip6557yzizcc88f2c3kndpas2zzxjaix2bq";
       };
-    }
-    {
-      name = "winresizer";
-      version = "1.1.1";
-      src = fetchTarball {
-        url =
-          "https://github.com/simeji/winresizer/archive/refs/tags/v1.1.1.tar.gz";
-        sha256 = "08mbhckjawyawjgii8qqsdzvqvs8d0vra0fab75cdi4x08f0az94";
-      };
-    }
-    {
-      name = "vim-doc";
-      version = "1.0.0";
-      src = fetchTarball {
-        url =
-          "https://github.com/vim-jp/vimdoc-ja/archive/bc4132b074d99ff399c63a0f6611bb890118b324.tar.gz";
-        sha256 = "0nmrc8mps08hmw2hyl9pyvjlx9hhknzvdy4xfjig6q36kn537yy6";
-      };
-    }
-    {
-      name = "comfortable-motion-vim";
-      version = "1.0.0";
-      src = fetchTarball {
-        url =
-          "https://github.com/yuttie/comfortable-motion.vim/archive/e20aeafb07c6184727b29f7674530150f7ab2036.tar.gz";
-        sha256 = "13chwy7laxh30464xmdzjhzfcmlcfzy11i8g4a4r11m1cigcjljb";
-      };
-    }
-  ];
+      dontBuild = true;
+    });
 
   cocExtensions = [
     "coc-highlight"
@@ -172,15 +194,6 @@ let
     " Global keybind "
     """"""""""""""""""
 
-    " file (content) search
-    nnoremap <C-f> :Rg<CR>
-
-    " NERDTree
-    nnoremap <C-b> :NERDTreeTabsToggle<CR>
-
-    " Buffer
-    nnoremap <C-Tab> :Buffers<CR>
-
     """"""""""""""""""
     " Window keybind "
     """"""""""""""""""
@@ -210,7 +223,7 @@ let
     " floaterm
     nnoremap <Leader>t :FloatermToggle<CR>
     " file search
-    nnoremap <Leader>p :Files<CR>
+    nnoremap <Leader><Leader>p :Files<CR>
     " choosewin
     nnoremap <Leader>- :ChooseWin<CR>
     nnoremap <Leader><Leader>- :ChooseWinSwap<CR>
@@ -223,9 +236,20 @@ let
     map <Leader>j <Plug>(easymotion-j)
     " カーソル上を検索
     map <Leader>k <Plug>(easymotion-k)
+    " ZEN
+    nnoremap <Leader><Leader>z :Goyo<CR>
 
     " yank
     vnoremap <Leader>y :OSCYank<CR>
+
+    " NERDTree
+    nnoremap <Leader>b :NERDTreeTabsToggle<CR>
+
+    " file (content) search
+    nnoremap <Leader><Leader>f :Rg<CR>
+
+    " Buffer
+    nnoremap <Leader><Leader>b :Buffers<CR>
 
     """"""""""""""
     " easymotion "
@@ -283,6 +307,7 @@ let
     let g:ale_open_list = 1
     " エラーと警告がなくなっても開いたままにする
     let g:ale_keep_list_window_open = 0
+    let g:ale_list_window_size = 4
 
     " Goyo
     let g:goyo_width = 120
@@ -418,10 +443,7 @@ let
     };
   };
 in {
-  home.packages = with pkgs;
-    [
-
-    ];
+  home.packages = with pkgs; [ python39Packages.pynvim ];
   programs.neovim = {
     inherit plugins extraConfig;
     enable = true;

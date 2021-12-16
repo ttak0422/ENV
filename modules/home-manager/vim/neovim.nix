@@ -138,6 +138,15 @@ let
           sha256 = "0wslmcj2iwfb6gam0ff5cgqfgahkf37430hyy3azarsdchl95dwx";
         };
       }
+      {
+        name = "vim-quickhl";
+        version = "1.0.0";
+        src = fetchTarball {
+          url =
+            "https://github.com/t9md/vim-quickhl/archive/be1f44169c3fdee3beab629e83380515da03835e.tar.gz";
+          sha256 = "1ppyvvwciw1c2m40nwlr3mhnzxy7nfxjz3bvc9jxpyym2xvl1igi";
+        };
+      }
     ] ++ singleton (mkVimPlugin' {
       pname = "denops-vim";
       version = "2.1.2";
@@ -244,6 +253,10 @@ let
 
     " yank
     vnoremap <Leader>y :OSCYank<CR>
+
+    " hilight
+    nmap <Leader>m <Plug>(quickhl-manual-this)
+    xmap <Leader>m <Plug>(quickhl-manual-this)
 
     " NERDTree
     nnoremap <Leader>b :NERDTreeTabsToggle<CR>

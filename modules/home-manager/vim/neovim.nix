@@ -87,6 +87,9 @@ let
     # zen
     goyo-vim
     limelight-vim
+
+    # git
+    gina-vim
   ])
   # wip...
     ++ map mkVimPlugin [
@@ -337,7 +340,7 @@ let
     let g:lightline = {
     \ 'colorscheme': 'ayu_mirage',
     \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
+    \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
     \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
     \              [ 'fileformat', 'fileencoding', 'filetype'] ],
     \ },
@@ -354,7 +357,8 @@ let
     \   'right': "\ue0b7",
     \ },
     \ 'component_function': {
-    \   'filename': 'LightlineFilename'
+    \   'filename': 'LightlineFilename',
+    \   'gitbranch': 'gina#component#repo#branch',
     \ },
     \ 'component_expand': {
     \   'buffers': 'lightline#bufferline#buffers',

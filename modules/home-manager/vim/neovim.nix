@@ -361,14 +361,6 @@ let
     \   'left': [ [ 'buffers'] ],
     \   'right': [ [ 'close' ] ],
     \ },
-    \ 'separator': {
-    \   'left': "\ue0b4",
-    \   'right': "\ue0b6",
-    \ },
-    \ 'subseparator': {
-    \   'left': "\ue0b5",
-    \   'right': "\ue0b7",
-    \ },
     \ 'component_function': {
     \   'filename': 'LightlineFilename',
     \   'gitbranch': 'gina#component#repo#branch',

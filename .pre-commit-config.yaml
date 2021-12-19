@@ -12,3 +12,7 @@ repos:
   rev: v3.3.0
   hooks:
   - id: check-yaml
+- repo: https://github.com/Calinou/pre-commit-luacheck
+  rev: v1.0.0
+  hooks:
+  - id: luacheck

@@ -70,7 +70,17 @@ let
     editorconfig-vim
 
     # 対応括弧可視化
-    rainbow
+    {
+      plugin = rainbow;
+      config = ''
+        let g:rainbow_active = 1
+        let g:rainbow_conf = {
+          \	  'separately': {
+          \	  	'nerdtree': 0,
+          \	  }
+          \ }
+      '';
+    }
 
     # zoom
     zoomwintab-vim
@@ -363,14 +373,6 @@ let
 
     " floating windowsの透過
     set pumblend=15
-
-    " rainbow有効化
-    let g:rainbow_active = 1
-    let g:rainbow_conf = {
-    \	  'separately': {
-    \	  	'nerdtree': 0,
-    \	  }
-    \ }
 
     " カーソル行可視化
     set cursorline

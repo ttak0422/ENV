@@ -20,6 +20,9 @@ let
 
     # treesitter
     nvim-treesitter
+    nvim-treesitter-context
+    nvim-treesitter-refactor
+    nvim-treesitter-textobjects
 
     # diff
     diffview-nvim
@@ -262,8 +265,49 @@ let
     "coc-go"
     "coc-toml"
     "coc-floaterm"
+    "coc-java"
   ];
   extraLuaConfig = ''
+    -- tree-sitter
+    require'nvim-treesitter.install'.compilers = { "gcc" }
+    require'nvim-treesitter.configs'.setup {
+      ensure_installed = "maintained",
+      sync_install = false,
+      ignore_install = {},
+      highlight = {
+        enable = true,
+        disable = { "c" },
+        additional_vim_regex_highlighting = false,
+      },
+    }
+    require'nvim-treesitter.configs'.setup {
+      refactor = {
+        smart_rename = {
+          enable = true,
+          keymaps = {
+            smart_rename = "grr",
+          },
+        },
+      },
+    }
+    require'treesitter-context'.setup{
+      enable = true,
+      throttle = true,
+      max_lines = 0,
+      patterns = {
+        default = {
+          'class',
+          'function',
+          'method',
+          -- 'for',
+          -- 'while',
+          -- 'if',
+          -- 'switch',
+          -- 'case',
+        },
+      },
+    }
+
     -- trouble
     require("trouble").setup {
       position = "bottom",
@@ -443,10 +487,8 @@ let
     nnoremap <Leader>b :NERDTreeTabsToggle<CR>
 
     " file (content) search
-    nnoremap <Leader><Leader>f :Rg<CR>
-
-    " Buffer
-    nnoremap <Leader><Leader>b :Buffers<CR>
+    nnoremap <Leader>ff :Telescope live_grep<CR>
+    nnoremap <Leader>fp :Telescope find_files<CR>
 
     """"""""""""""
     " easymotion "
@@ -464,10 +506,6 @@ let
     function! s:wilder_init() abort
       call wilder#setup({
         \   'modes': [':', '/', '?'],
-        \   'next_key': '<C-n>',
-        \   'previous_key': '<C-p>',
-        \   'accept_key': '<Tab>',
-        \   'reject_key': '<S-Tab>',
         \ })
       call wilder#set_option('pipeline', [
         \   wilder#branch(

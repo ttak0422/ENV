@@ -2,7 +2,7 @@
   home = {
     packages = with pkgs; [ jdk scala gradle maven sbt ];
     file = { ".jdk/openjdk".source = pkgs.jdk; };
-    sessionVariables = { JAVA_HOME = "$HOME/.jdk/openjdk/bin"; };
+    sessionVariables = { JAVA_HOME = "$HOME/.jdk/openjdk"; };
   };
 }
 

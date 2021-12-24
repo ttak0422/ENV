@@ -43,7 +43,12 @@ let
     registers-nvim
 
     # tab
-    supertab
+    {
+      plugin = supertab;
+      config = ''
+        let g:SuperTabDefaultCompletionType = "<c-n>"
+      '';
+    }
 
     # support Nix
     vim-nix
@@ -402,15 +407,8 @@ let
   '';
 
   extraConfig = ''
-    """"""""""""
-    " helplang "
-    """"""""""""
+    " helplang
     set helplang=ja
-
-    """"""""""""
-    " supertab "
-    """"""""""""
-    let g:SuperTabDefaultCompletionType = "<c-n>"
 
     " カラースキーム
     colorscheme ayu-mirage " termguicolors、backgroudも設定される
@@ -730,7 +728,10 @@ let
     EOF
           '';
   cocSettings = {
-    suggest = { enablePreselect = false; };
+    suggest = {
+      enablePreselect = true;
+      enablePreview = true;
+    };
     languagesever = {
       go = {
         command = "gopls";
@@ -738,9 +739,10 @@ let
         filetypes = [ "go" ];
       };
     };
+    java.jdt.ls.vmargs = "-javaagent:${pkgs.lombok}/share/java/lombok.jar";
   };
 in {
-  home.packages = with pkgs; [ python39Packages.pynvim ];
+  home.packages = with pkgs; [ python39Packages.pynvim lombok ];
   programs.neovim = {
     inherit plugins extraConfig;
     enable = true;

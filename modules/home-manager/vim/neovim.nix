@@ -739,7 +739,8 @@ let
         filetypes = [ "go" ];
       };
     };
-    java.jdt.ls.vmargs = "-javaagent:${pkgs.lombok}/share/java/lombok.jar";
+    "java.jdt.ls.vmargs" =
+      "-javaagent:${pkgs.lombok}/share/java/lombok.jar -Xbootclasspath/a:${pkgs.lombok}/share/java/lombok.jar";
   };
 in {
   home.packages = with pkgs; [ python39Packages.pynvim lombok ];

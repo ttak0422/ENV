@@ -559,10 +559,6 @@ let
         \   'substitute': s:wildmenu_renderer,
         \ }))
     endfunction
-
-    " 開いているファイルのディレクトリに自動で移動 (相対パスが機能するように)
-    autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
-    autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
     autocmd CmdlineEnter * ++once call s:wilder_init()
 
     " mouse有効化

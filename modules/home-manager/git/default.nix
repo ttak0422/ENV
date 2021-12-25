@@ -58,11 +58,8 @@ in {
     lfs.enable = true;
     delta.enable = true;
     aliases = {
-      ignore = ''
-        ignore = !"f() { local s=$1; shift; \
-        while [ $# -gt 0 ]; do s=\"$s,$1\"; shift; done;\
-        curl -L \"https://www.gitignore.io/api/$s\"; }; f"
-      '';
+      tags = "tag";
+      ignore = "!f() { curl -L -s https://www.gitignore.io/api/$@ ;}; f";
       # e.g. git delete-merged-branch develop
       # 参考 (https://qiita.com/hajimeni/items/73d2155fc59e152630c4)
       delete-merged-branch = ''

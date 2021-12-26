@@ -79,6 +79,13 @@ let
     # vim向けeditorconfig
     editorconfig-vim
 
+    {
+      plugin = quick-scope;
+      config = ''
+        let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+      '';
+    }
+
     # 対応括弧可視化
     {
       plugin = rainbow;

@@ -4,6 +4,7 @@ let
   inherit (builtins) concatStringsSep map fetchTarball readFile;
   inherit (lib.lists) singleton;
   inherit (pkgs.vimUtils) buildVimPlugin;
+  templates = pkgs.callPackage ./templates { };
   external = pkgs.callPackage ./external.nix { };
   wrap = txt: "'${txt}'";
   mkVimPlugin = cfg:
@@ -293,6 +294,15 @@ let
           sha256 = "0jxxckfcm0vmcblj6fr4fbdxw7b5dwpr8b7jv59mjsyzqfcdnhs5";
         };
       }
+      {
+        name = "vim-sonictemplate";
+        version = "1.0.0";
+        src = fetchTarball {
+          url =
+            "https://github.com/mattn/vim-sonictemplate/archive/7a44ba848709ce6f4ea12e11e0de6664db69694c.tar.gz";
+          sha256 = "0g862azpyk700qm96rlkd28clp6ngpmirawlxx88906qzbf8knp6";
+        };
+      }
     ] ++ singleton (mkVimPlugin' {
       pname = "denops-vim";
       version = "2.1.2";
@@ -553,6 +563,13 @@ let
     " easymotionでもsmartcase
     let g:EasyMotion_smartcase = 1
 
+    """""""""""""""""
+    " sonictemplate "
+    """""""""""""""""
+    let g:sonictemplate_vim_template_dir = [
+    \ '${templates}'
+    \]
+
     """"""""""
     " wilder "
     """"""""""
@@ -787,7 +804,8 @@ let
     "list.insertMappings" = { "<C-c>" = "do:exit"; };
   };
 in {
-  home.packages = with pkgs; [ python39Packages.pynvim lombok ];
+  home.packages = with pkgs;
+    [ python39Packages.pynvim lombok ] ++ [ templates ];
   programs.neovim = {
     inherit plugins extraConfig;
     enable = true;

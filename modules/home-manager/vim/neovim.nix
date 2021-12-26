@@ -66,7 +66,8 @@ let
     vim-better-whitespace
 
     # インデント可視化
-    indentLine
+    # indentLine
+    indent-blankline-nvim
 
     # yank可視化
     vim-highlightedyank
@@ -93,8 +94,18 @@ let
     # zoom
     zoomwintab-vim
 
-    # ale
-    ale
+    {
+      plugin = ale;
+      config = ''
+        let g:ale_sign_column_always = 1
+        let g:ale_set_loclist = 0
+        let g:ale_set_quickfix = 1
+        let g:ale_open_list = 1
+        let g:ale_keep_list_window_open = 0
+        let g:ale_list_window_size = 4
+        let g:ale_java_javac_executable = "javac -cp ${pkgs.lombok}/share/java/lombok.jar"
+      '';
+    }
 
     # feline
     # feline-nvim
@@ -146,14 +157,9 @@ let
     gitsigns-nvim
 
     # cursor
-    nvim-cursorline
     specs-nvim
 
-    # scroll
     nvim-scrollview
-
-    # qucickrun
-    vim-quickrun
 
     # command line
     wilder-nvim
@@ -179,6 +185,32 @@ let
 
     # brackets
     auto-pairs
+
+    {
+      plugin = vim-quickrun;
+      config = ''
+        let g:quickrun_config={'*': {'split': '''}}
+        set splitbelow
+      '';
+    }
+
+    {
+      plugin = nvim-code-action-menu;
+      config = "";
+    }
+
+    {
+      plugin = nvim-bqf;
+      config = "";
+    }
+
+    # debug
+    {
+      plugin = vimspector;
+      config = ''
+        let g:vimspector_enable_mappings = 'HUMAN'
+      '';
+    }
 
     trouble-nvim
     # wip...
@@ -252,6 +284,15 @@ let
           sha256 = "0gjirzqrlr8vy4rlflx4kq3dbk5v2ihavw39y3q8ik8k27yx99d6";
         };
       }
+      {
+        name = "project-nvim";
+        version = "1.0.0";
+        src = fetchTarball {
+          url =
+            "https://github.com/ahmedkhalf/project.nvim/archive/71d0e23dcfc43cfd6bb2a97dc5a7de1ab47a6538.tar.gz";
+          sha256 = "0jxxckfcm0vmcblj6fr4fbdxw7b5dwpr8b7jv59mjsyzqfcdnhs5";
+        };
+      }
     ] ++ singleton (mkVimPlugin' {
       pname = "denops-vim";
       version = "2.1.2";
@@ -271,8 +312,23 @@ let
     "coc-toml"
     "coc-floaterm"
     "coc-java"
+    # "coc-tsserver"
   ];
   extraLuaConfig = ''
+    -- indent-blankline-nvim
+    vim.opt.list = true
+    vim.opt.listchars:append("space:⋅")
+    vim.opt.listchars:append("eol:↴")
+    require("indent_blankline").setup {
+        show_end_of_line = true,
+        space_char_blankline = " ",
+    }
+
+    -- project-nvim
+    require("project_nvim").setup {
+      silent_chdir = false,
+    }
+
     -- tree-sitter
     require'nvim-treesitter.install'.compilers = { "gcc" }
     require'nvim-treesitter.configs'.setup {
@@ -369,16 +425,13 @@ let
     }
 
     -- lightbulb
-    vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+    -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
     -- gitsigns
     require('gitsigns').setup()
 
     -- stabilize
     require('stabilize').setup()
-
-    -- package-info
-    require('package-info').setup()
 
     -- todo-comments.nvim WIP
     require('todo-comments').setup()
@@ -408,7 +461,7 @@ let
 
   extraConfig = ''
     " helplang
-    set helplang=ja
+    " set helplang=ja
 
     " カラースキーム
     colorscheme ayu-mirage " termguicolors、backgroudも設定される
@@ -487,6 +540,9 @@ let
     " file (content) search
     nnoremap <Leader>ff :Telescope live_grep<CR>
     nnoremap <Leader>fp :Telescope find_files<CR>
+
+    " quick run
+    nnoremap <Leader>r :<C-U>QuickRun<CR>
 
     """"""""""""""
     " easymotion "
@@ -634,17 +690,6 @@ let
       return expand('%')
     endfunction
 
-    """""""
-    " ale "
-    """""""
-    let g:ale_sign_column_always = 1
-    let g:ale_set_loclist = 0
-    let g:ale_set_quickfix = 1
-    let g:ale_open_list = 1
-    " エラーと警告がなくなっても開いたままにする
-    let g:ale_keep_list_window_open = 0
-    let g:ale_list_window_size = 4
-
     " Goyo
     let g:goyo_width = 120
     autocmd! User GoyoEnter Limelight
@@ -737,6 +782,9 @@ let
     };
     "java.jdt.ls.vmargs" =
       "-javaagent:${pkgs.lombok}/share/java/lombok.jar -Xbootclasspath/a:${pkgs.lombok}/share/java/lombok.jar";
+    "java.autobuild.enabled" = false;
+    "list.normalMappings" = { "<C-c>" = "do:exit"; };
+    "list.insertMappings" = { "<C-c>" = "do:exit"; };
   };
 in {
   home.packages = with pkgs; [ python39Packages.pynvim lombok ];

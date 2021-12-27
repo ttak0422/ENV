@@ -813,7 +813,7 @@ let
   };
 in {
   home.packages = with pkgs;
-    [ python39Packages.pynvim lombok ] ++ [ templates ];
+    [ python39Packages.pynvim lombok ] ++ [ tree-sitter templates ];
   programs.neovim = {
     inherit plugins extraConfig;
     enable = true;

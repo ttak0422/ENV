@@ -653,6 +653,8 @@ let
 
     " tabキーでspaceを入力する
     set expandtab
+    set tabstop=4
+    set shiftwidth=4
 
     " ファイル保管
     set wildmenu

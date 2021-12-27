@@ -329,7 +329,7 @@ let
     "coc-toml"
     "coc-floaterm"
     "coc-java"
-    # "coc-tsserver"
+    "coc-tsserver"
   ];
   extraLuaConfig = ''
     -- indent-blankline-nvim

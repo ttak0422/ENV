@@ -330,6 +330,7 @@ let
     "coc-floaterm"
     "coc-java"
     "coc-tsserver"
+    "coc-pyright"
   ];
   extraLuaConfig = ''
     -- indent-blankline-nvim

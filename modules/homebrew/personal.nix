@@ -21,6 +21,7 @@
       "jetbrains-toolbox"
       "karabiner-elements"
       "keycastr"
+      "kitty"
       "slack"
       "visual-studio-code"
       # wait for m1 support

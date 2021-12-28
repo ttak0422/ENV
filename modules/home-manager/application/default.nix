@@ -1,1 +1,1 @@
-{ config, pkgs, lib, ... }: { imports = [ ./alacritty.nix ]; }
+{ config, pkgs, lib, ... }: { imports = [ ./alacritty.nix ./kitty.nix ]; }

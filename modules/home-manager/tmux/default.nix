@@ -7,8 +7,9 @@ let
   defaultShell = "${pkgs.zsh}/bin/zsh";
   statusInterval = 60;
   resizeAmount = 5;
-  lStatusSimbol = "\\ue0b1";
-  rStatusSimbol = "\\ue0b3";
+  focusPane = "‹:)~❁";
+  lBracketSimbol = "\\ue0b6";
+  rBracketSimbol = "\\ue0b4";
   sessionSimbol = "\\uf53a";
   zoomSimbol = "\\uf519";
   loaSimbol = "\\uf91e";
@@ -190,7 +191,7 @@ let
     # pane-border
     set -g pane-active-border-style ""
     set -g pane-border-style ""
-    set -g pane-border-format "#[reverse]#{?pane_active, #T ,}"
+    set -g pane-border-format "#{?pane_active,${lBracketSimbol}#[reverse]${focusPane}#[default]${rBracketSimbol},}"
     set -g pane-border-status off
 
     ##########
@@ -212,8 +213,8 @@ let
 
     # status-center
     set-option -g status-justify "centre"
-    set-window-option -g window-status-format " #I:#W "
-    set-window-option -g window-status-current-format "#{?client_prefix,#[fg=${colors.accent}],}#[reverse] #I:#W #[default]"
+    set-window-option -g window-status-format " #W "
+    set-window-option -g window-status-current-format "#{?client_prefix,#[fg=${colors.accent}],}${lBracketSimbol}#[reverse] #W #[default]#{?client_prefix,#[fg=${colors.accent}],}${rBracketSimbol}"
 
     # status-right
     set -g status-right "#[fg=${colors.statusRight}] ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA)"

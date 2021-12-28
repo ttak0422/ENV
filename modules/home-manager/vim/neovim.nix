@@ -496,6 +496,8 @@ let
     " Global keybind "
     """"""""""""""""""
 
+    inoremap <S-Tab> <C-d>
+
     """"""""""""""""""
     " Window keybind "
     """"""""""""""""""

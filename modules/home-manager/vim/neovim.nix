@@ -807,6 +807,10 @@ let
         rootPatterns = [ "go.mod" ];
         filetypes = [ "go" ];
       };
+      nix = {
+        command = "rnix-lsp";
+        filetypes = [ "nix" ];
+      };
     };
     "java.jdt.ls.vmargs" =
       "-javaagent:${pkgs.lombok}/share/java/lombok.jar -Xbootclasspath/a:${pkgs.lombok}/share/java/lombok.jar";

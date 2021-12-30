@@ -138,8 +138,14 @@ let
     # vista
     vista-vim
 
-    # coc
-    coc-nvim
+    # {
+    #   plugin = coc-nvim;
+    #   config = ''
+    #     let g:coc_global_extensions = [ ${
+    #       concatStringsSep "," (map wrap cocExtensions)
+    #     } ]
+    #   '';
+    # }
 
     emmet-vim
 
@@ -724,13 +730,6 @@ let
     autocmd! User GoyoLeave Limelight!
 
     """"""""""""
-    " coc.nvim "
-    """"""""""""
-    let g:coc_global_extensions = [ ${
-      concatStringsSep "," (map wrap cocExtensions)
-    } ]
-
-    """"""""""""
     " floaterm "
     """"""""""""
     let g:floaterm_autoclose = 1
@@ -829,7 +828,7 @@ in {
     withPython3 = true;
     withRuby = true;
     coc = {
-      enable = true;
+      enable = false;
       settings = cocSettings;
     };
   };

@@ -128,7 +128,12 @@ let
     which-key-nvim
 
     # telescope
-    telescope-nvim
+    {
+      plugin = telescope-nvim;
+      config = ''
+        autocmd FileType TelescopePrompt call deoplete#custom#buffer_option('auto_complete', v:false)
+      '';
+    }
     telescope-fzf-native-nvim
     telescope-cheat-nvim
 

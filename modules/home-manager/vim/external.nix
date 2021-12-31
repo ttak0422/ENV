@@ -13,4 +13,21 @@ let
       cp -r ./* $out
     '';
   };
+
+  # configuration requires write access...
+  # jdt-language-server = stdenv.mkDerivation {
+  #   name = "jdt-language-server";
+  #   src = builtins.fetchurl {
+  #     url =
+  #       "https://download.eclipse.org/jdtls/milestones/1.7.0/jdt-language-server-1.7.0-202112161541.tar.gz";
+  #     sha256 = "0ll5rgd8i8wfg2zz0ciapakl66qqaw344129qj72cyiixkgjh31g";
+  #   };
+  #   noBuild = true;
+  #   sourceRoot = ".";
+  #   installPhase = ''
+  #     ls
+  #     mkdir -p $out
+  #     cp -r ./* $out
+  #   '';
+  # };
 in { inherit fzy-lua-native; }

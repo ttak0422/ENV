@@ -143,14 +143,14 @@ let
     # vista
     vista-vim
 
-    # {
-    #   plugin = coc-nvim;
-    #   config = ''
-    #     let g:coc_global_extensions = [ ${
-    #       concatStringsSep "," (map wrap cocExtensions)
-    #     } ]
-    #   '';
-    # }
+    {
+      plugin = coc-nvim;
+      config = ''
+        let g:coc_global_extensions = [ ${
+          concatStringsSep "," (map wrap cocExtensions)
+        } ]
+      '';
+    }
 
     emmet-vim
 
@@ -235,14 +235,6 @@ let
     # wip...
     # https://github.com/chentau/marks.nvim
     # https://github.com/numToStr/FTerm.nvim
-    {
-      plugin = echodoc-vim;
-      config = ''
-        let g:echodoc#enable_at_startup = 1
-        let g:echodoc#type = 'floating'
-        highlight link EchoDocFloat Pmenu
-      '';
-    }
   ]) ++ [
     external.fzy-lua-native
   ]
@@ -747,6 +739,11 @@ let
     """"""""""""
     let g:floaterm_autoclose = 1
 
+    """"""""""""
+    " filetype "
+    """"""""""""
+    autocmd BufNewFile,BufRead *.fs,*.fsx,*.fsi set filetype=fsharp
+
     " 検索
     set ignorecase                " 小文字のみの検索に限り小文字大文字の差を無視
     set smartcase
@@ -841,7 +838,7 @@ in {
     withPython3 = true;
     withRuby = true;
     coc = {
-      enable = false;
+      enable = true;
       settings = cocSettings;
     };
   };

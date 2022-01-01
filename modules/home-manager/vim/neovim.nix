@@ -497,8 +497,9 @@ let
     " floating windowsの透過
     set pumblend=15
 
-    " カーソル行可視化
+    " カーソル可視化
     set cursorline
+    set cursorcolumn
 
     """"""""""""
     " Commands "
@@ -573,6 +574,13 @@ let
 
     " quick run
     nnoremap <Leader>r :<C-U>QuickRun<CR>
+
+    " coc "
+    nnoremap <Leader>ca :CocAction<CR>
+    nnoremap <Leader>cgd <Plug>(coc-definition)
+    nnoremap <Leader>cgy <Plug>(coc-type-definition)
+    nnoremap <Leader>cgi <Plug>(coc-implementation)
+    nnoremap <Leader>cgr <Plug>(coc-references)
 
     """"""""""""""
     " easymotion "
@@ -744,6 +752,33 @@ let
     """"""""""""
     autocmd BufNewFile,BufRead *.fs,*.fsx,*.fsi set filetype=fsharp
 
+    """"""""""
+    " backup "
+    """"""""""
+    set nobackup
+    set nowritebackup
+
+    " coc "
+    set updatetime=300
+    set shortmess+=c
+    set signcolumn=number
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+    function! s:show_documentation()
+      if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+      elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+      else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+      endif
+    endfunction
+
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+    " Add `:Format` command to format current buffer.
+    command! -nargs=0 Format :call CocAction('format')
+
     " 検索
     set ignorecase                " 小文字のみの検索に限り小文字大文字の差を無視
     set smartcase
@@ -824,6 +859,8 @@ let
     "java.jdt.ls.vmargs" =
       "-javaagent:${pkgs.lombok}/share/java/lombok.jar -Xbootclasspath/a:${pkgs.lombok}/share/java/lombok.jar";
     "java.autobuild.enabled" = false;
+    "java.format.enabled" = true;
+    "java.saveActions.organizeImports" = true;
     "list.normalMappings" = { "<C-c>" = "do:exit"; };
     "list.insertMappings" = { "<C-c>" = "do:exit"; };
   };

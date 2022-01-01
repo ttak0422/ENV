@@ -55,7 +55,13 @@ let
     vim-nix
 
     # colorscheme
-    neovim-ayu
+    # neovim-ayu
+    {
+      plugin = ayu-vim;
+      config = ''
+        let ayucolor="mirage"
+      '';
+    }
 
     # startify
     vim-startify
@@ -117,12 +123,95 @@ let
 
     # feline
     # feline-nvim
-    lightline-vim
-    lightline-ale
+    {
+      plugin = lightline-vim;
+      config = ''
+                set laststatus=2
+                set showtabline=2
+                let g:lightline#ale#indicator_checking = "\uf110"
+                let g:lightline#ale#indicator_infos = "\uf129"
+                let g:lightline#ale#indicator_warnings = "\uf071"
+                let g:lightline#ale#indicator_errors = "\uf05e"
+                let g:lightline#ale#indicator_ok = "\uf00c"
+                let g:lightline = {
+                  \   'colorscheme': 'ayu_mirage',
+                  \   'active': {
+                  \     'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'gitdiff'] ],
+                  \     'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
+                  \                [ 'fileformat', 'fileencoding', 'filetype'] ],
+                  \   },
+                  \   'tabline': {
+                  \     'left': [ ['buffers'] ],
+                  \     'right': [ ['close'] ],
+                  \   },
+                  \   'separator': {
+                  \     'left': "\ue0b4",
+                  \     'right': "\ue0b6",
+                  \   },
+                  \   'subseparator': {
+                  \     'left': "\ue0b5",
+                  \     'right': "\ue0b7",
+                  \   },
+                  \   'component_function': {
+                  \     'filename': 'LightlineFilename',
+                  \     'gitbranch': 'LightlineGitBranch',
+                  \     'gitdiff': 'LightlineGitDiff',
+                  \   },
+                  \   'component_expand': {
+                  \     'buffers': 'lightline#bufferline#buffers',
+                  \     'linter_checking': 'lightline#ale#checking',
+                  \     'linter_infos': 'lightline#ale#infos',
+                  \     'linter_warnings': 'lightline#ale#warnings',
+                  \     'linter_errors': 'lightline#ale#errors',
+                  \     'linter_ok': 'lightline#ale#ok',
+                  \   },
+                  \   'component_type': {
+                  \     'buffers': 'tabsel',
+                  \     'linter_infos': 'right',
+                  \     'linter_warnings': 'warning',
+                  \     'linter_errors': 'error',
+                  \     'linter_ok': 'right',
+                  \     'gitdiff': 'middle',
+                  \   },
+                  \   'mode_map': {
+        		      \     'n' : ' NOR',
+        		      \     'i' : ' INS',
+        		      \     'R' : ' REP',
+        		      \     'v' : ' VIS',
+        		      \     'V' : ' VIS',
+        		      \     "\<C-v>": ' VIS',
+        		      \     'c' : ' CMD',
+        		      \     's' : ' SEL',
+        		      \     'S' : ' SEL',
+        		      \     "\<C-s>": ' SEL',
+        		      \     't': ' TRM',
+        		      \   }
+                  \ }
+                function! LightlineFilename()
+                  return expand('%')
+                endfunction
 
-    # tab
-    # bufferline-nvim
-    barbar-nvim
+                function! LightlineGitDiff()
+                  return get(b:,'gitsigns_status')
+                endfunction
+
+                function! LightlineGitBranch()
+                  return ' ' . get(b:,'gitsigns_head')
+                endfunction
+              '';
+
+    }
+    lightline-ale
+    {
+      plugin = lightline-bufferline;
+      config = ''
+        let g:lightline#bufferline#show_number = 0
+        let g:lightline#bufferline#shorten_path = 1
+        let g:lightline#bufferline#unnamed = '[No Name]'
+        let g:lightline#bufferline#enable_devicons = 1
+        let g:lightline#bufferline#unicode_symbols = 1
+      '';
+    }
 
     # whichkey
     which-key-nvim
@@ -491,8 +580,11 @@ let
     " helplang
     " set helplang=ja
 
-    " カラースキーム
-    colorscheme ayu-mirage " termguicolors、backgroudも設定される
+    """""""""""""""
+    " colorscheme "
+    """""""""""""""
+    set termguicolors
+    colorscheme ayu
 
     " floating windowsの透過
     set pumblend=15
@@ -571,6 +663,7 @@ let
     " file (content) search
     nnoremap <Leader>ff :Telescope live_grep<CR>
     nnoremap <Leader>fp :Telescope find_files<CR>
+    nnoremap <Leader>fb :Telescope buffers<CR>
 
     " quick run
     nnoremap <Leader>r :<C-U>QuickRun<CR>
@@ -698,44 +791,6 @@ let
     noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
     noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
 
-    " lightline
-    set laststatus=2
-    set showtabline=2
-    let g:lightline#ale#indicator_checking = "\uf110"
-    let g:lightline#ale#indicator_infos = "\uf129"
-    let g:lightline#ale#indicator_warnings = "\uf071"
-    let g:lightline#ale#indicator_errors = "\uf05e"
-    let g:lightline#ale#indicator_ok = "\uf00c"
-    let g:lightline = {
-      \   'colorscheme': 'ayu_mirage',
-      \   'active': {
-      \     'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-      \     'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
-      \                [ 'fileformat', 'fileencoding', 'filetype'] ],
-      \   },
-      \   'component_function': {
-      \     'filename': 'LightlineFilename',
-      \     'gitbranch': 'gina#component#repo#branch',
-      \   },
-      \   'component_expand': {
-      \     'buffers': 'lightline#bufferline#buffers',
-      \     'linter_checking': 'lightline#ale#checking',
-      \     'linter_infos': 'lightline#ale#infos',
-      \     'linter_warnings': 'lightline#ale#warnings',
-      \     'linter_errors': 'lightline#ale#errors',
-      \     'linter_ok': 'lightline#ale#ok',
-      \   },
-      \   'component_type': {
-      \     'buffers': 'tabsel',
-      \     'linter_infos': 'right',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'right',
-      \   },
-      \ }
-    function! LightlineFilename()
-      return expand('%')
-    endfunction
 
     " Goyo
     let g:goyo_width = 120

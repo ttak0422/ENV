@@ -5,6 +5,7 @@ in {
   programs.zsh = {
     enable = true;
     defaultKeymap = "viins";
+    enableCompletion = false;
     shellAliases = shared.shellAliases;
     history = {
       size = 100000;

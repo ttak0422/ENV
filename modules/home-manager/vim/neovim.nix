@@ -92,6 +92,12 @@ let
       '';
     }
 
+    {
+      plugin = toggleterm-nvim;
+      # lua
+      # config = "";
+    }
+
     # 対応括弧可視化
     {
       plugin = rainbow;
@@ -251,11 +257,6 @@ let
     nerdtree-git-plugin
     vim-nerdtree-tabs
     vim-nerdtree-syntax-highlight
-
-    # winresizer.vim
-
-    # terminal
-    vim-floaterm
 
     # zen
     goyo-vim
@@ -433,6 +434,15 @@ let
     "coc-pyright"
   ];
   extraLuaConfig = ''
+    -- toggleterm-nvim
+    require("toggleterm").setup {
+      open_mapping = [[<c-t>]],
+      direction = 'float',
+      float_opts = {
+        border = 'curved',
+      },
+    }
+
     -- indent-blankline-nvim
     vim.opt.list = true
     vim.opt.listchars:append("space:⋅")
@@ -638,8 +648,6 @@ let
     nnoremap <Leader>v :<C-u>vs<CR>
     " sp
     nnoremap <Leader>h :<C-u>sp<CR>
-    " floaterm
-    nnoremap <Leader>t :FloatermToggle<CR>
     " file search
     nnoremap <Leader><Leader>p :Files<CR>
     " choosewin

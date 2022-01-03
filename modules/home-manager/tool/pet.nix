@@ -41,17 +41,6 @@ in {
     packages = [ pkgs.pet ];
     file.".config/pet/config.toml".text = config';
     file.".config/pet/snippets.toml".text = snippets;
-    # zsh
-    file.".zshrc".text = mkAfter ''
-      function pet-select() {
-          BUFFER=$(pet search --query "$LBUFFER")
-          CURSOR=$#BUFFER
-          zle redisplay
-      }
-      zle -N pet-select
-      stty -ixon
-      bindkey '^e' pet-select
-    '';
   };
   # fish
   programs.fish = {

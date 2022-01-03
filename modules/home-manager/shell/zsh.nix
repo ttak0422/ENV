@@ -7,14 +7,14 @@ let
     zstyle ':completion:*:manuals' separate-sections true
   '';
   functionConfig = ''
-    function select-history() {
+      function select-history() {
       BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
       CURSOR=$#BUFFER
     }
     function pet-select() {
-        BUFFER=$(pet search --query "$LBUFFER")
-        CURSOR=$#BUFFER
-        zle redisplay
+    BUFFER=$(pet search --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle redisplay
     }
   '';
   keybindConfig = let
@@ -31,8 +31,14 @@ let
       ${cfg}
     }
   '';
+  starshipConfig = ''
+    [character]
+    success_symbol = "[](bold green)"
+    error_symbol = "[](bold red)"
+    vicmd_symbol = "[](bold green)"
+  '';
 in {
-  home.packages = with pkgs; [ starship ];
+  home.packages = with pkgs; [ ];
   programs.zsh = {
     defaultKeymap = "viins";
     enableCompletion = true;
@@ -51,28 +57,25 @@ in {
       ${functionConfig}
       ${keybindConfig}
 
-      # https://qiita.com/ssh0/items/a9956a74bff8254a606a
-      if [[ ! -n $TMUX ]]; then
-        # get the IDs
-        ID="`tmux list-sessions`"
-        if [[ -z "$ID" ]]; then
-          tmux new-session
-        fi
-        create_new_session="Create New Session"
-        ID="$ID\n''${create_new_session}:"
-        ID="`echo $ID | fzf --no-sort --prompt="Session > " | cut -d: -f1`"
-        if [[ "$ID" = "''${create_new_session}" ]]; then
-          tmux new-session
-        elif [[ -n "$ID" ]]; then
-          tmux attach-session -t "$ID"
-        else
-          :  # Start terminal normally
-        fi
-      fi
-
-      # starship
-      eval "$(starship init zsh)"
-    '';
+            # https://qiita.com/ssh0/items/a9956a74bff8254a606a
+            if [[ ! -n $TMUX ]]; then
+              # get the IDs
+              ID="`tmux list-sessions`"
+              if [[ -z "$ID" ]]; then
+                tmux new-session
+              fi
+              create_new_session="Create New Session"
+              ID="$ID\n''${create_new_session}:"
+              ID="`echo $ID | fzf --no-sort --prompt="Session > " | cut -d: -f1`"
+              if [[ "$ID" = "''${create_new_session}" ]]; then
+                tmux new-session
+              elif [[ -n "$ID" ]]; then
+                tmux attach-session -t "$ID"
+              else
+                :  # Start terminal normally
+              fi
+            fi
+            '';
     sessionVariables = { EDITOR = "vim"; };
     plugins = [
       {
@@ -87,4 +90,6 @@ in {
       }
     ];
   };
+  programs.starship.enable = true;
+  xdg.configFile."starship.toml".text = starshipConfig;
 }

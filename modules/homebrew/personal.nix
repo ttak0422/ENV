@@ -1,10 +1,7 @@
 { config, pkgs, lib, ... }: {
   imports = [ ./prelude.nix ];
   homebrew = {
-    brews = [
-      "lunchy"
-      "yabai" # wip...
-    ];
+    brews = [ "lunchy" ];
     taps = [
       "homebrew/cask-fonts"
       "homebrew/cask"

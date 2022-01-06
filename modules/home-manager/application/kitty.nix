@@ -30,6 +30,7 @@ let
     map cmd+shift+minus change_font_size all +2.0
     map cmd+c copy_to_clipboard
     map cmd+v paste_from_clipboard
+    map cmd+w close_os_window
   '';
 in {
   home.packages = [ themes ];

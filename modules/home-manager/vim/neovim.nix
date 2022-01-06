@@ -935,6 +935,17 @@ let
         command = "rnix-lsp";
         filetypes = [ "nix" ];
       };
+      elmLS = {
+        command = "elm-language-server";
+        filetypes = [ "elm" ];
+        rootPatterns = [ "elm.json" ];
+        initializationOptions = {
+          elmPath = "elm";
+          elmFormatPath = "elm-format";
+          elmTestPath = "elm-test";
+          elmAnalyseTrigger = "change";
+        };
+      };
     };
     "java.jdt.ls.vmargs" =
       "-javaagent:${pkgs.lombok}/share/java/lombok.jar -Xbootclasspath/a:${pkgs.lombok}/share/java/lombok.jar";

@@ -244,6 +244,8 @@ let
         let g:coc_global_extensions = [ ${
           concatStringsSep "," (map wrap cocExtensions)
         } ]
+        inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
       '';
     }
 
@@ -829,6 +831,12 @@ let
     """"""""""
     set nobackup
     set nowritebackup
+
+    """""""""""""
+    " autochdir "
+    """""""""""""
+    autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
+    autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
 
     " coc "
     set updatetime=300

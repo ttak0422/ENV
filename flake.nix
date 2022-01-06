@@ -72,7 +72,7 @@
       };
 
       overlays = {
-        pkgs-master = final: prev: {
+        pkgs-unstable = final: prev: {
           pkgs-master = import inputs.nixpkgs {
             inherit (prev.stdenv) system;
             inherit (nixpkgsConfig) config;

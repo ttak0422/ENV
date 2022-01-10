@@ -32,13 +32,6 @@ lsp_installer.on_server_ready(function(server)
     opts.flags = {
       debounce_text_changes = 150,
     }
-    if server.name == "jdtls" then
-       local cmd = server:get_default_options().cmd
-       opts.cmd = vim.list_extend(cmd, {
-           ("-javaagent:%q"):format(path.concat { server.root_dir, "lombok.jar" }),
-           ("-Xbootclasspath/a:%q"):format(path.concat { server.root_dir, "lombok.jar" }),
-       })
-    end
 
     server:setup(opts)
     vim.cmd [[ do User LspAttachBuffers ]]

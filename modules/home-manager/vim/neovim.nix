@@ -66,14 +66,6 @@ let
     # registers
     registers-nvim
 
-    # tab
-    {
-      plugin = supertab;
-      config = ''
-        let g:SuperTabDefaultCompletionType = "<c-n>"
-      '';
-    }
-
     # support Nix
     vim-nix
 
@@ -211,6 +203,10 @@ let
       config = ""; # nvim-lsp-installerにて
     }
     {
+      plugin = lsp_signature-nvim;
+      config = readLua ./lua/lsp_signature-nvim.lua;
+    }
+    {
       plugin = mkVimPlugin {
         name = "lspsaga-nvim";
         version = "2021-01-10";
@@ -229,7 +225,13 @@ let
     cmp-nvim-lsp
     cmp-buffer
     cmp-nvim-lsp
-    lspkind-nvim
+    cmp-vsnip
+    lspkind-nvim # nvim-cmpでアイコン表示
+
+    {
+      plugin = vim-vsnip;
+      config = "";
+    }
 
     # whichkey
     which-key-nvim
@@ -247,17 +249,6 @@ let
 
     # vista
     vista-vim
-
-    {
-      plugin = coc-nvim;
-      config = ''
-        let g:coc_global_extensions = [ ${
-          concatStringsSep "," (map wrap cocExtensions)
-        } ]
-        inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-      '';
-    }
 
     emmet-vim
 
@@ -458,18 +449,6 @@ let
       dontBuild = true;
     });
 
-  cocExtensions = [
-    "coc-highlight"
-    "coc-json"
-    "coc-yaml"
-    "coc-go"
-    "coc-toml"
-    "coc-floaterm"
-    "coc-java"
-    "coc-tsserver"
-    "coc-pyright"
-  ];
-
   extraConfig = ''
     " helplang
     " set helplang=ja
@@ -560,13 +539,6 @@ let
     " quick run
     nnoremap <Leader>r :<C-U>QuickRun<CR>
 
-    " coc "
-    " nnoremap <Leader>ca :CocAction<CR>
-    " nnoremap <Leader>cgd <Plug>(coc-definition)
-    " nnoremap <Leader>cgy <Plug>(coc-type-definition)
-    " nnoremap <Leader>cgi <Plug>(coc-implementation)
-    " nnoremap <Leader>cgr <Plug>(coc-references)
-
     " lspsage "
     nnoremap <silent><Leader>ca :Lspsaga code_action<CR>
     vnoremap <silent><Leader>ca :<C-U>Lspsaga range_code_action<CR>
@@ -638,27 +610,6 @@ let
     autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
     autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
 
-    " coc "
-    " set updatetime=300
-    " set shortmess+=c
-    " set signcolumn=number
-    " nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-    " function! s:show_documentation()
-    "   if (index(['vim','help'], &filetype) >= 0)
-    "     execute 'h '.expand('<cword>')
-    "   elseif (coc#rpc#ready())
-    "     call CocActionAsync('doHover')
-    "   else
-    "     execute '!' . &keywordprg . " " . expand('<cword>')
-    "   endif
-    " endfunction
-
-    " autocmd CursorHold * silent call CocActionAsync('highlight')
-
-    " Add `:Format` command to format current buffer.
-    " command! -nargs=0 Format :call CocAction('format')
-
     " 検索
     set ignorecase                " 小文字のみの検索に限り小文字大文字の差を無視
     set smartcase
@@ -682,37 +633,6 @@ let
       endfunction " }}}
     augroup END " }}}
           '';
-  cocSettings = {
-    suggest = {
-      enablePreselect = true;
-      enablePreview = true;
-    };
-    languagesever = {
-      nix = {
-        command = "${pkgs.rnix-lsp}/bin/rnix-lsp";
-        filetypes = [ "nix" ];
-      };
-      elmLS = {
-        command =
-          "${pkgs.pkgs-stable.elmPackages.elm-language-server}/bin/elm-language-server";
-        filetypes = [ "elm" ];
-        rootPatterns = [ "elm.json" ];
-        initializationOptions = {
-          elmPath = "elm";
-          elmFormatPath = "elm-format";
-          elmTestPath = "elm-test";
-          elmAnalyseTrigger = "change";
-        };
-      };
-    };
-    "java.jdt.ls.vmargs" =
-      "-javaagent:${pkgs.lombok}/share/java/lombok.jar -Xbootclasspath/a:${pkgs.lombok}/share/java/lombok.jar";
-    "java.autobuild.enabled" = false;
-    "java.format.enabled" = true;
-    "java.saveActions.organizeImports" = true;
-    "list.normalMappings" = { "<C-c>" = "do:exit"; };
-    "list.insertMappings" = { "<C-c>" = "do:exit"; };
-  };
 in {
   home.packages = with pkgs;
     [ python39Packages.pynvim lombok ] ++ [ tree-sitter templates ];
@@ -723,9 +643,5 @@ in {
     withNodeJs = true;
     withPython3 = true;
     withRuby = true;
-    coc = {
-      enable = false;
-      settings = cocSettings;
-    };
   };
 }

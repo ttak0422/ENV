@@ -1,12 +1,20 @@
 { config, pkgs, lib, ... }:
 
 let
-  inherit (builtins) concatStringsSep map fetchTarball readFile;
+  inherit (builtins) concatStringsSep map fetchTarball;
+  inherit (lib.strings) fileContents;
   inherit (lib.lists) singleton;
   inherit (pkgs.vimUtils) buildVimPlugin;
   templates = pkgs.callPackage ./templates { };
   external = pkgs.callPackage ./external.nix { };
   wrap = txt: "'${txt}'";
+  lua = luaCode: ''
+      lua <<EOF
+        ${luaCode}
+    EOF
+  '';
+  readLua = path: lua (fileContents path);
+  readVimScript = path: fileContents path;
   mkVimPlugin = cfg:
     buildVimPlugin {
       pname = cfg.name;
@@ -20,9 +28,18 @@ let
     nvim-web-devicons
 
     # treesitter
-    nvim-treesitter
-    nvim-treesitter-context
-    nvim-treesitter-refactor
+    {
+      plugin = nvim-treesitter;
+      config = readLua ./lua/nvim-treesitter.lua;
+    }
+    {
+      plugin = nvim-treesitter-context;
+      config = readLua ./lua/nvim-treesitter-context.lua;
+    }
+    # {
+    #   plugin = nvim-treesitter-refactor;
+    #   config = readLua ./lua/nvim-treesitter-refactor.lua;
+    # }
     nvim-treesitter-textobjects
 
     # diff
@@ -34,8 +51,14 @@ let
     # nui
     nui-nvim
 
-    # stabilize
+    # Windowの挙動を安定させる
     stabilize-nvim
+    {
+      plugin = stabilize-nvim;
+      config = lua ''
+        require('stabilize').setup()
+      '';
+    }
 
     # yank
     vim-oscyank
@@ -63,8 +86,37 @@ let
       '';
     }
 
+    # スクロールを物理シミュレーション
+    {
+      plugin = mkVimPlugin {
+        name = "comfortable-motion-vim";
+        version = "2021-01-10";
+        src = fetchTarball {
+          url =
+            "https://github.com/yuttie/comfortable-motion.vim/archive/e20aeafb07c6184727b29f7674530150f7ab2036.tar.gz";
+          sha256 = "13chwy7laxh30464xmdzjhzfcmlcfzy11i8g4a4r11m1cigcjljb";
+        };
+      };
+      config = readVimScript ./vim/comfortable-motion.vim;
+    }
+
+    {
+      plugin = mkVimPlugin {
+        name = "spaces-nvim";
+        version = "2021-01-10";
+        src = fetchTarball {
+          url =
+            "https://github.com/edluffy/specs.nvim/archive/e043580a65409ea071dfe34e94284959fd24e3be.tar.gz";
+          sha256 = "1sg2i99ncx5j7al3mhwpnwyx1hila5gars0ak7q3n9yr4013i7dx";
+        };
+      };
+      config = readLua ./lua/spaces-nvim.lua;
+    }
     # startify
-    vim-startify
+    {
+      plugin = vim-startify;
+      config = readVimScript ./vim/startify.vim;
+    }
 
     # 定番設定
     vim-sensible
@@ -73,14 +125,19 @@ let
     vim-better-whitespace
 
     # インデント可視化
-    # indentLine
-    indent-blankline-nvim
+    {
+      plugin = indent-blankline-nvim;
+      config = readLua ./lua/indent-blankline-nvim.lua;
+    }
 
     # yank可視化
     vim-highlightedyank
 
     # git
-    gitsigns-nvim
+    {
+      plugin = gitsigns-nvim;
+      config = readLua ./lua/gitsigns.lua;
+    }
 
     # vim向けeditorconfig
     editorconfig-vim
@@ -94,8 +151,7 @@ let
 
     {
       plugin = toggleterm-nvim;
-      # lua
-      # config = "";
+      config = readLua ./lua/toggleterm-nvim.lua;
     }
 
     # 対応括弧可視化
@@ -127,97 +183,53 @@ let
       '';
     }
 
-    # feline
-    # feline-nvim
     {
       plugin = lightline-vim;
-      config = ''
-                set laststatus=2
-                set showtabline=2
-                let g:lightline#ale#indicator_checking = "\uf110"
-                let g:lightline#ale#indicator_infos = "\uf129"
-                let g:lightline#ale#indicator_warnings = "\uf071"
-                let g:lightline#ale#indicator_errors = "\uf05e"
-                let g:lightline#ale#indicator_ok = "\uf00c"
-                let g:lightline = {
-                  \   'colorscheme': 'ayu_mirage',
-                  \   'active': {
-                  \     'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'gitdiff'] ],
-                  \     'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
-                  \                [ 'fileformat', 'fileencoding', 'filetype'] ],
-                  \   },
-                  \   'tabline': {
-                  \     'left': [ ['buffers'] ],
-                  \     'right': [ ['close'] ],
-                  \   },
-                  \   'separator': {
-                  \     'left': "\ue0b4",
-                  \     'right': "\ue0b6",
-                  \   },
-                  \   'subseparator': {
-                  \     'left': "\ue0b5",
-                  \     'right': "\ue0b7",
-                  \   },
-                  \   'component_function': {
-                  \     'filename': 'LightlineFilename',
-                  \     'gitbranch': 'LightlineGitBranch',
-                  \     'gitdiff': 'LightlineGitDiff',
-                  \   },
-                  \   'component_expand': {
-                  \     'buffers': 'lightline#bufferline#buffers',
-                  \     'linter_checking': 'lightline#ale#checking',
-                  \     'linter_infos': 'lightline#ale#infos',
-                  \     'linter_warnings': 'lightline#ale#warnings',
-                  \     'linter_errors': 'lightline#ale#errors',
-                  \     'linter_ok': 'lightline#ale#ok',
-                  \   },
-                  \   'component_type': {
-                  \     'buffers': 'tabsel',
-                  \     'linter_infos': 'right',
-                  \     'linter_warnings': 'warning',
-                  \     'linter_errors': 'error',
-                  \     'linter_ok': 'right',
-                  \     'gitdiff': 'middle',
-                  \   },
-                  \   'mode_map': {
-        		      \     'n' : ' NOR',
-        		      \     'i' : ' INS',
-        		      \     'R' : ' REP',
-        		      \     'v' : ' VIS',
-        		      \     'V' : ' VIS',
-        		      \     "\<C-v>": ' VIS',
-        		      \     'c' : ' CMD',
-        		      \     's' : ' SEL',
-        		      \     'S' : ' SEL',
-        		      \     "\<C-s>": ' SEL',
-        		      \     't': ' TRM',
-        		      \   }
-                  \ }
-                function! LightlineFilename()
-                  return expand('%')
-                endfunction
-
-                function! LightlineGitDiff()
-                  return get(b:,'gitsigns_status')
-                endfunction
-
-                function! LightlineGitBranch()
-                  return ' ' . get(b:,'gitsigns_head')
-                endfunction
-              '';
-
+      config = readVimScript ./vim/lightline-vim.vim;
     }
+
     lightline-ale
     {
       plugin = lightline-bufferline;
-      config = ''
-        let g:lightline#bufferline#show_number = 0
-        let g:lightline#bufferline#shorten_path = 1
-        let g:lightline#bufferline#unnamed = '[No Name]'
-        let g:lightline#bufferline#enable_devicons = 1
-        let g:lightline#bufferline#unicode_symbols = 1
-      '';
+      config = readVimScript ./vim/lightline-bufferline.vim;
     }
+    {
+      plugin = mkVimPlugin' {
+        pname = "nvim-lsp-installer";
+        version = "2021-01-09";
+        src = fetchTarball {
+          url =
+            "https://github.com/williamboman/nvim-lsp-installer/archive/f8e2821234cac696e27e286c009c3afae8c089ae.tar.gz";
+          sha256 = "02c68b4z45mpaxcrg9q2nhawr25vhvz2kxh7d2f3k3xl983yzazp";
+        };
+        buildInputs = [ pkgs.git pkgs.cacert ];
+      };
+      config = readLua ./lua/nvim-lsp-installer.lua;
+    }
+    {
+      plugin = nvim-lspconfig;
+      config = ""; # nvim-lsp-installerにて
+    }
+    {
+      plugin = mkVimPlugin {
+        name = "lspsaga-nvim";
+        version = "2021-01-10";
+        src = fetchTarball {
+          url =
+            "https://github.com/tami5/lspsaga.nvim/archive/72eaf3544020db3da41d3813487329ae89512e9e.tar.gz";
+          sha256 = "1baf13agnrsqykhy3r01fgj8vmyqv10v33j90rf4w1q02dn8zvgc";
+        };
+      };
+      config = readLua ./lua/lspsaga-nvim.lua;
+    }
+    {
+      plugin = nvim-cmp;
+      config = readLua ./lua/nvim-cmp.lua;
+    }
+    cmp-nvim-lsp
+    cmp-buffer
+    cmp-nvim-lsp
+    lspkind-nvim
 
     # whichkey
     which-key-nvim
@@ -225,9 +237,7 @@ let
     # telescope
     {
       plugin = telescope-nvim;
-      config = ''
-        autocmd FileType TelescopePrompt call deoplete#custom#buffer_option('auto_complete', v:false)
-      '';
+      config = "";
     }
     telescope-fzf-native-nvim
     telescope-cheat-nvim
@@ -261,8 +271,20 @@ let
     vim-nerdtree-syntax-highlight
 
     # zen
-    goyo-vim
-    limelight-vim
+    {
+      plugin = mkVimPlugin {
+        name = "zen-mode-nvim";
+        version = "2021-01-10";
+        src = fetchTarball {
+          url =
+            "https://github.com/folke/zen-mode.nvim/archive/f1cc53d32b49cf962fb89a2eb0a31b85bb270f7c.tar.gz";
+          sha256 = "1fxkrny1xk69w8rlmz4x5msvqb8i8xvvl9csndpplxhkn8wzirdp";
+        };
+      };
+      config = readLua ./lua/zen-mode.lua;
+    }
+    # zenの配色
+    twilight-nvim
 
     # git
     gitsigns-nvim
@@ -272,8 +294,11 @@ let
 
     nvim-scrollview
 
-    # command line
-    wilder-nvim
+    # command lineを見やすく
+    {
+      plugin = wilder-nvim;
+      config = readVimScript ./vim/wilder.vim;
+    }
 
     # hl
     nvim-hlslens
@@ -282,7 +307,10 @@ let
     nvim-bufdel
 
     # nortification
-    nvim-notify
+    # {
+    #   plugin = nvim-notify;
+    #   config = readLua ./lua/nvim-notify.lua;
+    # }
 
     # todo comment
     todo-comments-nvim
@@ -291,7 +319,12 @@ let
     package-info-nvim
 
     # action
-    nvim-lightbulb
+    # {
+    #   plugin = nvim-lightbulb;
+    #   config = ''
+    #     " autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+    #   '';
+    # }
     nvim-code-action-menu
 
     # brackets
@@ -322,11 +355,29 @@ let
         let g:vimspector_enable_mappings = 'HUMAN'
       '';
     }
+    {
+      plugin = mkVimPlugin {
+        name = "project-nvim";
+        version = "2021-01-10";
+        src = fetchTarball {
+          url =
+            "https://github.com/ahmedkhalf/project.nvim/archive/71d0e23dcfc43cfd6bb2a97dc5a7de1ab47a6538.tar.gz";
+          sha256 = "0jxxckfcm0vmcblj6fr4fbdxw7b5dwpr8b7jv59mjsyzqfcdnhs5";
+        };
+      };
+      config = lua ''
+        require("project_nvim").setup()
+        require("telescope").load_extension("projects")
+      '';
+    }
 
     trouble-nvim
+    {
+      plugin = trouble-nvim;
+      config = readLua ./lua/trouble-nvim.lua;
+    }
     # wip...
     # https://github.com/chentau/marks.nvim
-    # https://github.com/numToStr/FTerm.nvim
   ]) ++ [
     external.fzy-lua-native
   ]
@@ -360,15 +411,6 @@ let
         };
       }
       {
-        name = "comfortable-motion-vim";
-        version = "1.0.0";
-        src = fetchTarball {
-          url =
-            "https://github.com/yuttie/comfortable-motion.vim/archive/e20aeafb07c6184727b29f7674530150f7ab2036.tar.gz";
-          sha256 = "13chwy7laxh30464xmdzjhzfcmlcfzy11i8g4a4r11m1cigcjljb";
-        };
-      }
-      {
         name = "denops-helloworld-vim";
         version = "2.0.0";
         src = fetchTarball {
@@ -395,15 +437,7 @@ let
           sha256 = "0gjirzqrlr8vy4rlflx4kq3dbk5v2ihavw39y3q8ik8k27yx99d6";
         };
       }
-      {
-        name = "project-nvim";
-        version = "1.0.0";
-        src = fetchTarball {
-          url =
-            "https://github.com/ahmedkhalf/project.nvim/archive/71d0e23dcfc43cfd6bb2a97dc5a7de1ab47a6538.tar.gz";
-          sha256 = "0jxxckfcm0vmcblj6fr4fbdxw7b5dwpr8b7jv59mjsyzqfcdnhs5";
-        };
-      }
+
       {
         name = "vim-sonictemplate";
         version = "1.0.0";
@@ -435,167 +469,6 @@ let
     "coc-tsserver"
     "coc-pyright"
   ];
-  extraLuaConfig = ''
-    -- toggleterm-nvim
-    require("toggleterm").setup {
-      open_mapping = [[<c-t>]],
-      direction = 'float',
-      float_opts = {
-        border = 'curved',
-      },
-    }
-
-    -- indent-blankline-nvim
-    vim.opt.list = true
-    vim.opt.listchars:append("space:⋅")
-    vim.opt.listchars:append("eol:↴")
-    require("indent_blankline").setup {
-        show_end_of_line = true,
-        space_char_blankline = " ",
-    }
-
-    -- project-nvim
-    require("project_nvim").setup {
-      silent_chdir = false,
-    }
-
-    -- tree-sitter
-    require'nvim-treesitter.configs'.setup {
-      ensure_installed = "maintained",
-      sync_install = false,
-      ignore_install = {},
-      highlight = {
-        enable = true,
-        disable = { "c" },
-        additional_vim_regex_highlighting = false,
-      },
-    }
-    require'nvim-treesitter.configs'.setup {
-      refactor = {
-        smart_rename = {
-          enable = true,
-          keymaps = {
-            smart_rename = "grr",
-          },
-        },
-      },
-    }
-    require'treesitter-context'.setup{
-      enable = true,
-      throttle = true,
-      max_lines = 0,
-      patterns = {
-        default = {
-          'class',
-          'function',
-          'method',
-          -- 'for',
-          -- 'while',
-          -- 'if',
-          -- 'switch',
-          -- 'case',
-        },
-      },
-    }
-
-    -- trouble
-    require("trouble").setup {
-      position = "bottom",
-      height = 10,
-      width = 50,
-      icons = true,
-      mode = "quickfix",
-      fold_open = "",
-      fold_closed = "",
-      group = true,
-      padding = true,
-      action_keys = {
-        close = "q",
-        cancel = "<esc>",
-        refresh = "r",
-        jump = {"<cr>", "<tab>"},
-        open_split = { "<c-x>" },
-        open_vsplit = { "<c-v>" },
-        open_tab = { "<c-t>" },
-        jump_close = {"o"},
-        toggle_mode = "m",
-        toggle_preview = "P",
-        hover = "K",
-        preview = "p",
-        close_folds = {"zM", "zm"},
-        open_folds = {"zR", "zr"},
-        toggle_fold = {"zA", "za"},
-        previous = "k",
-        next = "j"
-      }
-    }
-
-    -- tab
-    vim.g.bufferline = {
-      animation = true,
-      auto_hide = false,
-      tabpages = true,
-      closable = true,
-      clickable = true,
-      icons = true,
-      icon_custom_colors = false,
-      icon_separator_active = '▎',
-      icon_separator_inactive = '▎',
-      icon_close_tab = '',
-      icon_close_tab_modified = '●',
-      icon_pinned = '車',
-      insert_at_end = true,
-      insert_at_start = false,
-      maximum_padding = 1,
-      maximum_length = 30,
-      semantic_letters = true,
-      letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
-      no_name_title = nil,
-    }
-
-    -- lightbulb
-    -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
-
-    -- gitsigns
-    require('gitsigns').setup {
-      status_formatter = function(status)
-        local added, changed, removed = status.added, status.changed, status.removed
-        local status_txt = {}
-        if added   and added   > 0 then table.insert(status_txt, ' '..added  ) end
-        if changed and changed > 0 then table.insert(status_txt, ' '..changed) end
-        if removed and removed > 0 then table.insert(status_txt, ' '..removed) end
-        return table.concat(status_txt, ' ')
-      end
-    }
-
-    -- stabilize
-    require('stabilize').setup()
-
-    -- todo-comments.nvim WIP
-    require('todo-comments').setup()
-
-    -- nvim-notify
-    require('notify').setup()
-
-    -- spaces.nvim
-    require('specs').setup {
-      show_jumps  = true,
-      min_jump = 15,
-      popup = {
-        delay_ms = 0,
-        inc_ms = 10,
-        blend = 0,
-        width = 10,
-        winhl = "PMenu",
-        fader = require('specs').linear_fader,
-        resizer = require('specs').shrink_resizer
-      },
-      ignore_filetypes = {},
-      ignore_buftypes = {
-        nofile = true,
-      },
-    }
-  '';
 
   extraConfig = ''
     " helplang
@@ -665,7 +538,7 @@ let
     " カーソル上を検索
     map <Leader>k <Plug>(easymotion-k)
     " ZEN
-    nnoremap <Leader><Leader>z :Goyo<CR>
+    nnoremap <Leader><Leader>z :ZenMode<CR>
 
     " yank
     vnoremap <Leader>y :OSCYank<CR>
@@ -688,11 +561,16 @@ let
     nnoremap <Leader>r :<C-U>QuickRun<CR>
 
     " coc "
-    nnoremap <Leader>ca :CocAction<CR>
-    nnoremap <Leader>cgd <Plug>(coc-definition)
-    nnoremap <Leader>cgy <Plug>(coc-type-definition)
-    nnoremap <Leader>cgi <Plug>(coc-implementation)
-    nnoremap <Leader>cgr <Plug>(coc-references)
+    " nnoremap <Leader>ca :CocAction<CR>
+    " nnoremap <Leader>cgd <Plug>(coc-definition)
+    " nnoremap <Leader>cgy <Plug>(coc-type-definition)
+    " nnoremap <Leader>cgi <Plug>(coc-implementation)
+    " nnoremap <Leader>cgr <Plug>(coc-references)
+
+    " lspsage "
+    nnoremap <silent><Leader>ca :Lspsaga code_action<CR>
+    vnoremap <silent><Leader>ca :<C-U>Lspsaga range_code_action<CR>
+    nnoremap <silent><Leader>rn :Lspsaga rename<CR>
 
     """"""""""""""
     " easymotion "
@@ -709,70 +587,6 @@ let
     let g:sonictemplate_vim_template_dir = [
     \ '${templates}'
     \]
-
-    """"""""""
-    " wilder "
-    """"""""""
-    function! s:wilder_init() abort
-      call wilder#setup({
-        \   'modes': [':', '/', '?'],
-        \ })
-      call wilder#set_option('pipeline', [
-        \   wilder#branch(
-        \     wilder#cmdline_pipeline({
-        \       'language': 'lua',
-        \       'fuzzy': 1,
-        \       'fuzzy_filter': wilder#lua_fzy_filter(),
-        \     }),
-        \     wilder#python_search_pipeline({
-        \       'pattern': wilder#python_fuzzy_pattern(),
-        \       'sorter': wilder#python_difflib_sorter(),
-        \       'engine': 're',
-        \     }),
-        \   ),
-        \ ])
-      let s:highlighters = [
-        \   wilder#pcre2_highlighter(),
-        \   has('nvim') ? wilder#lua_fzy_highlighter() : wilder#cpsm_highlighter(),
-        \ ]
-      let s:popupmenu_renderer = wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
-        \   'border': 'rounded',
-        \   'empty_message': wilder#popupmenu_empty_message_with_spinner(),
-        \   'highlighter': s:highlighters,
-        \   'left': [
-        \     ' ',
-        \     wilder#popupmenu_devicons(),
-        \     wilder#popupmenu_buffer_flags({
-        \       'flags': ' a + ',
-        \       'icons': {'+': '', 'a': '', 'h': ''},
-        \     }),
-        \   ],
-        \   'right': [
-        \     ' ',
-        \     wilder#popupmenu_scrollbar(),
-        \   ],
-        \ }))
-      let s:lightline_renderer = wilder#wildmenu_renderer(
-        \ wilder#wildmenu_lightline_theme({
-        \   'hilights': {},
-        \   'highlighter': s:highlighters,
-        \   'separator': ' | ',
-        \ }))
-
-      let s:wildmenu_renderer = wilder#wildmenu_renderer({
-        \   'highlighter': s:highlighters,
-        \   'separator': ' · ',
-        \   'left': [' ', wilder#wildmenu_spinner(), ' '],
-        \   'right': [' ', wilder#wildmenu_index()],
-        \ })
-
-      call wilder#set_option('renderer', wilder#renderer_mux({
-        \   ':': s:popupmenu_renderer,
-        \   '/': s:lightline_renderer,
-        \   'substitute': s:wildmenu_renderer,
-        \ }))
-    endfunction
-    autocmd CmdlineEnter * ++once call s:wilder_init()
 
     " mouse有効化
     set mouse=a
@@ -802,20 +616,6 @@ let
     let g:better_whitespace_enabled=1
     let g:strip_whitespace_on_save=1
 
-    """"""""""""""""""""""
-    " comfortable-motion "
-    """"""""""""""""""""""
-    let g:comfortable_motion_scroll_down_key = "j"
-    let g:comfortable_motion_scroll_up_key = "k"
-    noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
-    noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
-
-
-    " Goyo
-    let g:goyo_width = 120
-    autocmd! User GoyoEnter Limelight
-    autocmd! User GoyoLeave Limelight!
-
     """"""""""""
     " floaterm "
     """"""""""""
@@ -839,25 +639,25 @@ let
     autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
 
     " coc "
-    set updatetime=300
-    set shortmess+=c
-    set signcolumn=number
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    " set updatetime=300
+    " set shortmess+=c
+    " set signcolumn=number
+    " nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-    function! s:show_documentation()
-      if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-      elseif (coc#rpc#ready())
-        call CocActionAsync('doHover')
-      else
-        execute '!' . &keywordprg . " " . expand('<cword>')
-      endif
-    endfunction
+    " function! s:show_documentation()
+    "   if (index(['vim','help'], &filetype) >= 0)
+    "     execute 'h '.expand('<cword>')
+    "   elseif (coc#rpc#ready())
+    "     call CocActionAsync('doHover')
+    "   else
+    "     execute '!' . &keywordprg . " " . expand('<cword>')
+    "   endif
+    " endfunction
 
-    autocmd CursorHold * silent call CocActionAsync('highlight')
+    " autocmd CursorHold * silent call CocActionAsync('highlight')
 
     " Add `:Format` command to format current buffer.
-    command! -nargs=0 Format :call CocAction('format')
+    " command! -nargs=0 Format :call CocAction('format')
 
     " 検索
     set ignorecase                " 小文字のみの検索に限り小文字大文字の差を無視
@@ -881,44 +681,6 @@ let
         endif
       endfunction " }}}
     augroup END " }}}
-
-    " startify
-    " 参考 (https://mjhd.hatenablog.com/entry/recommendation-of-vim-startify)
-    function! s:filter_header(lines) abort
-      let longest_line   = max(map(copy(a:lines), 'len(v:val)'))
-      let centered_lines = map(copy(a:lines), 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
-      return centered_lines
-    endfunction
-    let g:startify_custom_header = s:filter_header([
-    \ '|               ▒       ▒▒▒▒      ▒▒',
-    \ '|             ▒▓▓▓▒     ░▒▒▒▒   ▒▒▒▒░',
-    \ '|             ▒▓▓▓▓▒     ░▒▒▒▒  ▒▒▒▒░',
-    \ '|              ▒▓▓▓▓      ░▒▒▒░▒▒▒▒░',
-    \ '|               ▓▓▓▓▓      ▒▒▒▒▒▒▒░',
-    \ '|          ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒      ▒',
-    \ '|         ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░     ▓▓▒',
-    \ '|        ▒▒▒▒▒▒▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓   ▓▓▓▓',
-    \ '|              ▒▒▒▒▒▓         ▒▒▒▒▒▓ ▓▓▓▓▓',
-    \ '|             ▒▒▒▒▒▓           ▒▒▒▒░▓▓▓▓▓',
-    \ '|     ▒▒▒▒▒▒▒▒▒▒▒▒░             ▒▒░▓▓▓▓▓▒▒▒▒▒',
-    \ '|    ░▒▒▒▒▒▒▒▒▒▒▒░               ▒▓▓▓▓▓▓▓▓▓▓▓▓',
-    \ '|    ░▒▒▒▒▒▒▒▒▒▒░▒               ▒▓▓▓▓▓▓▓▓▓▓▓▓     _______   ___    __',
-    \ '|     ▒▒▒▒▒▒▒▒▒░▓▓▓             ▒▓▓▓▓▒            / ____/ | / / |  / /',
-    \ '|         ░▒▒▒▒▒▓▓▓▓           ▒▓▓▓▓▒            / __/ /  |/ /| | / /',
-    \ '|        ░▒▒▒▒  ▓▓▓▓▒         ▒▓▓▓▓▒            / /___/ /|  / | |/ /',
-    \ '|        ▒▒▒▒▒   ▓▓▓▓▒▓▓▓▓▓▓▓▓░░░░░▓▓▓▓▓▓▓     /_____/_/ |_/  |___/',
-    \ '|         ▒▒▒    ▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒',
-    \ '|          ▒     ▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒       _    __           ___',
-    \ '|               ▓▓▓▓▓▓▓▓▒     ░▒▒▒▒            | |  / /__  _____ |__ \',
-    \ '|              ▒▓▓▓▓▒▓▓▓▓      ░▒▒▒░           | | / / _ \/ ___/ __/ /',
-    \ '|             ▒▓▓▓▓  ▒▓▓▓▓      ░▒▒▒░          | |/ /  __/ /  _ / __/',
-    \ '|             ▒▓▓▓    ▒▓▓▓▓      ▒▒▒▓          |___/\___/_/  (_)____/',
-    \ ])
-
-    " load lua
-      lua <<EOF
-        ${extraLuaConfig}
-    EOF
           '';
   cocSettings = {
     suggest = {
@@ -926,17 +688,13 @@ let
       enablePreview = true;
     };
     languagesever = {
-      go = {
-        command = "gopls";
-        rootPatterns = [ "go.mod" ];
-        filetypes = [ "go" ];
-      };
       nix = {
-        command = "rnix-lsp";
+        command = "${pkgs.rnix-lsp}/bin/rnix-lsp";
         filetypes = [ "nix" ];
       };
       elmLS = {
-        command = "elm-language-server";
+        command =
+          "${pkgs.pkgs-stable.elmPackages.elm-language-server}/bin/elm-language-server";
         filetypes = [ "elm" ];
         rootPatterns = [ "elm.json" ];
         initializationOptions = {
@@ -966,7 +724,7 @@ in {
     withPython3 = true;
     withRuby = true;
     coc = {
-      enable = true;
+      enable = false;
       settings = cocSettings;
     };
   };

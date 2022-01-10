@@ -14,6 +14,7 @@
       "firefox"
       "font-fira-code"
       "font-hack-nerd-font"
+      "flutter"
       "iterm2"
       "jetbrains-toolbox"
       "karabiner-elements"

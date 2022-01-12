@@ -113,6 +113,9 @@ let
     # sesssion #
     ############
 
+    # session
+    bind C-n command-prompt -I "" "new -s '%%'"
+
     # choose
     bind s choose-session
 

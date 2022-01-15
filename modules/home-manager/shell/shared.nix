@@ -11,7 +11,7 @@
     "tree" = "exa -T";
   };
   abbrevs = {
-    static = { };
+    static = { "n" = "nvim"; };
     eval = { };
   };
 }

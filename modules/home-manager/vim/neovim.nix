@@ -37,10 +37,13 @@ let
       config = readLua ./lua/nvim-treesitter-context.lua;
     }
     # {
+    #   plugin = nvim-treesitter-textobjects;
+    #   # ./lua/nvim-treesitter.lua
+    # }
+    # {
     #   plugin = nvim-treesitter-refactor;
     #   config = readLua ./lua/nvim-treesitter-refactor.lua;
     # }
-    nvim-treesitter-textobjects
 
     # diff
     diffview-nvim
@@ -70,12 +73,41 @@ let
     vim-nix
 
     # colorscheme
-    # neovim-ayu
+    # {
+    #   plugin = ayu-vim;
+    #   config = ''
+    #     let ayucolor="mirage"
+    #   '';
+    # }
+
+    # {
+    #   plugin = tokyonight-nvim;
+    #   config = ''
+    #     colorscheme tokyonight
+    #   '';
+    # }
+
     {
-      plugin = ayu-vim;
+      plugin = oceanic-next;
       config = ''
-        let ayucolor="mirage"
+        set termguicolors
+        syntax enable
+        let g:oceanic_next_terminal_bold = 1
+        let g:oceanic_next_terminal_italic = 1
+        colorscheme OceanicNext
+        hi Normal guibg=NONE ctermbg=NONE
+        hi LineNr guibg=NONE ctermbg=NONE
+        hi SignColumn guibg=NONE ctermbg=NONE
+        hi EndOfBuffer guibg=NONE ctermbg=NONE
       '';
+    }
+
+    {
+      plugin = nvim-colorizer-lua;
+      config = lua ''
+        require 'colorizer'.setup()
+      '';
+
     }
 
     # スクロールを物理シミュレーション
@@ -146,19 +178,6 @@ let
       config = readLua ./lua/toggleterm-nvim.lua;
     }
 
-    # 対応括弧可視化
-    {
-      plugin = rainbow;
-      config = ''
-        let g:rainbow_active = 1
-        let g:rainbow_conf = {
-          \	  'separately': {
-          \	  	'nerdtree': 0,
-          \	  }
-          \ }
-      '';
-    }
-
     # zoom
     zoomwintab-vim
 
@@ -176,15 +195,20 @@ let
     }
 
     {
-      plugin = lightline-vim;
-      config = readVimScript ./vim/lightline-vim.vim;
+      plugin = lualine-nvim;
+      config = readLua ./lua/lualine-nvim.lua;
     }
 
-    lightline-ale
-    {
-      plugin = lightline-bufferline;
-      config = readVimScript ./vim/lightline-bufferline.vim;
-    }
+    # {
+    #   plugin = lightline-vim;
+    #   config = readVimScript ./vim/lightline-vim.vim;
+    # }
+
+    # lightline-ale
+    # {
+    #   plugin = lightline-bufferline;
+    #   config = readVimScript ./vim/lightline-bufferline.vim;
+    # }
     {
       plugin = mkVimPlugin' {
         pname = "nvim-lsp-installer";
@@ -200,7 +224,7 @@ let
     }
     {
       plugin = nvim-lspconfig;
-      config = ""; # nvim-lsp-installerにて
+      # ./lua/nvim-lsp-installer.lua
     }
     {
       plugin = lsp_signature-nvim;
@@ -218,13 +242,47 @@ let
       };
       config = readLua ./lua/lspsaga-nvim.lua;
     }
+
+    {
+      plugin = mkVimPlugin' {
+        pname = "neogen";
+        version = "2022-01-14";
+        src = fetchTarball {
+          url =
+            "https://github.com/danymat/neogen/archive/966d09146857af9ba23a4633dce0e83ad51f2b23.tar.gz";
+          sha256 = "1xjc76r6n4x1q652f3hsxwqi6bm0g81fcl8na48inijawp5ic2zw";
+        };
+        dontBuild = true;
+        installPhase = ''
+          mkdir -p $out
+          cp -r ./themes/* $out
+        '';
+      };
+      config = lua ''
+        require('neogen').setup {
+          enabled = true
+        }
+      '';
+    }
+
+    # {
+    #   plugin = mkVimPlugin {
+    #     name = "virtual-types-nvim";
+    #     version = "2022-01-14";
+    #     src = {
+    #       url = "https://github.com/jubnzv/virtual-types.nvim/archive/7d25c3130555a0173d5a4c6da238be2414144995.tar.gz";
+    #       sha256 = "18dv3rzc5v8kfmw1brqagvbdz3pcfch4gzlbxl6kiv9x85yfdx98";
+    #     };
+    #   }
+    # }
+
     {
       plugin = nvim-cmp;
       config = readLua ./lua/nvim-cmp.lua;
     }
     cmp-nvim-lsp
     cmp-buffer
-    cmp-nvim-lsp
+    cmp-path
     cmp-vsnip
     lspkind-nvim # nvim-cmpでアイコン表示
 
@@ -244,22 +302,28 @@ let
     telescope-fzf-native-nvim
     telescope-cheat-nvim
 
-    traces-vim
-    vim-closetag
+    # traces-vim
+    # vim-closetag
 
     # vista
     vista-vim
 
     emmet-vim
 
-    # easymotion
-    vim-easymotion
+    {
+      # like easymotion
+      plugin = hop-nvim;
+      config = lua ''
+        require'hop'.setup()
+      '';
+    }
 
     # nerdtree
     nerdtree
     nerdtree-git-plugin
     vim-nerdtree-tabs
     vim-nerdtree-syntax-highlight
+    nvim-ts-rainbow
 
     # zen
     {
@@ -304,7 +368,12 @@ let
     # }
 
     # todo comment
-    todo-comments-nvim
+    {
+      plugin = todo-comments-nvim;
+      config = lua ''
+        require("todo-comments").setup()
+      '';
+    }
 
     # package version
     package-info-nvim
@@ -316,10 +385,14 @@ let
     #     " autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
     #   '';
     # }
-    nvim-code-action-menu
 
-    # brackets
-    auto-pairs
+    {
+      plugin = nvim-autopairs;
+      # depends nvim-cmp
+      config = lua ''
+        require('nvim-autopairs').setup()
+      '';
+    }
 
     {
       plugin = vim-quickrun;
@@ -327,11 +400,6 @@ let
         let g:quickrun_config={'*': {'split': '''}}
         set splitbelow
       '';
-    }
-
-    {
-      plugin = nvim-code-action-menu;
-      config = "";
     }
 
     {
@@ -361,11 +429,13 @@ let
         require("telescope").load_extension("projects")
       '';
     }
-
-    trouble-nvim
     {
       plugin = trouble-nvim;
       config = readLua ./lua/trouble-nvim.lua;
+    }
+    {
+      plugin = null-ls-nvim;
+      config = readLua ./lua/null-ls-nvim.lua;
     }
     # wip...
     # https://github.com/chentau/marks.nvim
@@ -453,12 +523,6 @@ let
     " helplang
     " set helplang=ja
 
-    """""""""""""""
-    " colorscheme "
-    """""""""""""""
-    set termguicolors
-    colorscheme ayu
-
     " floating windowsの透過
     set pumblend=15
 
@@ -507,15 +571,13 @@ let
     " choosewin
     nnoremap <Leader>- :ChooseWin<CR>
     nnoremap <Leader><Leader>- :ChooseWinSwap<CR>
-    " easymotion
-    " 1文字
-    nmap <Leader>s <Plug>(easymotion-overwin-f)
-    " 2文字
-    nmap <Leader><Leader>s <Plug>(easymotion-overwin-f2)
-    " カーソル下を検索
-    map <Leader>j <Plug>(easymotion-j)
-    " カーソル上を検索
-    map <Leader>k <Plug>(easymotion-k)
+
+    " hop.nvim
+    nnoremap <Leader>s :HopChar1<CR>
+    nnoremap <Leader><Leader>s :HopChar2<CR>
+    nnoremap <Leader>j :HopLineAC<CR>
+    nnoremap <Leader>k :HopLineBC<CR>
+
     " ZEN
     nnoremap <Leader><Leader>z :ZenMode<CR>
 
@@ -543,15 +605,6 @@ let
     nnoremap <silent><Leader>ca :Lspsaga code_action<CR>
     vnoremap <silent><Leader>ca :<C-U>Lspsaga range_code_action<CR>
     nnoremap <silent><Leader>rn :Lspsaga rename<CR>
-
-    """"""""""""""
-    " easymotion "
-    """"""""""""""
-    let g:EasyMotion_do_mapping = 0
-    let g:EasyMotion_use_migemo = 1
-
-    " easymotionでもsmartcase
-    let g:EasyMotion_smartcase = 1
 
     """""""""""""""""
     " sonictemplate "
@@ -589,11 +642,6 @@ let
     let g:strip_whitespace_on_save=1
 
     """"""""""""
-    " floaterm "
-    """"""""""""
-    let g:floaterm_autoclose = 1
-
-    """"""""""""
     " filetype "
     """"""""""""
     autocmd BufNewFile,BufRead *.fs,*.fsx,*.fsi set filetype=fsharp
@@ -603,12 +651,6 @@ let
     """"""""""
     set nobackup
     set nowritebackup
-
-    """""""""""""
-    " autochdir "
-    """""""""""""
-    autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
-    autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
 
     " 検索
     set ignorecase                " 小文字のみの検索に限り小文字大文字の差を無視
@@ -621,17 +663,7 @@ let
     let &grepprg = 'rg --vimgrep --hidden'
     set grepformat=%f:%l:%c:%m
 
-    " ディレクトリを必要に応じて生成
-    " 参考 (https://vim-jp.org/vim-users-jp/2011/02/20/Hack-202.html)
-    augroup vimrc-auto-mkdir " {{{
-      autocmd!
-      autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
-      function! s:auto_mkdir(dir, force) " {{{
-        if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
-          call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
-        endif
-      endfunction " }}}
-    augroup END " }}}
+    ${readVimScript ./vim/autocmd.vim}
           '';
 in {
   home.packages = with pkgs;
@@ -643,5 +675,6 @@ in {
     withNodeJs = true;
     withPython3 = true;
     withRuby = true;
+
   };
 }

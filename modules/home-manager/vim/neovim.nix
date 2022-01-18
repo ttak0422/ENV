@@ -88,15 +88,31 @@ let
     # }
 
     {
-      plugin = oceanic-next;
+      plugin = mkVimPlugin {
+        name = "material-nvim";
+        version = "2022-01-19";
+        src = fetchTarball {
+          url =
+            "https://github.com/marko-cerovac/material.nvim/archive/8abf1b1cdc75a3e1846ced199ee86a36b9a758c4.tar.gz";
+          sha256 = "16ajmv2kwbnj8y40ysdfmqmikajpw63sqq7bqzx7nz0vv8vpiv8z";
+        };
+      };
       config = ''
         set termguicolors
-        syntax enable
-        let g:oceanic_next_terminal_bold = 1
-        let g:oceanic_next_terminal_italic = 1
-        colorscheme OceanicNext
-      '';
+        let g:material_style = 'darker'
+        colorscheme material
+      '' + (readLua ./lua/material-nvim.lua);
     }
+    # {
+    #   plugin = oceanic-next;
+    #   config = ''
+    #     set termguicolors
+    #     syntax enable
+    #     let g:oceanic_next_terminal_bold = 1
+    #     let g:oceanic_next_terminal_italic = 1
+    #     colorscheme OceanicNext
+    #   '';
+    # }
 
     {
       plugin = nvim-colorizer-lua;

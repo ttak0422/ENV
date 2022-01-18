@@ -196,6 +196,11 @@ let
     }
 
     # {
+    #   plugin = goto-preview;
+    #   config = readLua ./lua/goto-preview.lua;
+    # }
+
+    # {
     #   plugin = lightline-vim;
     #   config = readVimScript ./vim/lightline-vim.vim;
     # }

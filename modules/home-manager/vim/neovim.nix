@@ -297,7 +297,7 @@ let
     # telescope
     {
       plugin = telescope-nvim;
-      config = "";
+      config = readLua ./lua/telescope-nvim.lua;
     }
     telescope-fzf-native-nvim
     telescope-cheat-nvim

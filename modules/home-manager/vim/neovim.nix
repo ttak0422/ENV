@@ -301,6 +301,7 @@ let
     cmp-buffer
     cmp-path
     cmp-vsnip
+    cmp-emoji
     lspkind-nvim # nvim-cmpでアイコン表示
 
     {

@@ -130,13 +130,6 @@ let
       #   '';
       # }
 
-      # {
-      #   plugin = tokyonight-nvim;
-      #   config = ''
-      #     colorscheme tokyonight
-      #   '';
-      # }
-
       {
         plugin = mkVimPlugin {
           name = "material-nvim";
@@ -236,11 +229,6 @@ let
         '';
       }
 
-      {
-        plugin = lualine-nvim;
-        config = readLua ./lua/lualine-nvim.lua;
-      }
-
       # {
       #   plugin = goto-preview;
       #   config = readLua ./lua/goto-preview.lua;
@@ -323,32 +311,8 @@ let
       #   }
       # }
 
-      {
-        plugin = nvim-cmp;
-        config = readLua ./lua/nvim-cmp.lua;
-      }
-      cmp-nvim-lsp
-      cmp-buffer
-      cmp-path
-      cmp-vsnip
-      cmp-emoji
-      lspkind-nvim # nvim-cmpでアイコン表示
-
-      {
-        plugin = vim-vsnip;
-        config = "";
-      }
-
       # whichkey
       which-key-nvim
-
-      # telescope
-      {
-        plugin = telescope-nvim;
-        config = readLua ./lua/telescope-nvim.lua;
-      }
-      telescope-fzf-native-nvim
-      telescope-cheat-nvim
 
       # traces-vim
       # vim-closetag
@@ -433,14 +397,6 @@ let
       #     " autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
       #   '';
       # }
-
-      {
-        plugin = nvim-autopairs;
-        # depends nvim-cmp
-        config = lua ''
-          require('nvim-autopairs').setup()
-        '';
-      }
 
       {
         plugin = vim-quickrun;

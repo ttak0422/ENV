@@ -138,7 +138,7 @@ let
 
     {
       plugin = mkVimPlugin {
-        name = "spaces-nvim";
+        name = "specs-nvim";
         version = "2021-01-10";
         src = fetchTarball {
           url =
@@ -146,7 +146,7 @@ let
           sha256 = "1sg2i99ncx5j7al3mhwpnwyx1hila5gars0ak7q3n9yr4013i7dx";
         };
       };
-      config = readLua ./lua/spaces-nvim.lua;
+      config = readLua ./lua/specs-nvim.lua;
     }
     # startify
     {

@@ -7,12 +7,21 @@ let
   inherit (pkgs.vimUtils) buildVimPlugin;
   templates = pkgs.callPackage ./templates { };
   external = pkgs.callPackage ./external.nix { };
-  wrap = txt: "'${txt}'";
   lua = luaCode: ''
       lua <<EOF
         ${luaCode}
     EOF
   '';
+  packerConfig = cfg:
+    lua ''
+      vim.cmd[[packadd packer.nvim]]
+      require'packer'.startup(function()
+        ${cfg}
+      end)
+    '';
+  # [Path] -> String
+  readFiles = paths:
+    concatStringsSep "\n" (map (path: fileContents path) paths);
   readLua = path: lua (fileContents path);
   readVimScript = path: fileContents path;
   mkVimPlugin = cfg:
@@ -23,6 +32,12 @@ let
     };
   mkVimPlugin' = buildVimPlugin;
   plugins = (with pkgs.vimPlugins; [
+    {
+      plugin = packer-nvim;
+      optional = true;
+      config = packerConfig (readFiles [ ./lua/bufferline-nvim.lua ]);
+    }
+
     # icon
     vim-devicons
     nvim-web-devicons

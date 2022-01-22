@@ -195,13 +195,7 @@ let
 
     {
       plugin = ale;
-      config = ''
-        let g:ale_sign_column_always = 1
-        let g:ale_set_loclist = 0
-        let g:ale_set_quickfix = 1
-        let g:ale_open_list = 1
-        let g:ale_keep_list_window_open = 0
-        let g:ale_list_window_size = 4
+      config = readVimScript ./vim/ale.vim + ''
         let g:ale_java_javac_executable = "javac -cp ${pkgs.lombok}/share/java/lombok.jar"
       '';
     }

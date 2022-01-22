@@ -1,11 +1,3 @@
-" tmux status line
-if !has('gui_running') && $TMUX !=# ''
-    augroup Tmux
-        autocmd!
-        autocmd VimEnter,VimLeave * silent !tmux set status
-    augroup END
-endif
-
 " ディレクトリを必要に応じて生成
 " 参考 (https://vim-jp.org/vim-users-jp/2011/02/20/Hack-202.html)
 augroup vimrc-auto-mkdir

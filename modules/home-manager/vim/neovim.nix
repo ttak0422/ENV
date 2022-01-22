@@ -538,10 +538,6 @@ let
     " floating windowsの透過
     set pumblend=15
 
-    " カーソル可視化
-    set cursorline
-    set cursorcolumn
-
     """"""""""""
     " Commands "
     """"""""""""
@@ -625,16 +621,6 @@ let
     \ '${templates}'
     \]
 
-    " mouse有効化
-    set mouse=a
-
-    " 行数
-    set number         " 表示
-    set relativenumber " 相対表示
-
-    " 短形選択の自由度を上げる
-    set virtualedit=block
-
     " tabキーでspaceを入力する
     set expandtab
     set tabstop=4
@@ -664,18 +650,11 @@ let
     set nobackup
     set nowritebackup
 
-    " 検索
-    set ignorecase                " 小文字のみの検索に限り小文字大文字の差を無視
-    set smartcase
-    set incsearch                 " インクリメンタルサーチ
-    set hlsearch                  " 検索結果をハイライト
     nnoremap <silent> <ESC><ESC> :nohl<CR> " ESC2回押しでハイライトを消す
 
-    " grepをrgに置き換え
-    let &grepprg = 'rg --vimgrep --hidden'
-    set grepformat=%f:%l:%c:%m
 
     ${readVimScript ./vim/autocmd.vim}
+    ${readVimScript ./vim/util.vim}
           '';
 in {
   home.packages = with pkgs;

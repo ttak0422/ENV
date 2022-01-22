@@ -1,0 +1,1 @@
+use 'folke/tokyonight.nvim'

@@ -68,6 +68,7 @@ let
       ./lua/packer/nvim-autopairs.lua
       ./lua/packer/lspkind.lua
       ./lua/packer/nvim-cmp.lua
+      ./lua/packer/lualine-nvim.lua
     ]);
   };
   plugins = with pkgs.vimPlugins;

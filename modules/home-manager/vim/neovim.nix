@@ -140,343 +140,176 @@ let
       ./lua/packer/tokyonight-nvim.lua
       ./lua/packer/vim-vsnip.lua
       ./lua/packer/zen-mode-nvim.lua
+      ./lua/packer/sidebar-nvim.lua
+      ./lua/packer/diffview-nvim.lua
+      ./lua/packer/nvim-lsp-installer.lua
+      ./lua/packer/lsp_signature-nvim.lua
+      ./lua/packer/sidebar-nvim.lua
+
       # ./lua/packer/nvim-treesitter.lua
       # ./lua/packer/nvim-treesitter-context.lua
     ]);
   };
-  plugins = with pkgs.vimPlugins;
-    ([
-      # {
-      #   plugin = pkgs.vimPlugins.packer-nvim;
-      #   optional = true;
-      #   config = packerConfig (readFiles [ ./lua/bufferline-nvim.lua ]);
-      # }
+  plugins = (with pkgs.vimPlugins; [
 
-      # icon
-      # vim-devicons
-      # nvim-web-devicons
-
-      # # treesitter
-      # {
-      #   plugin = nvim-treesitter-textobjects;
-      #   # ./lua/nvim-treesitter.lua
-      # }
-      # {
-      #   plugin = nvim-treesitter-refactor;
-      #   config = readLua ./lua/nvim-treesitter-refactor.lua;
-      # }
-
-      # diff
-      diffview-nvim
-
-      # lua
-      # plenary-nvim
-
-      # nui
-      # nui-nvim
-
-      # Windowの挙動を安定させる
-      # stabilize-nvim
-      # {
-      #   plugin = stabilize-nvim;
-      #   config = lua ''
-      #     require('stabilize').setup()
-      #   '';
-      # }
-
-      # registers
-      # registers-nvim
-
-      # colorscheme
-      # {
-      #   plugin = ayu-vim;
-      #   config = ''
-      #     let ayucolor="mirage"
-      #   '';
-      # }
-
-      # {
-      #   plugin = mkVimPlugin {
-      #     name = "material-nvim";
-      #     version = "2022-01-19";
-      #     src = fetchTarball {
-      #       url =
-      #         "https://github.com/marko-cerovac/material.nvim/archive/8abf1b1cdc75a3e1846ced199ee86a36b9a758c4.tar.gz";
-      #       sha256 = "16ajmv2kwbnj8y40ysdfmqmikajpw63sqq7bqzx7nz0vv8vpiv8z";
-      #     };
-      #   };
-      #   config = ''
-      #     set termguicolors
-      #     let g:material_style = 'darker'
-      #     colorscheme material
-      #   '' + (readLua ./lua/material-nvim.lua);
-      # }
-      # {
-      #   plugin = oceanic-next;
-      #   config = ''
-      #     set termguicolors
-      #     syntax enable
-      #     let g:oceanic_next_terminal_bold = 1
-      #     let g:oceanic_next_terminal_italic = 1
-      #     colorscheme OceanicNext
-      #   '';
-      # }
-
-      # {
-      #   plugin = nvim-colorizer-lua;
-      #   config = lua ''
-      #     require 'colorizer'.setup()
-      #   '';
-
-      # }
-
-      # {
-      #   plugin = mkVimPlugin {
-      #     name = "specs-nvim";
-      #     version = "2021-01-10";
-      #     src = fetchTarball {
-      #       url =
-      #         "https://github.com/edluffy/specs.nvim/archive/e043580a65409ea071dfe34e94284959fd24e3be.tar.gz";
-      #       sha256 = "1sg2i99ncx5j7al3mhwpnwyx1hila5gars0ak7q3n9yr4013i7dx";
-      #     };
-      #   };
-      #   config = readLua ./lua/specs-nvim.lua;
-      # }
-      # # startify
-      # {
-      #   plugin = vim-startify;
-      #   config = readVimScript ./vim/startify.vim;
-      # }
-
-      # 定番設定
-      # vim-sensible
-
-      # # インデント可視化
-      # {
-      #   plugin = indent-blankline-nvim;
-      #   config = readLua ./lua/indent-blankline-nvim.lua;
-      # }
-
-      # git
-      # {
-      #   plugin = gitsigns-nvim;
-      #   config = readLua ./lua/gitsigns.lua;
-      # }
-
-      # {
-      #   plugin = toggleterm-nvim;
-      #   config = readLua ./lua/toggleterm-nvim.lua;
-      # }
-
-      # {
-      #   plugin = goto-preview;
-      #   config = readLua ./lua/goto-preview.lua;
-      # }
-
-      # {
-      #   plugin = lightline-vim;
-      #   config = readVimScript ./vim/lightline-vim.vim;
-      # }
-
-      # lightline-ale
-      # {
-      #   plugin = lightline-bufferline;
-      #   config = readVimScript ./vim/lightline-bufferline.vim;
-      # }
-      {
-        plugin = mkVimPlugin' {
-          pname = "nvim-lsp-installer";
-          version = "2021-01-09";
-          src = fetchTarball {
-            url =
-              "https://github.com/williamboman/nvim-lsp-installer/archive/f8e2821234cac696e27e286c009c3afae8c089ae.tar.gz";
-            sha256 = "02c68b4z45mpaxcrg9q2nhawr25vhvz2kxh7d2f3k3xl983yzazp";
-          };
-          buildInputs = [ pkgs.git pkgs.cacert ];
+    {
+      plugin = mkVimPlugin' {
+        pname = "neogen";
+        version = "2022-01-14";
+        src = fetchTarball {
+          url =
+            "https://github.com/danymat/neogen/archive/966d09146857af9ba23a4633dce0e83ad51f2b23.tar.gz";
+          sha256 = "1xjc76r6n4x1q652f3hsxwqi6bm0g81fcl8na48inijawp5ic2zw";
         };
-        config = readLua ./lua/nvim-lsp-installer.lua;
-      }
-      {
-        plugin = nvim-lspconfig;
-        # ./lua/nvim-lsp-installer.lua
-      }
-      {
-        plugin = lsp_signature-nvim;
-        config = readLua ./lua/lsp_signature-nvim.lua;
-      }
-      {
-        plugin = mkVimPlugin {
-          name = "lspsaga-nvim";
-          version = "2021-01-10";
-          src = fetchTarball {
-            url =
-              "https://github.com/tami5/lspsaga.nvim/archive/72eaf3544020db3da41d3813487329ae89512e9e.tar.gz";
-            sha256 = "1baf13agnrsqykhy3r01fgj8vmyqv10v33j90rf4w1q02dn8zvgc";
-          };
+        dontBuild = true;
+        installPhase = ''
+          mkdir -p $out
+          cp -r ./themes/* $out
+        '';
+      };
+      config = lua ''
+        require('neogen').setup {
+          enabled = true
+        }
+      '';
+    }
+
+    # {
+    #   plugin = mkVimPlugin {
+    #     name = "virtual-types-nvim";
+    #     version = "2022-01-14";
+    #     src = {
+    #       url = "https://github.com/jubnzv/virtual-types.nvim/archive/7d25c3130555a0173d5a4c6da238be2414144995.tar.gz";
+    #       sha256 = "18dv3rzc5v8kfmw1brqagvbdz3pcfch4gzlbxl6kiv9x85yfdx98";
+    #     };
+    #   }
+    # }
+
+    # whichkey
+    which-key-nvim
+
+    # traces-vim
+    # vim-closetag
+
+    # vista
+    vista-vim
+
+    emmet-vim
+
+    # {
+    #   # like easymotion
+    #   plugin = hop-nvim;
+    #   config = lua ''
+    #     require'hop'.setup()
+    #   '';
+    # }
+
+    # nerdtree
+    nerdtree
+    nerdtree-git-plugin
+    vim-nerdtree-tabs
+    vim-nerdtree-syntax-highlight
+    # nvim-ts-rainbow
+
+    # # zen
+    # {
+    #   plugin = mkVimPlugin {
+    #     name = "zen-mode-nvim";
+    #     version = "2021-01-10";
+    #     src = fetchTarball {
+    #       url =
+    #         "https://github.com/folke/zen-mode.nvim/archive/f1cc53d32b49cf962fb89a2eb0a31b85bb270f7c.tar.gz";
+    #       sha256 = "1fxkrny1xk69w8rlmz4x5msvqb8i8xvvl9csndpplxhkn8wzirdp";
+    #     };
+    #   };
+    #   config = readLua ./lua/zen-mode.lua;
+    # }
+    # # zenの配色
+    # twilight-nvim
+
+    # git
+    # gitsigns-nvim
+
+    # cursor
+    # specs-nvim
+
+    # command lineを見やすく
+
+    # buffer
+    # nvim-bufdel
+
+    # nortification
+    # {
+    #   plugin = nvim-notify;
+    #   config = readLua ./lua/nvim-notify.lua;
+    # }
+
+    # todo comment
+    {
+      plugin = todo-comments-nvim;
+      config = lua ''
+        require("todo-comments").setup()
+      '';
+    }
+
+    # package version
+    # package-info-nvim
+
+    # action
+    # {
+    #   plugin = nvim-lightbulb;
+    #   config = ''
+    #     " autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+    #   '';
+    # }
+
+    {
+      plugin = vim-quickrun;
+      config = ''
+        let g:quickrun_config={'*': {'split': '''}}
+        set splitbelow
+      '';
+    }
+
+    # {
+    #   plugin = nvim-bqf;
+    #   config = "";
+    # }
+
+    # debug
+    {
+      plugin = vimspector;
+      config = ''
+        let g:vimspector_enable_mappings = 'HUMAN'
+      '';
+    }
+    {
+      plugin = mkVimPlugin {
+        name = "project-nvim";
+        version = "2021-01-10";
+        src = fetchTarball {
+          url =
+            "https://github.com/ahmedkhalf/project.nvim/archive/71d0e23dcfc43cfd6bb2a97dc5a7de1ab47a6538.tar.gz";
+          sha256 = "0jxxckfcm0vmcblj6fr4fbdxw7b5dwpr8b7jv59mjsyzqfcdnhs5";
         };
-        config = readLua ./lua/lspsaga-nvim.lua;
-      }
-
-      {
-        plugin = mkVimPlugin' {
-          pname = "neogen";
-          version = "2022-01-14";
-          src = fetchTarball {
-            url =
-              "https://github.com/danymat/neogen/archive/966d09146857af9ba23a4633dce0e83ad51f2b23.tar.gz";
-            sha256 = "1xjc76r6n4x1q652f3hsxwqi6bm0g81fcl8na48inijawp5ic2zw";
-          };
-          dontBuild = true;
-          installPhase = ''
-            mkdir -p $out
-            cp -r ./themes/* $out
-          '';
-        };
-        config = lua ''
-          require('neogen').setup {
-            enabled = true
-          }
-        '';
-      }
-
-      # {
-      #   plugin = mkVimPlugin {
-      #     name = "virtual-types-nvim";
-      #     version = "2022-01-14";
-      #     src = {
-      #       url = "https://github.com/jubnzv/virtual-types.nvim/archive/7d25c3130555a0173d5a4c6da238be2414144995.tar.gz";
-      #       sha256 = "18dv3rzc5v8kfmw1brqagvbdz3pcfch4gzlbxl6kiv9x85yfdx98";
-      #     };
-      #   }
-      # }
-
-      # whichkey
-      which-key-nvim
-
-      # traces-vim
-      # vim-closetag
-
-      # vista
-      vista-vim
-
-      emmet-vim
-
-      # {
-      #   # like easymotion
-      #   plugin = hop-nvim;
-      #   config = lua ''
-      #     require'hop'.setup()
-      #   '';
-      # }
-
-      # nerdtree
-      nerdtree
-      nerdtree-git-plugin
-      vim-nerdtree-tabs
-      vim-nerdtree-syntax-highlight
-      # nvim-ts-rainbow
-
-      # # zen
-      # {
-      #   plugin = mkVimPlugin {
-      #     name = "zen-mode-nvim";
-      #     version = "2021-01-10";
-      #     src = fetchTarball {
-      #       url =
-      #         "https://github.com/folke/zen-mode.nvim/archive/f1cc53d32b49cf962fb89a2eb0a31b85bb270f7c.tar.gz";
-      #       sha256 = "1fxkrny1xk69w8rlmz4x5msvqb8i8xvvl9csndpplxhkn8wzirdp";
-      #     };
-      #   };
-      #   config = readLua ./lua/zen-mode.lua;
-      # }
-      # # zenの配色
-      # twilight-nvim
-
-      # git
-      # gitsigns-nvim
-
-      # cursor
-      # specs-nvim
-
-      # command lineを見やすく
-
-      # buffer
-      # nvim-bufdel
-
-      # nortification
-      # {
-      #   plugin = nvim-notify;
-      #   config = readLua ./lua/nvim-notify.lua;
-      # }
-
-      # todo comment
-      {
-        plugin = todo-comments-nvim;
-        config = lua ''
-          require("todo-comments").setup()
-        '';
-      }
-
-      # package version
-      # package-info-nvim
-
-      # action
-      # {
-      #   plugin = nvim-lightbulb;
-      #   config = ''
-      #     " autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-      #   '';
-      # }
-
-      {
-        plugin = vim-quickrun;
-        config = ''
-          let g:quickrun_config={'*': {'split': '''}}
-          set splitbelow
-        '';
-      }
-
-      # {
-      #   plugin = nvim-bqf;
-      #   config = "";
-      # }
-
-      # debug
-      {
-        plugin = vimspector;
-        config = ''
-          let g:vimspector_enable_mappings = 'HUMAN'
-        '';
-      }
-      {
-        plugin = mkVimPlugin {
-          name = "project-nvim";
-          version = "2021-01-10";
-          src = fetchTarball {
-            url =
-              "https://github.com/ahmedkhalf/project.nvim/archive/71d0e23dcfc43cfd6bb2a97dc5a7de1ab47a6538.tar.gz";
-            sha256 = "0jxxckfcm0vmcblj6fr4fbdxw7b5dwpr8b7jv59mjsyzqfcdnhs5";
-          };
-        };
-        config = lua ''
-          require("project_nvim").setup()
-          require("telescope").load_extension("projects")
-        '';
-      }
-      {
-        plugin = trouble-nvim;
-        config = readLua ./lua/trouble-nvim.lua;
-      }
-      {
-        plugin = null-ls-nvim;
-        config = readLua ./lua/null-ls-nvim.lua;
-      }
-      # wip...
-      # https://github.com/chentau/marks.nvim
-    ]) ++ [
-      # external.fzy-lua-native
-    ]
+      };
+      config = lua ''
+        require("project_nvim").setup()
+        require("telescope").load_extension("projects")
+      '';
+    }
+    {
+      plugin = trouble-nvim;
+      config = readLua ./lua/trouble-nvim.lua;
+    }
+    {
+      plugin = null-ls-nvim;
+      config = readLua ./lua/null-ls-nvim.lua;
+    }
     # wip...
+    # https://github.com/chentau/marks.nvim
+  ])
+  # wip...
     ++ map mkVimPlugin [
       {
         name = "vim-choosewin";

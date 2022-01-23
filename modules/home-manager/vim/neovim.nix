@@ -70,6 +70,19 @@ let
       '';
     }
 
+    # ペインのリサイズ
+    {
+      plugin = buildVimPlugin {
+        pname = "winresizer";
+        version = "1.1.1";
+        src = fetchTarball {
+          url =
+            "https://github.com/simeji/winresizer/archive/refs/tags/v1.1.1.tar.gz";
+          sha256 = "08mbhckjawyawjgii8qqsdzvqvs8d0vra0fab75cdi4x08f0az94";
+        };
+      };
+    }
+
     # wildmenu
     {
       plugin = wilder-nvim;
@@ -123,56 +136,62 @@ let
     config = packerConfig (readFiles [
       ./lua/packer/alpha-nvim.lua
       ./lua/packer/bufferline-nvim.lua
+      ./lua/packer/diffview-nvim.lua
       ./lua/packer/gitsigns-nvim.lua
       ./lua/packer/hop-nvim.lua
       ./lua/packer/indent-blanklin-nvim.lua
+      ./lua/packer/lsp_signature-nvim.lua
       ./lua/packer/lspkind.lua
+      ./lua/packer/lspsaga-nvim.lua
       ./lua/packer/lualine-nvim.lua
+      ./lua/packer/neogen.lua
       ./lua/packer/nvim-autopairs.lua
       ./lua/packer/nvim-bufdel.lua
       ./lua/packer/nvim-cmp.lua
       ./lua/packer/nvim-colorizer-lua.lua
+      ./lua/packer/nvim-lsp-installer.lua
+      ./lua/packer/nvim-treesitter-context.lua
+      ./lua/packer/nvim-treesitter.lua
+      ./lua/packer/plenary-nvim.lua
+      ./lua/packer/project-nvim.lua
       ./lua/packer/registers-nvim.lua
+      ./lua/packer/sidebar-nvim.lua
       ./lua/packer/specs-nvim.lua
       ./lua/packer/stabilize-nvim.lua
       ./lua/packer/telescope-nvim.lua
       ./lua/packer/toggleterm-nvim.lua
       ./lua/packer/tokyonight-nvim.lua
+      ./lua/packer/trouble-nvim.lua
+      ./lua/packer/vim-quickhl.lua
+      ./lua/packer/vim-sonic-template.lua
       ./lua/packer/vim-vsnip.lua
+      ./lua/packer/vimdoc-ja.lua
       ./lua/packer/zen-mode-nvim.lua
-      ./lua/packer/sidebar-nvim.lua
-      ./lua/packer/diffview-nvim.lua
-      ./lua/packer/nvim-lsp-installer.lua
-      ./lua/packer/lsp_signature-nvim.lua
-      ./lua/packer/sidebar-nvim.lua
-
-      # ./lua/packer/nvim-treesitter.lua
-      # ./lua/packer/nvim-treesitter-context.lua
     ]);
   };
   plugins = (with pkgs.vimPlugins; [
 
-    {
-      plugin = mkVimPlugin' {
-        pname = "neogen";
-        version = "2022-01-14";
-        src = fetchTarball {
-          url =
-            "https://github.com/danymat/neogen/archive/966d09146857af9ba23a4633dce0e83ad51f2b23.tar.gz";
-          sha256 = "1xjc76r6n4x1q652f3hsxwqi6bm0g81fcl8na48inijawp5ic2zw";
-        };
-        dontBuild = true;
-        installPhase = ''
-          mkdir -p $out
-          cp -r ./themes/* $out
-        '';
-      };
-      config = lua ''
-        require('neogen').setup {
-          enabled = true
-        }
-      '';
-    }
+    # {
+    #   plugin = mkVimPlugin' {
+    #     pname = "neogen";
+    #     version = "2022-01-14";
+    #     src = fetchTarball {
+    #       url =
+    #         "https://github.com/danymat/neogen/archive/966d09146857af9ba23a4633dce0e83ad51f2b23.tar.gz";
+    #       sha256 = "1xjc76r6n4x1q652f3hsxwqi6bm0g81fcl8na48inijawp5ic2zw";
+    #     };
+    #     dontBuild = true;
+    #     installPhase = ''
+    #       mkdir -p $out
+    #       cp -r ./themes/* $out
+    #     '';
+    #   };
+    #   config = lua ''
+    #     require('neogen').setup {
+    #       enabled = true
+    #     }
+    #   '';
+    # }
 
     # {
     #   plugin = mkVimPlugin {
@@ -245,12 +264,12 @@ let
     # }
 
     # todo comment
-    {
-      plugin = todo-comments-nvim;
-      config = lua ''
-        require("todo-comments").setup()
-      '';
-    }
+    # {
+    #   plugin = todo-comments-nvim;
+    #   config = lua ''
+    #     require("todo-comments").setup()
+    #   '';
+    # }
 
     # package version
     # package-info-nvim
@@ -283,25 +302,24 @@ let
         let g:vimspector_enable_mappings = 'HUMAN'
       '';
     }
-    {
-      plugin = mkVimPlugin {
-        name = "project-nvim";
-        version = "2021-01-10";
-        src = fetchTarball {
-          url =
-            "https://github.com/ahmedkhalf/project.nvim/archive/71d0e23dcfc43cfd6bb2a97dc5a7de1ab47a6538.tar.gz";
-          sha256 = "0jxxckfcm0vmcblj6fr4fbdxw7b5dwpr8b7jv59mjsyzqfcdnhs5";
-        };
-      };
-      config = lua ''
-        require("project_nvim").setup()
-        require("telescope").load_extension("projects")
-      '';
-    }
-    {
-      plugin = trouble-nvim;
-      config = readLua ./lua/trouble-nvim.lua;
-    }
+    # {
+    #   plugin = mkVimPlugin {
+    #     name = "project-nvim";
+    #     version = "2021-01-10";
+    #     src = fetchTarball {
+    #       url =
+    #         "https://github.com/ahmedkhalf/project.nvim/archive/71d0e23dcfc43cfd6bb2a97dc5a7de1ab47a6538.tar.gz";
+    #       sha256 = "0jxxckfcm0vmcblj6fr4fbdxw7b5dwpr8b7jv59mjsyzqfcdnhs5";
+    #     };
+    #   };
+    #   config = lua ''
+    #     require("telescope").load_extension("projects")
+    #   '';
+    # }
+    # {
+    #   plugin = trouble-nvim;
+    #   config = readLua ./lua/trouble-nvim.lua;
+    # }
     {
       plugin = null-ls-nvim;
       config = readLua ./lua/null-ls-nvim.lua;
@@ -320,24 +338,15 @@ let
           sha256 = "1lqj0yxkpr007y867b9lmxw7yrfnsnq603bsa2mpbalhv5xgayif";
         };
       }
-      {
-        name = "winresizer";
-        version = "1.1.1";
-        src = fetchTarball {
-          url =
-            "https://github.com/simeji/winresizer/archive/refs/tags/v1.1.1.tar.gz";
-          sha256 = "08mbhckjawyawjgii8qqsdzvqvs8d0vra0fab75cdi4x08f0az94";
-        };
-      }
-      {
-        name = "vim-doc";
-        version = "1.0.0";
-        src = fetchTarball {
-          url =
-            "https://github.com/vim-jp/vimdoc-ja/archive/bc4132b074d99ff399c63a0f6611bb890118b324.tar.gz";
-          sha256 = "0nmrc8mps08hmw2hyl9pyvjlx9hhknzvdy4xfjig6q36kn537yy6";
-        };
-      }
+      # {
+      #   name = "vim-doc";
+      #   version = "1.0.0";
+      #   src = fetchTarball {
+      #     url =
+      #       "https://github.com/vim-jp/vimdoc-ja/archive/bc4132b074d99ff399c63a0f6611bb890118b324.tar.gz";
+      #     sha256 = "0nmrc8mps08hmw2hyl9pyvjlx9hhknzvdy4xfjig6q36kn537yy6";
+      #   };
+      # }
       {
         name = "denops-helloworld-vim";
         version = "2.0.0";
@@ -347,15 +356,15 @@ let
           sha256 = "0wslmcj2iwfb6gam0ff5cgqfgahkf37430hyy3azarsdchl95dwx";
         };
       }
-      {
-        name = "vim-quickhl";
-        version = "1.0.0";
-        src = fetchTarball {
-          url =
-            "https://github.com/t9md/vim-quickhl/archive/be1f44169c3fdee3beab629e83380515da03835e.tar.gz";
-          sha256 = "1ppyvvwciw1c2m40nwlr3mhnzxy7nfxjz3bvc9jxpyym2xvl1igi";
-        };
-      }
+      # {
+      #   name = "vim-quickhl";
+      #   version = "1.0.0";
+      #   src = fetchTarball {
+      #     url =
+      #       "https://github.com/t9md/vim-quickhl/archive/be1f44169c3fdee3beab629e83380515da03835e.tar.gz";
+      #     sha256 = "1ppyvvwciw1c2m40nwlr3mhnzxy7nfxjz3bvc9jxpyym2xvl1igi";
+      #   };
+      # }
       {
         name = "vim-cheatsheet";
         version = "1.0.0";
@@ -366,15 +375,15 @@ let
         };
       }
 
-      {
-        name = "vim-sonictemplate";
-        version = "1.0.0";
-        src = fetchTarball {
-          url =
-            "https://github.com/mattn/vim-sonictemplate/archive/7a44ba848709ce6f4ea12e11e0de6664db69694c.tar.gz";
-          sha256 = "0g862azpyk700qm96rlkd28clp6ngpmirawlxx88906qzbf8knp6";
-        };
-      }
+      # {
+      #   name = "vim-sonictemplate";
+      #   version = "1.0.0";
+      #   src = fetchTarball {
+      #     url =
+      #       "https://github.com/mattn/vim-sonictemplate/archive/7a44ba848709ce6f4ea12e11e0de6664db69694c.tar.gz";
+      #     sha256 = "0g862azpyk700qm96rlkd28clp6ngpmirawlxx88906qzbf8knp6";
+      #   };
+      # }
     ] ++ singleton (mkVimPlugin' {
       pname = "denops-vim";
       version = "2.1.2";
@@ -458,16 +467,11 @@ let
     nnoremap <Leader>r :<C-U>QuickRun<CR>
 
     " lspsage "
-    nnoremap <silent><Leader>ca :Lspsaga code_action<CR>
-    vnoremap <silent><Leader>ca :<C-U>Lspsaga range_code_action<CR>
-    nnoremap <silent><Leader>rn :Lspsaga rename<CR>
 
     """""""""""""""""
     " sonictemplate "
     """""""""""""""""
-    let g:sonictemplate_vim_template_dir = [
-      \ '${templates}'
-      \]
+    let g:sonictemplate_vim_template_dir = [ '${templates}' ]
 
       " tabキーでspaceを入力する
       set expandtab

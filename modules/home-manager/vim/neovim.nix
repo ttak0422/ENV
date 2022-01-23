@@ -32,8 +32,57 @@ let
     };
   mkVimPlugin' = buildVimPlugin;
   vimPlugins = with pkgs.vimPlugins; [
+    # 定番設定
+    vim-sensible
+
     # Nixサポート
     vim-nix
+
+    # スペース可視化 & 除去
+    vim-better-whitespace
+
+    # yank可視化
+    vim-highlightedyank
+
+    # editorconfig
+    editorconfig-vim
+
+    # ハイライト
+    nvim-hlslens
+
+    # ベターQuickFix
+    nvim-bqf
+
+    # f, t 移動のサポート
+    {
+      plugin = quick-scope;
+      config = ''
+        let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+      '';
+    }
+
+    # ペインのズーム
+    {
+      plugin = zoomwintab-vim;
+      config = ''
+        let g:zoomwintab_remap = 0
+        nnoremap <C-w>z :ZoomWinTabToggle<CR>
+      '';
+    }
+
+    # wildmenu
+    {
+      plugin = wilder-nvim;
+      config = readVimScript ./vim/wilder.vim;
+    }
+
+    # Linter
+    {
+      plugin = ale;
+      config = readVimScript ./vim/ale.vim + ''
+        let g:ale_java_javac_executable = "javac -cp ${pkgs.lombok}/share/java/lombok.jar"
+      '';
+    }
 
     # スクロールを滑らかに
     {
@@ -52,46 +101,62 @@ let
     # クリップボード連携
     vim-oscyank
   ];
-  nvimPlugins = with pkgs.vimPlugins;
-    [
-      # Luajit FFI bindings to FZY
-      external.fzy-lua-native
-    ];
+  nvimPlugins = with pkgs.vimPlugins; [
+    # Luajit FFI bindings to FZY
+    external.fzy-lua-native
+
+    # スクロールバー
+    nvim-scrollview
+    # 構文解析
+    {
+      plugin = nvim-treesitter;
+      config = readLua ./lua/nvim-treesitter.lua;
+    }
+    {
+      plugin = nvim-treesitter-context;
+      config = readLua ./lua/nvim-treesitter-context.lua;
+    }
+  ];
   packerPlugins = singleton {
     plugin = pkgs.vimPlugins.packer-nvim;
     optional = true;
     config = packerConfig (readFiles [
+      ./lua/packer/alpha-nvim.lua
       ./lua/packer/bufferline-nvim.lua
+      ./lua/packer/gitsigns-nvim.lua
+      ./lua/packer/hop-nvim.lua
+      ./lua/packer/indent-blanklin-nvim.lua
+      ./lua/packer/lspkind.lua
+      ./lua/packer/lualine-nvim.lua
+      ./lua/packer/nvim-autopairs.lua
+      ./lua/packer/nvim-bufdel.lua
+      ./lua/packer/nvim-cmp.lua
+      ./lua/packer/nvim-colorizer-lua.lua
+      ./lua/packer/registers-nvim.lua
+      ./lua/packer/specs-nvim.lua
+      ./lua/packer/stabilize-nvim.lua
       ./lua/packer/telescope-nvim.lua
+      ./lua/packer/toggleterm-nvim.lua
       ./lua/packer/tokyonight-nvim.lua
       ./lua/packer/vim-vsnip.lua
-      ./lua/packer/nvim-autopairs.lua
-      ./lua/packer/lspkind.lua
-      ./lua/packer/nvim-cmp.lua
-      ./lua/packer/lualine-nvim.lua
+      ./lua/packer/zen-mode-nvim.lua
+      # ./lua/packer/nvim-treesitter.lua
+      # ./lua/packer/nvim-treesitter-context.lua
     ]);
   };
   plugins = with pkgs.vimPlugins;
     ([
-      {
-        plugin = pkgs.vimPlugins.packer-nvim;
-        optional = true;
-        config = packerConfig (readFiles [ ./lua/bufferline-nvim.lua ]);
-      }
+      # {
+      #   plugin = pkgs.vimPlugins.packer-nvim;
+      #   optional = true;
+      #   config = packerConfig (readFiles [ ./lua/bufferline-nvim.lua ]);
+      # }
 
       # icon
-      vim-devicons
-      nvim-web-devicons
+      # vim-devicons
+      # nvim-web-devicons
 
-      # treesitter
-      {
-        plugin = nvim-treesitter;
-        config = readLua ./lua/nvim-treesitter.lua;
-      }
-      {
-        plugin = nvim-treesitter-context;
-        config = readLua ./lua/nvim-treesitter-context.lua;
-      }
+      # # treesitter
       # {
       #   plugin = nvim-treesitter-textobjects;
       #   # ./lua/nvim-treesitter.lua
@@ -105,22 +170,22 @@ let
       diffview-nvim
 
       # lua
-      plenary-nvim
+      # plenary-nvim
 
       # nui
-      nui-nvim
+      # nui-nvim
 
       # Windowの挙動を安定させる
-      stabilize-nvim
-      {
-        plugin = stabilize-nvim;
-        config = lua ''
-          require('stabilize').setup()
-        '';
-      }
+      # stabilize-nvim
+      # {
+      #   plugin = stabilize-nvim;
+      #   config = lua ''
+      #     require('stabilize').setup()
+      #   '';
+      # }
 
       # registers
-      registers-nvim
+      # registers-nvim
 
       # colorscheme
       # {
@@ -130,22 +195,22 @@ let
       #   '';
       # }
 
-      {
-        plugin = mkVimPlugin {
-          name = "material-nvim";
-          version = "2022-01-19";
-          src = fetchTarball {
-            url =
-              "https://github.com/marko-cerovac/material.nvim/archive/8abf1b1cdc75a3e1846ced199ee86a36b9a758c4.tar.gz";
-            sha256 = "16ajmv2kwbnj8y40ysdfmqmikajpw63sqq7bqzx7nz0vv8vpiv8z";
-          };
-        };
-        config = ''
-          set termguicolors
-          let g:material_style = 'darker'
-          colorscheme material
-        '' + (readLua ./lua/material-nvim.lua);
-      }
+      # {
+      #   plugin = mkVimPlugin {
+      #     name = "material-nvim";
+      #     version = "2022-01-19";
+      #     src = fetchTarball {
+      #       url =
+      #         "https://github.com/marko-cerovac/material.nvim/archive/8abf1b1cdc75a3e1846ced199ee86a36b9a758c4.tar.gz";
+      #       sha256 = "16ajmv2kwbnj8y40ysdfmqmikajpw63sqq7bqzx7nz0vv8vpiv8z";
+      #     };
+      #   };
+      #   config = ''
+      #     set termguicolors
+      #     let g:material_style = 'darker'
+      #     colorscheme material
+      #   '' + (readLua ./lua/material-nvim.lua);
+      # }
       # {
       #   plugin = oceanic-next;
       #   config = ''
@@ -157,77 +222,51 @@ let
       #   '';
       # }
 
-      {
-        plugin = nvim-colorizer-lua;
-        config = lua ''
-          require 'colorizer'.setup()
-        '';
+      # {
+      #   plugin = nvim-colorizer-lua;
+      #   config = lua ''
+      #     require 'colorizer'.setup()
+      #   '';
 
-      }
+      # }
 
-      {
-        plugin = mkVimPlugin {
-          name = "specs-nvim";
-          version = "2021-01-10";
-          src = fetchTarball {
-            url =
-              "https://github.com/edluffy/specs.nvim/archive/e043580a65409ea071dfe34e94284959fd24e3be.tar.gz";
-            sha256 = "1sg2i99ncx5j7al3mhwpnwyx1hila5gars0ak7q3n9yr4013i7dx";
-          };
-        };
-        config = readLua ./lua/specs-nvim.lua;
-      }
-      # startify
-      {
-        plugin = vim-startify;
-        config = readVimScript ./vim/startify.vim;
-      }
+      # {
+      #   plugin = mkVimPlugin {
+      #     name = "specs-nvim";
+      #     version = "2021-01-10";
+      #     src = fetchTarball {
+      #       url =
+      #         "https://github.com/edluffy/specs.nvim/archive/e043580a65409ea071dfe34e94284959fd24e3be.tar.gz";
+      #       sha256 = "1sg2i99ncx5j7al3mhwpnwyx1hila5gars0ak7q3n9yr4013i7dx";
+      #     };
+      #   };
+      #   config = readLua ./lua/specs-nvim.lua;
+      # }
+      # # startify
+      # {
+      #   plugin = vim-startify;
+      #   config = readVimScript ./vim/startify.vim;
+      # }
 
       # 定番設定
-      vim-sensible
+      # vim-sensible
 
-      # スペース可視化
-      vim-better-whitespace
-
-      # インデント可視化
-      {
-        plugin = indent-blankline-nvim;
-        config = readLua ./lua/indent-blankline-nvim.lua;
-      }
-
-      # yank可視化
-      vim-highlightedyank
+      # # インデント可視化
+      # {
+      #   plugin = indent-blankline-nvim;
+      #   config = readLua ./lua/indent-blankline-nvim.lua;
+      # }
 
       # git
-      {
-        plugin = gitsigns-nvim;
-        config = readLua ./lua/gitsigns.lua;
-      }
+      # {
+      #   plugin = gitsigns-nvim;
+      #   config = readLua ./lua/gitsigns.lua;
+      # }
 
-      # vim向けeditorconfig
-      editorconfig-vim
-
-      {
-        plugin = quick-scope;
-        config = ''
-          let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-        '';
-      }
-
-      {
-        plugin = toggleterm-nvim;
-        config = readLua ./lua/toggleterm-nvim.lua;
-      }
-
-      # zoom
-      zoomwintab-vim
-
-      {
-        plugin = ale;
-        config = readVimScript ./vim/ale.vim + ''
-          let g:ale_java_javac_executable = "javac -cp ${pkgs.lombok}/share/java/lombok.jar"
-        '';
-      }
+      # {
+      #   plugin = toggleterm-nvim;
+      #   config = readLua ./lua/toggleterm-nvim.lua;
+      # }
 
       # {
       #   plugin = goto-preview;
@@ -322,56 +361,47 @@ let
 
       emmet-vim
 
-      {
-        # like easymotion
-        plugin = hop-nvim;
-        config = lua ''
-          require'hop'.setup()
-        '';
-      }
+      # {
+      #   # like easymotion
+      #   plugin = hop-nvim;
+      #   config = lua ''
+      #     require'hop'.setup()
+      #   '';
+      # }
 
       # nerdtree
       nerdtree
       nerdtree-git-plugin
       vim-nerdtree-tabs
       vim-nerdtree-syntax-highlight
-      nvim-ts-rainbow
+      # nvim-ts-rainbow
 
-      # zen
-      {
-        plugin = mkVimPlugin {
-          name = "zen-mode-nvim";
-          version = "2021-01-10";
-          src = fetchTarball {
-            url =
-              "https://github.com/folke/zen-mode.nvim/archive/f1cc53d32b49cf962fb89a2eb0a31b85bb270f7c.tar.gz";
-            sha256 = "1fxkrny1xk69w8rlmz4x5msvqb8i8xvvl9csndpplxhkn8wzirdp";
-          };
-        };
-        config = readLua ./lua/zen-mode.lua;
-      }
-      # zenの配色
-      twilight-nvim
+      # # zen
+      # {
+      #   plugin = mkVimPlugin {
+      #     name = "zen-mode-nvim";
+      #     version = "2021-01-10";
+      #     src = fetchTarball {
+      #       url =
+      #         "https://github.com/folke/zen-mode.nvim/archive/f1cc53d32b49cf962fb89a2eb0a31b85bb270f7c.tar.gz";
+      #       sha256 = "1fxkrny1xk69w8rlmz4x5msvqb8i8xvvl9csndpplxhkn8wzirdp";
+      #     };
+      #   };
+      #   config = readLua ./lua/zen-mode.lua;
+      # }
+      # # zenの配色
+      # twilight-nvim
 
       # git
-      gitsigns-nvim
+      # gitsigns-nvim
 
       # cursor
-      specs-nvim
-
-      nvim-scrollview
+      # specs-nvim
 
       # command lineを見やすく
-      {
-        plugin = wilder-nvim;
-        config = readVimScript ./vim/wilder.vim;
-      }
-
-      # hl
-      nvim-hlslens
 
       # buffer
-      nvim-bufdel
+      # nvim-bufdel
 
       # nortification
       # {
@@ -388,7 +418,7 @@ let
       }
 
       # package version
-      package-info-nvim
+      # package-info-nvim
 
       # action
       # {
@@ -406,10 +436,10 @@ let
         '';
       }
 
-      {
-        plugin = nvim-bqf;
-        config = "";
-      }
+      # {
+      #   plugin = nvim-bqf;
+      #   config = "";
+      # }
 
       # debug
       {
@@ -444,7 +474,7 @@ let
       # wip...
       # https://github.com/chentau/marks.nvim
     ]) ++ [
-      external.fzy-lua-native
+      # external.fzy-lua-native
     ]
     # wip...
     ++ map mkVimPlugin [
@@ -549,8 +579,6 @@ let
     """"""""""""""""""
 
     " zoom (zoomwintabの標準の割り当てを用いない)
-    let g:zoomwintab_remap = 0
-    nnoremap <C-w>z :ZoomWinTabToggle<CR>
 
     """"""""""""""""""
     " Leader keybind "
@@ -576,11 +604,6 @@ let
     nnoremap <Leader>- :ChooseWin<CR>
     nnoremap <Leader><Leader>- :ChooseWinSwap<CR>
 
-    " hop.nvim
-    nnoremap <Leader>s :HopChar1<CR>
-    nnoremap <Leader><Leader>s :HopChar2<CR>
-    nnoremap <Leader>j :HopLineAC<CR>
-    nnoremap <Leader>k :HopLineBC<CR>
 
     " ZEN
     nnoremap <Leader><Leader>z :ZenMode<CR>

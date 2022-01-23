@@ -110,9 +110,6 @@ let
       };
       config = readVimScript ./vim/comfortable-motion.vim;
     }
-
-    # クリップボード連携
-    vim-oscyank
   ];
   nvimPlugins = with pkgs.vimPlugins; [
     # Luajit FFI bindings to FZY
@@ -159,9 +156,12 @@ let
       ./lua/packer/specs-nvim.lua
       ./lua/packer/stabilize-nvim.lua
       ./lua/packer/telescope-nvim.lua
+      ./lua/packer/todo-comments-nvim.lua
       ./lua/packer/toggleterm-nvim.lua
       ./lua/packer/tokyonight-nvim.lua
       ./lua/packer/trouble-nvim.lua
+      ./lua/packer/vim-choosewin.lua
+      ./lua/packer/vim-oscyank.lua
       ./lua/packer/vim-quickhl.lua
       ./lua/packer/vim-sonic-template.lua
       ./lua/packer/vim-vsnip.lua
@@ -170,131 +170,16 @@ let
     ]);
   };
   plugins = (with pkgs.vimPlugins; [
-
-    # {
-    #   plugin = mkVimPlugin' {
-    #     pname = "neogen";
-    #     version = "2022-01-14";
-    #     src = fetchTarball {
-    #       url =
-    #         "https://github.com/danymat/neogen/archive/966d09146857af9ba23a4633dce0e83ad51f2b23.tar.gz";
-    #       sha256 = "1xjc76r6n4x1q652f3hsxwqi6bm0g81fcl8na48inijawp5ic2zw";
-    #     };
-    #     dontBuild = true;
-    #     installPhase = ''
-    #       mkdir -p $out
-    #       cp -r ./themes/* $out
-    #     '';
-    #   };
-    #   config = lua ''
-    #     require('neogen').setup {
-    #       enabled = true
-    #     }
-    #   '';
-    # }
-
-    # {
-    #   plugin = mkVimPlugin {
-    #     name = "virtual-types-nvim";
-    #     version = "2022-01-14";
-    #     src = {
-    #       url = "https://github.com/jubnzv/virtual-types.nvim/archive/7d25c3130555a0173d5a4c6da238be2414144995.tar.gz";
-    #       sha256 = "18dv3rzc5v8kfmw1brqagvbdz3pcfch4gzlbxl6kiv9x85yfdx98";
-    #     };
-    #   }
-    # }
-
     # whichkey
     which-key-nvim
 
-    # traces-vim
-    # vim-closetag
-
-    # vista
-    vista-vim
-
     emmet-vim
-
-    # {
-    #   # like easymotion
-    #   plugin = hop-nvim;
-    #   config = lua ''
-    #     require'hop'.setup()
-    #   '';
-    # }
 
     # nerdtree
     nerdtree
     nerdtree-git-plugin
     vim-nerdtree-tabs
     vim-nerdtree-syntax-highlight
-    # nvim-ts-rainbow
-
-    # # zen
-    # {
-    #   plugin = mkVimPlugin {
-    #     name = "zen-mode-nvim";
-    #     version = "2021-01-10";
-    #     src = fetchTarball {
-    #       url =
-    #         "https://github.com/folke/zen-mode.nvim/archive/f1cc53d32b49cf962fb89a2eb0a31b85bb270f7c.tar.gz";
-    #       sha256 = "1fxkrny1xk69w8rlmz4x5msvqb8i8xvvl9csndpplxhkn8wzirdp";
-    #     };
-    #   };
-    #   config = readLua ./lua/zen-mode.lua;
-    # }
-    # # zenの配色
-    # twilight-nvim
-
-    # git
-    # gitsigns-nvim
-
-    # cursor
-    # specs-nvim
-
-    # command lineを見やすく
-
-    # buffer
-    # nvim-bufdel
-
-    # nortification
-    # {
-    #   plugin = nvim-notify;
-    #   config = readLua ./lua/nvim-notify.lua;
-    # }
-
-    # todo comment
-    # {
-    #   plugin = todo-comments-nvim;
-    #   config = lua ''
-    #     require("todo-comments").setup()
-    #   '';
-    # }
-
-    # package version
-    # package-info-nvim
-
-    # action
-    # {
-    #   plugin = nvim-lightbulb;
-    #   config = ''
-    #     " autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-    #   '';
-    # }
-
-    {
-      plugin = vim-quickrun;
-      config = ''
-        let g:quickrun_config={'*': {'split': '''}}
-        set splitbelow
-      '';
-    }
-
-    # {
-    #   plugin = nvim-bqf;
-    #   config = "";
-    # }
-
     # debug
     {
       plugin = vimspector;
@@ -302,89 +187,21 @@ let
         let g:vimspector_enable_mappings = 'HUMAN'
       '';
     }
-    # {
-    #   plugin = mkVimPlugin {
-    #     name = "project-nvim";
-    #     version = "2021-01-10";
-    #     src = fetchTarball {
-    #       url =
-    #         "https://github.com/ahmedkhalf/project.nvim/archive/71d0e23dcfc43cfd6bb2a97dc5a7de1ab47a6538.tar.gz";
-    #       sha256 = "0jxxckfcm0vmcblj6fr4fbdxw7b5dwpr8b7jv59mjsyzqfcdnhs5";
-    #     };
-    #   };
-    #   config = lua ''
-    #     require("telescope").load_extension("projects")
-    #   '';
-    # }
-    # {
-    #   plugin = trouble-nvim;
-    #   config = readLua ./lua/trouble-nvim.lua;
-    # }
     {
       plugin = null-ls-nvim;
       config = readLua ./lua/null-ls-nvim.lua;
     }
-    # wip...
-    # https://github.com/chentau/marks.nvim
   ])
   # wip...
-    ++ map mkVimPlugin [
-      {
-        name = "vim-choosewin";
-        version = "1.5.0";
-        src = fetchTarball {
-          url =
-            "https://github.com/t9md/vim-choosewin/archive/refs/tags/v1.5.tar.gz";
-          sha256 = "1lqj0yxkpr007y867b9lmxw7yrfnsnq603bsa2mpbalhv5xgayif";
-        };
-      }
-      # {
-      #   name = "vim-doc";
-      #   version = "1.0.0";
-      #   src = fetchTarball {
-      #     url =
-      #       "https://github.com/vim-jp/vimdoc-ja/archive/bc4132b074d99ff399c63a0f6611bb890118b324.tar.gz";
-      #     sha256 = "0nmrc8mps08hmw2hyl9pyvjlx9hhknzvdy4xfjig6q36kn537yy6";
-      #   };
-      # }
-      {
-        name = "denops-helloworld-vim";
-        version = "2.0.0";
-        src = fetchTarball {
-          url =
-            "https://github.com/vim-denops/denops-helloworld.vim/archive/refs/tags/v2.0.0.tar.gz";
-          sha256 = "0wslmcj2iwfb6gam0ff5cgqfgahkf37430hyy3azarsdchl95dwx";
-        };
-      }
-      # {
-      #   name = "vim-quickhl";
-      #   version = "1.0.0";
-      #   src = fetchTarball {
-      #     url =
-      #       "https://github.com/t9md/vim-quickhl/archive/be1f44169c3fdee3beab629e83380515da03835e.tar.gz";
-      #     sha256 = "1ppyvvwciw1c2m40nwlr3mhnzxy7nfxjz3bvc9jxpyym2xvl1igi";
-      #   };
-      # }
-      {
-        name = "vim-cheatsheet";
-        version = "1.0.0";
-        src = fetchTarball {
-          url =
-            "https://github.com/reireias/vim-cheatsheet/archive/35a8d57e53abc210b1baa9377965ffe360b84334.tar.gz";
-          sha256 = "0gjirzqrlr8vy4rlflx4kq3dbk5v2ihavw39y3q8ik8k27yx99d6";
-        };
-      }
-
-      # {
-      #   name = "vim-sonictemplate";
-      #   version = "1.0.0";
-      #   src = fetchTarball {
-      #     url =
-      #       "https://github.com/mattn/vim-sonictemplate/archive/7a44ba848709ce6f4ea12e11e0de6664db69694c.tar.gz";
-      #     sha256 = "0g862azpyk700qm96rlkd28clp6ngpmirawlxx88906qzbf8knp6";
-      #   };
-      # }
-    ] ++ singleton (mkVimPlugin' {
+    ++ map mkVimPlugin [{
+      name = "vim-choosewin";
+      version = "1.5.0";
+      src = fetchTarball {
+        url =
+          "https://github.com/t9md/vim-choosewin/archive/refs/tags/v1.5.tar.gz";
+        sha256 = "1lqj0yxkpr007y867b9lmxw7yrfnsnq603bsa2mpbalhv5xgayif";
+      };
+    }] ++ singleton (mkVimPlugin' {
       pname = "denops-vim";
       version = "2.1.2";
       src = fetchTarball {
@@ -443,15 +260,10 @@ let
     " file search
     nnoremap <Leader><Leader>p :Files<CR>
     " choosewin
-    nnoremap <Leader>- :ChooseWin<CR>
-    nnoremap <Leader><Leader>- :ChooseWinSwap<CR>
 
 
     " ZEN
     nnoremap <Leader><Leader>z :ZenMode<CR>
-
-    " yank
-    vnoremap <Leader>y :OSCYank<CR>
 
     " hilight
     nmap <Leader>m <Plug>(quickhl-manual-this)

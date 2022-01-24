@@ -7,6 +7,7 @@ let
   inherit (pkgs.vimUtils) buildVimPlugin;
   templates = pkgs.callPackage ./templates { };
   external = pkgs.callPackage ./external.nix { };
+  packerPackage = pkgs.callPackage ./lua/packer { };
   lua = luaCode: ''
     lua <<EOF
     ${luaCode}
@@ -19,6 +20,50 @@ let
       ${cfg}
       end)
     '';
+  mkPackerPluginsConfig = cfg: ''
+    vim.cmd[[packadd packer.nvim]]
+    require'packer'.startup(function()
+      ${cfg}
+    end)
+  '';
+  packerPluginsConfig = mkPackerPluginsConfig (readFiles [
+    ./lua/packer/alpha-nvim.lua
+    ./lua/packer/bufferline-nvim.lua
+    ./lua/packer/diffview-nvim.lua
+    ./lua/packer/gitsigns-nvim.lua
+    ./lua/packer/hop-nvim.lua
+    ./lua/packer/indent-blanklin-nvim.lua
+    ./lua/packer/lsp_signature-nvim.lua
+    ./lua/packer/lspkind.lua
+    ./lua/packer/lspsaga-nvim.lua
+    ./lua/packer/lualine-nvim.lua
+    ./lua/packer/neogen.lua
+    ./lua/packer/nvim-autopairs.lua
+    ./lua/packer/nvim-bufdel.lua
+    ./lua/packer/nvim-cmp.lua
+    ./lua/packer/nvim-colorizer-lua.lua
+    ./lua/packer/nvim-lsp-installer.lua
+    ./lua/packer/nvim-treesitter-context.lua
+    ./lua/packer/nvim-treesitter.lua
+    ./lua/packer/plenary-nvim.lua
+    ./lua/packer/project-nvim.lua
+    ./lua/packer/registers-nvim.lua
+    ./lua/packer/sidebar-nvim.lua
+    ./lua/packer/specs-nvim.lua
+    ./lua/packer/stabilize-nvim.lua
+    ./lua/packer/telescope-nvim.lua
+    ./lua/packer/todo-comments-nvim.lua
+    ./lua/packer/toggleterm-nvim.lua
+    ./lua/packer/tokyonight-nvim.lua
+    ./lua/packer/trouble-nvim.lua
+    ./lua/packer/vim-choosewin.lua
+    ./lua/packer/vim-oscyank.lua
+    ./lua/packer/vim-quickhl.lua
+    ./lua/packer/vim-sonic-template.lua
+    ./lua/packer/vim-vsnip.lua
+    ./lua/packer/vimdoc-ja.lua
+    ./lua/packer/zen-mode-nvim.lua
+  ]);
   # [Path] -> String
   readFiles = paths:
     concatStringsSep "\n" (map (path: fileContents path) paths);
@@ -117,57 +162,22 @@ let
 
     # スクロールバー
     nvim-scrollview
-    # 構文解析
+
     {
-      plugin = nvim-treesitter;
-      config = readLua ./lua/nvim-treesitter.lua;
-    }
-    {
-      plugin = nvim-treesitter-context;
-      config = readLua ./lua/nvim-treesitter-context.lua;
+      plugin = packer-nvim;
+      optional = true;
+      config = lua ''
+        vim.cmd[[command! PackerInstall packadd packer.nvim | lua require'plugins'.install()]]
+        vim.cmd[[command! PackerUpdate packadd packer.nvim | lua require'plugins'.update()]]
+        vim.cmd[[command! PackerSync packadd packer.nvim | lua require'plugins'.sync()]]
+        vim.cmd[[command! PackerClean packadd packer.nvim | lua require'plugins'.clean()]]
+        vim.cmd[[command! PackerCompile packadd packer.nvim | lua require'plugins'.compile()]]
+      '';
     }
   ];
   packerPlugins = singleton {
     plugin = pkgs.vimPlugins.packer-nvim;
     optional = true;
-    config = packerConfig (readFiles [
-      ./lua/packer/alpha-nvim.lua
-      ./lua/packer/bufferline-nvim.lua
-      ./lua/packer/diffview-nvim.lua
-      ./lua/packer/gitsigns-nvim.lua
-      ./lua/packer/hop-nvim.lua
-      ./lua/packer/indent-blanklin-nvim.lua
-      ./lua/packer/lsp_signature-nvim.lua
-      ./lua/packer/lspkind.lua
-      ./lua/packer/lspsaga-nvim.lua
-      ./lua/packer/lualine-nvim.lua
-      ./lua/packer/neogen.lua
-      ./lua/packer/nvim-autopairs.lua
-      ./lua/packer/nvim-bufdel.lua
-      ./lua/packer/nvim-cmp.lua
-      ./lua/packer/nvim-colorizer-lua.lua
-      ./lua/packer/nvim-lsp-installer.lua
-      ./lua/packer/nvim-treesitter-context.lua
-      ./lua/packer/nvim-treesitter.lua
-      ./lua/packer/plenary-nvim.lua
-      ./lua/packer/project-nvim.lua
-      ./lua/packer/registers-nvim.lua
-      ./lua/packer/sidebar-nvim.lua
-      ./lua/packer/specs-nvim.lua
-      ./lua/packer/stabilize-nvim.lua
-      ./lua/packer/telescope-nvim.lua
-      ./lua/packer/todo-comments-nvim.lua
-      ./lua/packer/toggleterm-nvim.lua
-      ./lua/packer/tokyonight-nvim.lua
-      ./lua/packer/trouble-nvim.lua
-      ./lua/packer/vim-choosewin.lua
-      ./lua/packer/vim-oscyank.lua
-      ./lua/packer/vim-quickhl.lua
-      ./lua/packer/vim-sonic-template.lua
-      ./lua/packer/vim-vsnip.lua
-      ./lua/packer/vimdoc-ja.lua
-      ./lua/packer/zen-mode-nvim.lua
-    ]);
   };
   plugins = (with pkgs.vimPlugins; [
     # whichkey
@@ -321,11 +331,15 @@ let
       ${readVimScript ./vim/util.vim}
       '';
 in {
-  home.packages = with pkgs;
-    [ python39Packages.pynvim lombok ] ++ [ tree-sitter templates ];
+  home = {
+    packages = with pkgs;
+      [ python39Packages.pynvim lombok ] ++ [ tree-sitter templates ];
+    file = { ".config/nvim/lua".source = packerPackage; };
+  };
+  # xdg.configFile."nvim/lua/plugins.lua".text = packerPluginsConfig;
   programs.neovim = {
     inherit extraConfig;
-    plugins = vimPlugins ++ nvimPlugins ++ packerPlugins;
+    plugins = vimPlugins ++ nvimPlugins;
     enable = true;
     package = pkgs.neovim-nightly;
     withNodeJs = true;

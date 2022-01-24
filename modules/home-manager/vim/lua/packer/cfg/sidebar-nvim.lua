@@ -1,0 +1,1 @@
+require('sidebar-nvim').setup()

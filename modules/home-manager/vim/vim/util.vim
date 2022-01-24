@@ -1,3 +1,12 @@
+let mapleader="\<Space>"
+
+nnoremap <Leader>, :bprev<CR>
+nnoremap <Leader>. :bnext<CR>
+nnoremap <Leader>q :bd<CR>
+nnoremap <silent> <ESC><ESC> :nohl<CR>
+
+set helplang=ja
+
 " カーソル可視化
 set cursorline
 set cursorcolumn
@@ -17,6 +26,20 @@ set ignorecase                " 小文字のみの検索に限り小文字大文
 set smartcase
 set incsearch                 " インクリメンタルサーチ
 set hlsearch                  " 検索結果をハイライト
+
+" tabキーでspaceを入力する
+set expandtab
+set tabstop=2
+set shiftwidth=2
+
+" バッファ切り替え時に保存不要に
+set hidden
+
+" モードをstatusに表示しない
+set noshowmode
+
+set nobackup
+set nowritebackup
 
 " grepをrgに置き換え
 let &grepprg = 'rg --vimgrep --hidden'

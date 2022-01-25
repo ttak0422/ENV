@@ -18,7 +18,7 @@ let
     font_family Hack Nerd Font Mono
     italic_font Fira Code Italic
     hide_window_decorations yes
-    window_padding_width 5
+    window_padding_width 3
 
     include ./theme.conf
     hide_window_decorations ${

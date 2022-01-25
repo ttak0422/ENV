@@ -20,6 +20,14 @@ let
     termBg = "#282c34";
     termFg = "#abb2bf";
   };
+  one = {
+    bg = "#282c34";
+    fg = "#abb2bf";
+    yellow = "#e5c07b";
+    blue = "#61afef";
+    green = "#98c379";
+    red = "#e06c75";
+  };
 
   # helper script
   scripts = let
@@ -212,15 +220,18 @@ let
     set -g message-style fg=${colors.accent},reverse,bg=default
 
     # status-left
-    set -g status-left "#[fg=${colors.statusLeft}]${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol},}"
+    # set -g status-left " #[fg=${colors.statusLeft}]${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol},}"
+    set -g status-left " ${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol},}"
 
     # status-center
     set-option -g status-justify "centre"
     set-window-option -g window-status-format " #W "
-    set-window-option -g window-status-current-format "#{?client_prefix,#[fg=${colors.accent}],}${lBracketSimbol}#[reverse] #W #[default]#{?client_prefix,#[fg=${colors.accent}],}${rBracketSimbol}"
+    # set-window-option -g window-status-current-format "#{?client_prefix,#[fg=${colors.accent}],}${lBracketSimbol}#[reverse] #W #[default]#{?client_prefix,#[fg=${colors.accent}],}${rBracketSimbol}"
+    set-window-option -g window-status-current-format "#{?client_prefix,#[fg=${one.yellow}],#[fg=${one.blue}]}#[bold] #W #[default]"
 
     # status-right
-    set -g status-right "#[fg=${colors.statusRight}] ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA)"
+    # set -g status-right "#[fg=${colors.statusRight}] ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA) "
+    set -g status-right " ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA) "
 
     # resurrect
     set -g @resurrect-strategy-nvim 'session'

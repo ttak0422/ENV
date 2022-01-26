@@ -15,8 +15,10 @@ let
   };
 
   config' = ''
-    font_family Hack Nerd Font Mono
-    italic_font Fira Code Italic
+    font_family Hack Nerd Font Mono Bold
+    bold_font        auto
+    italic_font      auto
+    bold_italic_font auto
     hide_window_decorations yes
     window_padding_width 3
 

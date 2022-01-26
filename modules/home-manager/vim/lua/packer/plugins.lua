@@ -16,24 +16,22 @@ require'packer'.startup(function()
   }
 
   use {
+    'LionC/nest.nvim',
+    config = function ()
+      require'cfg.nest-nvim'
+    end
+  }
+
+  use {
     'phaazon/hop.nvim',
     branch = 'v1',
     cmd = {'HopChar1', 'HopChar2', 'HopLineAC', 'HopLineBC'},
-    setup = function()
-      vim.api.nvim_set_keymap('n', '<Leader>s', '<cmd>HopChar1<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<Leader><Leader>s', '<cmd>HopChar2<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<Leader>j', '<cmd>HopLineAC<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<Leader>k', '<cmd>HopLineBC<CR>', { noremap = true, silent = true })
-    end,
     config = function() require'cfg.hop-nvim'.setup() end,
   }
 
   use {
     'danymat/neogen',
     ft = { 'lua', 'python', 'javascript', 'cpp', 'go', 'java', 'rust', 'csharp' },
-    setup = function()
-      vim.api.nvim_set_keymap('n', '<Leader>nc', ":lua require('neogen').generate({ type = 'class' })<CR>", { noremap = true, silent = true })
-    end,
   }
 
   use {
@@ -97,11 +95,6 @@ require'packer'.startup(function()
     'tami5/lspsaga.nvim',
     opt = true,
     cmd = 'Lspsaga',
-    setup = function()
-      vim.api.nvim_set_keymap('n', '<Leader>ca', '<cmd>Lspsaga code_action<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('v', '<Leader>ca', ':<C-u>Lspsaga range_code_action<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<Leader>ca', '<cmd>Lspsaga rename<CR> ', { noremap = true, silent = true })
-    end,
     config = function()
       require'cfg.lspsaga-nvim'
     end,
@@ -196,17 +189,11 @@ require'packer'.startup(function()
 
   use {
     'nvim-telescope/telescope.nvim',
-    cmd = 'Telescope',
+    event = 'VimEnter',
     requires = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-fzy-native.nvim',
-      'romgrk/fzy-lua-native',
+       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      'nvim-telescope/telescope-live-grep-raw.nvim',
     },
-    setup = function()
-      vim.api.nvim_set_keymap('n', '<Leader>ff', '<cmd>Telescope live_grep<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<Leader>fp', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<Leader>fb', '<cmd>Telescope buffers<CR>', { noremap = true, silent = true })
-    end,
     config = function()
       require'cfg.telescope-nvim'
     end,
@@ -248,9 +235,6 @@ require'packer'.startup(function()
     'ojroques/vim-oscyank',
     opt = true,
     cmd = 'OSCYank',
-    setup = function()
-      vim.api.nvim_set_keymap('v', '<Leader>y', '<cmd>OSCYank<CR> ', { noremap = true, silent = true })
-    end,
   }
 
   use {
@@ -278,14 +262,11 @@ require'packer'.startup(function()
     event = { 'InsertEnter', 'CmdlineEnter' },
   }
 
-  use 'folke/twilight.nvim'
-
   use {
     'folke/zen-mode.nvim',
+    requires = { 'folke/twilight.nvim' },
     cmd = 'ZenMode',
-    setup = function()
-      vim.api.nvim_set_keymap('n', '<Leader><Leader>z', '<cmd>ZenMode<CR>', { noremap = true, silent = true })
-    end,
+    opt = true,
     config = function()
       require'cfg.zen-mode-nvim'
     end,

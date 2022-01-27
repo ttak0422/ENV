@@ -3,7 +3,6 @@ require'nest'.applyKeymaps {
     { '<leader>', {
       { 's', '<cmd>HopChar2<cr>' },
       { 'z', '<cmd>ZenMode<cr>' },
-      { 'y', '<cmd>OSCYank<cr>' },
     },},
     { 's', '<cmd>HopChar1<cr>' },
     { 'j', '<cmd>HopLineAC<cr>' },

@@ -7,6 +7,10 @@ require'packer'.startup(function()
 
   use {
     'nvim-treesitter/nvim-treesitter',
+    requires = {
+      { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' },
+      { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' },
+    },
     config = function() require'cfg.nvim-treesitter' end,
   }
 
@@ -101,12 +105,16 @@ require'packer'.startup(function()
   }
 
   use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = function()
-      require'cfg.lualine-nvim'
-    end,
+    'windwp/windline.nvim',
+    config = [[ require'wlsample.vscode' ]],
   }
+  -- use {
+  --   'nvim-lualine/lualine.nvim',
+  --   requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+  --   config = function()
+  --     require'cfg.lualine-nvim'
+  --   end,
+  -- }
 
   use {
     'windwp/nvim-autopairs',
@@ -163,8 +171,6 @@ require'packer'.startup(function()
       require'cfg.nvim-lsp-installer'
     end,
   }
-
-  use 'p00f/nvim-ts-rainbow'
 
   use {
     'sidebar-nvim/sidebar.nvim',
@@ -263,8 +269,14 @@ require'packer'.startup(function()
   }
 
   use {
+      'folke/twilight.nvim',
+      opt = true,
+      config = [[ require'cfg.twilight-nvim' ]],
+  }
+
+  use {
     'folke/zen-mode.nvim',
-    requires = { 'folke/twilight.nvim' },
+    wants = 'twilight.nvim',
     cmd = 'ZenMode',
     opt = true,
     config = function()

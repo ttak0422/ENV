@@ -3,6 +3,7 @@ require'nest'.applyKeymaps {
     { '<leader>', {
       { 's', '<cmd>HopChar2<cr>' },
       { 'z', '<cmd>ZenMode<cr>' },
+      { 'b', '<cmd>NvimTreeToggle<cr>' },
     },},
     { 's', '<cmd>HopChar1<cr>' },
     { 'j', '<cmd>HopLineAC<cr>' },

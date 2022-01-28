@@ -25,6 +25,7 @@ require'bufferline'.setup{
         if info ~= 0 then
           table.insert(result, {text = '  ' .. info, guifg = '#7EA9A7'})
         end
+        table.insert(result, {text = ' '})
         return result
       end,
     },

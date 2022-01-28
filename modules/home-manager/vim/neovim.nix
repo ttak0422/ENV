@@ -109,6 +109,8 @@ let
   ];
 
   extraConfig = ''
+    " disable default plugin
+    let g:did_load_filetypes = 1
     " sonictemplate
     let g:sonictemplate_vim_template_dir = [ '${templates}' ]
     ${fileContents ./vim/autocmd.vim}

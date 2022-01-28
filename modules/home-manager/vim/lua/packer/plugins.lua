@@ -3,6 +3,8 @@ vim.cmd[[packadd packer.nvim]]
 require'packer'.startup(function()
   use{'wbthomason/packer.nvim', opt = true}
 
+  use 'nathom/filetype.nvim'
+
   use 'vim-jp/vimdoc-ja'
 
   use {

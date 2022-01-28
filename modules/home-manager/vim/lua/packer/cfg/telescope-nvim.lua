@@ -3,7 +3,7 @@ local l = tel.load_extension
 
 tel.setup{
   defaults = {
-    layout_strategy = 'flex',
+    layout_strategy = 'vertical',
     layout_config = { height = 0.95 },
   },
   extensions = {

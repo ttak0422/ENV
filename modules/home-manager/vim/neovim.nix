@@ -109,10 +109,6 @@ let
   ];
 
   extraConfig = ''
-    " colorscheme
-    let g:tokyonight_style = 'night'
-    colorscheme tokyonight
-
     " sonictemplate
     let g:sonictemplate_vim_template_dir = [ '${templates}' ]
     ${fileContents ./vim/autocmd.vim}

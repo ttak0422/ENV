@@ -226,8 +226,6 @@ require'packer'.startup(function()
     end,
   }
 
-  use 'folke/tokyonight.nvim'
-
   use {
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
@@ -281,6 +279,11 @@ require'packer'.startup(function()
     config = function()
       require'cfg.zen-mode-nvim'
     end,
+  }
+
+  use {
+    'themercorp/themer.lua',
+    config = [[require'cfg.themer-lua']],
   }
 
   -- {

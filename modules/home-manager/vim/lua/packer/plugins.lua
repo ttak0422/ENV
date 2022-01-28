@@ -8,6 +8,20 @@ require'packer'.startup(function()
   use 'vim-jp/vimdoc-ja'
 
   use {
+    'ojroques/nvim-bufdel',
+    opt = true,
+    cmd = {'BufDel','BufDel!'},
+    config = [[require'cfg.nvim-bufdel']],
+  }
+
+  use {
+    'kyazdani42/nvim-tree.lua',
+    cmd = 'NvimTreeToggle',
+    opt = true,
+    config = [[require'cfg.nvim-tree']],
+  }
+
+  use {
     'nvim-treesitter/nvim-treesitter',
     requires = {
       { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' },
@@ -109,13 +123,13 @@ require'packer'.startup(function()
     'windwp/windline.nvim',
     config = [[ require'wlsample.vscode' ]],
   }
-  -- use {
-  --   'nvim-lualine/lualine.nvim',
-  --   requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-  --   config = function()
-  --     require'cfg.lualine-nvim'
-  --   end,
-  -- }
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = function()
+      require'cfg.lualine-nvim'
+    end,
+  }
 
   use {
     'windwp/nvim-autopairs',
@@ -198,7 +212,7 @@ require'packer'.startup(function()
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     requires = {
-       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       'nvim-telescope/telescope-live-grep-raw.nvim',
     },
     config = function()
@@ -268,9 +282,9 @@ require'packer'.startup(function()
   }
 
   use {
-      'folke/twilight.nvim',
-      opt = true,
-      config = [[ require'cfg.twilight-nvim' ]],
+    'folke/twilight.nvim',
+    opt = true,
+    config = [[ require'cfg.twilight-nvim' ]],
   }
 
   use {
@@ -294,6 +308,7 @@ require'packer'.startup(function()
   --     '<Plug>(choosewin)',
   --     '<Plug>(choosewin-swap)',
   --   },
+  --   opt = true,
   --   setup = function()
   --     vim.api.nvim_set_keymap('n', '<Leader>-', '<Plug>(choosewin)', { silent = true })
   --     vim.api.nvim_set_keymap('n', '<Leader><Leader>-', '<Plug>(choosewin-swap)', { silent = true })

@@ -17,5 +17,8 @@ require'nest'.applyKeymaps {
       { 'b', '<cmd>Telescope buffers<cr>' }, }
     }, }
   },
+  { '<c-w>', {
+    { 'q', '<cmd>BufDel<cr>' },},
+  },
 }
 

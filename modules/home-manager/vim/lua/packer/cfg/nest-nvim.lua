@@ -18,7 +18,8 @@ require'nest'.applyKeymaps {
     }, }
   },
   { '<c-w>', {
-    { 'q', '<cmd>BufDel<cr>' },},
+    { 'q', '<cmd>BufDel<cr>' },
+    { 'Q', '<cmd>BufDel!<cr>' },},
   },
 }
 

@@ -72,12 +72,12 @@ let
     }
 
     # Linter
-    {
-      plugin = ale;
-      config = fileContents ./vim/ale.vim + ''
-        let g:ale_java_javac_executable = "javac -cp ${pkgs.lombok}/share/java/lombok.jar"
-      '';
-    }
+    # {
+    #   plugin = ale;
+    #   config = fileContents ./vim/ale.vim + ''
+    #     let g:ale_java_javac_executable = "javac -cp ${pkgs.lombok}/share/java/lombok.jar"
+    #   '';
+    # }
 
     # スクロールを滑らかに
     {
@@ -94,7 +94,7 @@ let
     }
   ];
   nvimPlugins = with pkgs.vimPlugins; [
-    # Luajit FFI bindings to FZY
+    # Luajit FFI
     external.fzy-lua-native
 
     # スクロールバー
@@ -111,10 +111,11 @@ let
   extraConfig = ''
     " disable default plugin
     let g:did_load_filetypes = 1
+
+    ${fileContents ./vim/util.vim}
+
     " sonictemplate
     let g:sonictemplate_vim_template_dir = [ '${templates}' ]
-    ${fileContents ./vim/autocmd.vim}
-    ${fileContents ./vim/util.vim}
   '';
 in {
   home = {

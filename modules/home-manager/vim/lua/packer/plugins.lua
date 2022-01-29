@@ -1,17 +1,49 @@
 vim.cmd[[packadd packer.nvim]]
 
 require'packer'.startup(function()
-  use{'wbthomason/packer.nvim', opt = true}
-
   use 'nathom/filetype.nvim'
 
-  use 'vim-jp/vimdoc-ja'
+  use {
+    'goolord/alpha-nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = [[require'cfg.alpha-nvim']],
+  }
 
   use {
-    'ojroques/nvim-bufdel',
-    opt = true,
-    cmd = {'BufDel','BufDel!'},
-    config = [[require'cfg.nvim-bufdel']],
+    'themercorp/themer.lua',
+    config = [[require'cfg.themer-lua']],
+  }
+
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = [[require'cfg.lualine-nvim']],
+  }
+
+  use {
+    'akinsho/nvim-bufferline.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = [[require'cfg.bufferline-nvim']],
+  }
+
+  use {
+    'windwp/windline.nvim',
+    config = [[ require'wlsample.vscode' ]],
+  }
+
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = [[require'cfg.gitsigns-nvim']],
+  }
+
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    setup = function ()
+      vim.opt.list = true
+      vim.opt.listchars:append('eol:↴')
+    end,
+    config = [[require'cfg.indent-blanklin-nvim']],
   }
 
   use {
@@ -22,122 +54,45 @@ require'packer'.startup(function()
   }
 
   use {
+    'ojroques/nvim-bufdel',
+    opt = true,
+    cmd = {'BufDel','BufDel!'},
+    config = [[require'cfg.nvim-bufdel']],
+  }
+
+  use {
     'nvim-treesitter/nvim-treesitter',
     requires = {
       { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' },
       { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' },
     },
-    config = function() require'cfg.nvim-treesitter' end,
+    config = [[require'cfg.nvim-treesitter']],
   }
 
   use {
     'romgrk/nvim-treesitter-context',
-    config = function() require'cfg.nvim-treesitter-context' end,
+    wants = 'nvim-treesitter',
+    config = [[require'cfg.nvim-treesitter-context']],
   }
 
   use {
-    'LionC/nest.nvim',
-    config = function ()
-      require'cfg.nest-nvim'
-    end
+    'nvim-telescope/telescope.nvim',
+    cmd = 'Telescope',
+    requires = {
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      { 'nvim-telescope/telescope-live-grep-raw.nvim' },
+      { 'nvim-lua/plenary.nvim' },
+    },
+    config =[[require'cfg.telescope-nvim']]
   }
 
   use {
     'phaazon/hop.nvim',
     branch = 'v1',
+    opt = true,
     cmd = {'HopChar1', 'HopChar2', 'HopLineAC', 'HopLineBC'},
-    config = function() require'cfg.hop-nvim'.setup() end,
+    config = [[require'cfg.hop-nvim'.setup()]],
   }
-
-  use {
-    'danymat/neogen',
-    ft = { 'lua', 'python', 'javascript', 'cpp', 'go', 'java', 'rust', 'csharp' },
-  }
-
-  use {
-    'onsails/lspkind-nvim',
-    config = function() require'cfg.lspkind' end
-  }
-
-  use {
-    'goolord/alpha-nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function () require'cfg.alpha-nvim' end
-  }
-
-  use {
-    'akinsho/nvim-bufferline.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require'cfg.bufferline-nvim'
-    end,
-  }
-
-  use {
-    'sindrets/diffview.nvim',
-    requires = 'nvim-lua/plenary.nvim',
-    cmd = { 'DiffviewOpen', 'DiffviewToggleFiles' },
-    opt = true,
-    config = function()
-      require'cfg.diffview-nvim'
-    end,
-  }
-
-  use {
-    'lewis6991/gitsigns.nvim',
-    requires = 'nvim-lua/plenary.nvim',
-    config = function()
-      require'cfg.gitsigns-nvim'
-    end,
-  }
-
-  use {
-    'lukas-reineke/indent-blankline.nvim',
-    setup = function()
-      vim.opt.list = true
-      vim.opt.listchars:append('eol:↴')
-    end,
-    config = function()
-      require'cfg.indent-blanklin-nvim'
-    end,
-  }
-
-  use {
-    'ray-x/lsp_signature.nvim',
-    config = function()
-      require'cfg.lsp_signature-nvim'
-    end,
-  }
-
-  use {
-    -- maintained fork version
-    'tami5/lspsaga.nvim',
-    opt = true,
-    cmd = 'Lspsaga',
-    config = function()
-      require'cfg.lspsaga-nvim'
-    end,
-  }
-
-  use {
-    'windwp/windline.nvim',
-    config = [[ require'wlsample.vscode' ]],
-  }
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = function()
-      require'cfg.lualine-nvim'
-    end,
-  }
-
-  use {
-    'windwp/nvim-autopairs',
-    config = function()
-      require'cfg.nvim-autopairs'
-    end,
-  }
-
 
   use {
     'hrsh7th/nvim-cmp',
@@ -151,27 +106,58 @@ require'packer'.startup(function()
       { 'hrsh7th/cmp-vsnip', after = { 'nvim-cmp', 'vim-vsnip' } },
     },
     event = { 'InsertEnter', 'CmdlineEnter' },
-    config = function()
-      require'cfg.nvim-cmp'
-    end,
+    config = [[require'cfg.nvim-cmp']],
   }
 
   use {
-    'norcalli/nvim-colorizer.lua',
-    config = function()
-      require 'cfg.nvim-colorizer-lua'
-    end,
+    'windwp/nvim-autopairs',
+    config = [[require'cfg.nvim-autopairs']],
   }
 
-  use 'nvim-lua/plenary.nvim'
+  use {
+    'danymat/neogen',
+    ft = { 'lua', 'python', 'javascript', 'cpp', 'go', 'java', 'rust', 'csharp' },
+  }
+
+  use {
+    'onsails/lspkind-nvim',
+    config = [[require'cfg.lspkind']],
+  }
+
+
+  use {
+    'sindrets/diffview.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    cmd = { 'DiffviewOpen', 'DiffviewToggleFiles' },
+    opt = true,
+    config = [[require'cfg.diffview-nvim']],
+  }
+
+  use {
+    'ray-x/lsp_signature.nvim',
+    config = [[require'cfg.lsp_signature-nvim']],
+  }
+
+  use {
+    -- maintained fork version
+    'tami5/lspsaga.nvim',
+    opt = true,
+    cmd = 'Lspsaga',
+    config = [[require'cfg.lspsaga-nvim']],
+  }
+
+
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = [[require 'cfg.nvim-colorizer-lua']],
+  }
+
 
   use 'tversteeg/registers.nvim'
 
   use {
     'ahmedkhalf/project.nvim',
-    config = function()
-      require'cfg.project-nvim'
-    end,
+    config = [[require'cfg.project-nvim']],
   }
 
   use 'neovim/nvim-lspconfig'
@@ -182,42 +168,22 @@ require'packer'.startup(function()
       'nvim-lspconfig',
       'hrsh7th/cmp-nvim-lsp'
     },
-    config = function()
-      require'cfg.nvim-lsp-installer'
-    end,
+    config = [[require'cfg.nvim-lsp-installer']],
   }
 
   use {
     'sidebar-nvim/sidebar.nvim',
-    config = function()
-      require'cfg.sidebar-nvim'
-    end,
+    config = [[require'cfg.sidebar-nvim']],
   }
 
   use {
     'edluffy/specs.nvim',
-    config = function()
-      require'cfg.specs-nvim'
-    end,
+    config = [[require'cfg.specs-nvim']],
   }
 
   use {
     'luukvbaal/stabilize.nvim',
-    config = function()
-      require'cfg.stabilize-nvim'
-    end
-  }
-
-  use {
-    'nvim-telescope/telescope.nvim',
-    event = 'VimEnter',
-    requires = {
-      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-      'nvim-telescope/telescope-live-grep-raw.nvim',
-    },
-    config = function()
-      require'cfg.telescope-nvim'
-    end,
+    config = [[require'cfg.stabilize-nvim']],
   }
 
   use {
@@ -230,24 +196,18 @@ require'packer'.startup(function()
       'TodoTelescope',
     },
     opt = true,
-    config = function()
-      require'cfg.todo-comments-nvim'
-    end,
+    config = [[require'cfg.todo-comments-nvim']],
   }
 
   use {
     'akinsho/toggleterm.nvim',
-    config = function()
-      require'cfg.toggleterm-nvim'
-    end,
+    config = [[require'cfg.toggleterm-nvim']],
   }
 
   use {
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require('trouble').setup()
-    end
+    config = [[require('trouble').setup()]],
   }
 
   use {
@@ -284,7 +244,7 @@ require'packer'.startup(function()
   use {
     'folke/twilight.nvim',
     opt = true,
-    config = [[ require'cfg.twilight-nvim' ]],
+    config = [[require'cfg.twilight-nvim']],
   }
 
   use {
@@ -292,15 +252,15 @@ require'packer'.startup(function()
     wants = 'twilight.nvim',
     cmd = 'ZenMode',
     opt = true,
-    config = function()
-      require'cfg.zen-mode-nvim'
-    end,
+    config =[[require'cfg.zen-mode-nvim']],
   }
 
   use {
-    'themercorp/themer.lua',
-    config = [[require'cfg.themer-lua']],
+    'LionC/nest.nvim',
+    config = [[require'cfg.nest-nvim']],
   }
+
+  use 'vim-jp/vimdoc-ja'
 
   -- {
   --   't9md/vim-choosewin',

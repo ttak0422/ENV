@@ -4,6 +4,7 @@ require'nvim-treesitter.configs'.setup {
   ignore_install = {},
   highlight = {
     enable = true,
+    ignore_install = { 'c' },
     disable = { 'c' },
     additional_vim_regex_highlighting = false,
   },

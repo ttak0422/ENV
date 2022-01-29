@@ -17,8 +17,9 @@ set cursorcolumn
 set mouse=a
 
 " 行数
-set number         " 表示
-set relativenumber " 相対表示
+set number
+set relativenumber
+set signcolumn=yes
 
 " 短形選択の自由度を上げる
 set virtualedit=block

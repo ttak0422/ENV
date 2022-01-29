@@ -1,9 +1,17 @@
+local term = require'toggleterm.terminal'.Terminal
+local tig = term:new({cmd = 'tig', direction = 'float', hidden = true})
+
+function TigToggle()
+  tig:toggle()
+end
+
 require'nest'.applyKeymaps {
   { '<leader>', {
     { '<leader>', {
       { 's', '<cmd>HopChar2<cr>' },
       { 'z', '<cmd>ZenMode<cr>' },
       { 'b', '<cmd>NvimTreeToggle<cr>' },
+      { 'g', '<cmd>lua TigToggle()<cr>' }
     },},
     { 's', '<cmd>HopChar1<cr>' },
     { 'j', '<cmd>HopLineAC<cr>' },

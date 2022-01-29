@@ -257,6 +257,7 @@ require'packer'.startup(function()
 
   use {
     'LionC/nest.nvim',
+    wants = 'toggleterm',
     config = [[require'cfg.nest-nvim']],
   }
 

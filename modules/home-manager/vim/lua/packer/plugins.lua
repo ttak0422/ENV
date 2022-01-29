@@ -1,6 +1,15 @@
-vim.cmd[[packadd packer.nvim]]
+local packer = nil
 
-require'packer'.startup(function()
+local function init()
+  if not packer then
+    vim.api.nvim_command('packadd packer.nvim')
+    packer = require('packer')
+    packer.init({disable_commands = true})
+  end
+
+  local use = packer.use
+  packer.reset()
+
   use 'nathom/filetype.nvim'
 
   use {
@@ -263,17 +272,27 @@ require'packer'.startup(function()
 
   use 'vim-jp/vimdoc-ja'
 
-  -- {
-  --   't9md/vim-choosewin',
-  --   keys = {
-  --     '<Plug>(choosewin)',
-  --     '<Plug>(choosewin-swap)',
-  --   },
-  --   opt = true,
-  --   setup = function()
-  --     vim.api.nvim_set_keymap('n', '<Leader>-', '<Plug>(choosewin)', { silent = true })
-  --     vim.api.nvim_set_keymap('n', '<Leader><Leader>-', '<Plug>(choosewin-swap)', { silent = true })
-  --   end,
-  -- }
 
-end)
+end
+
+-- {
+--   't9md/vim-choosewin',
+--   keys = {
+--     '<Plug>(choosewin)',
+--     '<Plug>(choosewin-swap)',
+--   },
+--   opt = true,
+--   setup = function()
+--     vim.api.nvim_set_keymap('n', '<Leader>-', '<Plug>(choosewin)', { silent = true })
+--     vim.api.nvim_set_keymap('n', '<Leader><Leader>-', '<Plug>(choosewin-swap)', { silent = true })
+--   end,
+-- }
+
+local plugins = setmetatable({}, {
+  __index = function(_, key)
+    init()
+    return packer[key]
+  end,
+})
+
+return plugins

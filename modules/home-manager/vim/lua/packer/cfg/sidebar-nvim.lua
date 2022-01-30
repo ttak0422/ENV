@@ -1,1 +1,3 @@
-require('sidebar-nvim').setup()
+require('sidebar-nvim').setup {
+  side = 'right',
+}

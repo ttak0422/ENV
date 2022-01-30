@@ -13,6 +13,7 @@ let
     ${luaCode}
     EOF
   '';
+  readLua = path: lua (fileContents path);
   vimPlugins = with pkgs.vimPlugins; [
     # 定番設定
     vim-sensible
@@ -103,9 +104,7 @@ let
     {
       plugin = packer-nvim;
       optional = true;
-      config = lua ''
-        require'plugins'
-      '';
+      config = readLua ./lua/init.lua;
     }
   ];
 
@@ -114,11 +113,11 @@ let
     let g:did_load_filetypes = 1
 
     command! WhatHighlight :call util#syntax_stack()
-    command! PackerInstall packadd packer.nvim | lua require('plugins').install()
-    command! PackerUpdate packadd packer.nvim | lua require('plugins').update()
-    command! PackerSync packadd packer.nvim | lua require('plugins').sync()
-    command! PackerClean packadd packer.nvim | lua require('plugins').clean()
-    command! PackerCompile packadd packer.nvim | lua require('plugins').compile()
+    command! PackerInstall packadd packer.nvim | lua require('packer.plugins').install()
+    command! PackerUpdate packadd packer.nvim | lua require('packer.plugins').update()
+    command! PackerSync packadd packer.nvim | lua require('packer.plugins').sync()
+    command! PackerClean packadd packer.nvim | lua require('packer.plugins').clean()
+    command! PackerCompile packadd packer.nvim | lua require('packer.plugins').compile()
 
     ${fileContents ./vim/util.vim}
 
@@ -129,7 +128,7 @@ in {
   home = {
     packages = with pkgs;
       [ gcc python39Packages.pynvim lombok ] ++ [ tree-sitter templates ];
-    file = { ".config/nvim/lua".source = packerPackage; };
+    file = { ".config/nvim/lua/packer".source = packerPackage; };
   };
   programs.neovim = {
     inherit extraConfig;

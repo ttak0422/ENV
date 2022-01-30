@@ -4,35 +4,43 @@ local function init()
   if not packer then
     vim.api.nvim_command('packadd packer.nvim')
     packer = require('packer')
-    packer.init({disable_commands = true})
+    global = require('packer.cfg.global')
+    packer.init({
+      compile_path = global.compile_path,
+      disable_commands = true,
+    })
   end
 
   local use = packer.use
   packer.reset()
 
   use 'nathom/filetype.nvim'
+  use {
+    'lewis6991/impatient.nvim',
+    config = [[require'packer.cfg.impatient-nvim']],
+  }
 
   use {
     'goolord/alpha-nvim',
     requires = { 'kyazdani42/nvim-web-devicons' },
-    config = [[require'cfg.alpha-nvim']],
+    config = [[require'packer.cfg.alpha-nvim']],
   }
 
   use {
     'themercorp/themer.lua',
-    config = [[require'cfg.themer-lua']],
+    config = [[require'packer.cfg.themer-lua']],
   }
 
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = [[require'cfg.lualine-nvim']],
+    config = [[require'packer.cfg.lualine-nvim']],
   }
 
   use {
     'akinsho/nvim-bufferline.lua',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = [[require'cfg.bufferline-nvim']],
+    config = [[require'packer.cfg.bufferline-nvim']],
   }
 
   use {
@@ -43,7 +51,7 @@ local function init()
   use {
     'lewis6991/gitsigns.nvim',
     requires = 'nvim-lua/plenary.nvim',
-    config = [[require'cfg.gitsigns-nvim']],
+    config = [[require'packer.cfg.gitsigns-nvim']],
   }
 
   use {
@@ -52,21 +60,21 @@ local function init()
       vim.opt.list = true
       vim.opt.listchars:append('eol:↴')
     end,
-    config = [[require'cfg.indent-blanklin-nvim']],
+    config = [[require'packer.cfg.indent-blanklin-nvim']],
   }
 
   use {
     'kyazdani42/nvim-tree.lua',
     cmd = 'NvimTreeToggle',
     opt = true,
-    config = [[require'cfg.nvim-tree']],
+    config = [[require'packer.cfg.nvim-tree']],
   }
 
   use {
     'ojroques/nvim-bufdel',
     opt = true,
     cmd = {'BufDel','BufDel!'},
-    config = [[require'cfg.nvim-bufdel']],
+    config = [[require'packer.cfg.nvim-bufdel']],
   }
 
   use {
@@ -75,13 +83,13 @@ local function init()
       { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' },
       { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' },
     },
-    config = [[require'cfg.nvim-treesitter']],
+    config = [[require'packer.cfg.nvim-treesitter']],
   }
 
   use {
     'romgrk/nvim-treesitter-context',
     wants = 'nvim-treesitter',
-    config = [[require'cfg.nvim-treesitter-context']],
+    config = [[require'packer.cfg.nvim-treesitter-context']],
   }
 
   use {
@@ -92,7 +100,7 @@ local function init()
       { 'nvim-telescope/telescope-live-grep-raw.nvim' },
       { 'nvim-lua/plenary.nvim' },
     },
-    config =[[require'cfg.telescope-nvim']]
+    config =[[require'packer.cfg.telescope-nvim']]
   }
 
   use {
@@ -100,7 +108,7 @@ local function init()
     branch = 'v1',
     opt = true,
     cmd = {'HopChar1', 'HopChar2', 'HopLineAC', 'HopLineBC'},
-    config = [[require'cfg.hop-nvim'.setup()]],
+    config = [[require'packer.cfg.hop-nvim'.setup()]],
   }
 
   use {
@@ -115,12 +123,12 @@ local function init()
       { 'hrsh7th/cmp-vsnip', after = { 'nvim-cmp', 'vim-vsnip' } },
     },
     event = { 'InsertEnter', 'CmdlineEnter' },
-    config = [[require'cfg.nvim-cmp']],
+    config = [[require'packer.cfg.nvim-cmp']],
   }
 
   use {
     'windwp/nvim-autopairs',
-    config = [[require'cfg.nvim-autopairs']],
+    config = [[require'packer.cfg.nvim-autopairs']],
   }
 
   use {
@@ -130,7 +138,7 @@ local function init()
 
   use {
     'onsails/lspkind-nvim',
-    config = [[require'cfg.lspkind']],
+    config = [[require'packer.cfg.lspkind']],
   }
 
 
@@ -139,12 +147,12 @@ local function init()
     requires = 'nvim-lua/plenary.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewToggleFiles' },
     opt = true,
-    config = [[require'cfg.diffview-nvim']],
+    config = [[require'packer.cfg.diffview-nvim']],
   }
 
   use {
     'ray-x/lsp_signature.nvim',
-    config = [[require'cfg.lsp_signature-nvim']],
+    config = [[require'packer.cfg.lsp_signature-nvim']],
   }
 
   use {
@@ -152,13 +160,13 @@ local function init()
     'tami5/lspsaga.nvim',
     opt = true,
     cmd = 'Lspsaga',
-    config = [[require'cfg.lspsaga-nvim']],
+    config = [[require'packer.cfg.lspsaga-nvim']],
   }
 
 
   use {
     'norcalli/nvim-colorizer.lua',
-    config = [[require 'cfg.nvim-colorizer-lua']],
+    config = [[require 'packer.cfg.nvim-colorizer-lua']],
   }
 
 
@@ -166,7 +174,7 @@ local function init()
 
   use {
     'ahmedkhalf/project.nvim',
-    config = [[require'cfg.project-nvim']],
+    config = [[require'packer.cfg.project-nvim']],
   }
 
   use 'neovim/nvim-lspconfig'
@@ -177,22 +185,22 @@ local function init()
       'nvim-lspconfig',
       'hrsh7th/cmp-nvim-lsp'
     },
-    config = [[require'cfg.nvim-lsp-installer']],
+    config = [[require'packer.cfg.nvim-lsp-installer']],
   }
 
   use {
     'sidebar-nvim/sidebar.nvim',
-    config = [[require'cfg.sidebar-nvim']],
+    config = [[require'packer.cfg.sidebar-nvim']],
   }
 
   use {
     'edluffy/specs.nvim',
-    config = [[require'cfg.specs-nvim']],
+    config = [[require'packer.cfg.specs-nvim']],
   }
 
   use {
     'luukvbaal/stabilize.nvim',
-    config = [[require'cfg.stabilize-nvim']],
+    config = [[require'packer.cfg.stabilize-nvim']],
   }
 
   use {
@@ -205,12 +213,12 @@ local function init()
       'TodoTelescope',
     },
     opt = true,
-    config = [[require'cfg.todo-comments-nvim']],
+    config = [[require'packer.cfg.todo-comments-nvim']],
   }
 
   use {
     'akinsho/toggleterm.nvim',
-    config = [[require'cfg.toggleterm-nvim']],
+    config = [[require'packer.cfg.toggleterm-nvim']],
   }
 
   use {
@@ -253,7 +261,7 @@ local function init()
   use {
     'folke/twilight.nvim',
     opt = true,
-    config = [[require'cfg.twilight-nvim']],
+    config = [[require'packer.cfg.twilight-nvim']],
   }
 
   use {
@@ -261,13 +269,13 @@ local function init()
     wants = 'twilight.nvim',
     cmd = 'ZenMode',
     opt = true,
-    config =[[require'cfg.zen-mode-nvim']],
+    config =[[require'packer.cfg.zen-mode-nvim']],
   }
 
   use {
     'LionC/nest.nvim',
     wants = 'toggleterm',
-    config = [[require'cfg.nest-nvim']],
+    config = [[require'packer.cfg.nest-nvim']],
   }
 
   use 'vim-jp/vimdoc-ja'

@@ -7,8 +7,6 @@ nnoremap <silent> <ESC><ESC> :nohl<CR>
 
 set helplang=ja
 
-set termguicolors
-
 " カーソル可視化
 set cursorline
 set cursorcolumn

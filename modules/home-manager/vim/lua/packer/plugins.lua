@@ -272,10 +272,16 @@ local function init()
     config =[[require'packer.cfg.zen-mode-nvim']],
   }
 
+  -- use {
+  --   'LionC/nest.nvim',
+  --   wants = 'toggleterm',
+  --   config = [[require'packer.cfg.nest-nvim']],
+  -- }
+
   use {
-    'LionC/nest.nvim',
+    'folke/which-key.nvim',
     wants = 'toggleterm',
-    config = [[require'packer.cfg.nest-nvim']],
+    config = [[require'packer.cfg.which-key-nvim']],
   }
 
   use 'vim-jp/vimdoc-ja'

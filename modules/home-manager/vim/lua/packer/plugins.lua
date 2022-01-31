@@ -8,6 +8,8 @@ local function init()
     packer.init({
       compile_path = global.compile_path,
       disable_commands = true,
+      auto_clean = true,
+      compile_on_sync = true,
     })
   end
 
@@ -15,6 +17,39 @@ local function init()
   packer.reset()
 
   use 'nathom/filetype.nvim'
+  use 'tpope/vim-sensible'
+
+  use {
+    'LnL7/vim-nix',
+    ft = 'nix',
+  }
+
+  use 'ntpeters/vim-better-whitespace'
+
+  use 'editorconfig/editorconfig-vim'
+
+  use 'kevinhwang91/nvim-hlslens'
+
+  use 'kevinhwang91/nvim-bqf'
+
+  use {
+    'troydm/zoomwintab.vim',
+    opt = true,
+    cmd = 'ZoomWinTabToggle',
+    setup = function ()
+      vim.g.zoomwintab_remap = 0
+    end,
+  }
+
+  use 'simeji/winresizer'
+
+  use {
+    'unblevable/quick-scope',
+    setup = function ()
+      vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
+    end,
+  }
+
   use {
     'lewis6991/impatient.nvim',
     config = [[require'packer.cfg.impatient-nvim']],
@@ -286,6 +321,7 @@ local function init()
 
   use 'vim-jp/vimdoc-ja'
 
+  use 'yuttie/comfortable-motion.vim'
 
 end
 

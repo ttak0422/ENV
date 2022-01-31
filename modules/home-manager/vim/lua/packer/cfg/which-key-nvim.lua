@@ -27,6 +27,7 @@ wk.register({
     ['<c-w>'] = {
       q = { '<cmd>BufDel<cr>', 'close buffer' },
       Q = { '<cmd>BufDel!<cr>', 'close buffer force' },
+      z = { '<cmd>ZoomWinTabToggle<cr>', 'zoom pane' },
     },
     s = { '<cmd>HopChar1<cr>', 'hop to char' },
     S = { '<cmd>HopChar2<cr>', 'hop to chars' },

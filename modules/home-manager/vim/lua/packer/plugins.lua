@@ -304,7 +304,7 @@ local function init()
     wants = 'twilight.nvim',
     cmd = 'ZenMode',
     opt = true,
-    config =[[require'packer.cfg.zen-mode-nvim']],
+    config = [[require'packer.cfg.zen-mode-nvim']],
   }
 
   -- use {
@@ -312,6 +312,12 @@ local function init()
   --   wants = 'toggleterm',
   --   config = [[require'packer.cfg.nest-nvim']],
   -- }
+
+  use {
+    'sunjon/Shade.nvim',
+    event = 'WinNew',
+    config = [[require'packer.cfg.shade-nvim']],
+  }
 
   use {
     'folke/which-key.nvim',

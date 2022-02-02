@@ -307,16 +307,9 @@ local function init()
     config = [[require'packer.cfg.zen-mode-nvim']],
   }
 
-  -- use {
-  --   'LionC/nest.nvim',
-  --   wants = 'toggleterm',
-  --   config = [[require'packer.cfg.nest-nvim']],
-  -- }
-
   use {
-    'sunjon/Shade.nvim',
-    event = 'WinNew',
-    config = [[require'packer.cfg.shade-nvim']],
+    'rmagatti/goto-preview',
+    config = [[require'packer.cfg.goto-preview']],
   }
 
   use {

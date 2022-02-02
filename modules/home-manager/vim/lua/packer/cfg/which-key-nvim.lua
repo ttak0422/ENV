@@ -24,11 +24,6 @@ wk.register({
       p = { '<cmd>Telescope find_files<cr>', 'find files' },
       b = { '<cmd>Telescope buffers<cr>', 'find buffers' },
     },
-    ['<c-w>'] = {
-      q = { '<cmd>BufDel<cr>', 'close buffer' },
-      Q = { '<cmd>BufDel!<cr>', 'close buffer force' },
-      z = { '<cmd>ZoomWinTabToggle<cr>', 'zoom pane' },
-    },
     s = { '<cmd>HopChar1<cr>', 'hop to char' },
     S = { '<cmd>HopChar2<cr>', 'hop to chars' },
     j = { '<cmd>HopLineAC<cr>', 'hop to under line' },
@@ -36,4 +31,19 @@ wk.register({
     -- nc = { ':lua require("neogen").generate({ type = "class" })<cr>' }, wip
     ca = { '<cmd>Lspsaga code_action<cr>', 'code action' },
     rn = { '<cmd>Lspsaga rename<cr>', 'rename' },
-  }})
+  },
+  ['<c-w>'] = {
+    q = { '<cmd>BufDel<cr>', 'close buffer' },
+    Q = { '<cmd>BufDel!<cr>', 'close buffer force' },
+    z = { '<cmd>ZoomWinTabToggle<cr>', 'zoom pane' },
+  },
+  ['g'] = {
+    name = 'goto',
+    ['p'] = {
+      d = { '<cmd>lua require("goto-preview").goto_preview_definition()<CR>', 'preview definition' },
+      i = { '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>', 'preview implementation' },
+      r = { '<cmd>lua require("goto-preview").goto_preview_references()<CR>', 'preview references' },
+    },
+    P = { '<cmd>lua require("goto-preview").close_all_win()<CR>', 'close all preview' },
+  },
+})

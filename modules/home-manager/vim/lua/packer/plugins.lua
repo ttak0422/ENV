@@ -24,8 +24,6 @@ local function init()
     ft = 'nix',
   }
 
-  use 'ntpeters/vim-better-whitespace'
-
   use 'editorconfig/editorconfig-vim'
 
   use 'kevinhwang91/nvim-hlslens'
@@ -294,6 +292,11 @@ local function init()
   }
 
   use {
+    'lewis6991/spaceless.nvim',
+    config = [[require'spaceless'.setup()]],
+  }
+
+  use {
     'folke/twilight.nvim',
     opt = true,
     config = [[require'packer.cfg.twilight-nvim']],
@@ -320,7 +323,10 @@ local function init()
 
   use 'vim-jp/vimdoc-ja'
 
-  use 'yuttie/comfortable-motion.vim'
+  use {
+    'karb94/neoscroll.nvim',
+    config = [[require'packer.cfg.neoscroll-nvim']],
+  }
 
 end
 

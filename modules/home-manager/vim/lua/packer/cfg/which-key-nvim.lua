@@ -32,11 +32,17 @@ wk.register({
     ca = { '<cmd>Lspsaga code_action<cr>', 'code action' },
     rn = { '<cmd>Lspsaga rename<cr>', 'rename' },
   },
+})
+
+wk.register({
   ['<c-w>'] = {
-    q = { '<cmd>BufDel<cr>', 'close buffer' },
     Q = { '<cmd>BufDel!<cr>', 'close buffer force' },
+    q = { '<cmd>BufDel<cr>', 'close buffer' },
     z = { '<cmd>ZoomWinTabToggle<cr>', 'zoom pane' },
   },
+})
+
+wk.register({
   ['g'] = {
     name = 'goto',
     ['p'] = {

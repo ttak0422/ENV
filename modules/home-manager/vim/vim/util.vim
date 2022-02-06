@@ -16,7 +16,6 @@ set mouse=a
 
 " 行数
 set number
-set relativenumber
 set signcolumn=yes
 
 " 短形選択の自由度を上げる

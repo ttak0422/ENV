@@ -228,6 +228,8 @@ local function init()
 
   use {
     'edluffy/specs.nvim',
+    opt = true,
+    event = 'CursorMoved',
     config = [[require'packer.cfg.specs-nvim']],
   }
 
@@ -325,6 +327,8 @@ local function init()
 
   use {
     'karb94/neoscroll.nvim',
+    opt = true,
+    event = 'WinScrolled',
     config = [[require'packer.cfg.neoscroll-nvim']],
   }
 

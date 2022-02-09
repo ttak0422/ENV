@@ -18,6 +18,9 @@ set mouse=a
 set number
 set signcolumn=yes
 
+" 折り返しを行わないように
+set nowrap
+
 " 短形選択の自由度を上げる
 set virtualedit=block
 

@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }:
 let
   configPath = ".config/alacritty/alacritty.yml";
-  fontSize = 16;
+  fontSize = 14;
   padding = fontSize / 2;
-  fontFamily = "Hack Nerd Font Mono";
-  backgroundOpacity = 1.0;
+  fontFamily = "JetBrainsMonoExtraBold Nerd Font Mono";
+  backgroundOpacity = 0.9;
   config = ''
     # ayu-mirage (neovim-ayuに寄せる)
     colors:
@@ -42,7 +42,8 @@ let
       padding:
         x: ${toString padding}
         y: ${toString padding}
-    background_opacity: ${toString backgroundOpacity}
+      opacity: ${toString backgroundOpacity}
+      dynamic_padding: false
     key_bindings:
       - { key: Minus, mods: Command|Shift, action: IncreaseFontSize } # JISキーボードで文字サイズを変更するため
       - { key: Backslash, mods: Alt, chars: "\x5c" } # JISキーボードのMacでバックスラッシュを入力するため
@@ -50,12 +51,9 @@ let
       size: ${toString fontSize}
       normal:
         family: ${fontFamily}
-        style: Regular
-      bold:
-        family: ${fontFamily}
-        style: Bold
+        style: Extra Bold
       italic:
         family: ${fontFamily}
-        style: Italic
+        style: Extra Bold Italic
   '';
 in { home.file."${configPath}".text = config; }

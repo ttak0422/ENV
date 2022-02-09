@@ -65,12 +65,6 @@ local function init()
   }
 
   use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = [[require'packer.cfg.lualine-nvim']],
-  }
-
-  use {
     'akinsho/nvim-bufferline.lua',
     requires = 'kyazdani42/nvim-web-devicons',
     config = [[require'packer.cfg.bufferline-nvim']],

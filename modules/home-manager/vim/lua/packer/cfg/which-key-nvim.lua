@@ -46,10 +46,12 @@ wk.register({
   ['g'] = {
     name = 'goto',
     ['p'] = {
+      name = 'preview',
       d = { '<cmd>lua require("goto-preview").goto_preview_definition()<CR>', 'preview definition' },
       i = { '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>', 'preview implementation' },
       r = { '<cmd>lua require("goto-preview").goto_preview_references()<CR>', 'preview references' },
     },
     P = { '<cmd>lua require("goto-preview").close_all_win()<CR>', 'close all preview' },
+    b = { '<cmd>BufferLinePick<CR>', 'pick buffer' },
   },
 })

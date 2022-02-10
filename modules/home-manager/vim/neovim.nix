@@ -26,9 +26,6 @@ let
     # Luajit FFI
     external.fzy-lua-native
 
-    # スクロールバー
-    nvim-scrollview
-
     {
       plugin = packer-nvim;
       optional = true;

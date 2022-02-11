@@ -85,6 +85,33 @@ let
     urlview
   ];
 
+  statusConfig = ''
+    set-option -g status-interval ${toString statusInterval}
+
+    # width
+    set -g status-left-length 40
+    set -g status-right-length 80
+
+    # color
+    set -g status-style fg=${colors.termFg}
+    set -g message-style fg=${colors.accent},reverse,bg=default
+
+    # status-left
+    # set -g status-left " #[fg=${colors.statusLeft}]${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol},}"
+    set -g status-left " ${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol},}"
+
+    # status-center
+    set-option -g status-justify "centre"
+    set-window-option -g window-status-format " #W "
+    # set-window-option -g window-status-current-format "#{?client_prefix,#[fg=${colors.accent}],}${lBracketSimbol}#[reverse] #W #[default]#{?client_prefix,#[fg=${colors.accent}],}${rBracketSimbol}"
+    set-window-option -g window-status-current-format "#{?client_prefix,#[fg=${one.yellow}],#[fg=${one.blue}]}#[bold] #W #[default]"
+
+    # status-right
+    # set -g status-right "#[fg=${colors.statusRight}] ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA) "
+    set -g status-right " ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA) "
+
+    set -g status-position top
+  '';
   # tmux.conf
   extraConfig = ''
     set-option -ga terminal-overrides ",screen-256color:Tc"
@@ -116,6 +143,11 @@ let
 
     # run
     run-shell "${scripts.TMUX_UPDATE_BORDER}/bin/TMUX_UPDATE_BORDER #{window_zoomed_flag}";
+
+    ##########
+    # status #
+    ##########
+    set -g status off
 
     ############
     # sesssion #
@@ -204,36 +236,6 @@ let
     set -g pane-border-style ""
     set -g pane-border-format "#{?pane_active,${lBracketSimbol}#[reverse]${focusPane}#[default]${rBracketSimbol},}"
     set -g pane-border-status off
-
-    ##########
-    # status #
-    ##########
-
-    set-option -g status-interval ${toString statusInterval}
-
-    # width
-    set -g status-left-length 40
-    set -g status-right-length 80
-
-    # color
-    set -g status-style fg=${colors.termFg}
-    set -g message-style fg=${colors.accent},reverse,bg=default
-
-    # status-left
-    # set -g status-left " #[fg=${colors.statusLeft}]${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol},}"
-    set -g status-left " ${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol},}"
-
-    # status-center
-    set-option -g status-justify "centre"
-    set-window-option -g window-status-format " #W "
-    # set-window-option -g window-status-current-format "#{?client_prefix,#[fg=${colors.accent}],}${lBracketSimbol}#[reverse] #W #[default]#{?client_prefix,#[fg=${colors.accent}],}${rBracketSimbol}"
-    set-window-option -g window-status-current-format "#{?client_prefix,#[fg=${one.yellow}],#[fg=${one.blue}]}#[bold] #W #[default]"
-
-    # status-right
-    # set -g status-right "#[fg=${colors.statusRight}] ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA) "
-    set -g status-right " ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA) "
-
-    set -g status-position top
 
     # resurrect
     set -g @resurrect-strategy-nvim 'session'

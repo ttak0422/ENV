@@ -81,7 +81,6 @@ local function init()
 
   use {
     'windwp/windline.nvim',
-    opt = true,
     config = [[ require'wlsample.vscode' ]],
   }
 

@@ -233,6 +233,8 @@ let
     # set -g status-right "#[fg=${colors.statusRight}] ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA) "
     set -g status-right " ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA) "
 
+    set -g status-position top
+
     # resurrect
     set -g @resurrect-strategy-nvim 'session'
     # continuum

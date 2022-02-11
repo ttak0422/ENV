@@ -16,33 +16,27 @@ let
   readLua = path: lua (fileContents path);
   vimPlugins = with pkgs.vimPlugins;
     [
-      # wildmenu
+      # # wildmenu
+      # {
+      #   plugin = wilder-nvim;
+      #   config = fileContents ./vim/wilder.vim;
+      # }
+    ];
+  nvimPlugins = with pkgs.vimPlugins;
+    [
+      # # Luajit FFI
+      # external.fzy-lua-native
+
       {
-        plugin = wilder-nvim;
-        config = fileContents ./vim/wilder.vim;
+        plugin = packer-nvim;
+        optional = true;
+        config = readLua ./lua/init.lua;
       }
     ];
-  nvimPlugins = with pkgs.vimPlugins; [
-    # Luajit FFI
-    external.fzy-lua-native
-
-    {
-      plugin = packer-nvim;
-      optional = true;
-      config = readLua ./lua/init.lua;
-    }
-  ];
 
   extraConfig = ''
     " disable default plugin
     let g:did_load_filetypes = 1
-
-    command! WhatHighlight :call util#syntax_stack()
-    command! PackerInstall packadd packer.nvim | lua require('packer.plugins').install()
-    command! PackerUpdate packadd packer.nvim | lua require('packer.plugins').update()
-    command! PackerSync packadd packer.nvim | lua require('packer.plugins').sync()
-    command! PackerClean packadd packer.nvim | lua require('packer.plugins').clean()
-    command! PackerCompile packadd packer.nvim | lua require('packer.plugins').compile()
 
     ${fileContents ./vim/util.vim}
 

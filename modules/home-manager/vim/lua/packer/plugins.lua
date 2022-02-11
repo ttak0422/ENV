@@ -26,9 +26,16 @@ local function init()
 
   use 'editorconfig/editorconfig-vim'
 
-  use 'kevinhwang91/nvim-hlslens'
+  use {
+    'kevinhwang91/nvim-hlslens',
+    opt = true,
+    event = 'CmdlineEnter',
+  }
 
-  use 'kevinhwang91/nvim-bqf'
+  use {
+    'kevinhwang91/nvim-bqf',
+    ft = 'qf',
+  }
 
   use {
     'troydm/zoomwintab.vim',
@@ -43,6 +50,8 @@ local function init()
 
   use {
     'unblevable/quick-scope',
+    opt = true,
+    event = 'CursorMoved',
     setup = function ()
       vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
     end,
@@ -72,6 +81,7 @@ local function init()
 
   use {
     'windwp/windline.nvim',
+    opt = true,
     config = [[ require'wlsample.vscode' ]],
   }
 
@@ -135,7 +145,8 @@ local function init()
     branch = 'v1',
     opt = true,
     cmd = {'HopChar1', 'HopChar2', 'HopLineAC', 'HopLineBC'},
-    config = [[require'packer.cfg.hop-nvim'.setup()]],
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    config = [[require'packer.cfg.hop-nvim']],
   }
 
   use {
@@ -155,6 +166,8 @@ local function init()
 
   use {
     'windwp/nvim-autopairs',
+    opt = true,
+    event = { 'CursorMoved', 'InsertEnter' },
     config = [[require'packer.cfg.nvim-autopairs']],
   }
 
@@ -196,7 +209,6 @@ local function init()
     config = [[require 'packer.cfg.nvim-colorizer-lua']],
   }
 
-
   use 'tversteeg/registers.nvim'
 
   use {
@@ -217,6 +229,7 @@ local function init()
 
   use {
     'sidebar-nvim/sidebar.nvim',
+    opt = true,
     config = [[require'packer.cfg.sidebar-nvim']],
   }
 
@@ -252,8 +265,17 @@ local function init()
 
   use {
     'folke/trouble.nvim',
+    opt = true,
+    cmd = 'TroubleToggle',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = [[require('trouble').setup()]],
+    config = [[require'packer.cfg.trouble-nvim']],
+  }
+
+  use {
+    'gelguy/wilder.nvim',
+    opt = true,
+    event = 'CmdlineEnter',
+    requires =  { 'romgrk/fzy-lua-native', after = 'wilder.nvim' },
   }
 
   use {
@@ -284,11 +306,14 @@ local function init()
 
   use {
     'hrsh7th/vim-vsnip' ,
-    event = { 'InsertEnter', 'CmdlineEnter' },
+    opt = true,
+    event = 'InsertEnter',
   }
 
   use {
     'lewis6991/spaceless.nvim',
+    opt = true,
+    event = 'InsertEnter',
     config = [[require'spaceless'.setup()]],
   }
 
@@ -356,5 +381,17 @@ local plugins = setmetatable({}, {
     return packer[key]
   end,
 })
+
+function plugins.load()
+    local present, _ = pcall(require, 'packer_compiled')
+    if not present then
+      assert('Run PackerCompile')
+    end
+    vim.cmd([[command! PackerInstall lua require('packer.plugins').install()]])
+    vim.cmd([[command! PackerUpdate lua require('packer.plugins').update()]])
+    vim.cmd([[command! PackerSync lua require('packer.plugins').sync()]])
+    vim.cmd([[command! PackerClean lua require('packer.plugins').clean()]])
+    vim.cmd([[command! PackerCompile lua require('packer.plugins').compile()]])
+end
 
 return plugins

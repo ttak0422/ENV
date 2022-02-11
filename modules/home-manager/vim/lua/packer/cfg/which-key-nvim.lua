@@ -18,6 +18,7 @@ wk.register({
       w = { '<cmd>WhichKey<cr>', 'Toggle WhichKey' },
       s = { '<cmd>SidebarNvimToggle<cr>', 'Toggle Sidebar Toggle' },
       d = { '<cmd>TroubleToggle<cr>', 'Toggle Diagnostics' },
+      m = { '<cmd>Glow<cr>', 'Toggle Markdown Preview' },
     },
     ['f'] = {
       name = 'find',

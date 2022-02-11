@@ -17,6 +17,7 @@ wk.register({
       g = { '<cmd>lua TigToggle()<cr>', 'Toggle Tig' },
       w = { '<cmd>WhichKey<cr>', 'Toggle WhichKey' },
       s = { '<cmd>SidebarNvimToggle<cr>', 'Toggle Sidebar Toggle' },
+      d = { '<cmd>TroubleToggle<cr>', 'Toggle Diagnostics' },
     },
     ['f'] = {
       name = 'find',

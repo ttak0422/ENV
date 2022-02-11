@@ -52,7 +52,7 @@ let
 in {
   home = {
     packages = with pkgs;
-      [ gcc python39Packages.pynvim lombok ] ++ [ tree-sitter templates ];
+      [ gcc python39Packages.pynvim lombok glow ] ++ [ tree-sitter templates ];
     file = { ".config/nvim/lua/packer".source = packerPackage; };
   };
   programs.neovim = {

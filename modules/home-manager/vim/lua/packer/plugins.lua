@@ -307,6 +307,15 @@ local function init()
   }
 
   use {
+    'ellisonleao/glow.nvim',
+    opt = true,
+    cmd = 'Glow',
+    setup = function ()
+      vim.g.glow_border = 'rounded'
+    end,
+  }
+
+  use {
     'rmagatti/goto-preview',
     config = [[require'packer.cfg.goto-preview']],
   }

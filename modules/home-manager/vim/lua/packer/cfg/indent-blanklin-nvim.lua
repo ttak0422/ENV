@@ -5,6 +5,6 @@ require('indent_blankline').setup {
   space_char_blankline = ' ',
   use_treesitter = true,
   show_current_context = true,
-  filetype_exclude = { 'alpha' , 'lspinfo', 'packer', 'checkhealth', 'help', ''},
+  filetype_exclude = { 'alpha' , 'lspinfo', 'packer', 'checkhealth', 'help', 'glowpreview', ''},
 }
 

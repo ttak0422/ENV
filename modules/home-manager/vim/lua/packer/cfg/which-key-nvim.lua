@@ -30,6 +30,8 @@ wk.register({
     S = { '<cmd>HopChar2<cr>', 'hop to chars' },
     j = { '<cmd>HopLineAC<cr>', 'hop to under line' },
     k = { '<cmd>HopLineBC<cr>', 'hop to upper line' },
+    Q = { '<cmd>BufDel!<cr>', 'close buffer force' },
+    q = { '<cmd>BufDel<cr>', 'close buffer' },
     -- nc = { ':lua require("neogen").generate({ type = "class" })<cr>' }, wip
     ca = { '<cmd>Lspsaga code_action<cr>', 'code action' },
     rn = { '<cmd>Lspsaga rename<cr>', 'rename' },
@@ -38,8 +40,6 @@ wk.register({
 
 wk.register({
   ['<c-w>'] = {
-    Q = { '<cmd>BufDel!<cr>', 'close buffer force' },
-    q = { '<cmd>BufDel<cr>', 'close buffer' },
     z = { '<cmd>ZoomWinTabToggle<cr>', 'zoom pane' },
   },
 })

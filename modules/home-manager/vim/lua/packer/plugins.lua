@@ -151,11 +151,11 @@ local function init()
 
   use {
     'phaazon/hop.nvim',
-    branch = 'v1',
     opt = true,
-    cmd = {'HopChar1', 'HopChar2', 'HopLineAC', 'HopLineBC'},
-    event = { 'InsertEnter', 'CmdlineEnter' },
-    config = [[require'packer.cfg.hop-nvim']],
+    cmd = {
+
+      'HopChar1', 'HopChar2', 'HopLineAC', 'HopLineBC'},
+      config = [[require'packer.cfg.hop-nvim']],
   }
 
   use {
@@ -371,19 +371,6 @@ local function init()
 
 end
 
--- {
---   't9md/vim-choosewin',
---   keys = {
---     '<Plug>(choosewin)',
---     '<Plug>(choosewin-swap)',
---   },
---   opt = true,
---   setup = function()
---     vim.api.nvim_set_keymap('n', '<Leader>-', '<Plug>(choosewin)', { silent = true })
---     vim.api.nvim_set_keymap('n', '<Leader><Leader>-', '<Plug>(choosewin-swap)', { silent = true })
---   end,
--- }
-
 local plugins = setmetatable({}, {
   __index = function(_, key)
     init()
@@ -392,15 +379,15 @@ local plugins = setmetatable({}, {
 })
 
 function plugins.load()
-    local present, _ = pcall(require, 'packer_compiled')
-    if not present then
-      assert('Run PackerCompile')
-    end
-    vim.cmd([[command! PackerInstall lua require('packer.plugins').install()]])
-    vim.cmd([[command! PackerUpdate lua require('packer.plugins').update()]])
-    vim.cmd([[command! PackerSync lua require('packer.plugins').sync()]])
-    vim.cmd([[command! PackerClean lua require('packer.plugins').clean()]])
-    vim.cmd([[command! PackerCompile lua require('packer.plugins').compile()]])
+  local present, _ = pcall(require, 'packer_compiled')
+  if not present then
+    assert('Run PackerCompile')
+  end
+  vim.cmd([[command! PackerInstall lua require('packer.plugins').install()]])
+  vim.cmd([[command! PackerUpdate lua require('packer.plugins').update()]])
+  vim.cmd([[command! PackerSync lua require('packer.plugins').sync()]])
+  vim.cmd([[command! PackerClean lua require('packer.plugins').clean()]])
+  vim.cmd([[command! PackerCompile lua require('packer.plugins').compile()]])
 end
 
 return plugins

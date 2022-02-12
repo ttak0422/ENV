@@ -4,9 +4,7 @@ local function init()
   if not packer then
     vim.api.nvim_command('packadd packer.nvim')
     packer = require('packer')
-    local global = require('packer.cfg.global')
     packer.init({
-      compile_path = global.compile_path,
       disable_commands = true,
       auto_clean = true,
       compile_on_sync = true,

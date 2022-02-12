@@ -2,8 +2,7 @@ local global = {}
 
 function global:init()
   self.vim_path = vim.fn.stdpath('config')
-  self.compile_name = 'packer_compiled'
-  self.compile_path = self.vim_path .. '/lua/' .. self.compile_name .. '.lua'
+  self.data_dir = vim.fn.stdpath('data') .. '/site/'
 end
 
 global:init()

@@ -74,6 +74,10 @@ local function init()
   }
 
   use {
+    'ulwlu/elly.vim',
+  }
+
+  use {
     'akinsho/nvim-bufferline.lua',
     requires = 'kyazdani42/nvim-web-devicons',
     config = [[require'packer.cfg.bufferline-nvim']],
@@ -81,7 +85,13 @@ local function init()
 
   use {
     'windwp/windline.nvim',
+    opt = true,
     config = [[ require'wlsample.vscode' ]],
+  }
+
+  use {
+    'nvim-lualine/lualine.nvim',
+    config = [[require'packer.cfg.lualine-nvim']],
   }
 
   use {

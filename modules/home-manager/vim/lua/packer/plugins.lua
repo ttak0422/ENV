@@ -353,6 +353,11 @@ local function init()
   }
 
   use {
+    'max397574/better-escape.nvim',
+    config = [[require'packer.cfg.better-escape-nvim']],
+  }
+
+  use {
     'folke/which-key.nvim',
     wants = 'toggleterm',
     config = [[require'packer.cfg.which-key-nvim']],

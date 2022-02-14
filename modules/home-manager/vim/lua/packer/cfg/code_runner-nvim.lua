@@ -3,8 +3,8 @@ require('code_runner').setup {
    size = 10,
   },
   filetype = {
-    c = 'cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt',
-    cpp = 'cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt',
+    c = 'cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir/$fileNameWithoutExt',
+    cpp = 'cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir/$fileNameWithoutExt',
     go = 'go run',
     java = 'cd $dir && javac $fileName && java $fileNameWithoutExt',
     javascript = 'node',

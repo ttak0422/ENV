@@ -366,6 +366,17 @@ local function init()
   use 'vim-jp/vimdoc-ja'
 
   use {
+    'CRAG666/code_runner.nvim',
+    opt = true,
+    cmd = {
+      'RunFile',
+      'RunProject',
+    },
+    requires = 'nvim-lua/plenary.nvim',
+    config = [[require'packer.cfg.code_runner-nvim']],
+  }
+
+  use {
     'karb94/neoscroll.nvim',
     opt = true,
     event = 'WinScrolled',

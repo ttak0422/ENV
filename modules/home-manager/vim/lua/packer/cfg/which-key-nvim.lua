@@ -26,6 +26,11 @@ wk.register({
       p = { '<cmd>Telescope find_files<cr>', 'find files' },
       b = { '<cmd>Telescope buffers<cr>', 'find buffers' },
     },
+    ['r'] = {
+      name = 'run',
+      f = { '<cmd>RunFile<cr>', 'run file' },
+      p = { '<cmd>RunProject<cr>', 'run project' },
+    },
     s = { '<cmd>HopChar1<cr>', 'hop to char' },
     S = { '<cmd>HopChar2<cr>', 'hop to chars' },
     j = { '<cmd>HopLineAC<cr>', 'hop to under line' },

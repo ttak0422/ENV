@@ -375,6 +375,13 @@ local function init()
   use 'vim-jp/vimdoc-ja'
 
   use {
+    'jghauser/mkdir.nvim',
+    opt = true,
+    event = 'CmdlineEnter',
+    config = [[require'mkdir']],
+  }
+
+  use {
     'CRAG666/code_runner.nvim',
     opt = true,
     cmd = {

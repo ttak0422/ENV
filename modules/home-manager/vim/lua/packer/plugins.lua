@@ -172,6 +172,15 @@ local function init()
   }
 
   use {
+    'abecodes/tabout.nvim',
+    config = [[require'packer.cfg.tabout-nvim']],
+    opt = true,
+    event = 'InsertEnter',
+    wants = 'nvim-treesitter',
+    after = 'nvim-cmp',
+  }
+
+  use {
     'windwp/nvim-autopairs',
     opt = true,
     event = { 'CursorMoved', 'InsertEnter' },

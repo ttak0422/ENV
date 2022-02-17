@@ -244,9 +244,9 @@ local function init()
   }
 
   use {
-    'sidebar-nvim/sidebar.nvim',
+    'stevearc/aerial.nvim',
     opt = true,
-    config = [[require'packer.cfg.sidebar-nvim']],
+    cmd = { 'AerialToggle' },
   }
 
   use {

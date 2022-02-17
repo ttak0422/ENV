@@ -16,9 +16,10 @@ wk.register({
       b = { '<cmd>NvimTreeToggle<cr>', 'Toggle File Tree' },
       g = { '<cmd>lua TigToggle()<cr>', 'Toggle Tig' },
       w = { '<cmd>WhichKey<cr>', 'Toggle WhichKey' },
-      s = { '<cmd>SidebarNvimToggle<cr>', 'Toggle Sidebar Toggle' },
+      -- s = { '<cmd>SidebarNvimToggle<cr>', 'Toggle Sidebar Toggle' },
       d = { '<cmd>TroubleToggle<cr>', 'Toggle Diagnostics' },
       m = { '<cmd>Glow<cr>', 'Toggle Markdown Preview' },
+      o = { '<cmd>AerialToggle<cr>', 'Toggle Outline' },
     },
     ['f'] = {
       name = 'find',

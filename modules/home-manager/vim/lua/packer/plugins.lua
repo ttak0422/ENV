@@ -36,6 +36,13 @@ local function init()
   }
 
   use {
+    'beauwilliams/focus.nvim',
+    opt = true,
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    config = [[require'packer.cfg.focus-nvim']],
+  }
+
+  use {
     'troydm/zoomwintab.vim',
     opt = true,
     cmd = 'ZoomWinTabToggle',

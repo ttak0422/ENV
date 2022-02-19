@@ -3,18 +3,20 @@
   homebrew = {
     brews = [ "lunchy" ];
     taps = [
-      "homebrew/cask-fonts"
       "homebrew/cask"
+      "homebrew/cask-drivers"
+      "homebrew/cask-fonts"
       "homebrew/core"
       "koekeishiya/formulae"
     ];
     casks = [
       "alacritty"
       "cyberduck"
+      "displaylink"
       "firefox"
+      "flutter"
       "font-fira-code"
       "font-hack-nerd-font"
-      "flutter"
       "iterm2"
       "jetbrains-toolbox"
       "karabiner-elements"

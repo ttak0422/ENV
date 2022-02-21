@@ -23,9 +23,10 @@
       "keycastr"
       "kitty"
       "slack"
+      "tableplus"
       "visual-studio-code"
-      # wait for m1 support
       # "bitwarden"
+      # wait for m1 support
     ];
   };
 }

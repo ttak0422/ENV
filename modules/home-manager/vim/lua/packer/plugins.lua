@@ -299,6 +299,7 @@ local function init()
     opt = true,
     event = 'CmdlineEnter',
     requires =  { 'romgrk/fzy-lua-native', after = 'wilder.nvim' },
+    config = [[require'packer.cfg.wilder-nvim']],
   }
 
   use {

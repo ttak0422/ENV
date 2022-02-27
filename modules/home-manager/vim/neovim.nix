@@ -14,14 +14,7 @@ let
     EOF
   '';
   readLua = path: lua (fileContents path);
-  vimPlugins = with pkgs.vimPlugins;
-    [
-      # # wildmenu
-      # {
-      #   plugin = wilder-nvim;
-      #   config = fileContents ./vim/wilder.vim;
-      # }
-    ];
+  vimPlugins = with pkgs.vimPlugins; [ ];
   nvimPlugins = with pkgs.vimPlugins;
     [
       # # Luajit FFI

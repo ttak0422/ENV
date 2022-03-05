@@ -123,6 +123,21 @@ ins_left({
 ins_left({
   'branch',
   icon = '',
+  cond = conditions.hide_in_width
+})
+
+ins_left{
+  function() return '  ' end,
+  padding = { left = 0, right = 0 },
+  cond = conditions.hide_in_width
+}
+
+ins_left({
+  'filename',
+  file_status = false,
+  path = 1,
+  padding = { left = 0, right = 0 },
+  cond = conditions.hide_in_width
 })
 
 ins_right({
@@ -133,36 +148,31 @@ ins_right({
 })
 
 ins_right({
-  function () return '' end,
+  function () return '' end,
   padding = { left = 0, right = 0 },
-  color = { fg = colors.subBg },
 })
 ins_right({
   'location',
   padding = { left = 1, right = 1 },
-  color = { fg = colors.subFg, bg = colors.subBg },
 })
 ins_right({
   'o:encoding',
   fmt = string.upper,
   padding = { left = 0, right = 1 },
   cond = conditions.hide_in_width,
-  color = { fg = colors.subFg, bg = colors.subBg },
 })
 ins_right({
   'fileformat',
   symbols = { unix = "LF", dos = "CRLF", mac = "CR"},
   fmt = string.upper,
   padding = { left = 0, right = 1 },
-  color = { fg = colors.subFg, bg = colors.subBg },
   cond = conditions.hide_in_width,
 })
 ins_right({
   function ()
-    return ''
+    return ''
   end,
   padding = { left = 0, right = 0 },
-  color = { fg = colors.subBg },
 })
 
 -- lsp status

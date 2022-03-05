@@ -90,6 +90,9 @@ in {
       }
     ];
   };
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    package = pkgs.pkgs-stable.starship;
+  };
   xdg.configFile."starship.toml".text = starshipConfig;
 }

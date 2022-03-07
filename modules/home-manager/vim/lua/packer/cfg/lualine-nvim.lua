@@ -11,6 +11,7 @@ local colors = {
   blue     = '#51afef',
   red      = '#ec5f67',
   white    = '#ffffff',
+  gray     = '#969696',
   subFg    = '#111a1F',
   subBg    = '#6998B3',
 }
@@ -114,6 +115,7 @@ ins_left({
   padding = { left = 1, right = 1 },
   color = 'LualineMode',
 })
+
 ins_left({
   function() return '' end,
   padding = { left = 0, right = 0 },
@@ -123,11 +125,15 @@ ins_left({
 ins_left({
   'branch',
   icon = '',
-  cond = conditions.hide_in_width
+  cond = conditions.hide_in_width,
+})
+
+ins_left({
+  function() return '%=' end,
 })
 
 ins_left{
-  function() return '  ' end,
+  function() return '  ' end,
   padding = { left = 0, right = 0 },
   cond = conditions.hide_in_width
 }
@@ -137,7 +143,7 @@ ins_left({
   file_status = false,
   path = 1,
   padding = { left = 0, right = 0 },
-  cond = conditions.hide_in_width
+  cond = conditions.hide_in_width,
 })
 
 ins_right({
@@ -145,15 +151,12 @@ ins_right({
   always_visible = true,
   sources = { 'nvim_diagnostic' },
   symbols = { error = '', warn = '', info = '', hint = '' },
+  padding = { left = 0, right = 1 },
 })
 
 ins_right({
-  function () return '' end,
-  padding = { left = 0, right = 0 },
-})
-ins_right({
   'location',
-  padding = { left = 1, right = 1 },
+  padding = { left = 0, right = 1 },
 })
 ins_right({
   'o:encoding',
@@ -167,12 +170,6 @@ ins_right({
   fmt = string.upper,
   padding = { left = 0, right = 1 },
   cond = conditions.hide_in_width,
-})
-ins_right({
-  function ()
-    return ''
-  end,
-  padding = { left = 0, right = 0 },
 })
 
 -- lsp status

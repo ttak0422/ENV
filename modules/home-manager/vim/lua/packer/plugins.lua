@@ -162,7 +162,6 @@ local function init()
     'hrsh7th/nvim-cmp',
     requires = {
       { 'hrsh7th/vim-vsnip' },
-      { 'jiangmiao/auto-pairs' },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp' , after = 'nvim-cmp' },
       { 'hrsh7th/cmp-path', after = 'nvim-cmp' },

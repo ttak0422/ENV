@@ -94,11 +94,11 @@ local function init()
     config = [[require'packer.cfg.lualine-nvim']],
   }
 
-  use {
-    'lewis6991/gitsigns.nvim',
-    requires = 'nvim-lua/plenary.nvim',
-    config = [[require'packer.cfg.gitsigns-nvim']],
-  }
+  -- use {
+  --   'lewis6991/gitsigns.nvim',
+  --   requires = 'nvim-lua/plenary.nvim',
+  --   config = [[require'packer.cfg.gitsigns-nvim']],
+  -- }
 
   use {
     'lukas-reineke/indent-blankline.nvim',

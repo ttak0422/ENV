@@ -68,7 +68,6 @@ local function init()
 
   use {
     'themercorp/themer.lua',
-    opt = true,
     config = [[require'packer.cfg.themer-lua']],
   }
 

@@ -1,6 +1,6 @@
 local function setup_vim_opt()
   vim.opt.termguicolors = true
-  vim.cmd 'colorscheme elly'
+  vim.cmd 'colorscheme themer_github_dark'
 end
 
 local function init()

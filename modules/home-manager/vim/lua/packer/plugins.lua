@@ -152,10 +152,8 @@ local function init()
   use {
     'phaazon/hop.nvim',
     opt = true,
-    cmd = {
-
-      'HopChar1', 'HopChar2', 'HopLineAC', 'HopLineBC'},
-      config = [[require'packer.cfg.hop-nvim']],
+    cmd = {'HopChar1', 'HopChar2', 'HopLineAC', 'HopLineBC'},
+    config = [[require'packer.cfg.hop-nvim']],
   }
 
   use {
@@ -399,6 +397,14 @@ local function init()
     opt = true,
     event = 'WinScrolled',
     config = [[require'packer.cfg.neoscroll-nvim']],
+  }
+
+  use {
+    'narutoxy/dim.lua',
+    requires = { 'nvim-treesitter/nvim-treesitter', 'neovim/nvim-lspconfig' },
+    config = function()
+      require('dim').setup()
+    end
   }
 
 end

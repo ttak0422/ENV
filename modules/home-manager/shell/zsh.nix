@@ -75,6 +75,8 @@ in {
           :  # Start terminal normally
         fi
       fi
+
+      export PATH=$HOME/.dotnet/tools:$HOME/.local/bin:$PATH
     '';
     sessionVariables = { EDITOR = "vim"; };
     plugins = [

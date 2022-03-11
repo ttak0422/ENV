@@ -109,7 +109,7 @@ ins_left({
   'mode',
   fmt = function(str)
     vim.api.nvim_command('hi! LualineMode guifg=' .. mode_color_fg[vim.fn.mode()] .. ' guibg=' .. mode_color_bg[vim.fn.mode()])
-    vim.api.nvim_command('hi! LualineModeRev guifg=' .. mode_color_bg[vim.fn.mode()] .. ' guibg=' .. mode_color_fg[vim.fn.mode()])
+    vim.api.nvim_command('hi! LualineModeRev guifg=' .. mode_color_bg[vim.fn.mode()])
     return " " .. str:sub(1,3)
   end,
   padding = { left = 1, right = 1 },

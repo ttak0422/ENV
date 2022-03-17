@@ -8,4 +8,6 @@ local function init()
   require'packer.plugins'.load()
 end
 
-init()
+if not vim.g.vscode then
+  init()
+end

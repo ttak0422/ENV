@@ -76,6 +76,7 @@ in {
         fi
       fi
 
+      export DOTNET_ROOT=$(dirname $(realpath $(which dotnet)))
       export PATH=$HOME/.dotnet/tools:$HOME/.local/bin:$PATH
     '';
     sessionVariables = { EDITOR = "vim"; };

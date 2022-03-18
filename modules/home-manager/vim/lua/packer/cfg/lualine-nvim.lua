@@ -1,6 +1,8 @@
 local lualine = require('lualine')
 
 local colors = {
+  fg       = '#dcd7ba',
+  bg       = '#1f1f28',
   yellow   = '#ECBE7B',
   cyan     = '#008080',
   darkblue = '#081633',
@@ -17,26 +19,26 @@ local colors = {
 }
 
 local mode_color_fg = {
-  n      = colors.darkblue,
-  i      = colors.darkblue,
-  v      = colors.darkblue,
-  [''] = colors.darkblue,
-  V      = colors.darkblue,
-  c      = colors.darkblue,
-  no     = colors.darkblue,
-  s      = colors.darkblue,
-  S      = colors.darkblue,
-  [''] = colors.darkblue,
-  ic     = colors.darkblue,
-  R      = colors.darkblue,
-  Rv     = colors.darkblue,
-  cv     = colors.darkblue,
-  ce     = colors.darkblue,
-  r      = colors.darkblue,
-  rm     = colors.darkblue,
-  ['r?'] = colors.darkblue,
-  ['!']  = colors.darkblue,
-  t      = colors.darkblue,
+  n      = colors.bg,
+  i      = colors.bg,
+  v      = colors.bg,
+  [''] = colors.bg,
+  V      = colors.bg,
+  c      = colors.bg,
+  no     = colors.bg,
+  s      = colors.bg,
+  S      = colors.bg,
+  [''] = colors.bg,
+  ic     = colors.bg,
+  R      = colors.bg,
+  Rv     = colors.bg,
+  cv     = colors.bg,
+  ce     = colors.bg,
+  r      = colors.bg,
+  rm     = colors.bg,
+  ['r?'] = colors.bg,
+  ['!']  = colors.bg,
+  t      = colors.bg,
 }
 local mode_color_bg = {
   n      = colors.red,
@@ -72,7 +74,6 @@ local conditions = {
 
 local config = {
   options = {
-    theme = 'auto',
     component_separators = '',
     section_separators = '',
   },
@@ -104,6 +105,7 @@ local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
 end
 
+local default_color = { fg = colors.fg, bg = colors.bg, }
 
 ins_left({
   'mode',
@@ -126,6 +128,7 @@ ins_left({
   'branch',
   icon = '',
   cond = conditions.hide_in_width,
+  color = default_color,
 })
 
 ins_left({
@@ -135,7 +138,8 @@ ins_left({
 ins_left{
   function() return '  ' end,
   padding = { left = 0, right = 0 },
-  cond = conditions.hide_in_width
+  cond = conditions.hide_in_width,
+  color = default_color,
 }
 
 ins_left({
@@ -144,6 +148,7 @@ ins_left({
   path = 1,
   padding = { left = 0, right = 0 },
   cond = conditions.hide_in_width,
+  color = default_color,
 })
 
 ins_right({
@@ -157,12 +162,14 @@ ins_right({
 ins_right({
   'location',
   padding = { left = 0, right = 1 },
+  color = default_color,
 })
 ins_right({
   'o:encoding',
   fmt = string.upper,
   padding = { left = 0, right = 1 },
   cond = conditions.hide_in_width,
+  color = default_color,
 })
 ins_right({
   'fileformat',
@@ -170,6 +177,7 @@ ins_right({
   fmt = string.upper,
   padding = { left = 0, right = 1 },
   cond = conditions.hide_in_width,
+  color = default_color,
 })
 
 -- lsp status
@@ -190,9 +198,7 @@ ins_right({
     return msg
   end,
   icon_enabled = false,
-  color = {
-    gui = 'bold',
-  },
+  color = default_color,
 })
 
 lualine.setup(config)

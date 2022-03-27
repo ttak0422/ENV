@@ -13,12 +13,22 @@ let
   sessionSimbol = "\\uf53a";
   zoomSimbol = "\\uf519";
   loaSimbol = "\\uf91e";
+  # vimで利用するもとと同じ
   colors = {
-    accent = "yellow";
-    statusLeft = "green";
-    statusRight = "green";
-    termBg = "#282c34";
-    termFg = "#abb2bf";
+    yellow = "#ECBE7B";
+    cyan = "#008080";
+    darkblue = "#081633";
+    green = "#98be65";
+    orange = "#FF8800";
+    violet = "#a9a1e1";
+    magenta = "#c678dd";
+    blue = "#51afef";
+    red = "#ec5f67";
+    white = "#ffffff";
+    gray = "#969696";
+  };
+  colors = {
+
   };
   one = {
     bg = "#282c34";
@@ -93,24 +103,20 @@ let
     set -g status-right-length 80
 
     # color
-    set -g status-style fg=${colors.termFg}
-    set -g message-style fg=${colors.accent},reverse,bg=default
+    set -g message-style bg=${colors.green},fg=${colors.darkblue}
 
     # status-left
-    # set -g status-left " #[fg=${colors.statusLeft}]${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol},}"
-    set -g status-left " ${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol},}"
+    set -g status-left "#[bg=${colors.red},fg=${colors.darkblue}] ${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol} ,}#[default]"
 
     # status-center
     set-option -g status-justify "centre"
     set-window-option -g window-status-format " #W "
-    # set-window-option -g window-status-current-format "#{?client_prefix,#[fg=${colors.accent}],}${lBracketSimbol}#[reverse] #W #[default]#{?client_prefix,#[fg=${colors.accent}],}${rBracketSimbol}"
-    set-window-option -g window-status-current-format "#{?client_prefix,#[fg=${one.yellow}],#[fg=${one.blue}]}#[bold] #W #[default]"
+    set-window-option -g window-status-current-format "#{?client_prefix,#[bg=${colors.green}],#[bg=${colors.blue}]}#[fg=${colors.darkblue},bold] #W #[default]"
 
     # status-right
-    # set -g status-right "#[fg=${colors.statusRight}] ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA) "
     set -g status-right " ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA) "
 
-    set -g status-position top
+    set -g status-position bottom
   '';
   # tmux.conf
   extraConfig = ''
@@ -147,7 +153,8 @@ let
     ##########
     # status #
     ##########
-    set -g status off
+    set -g status on
+    ${statusConfig}
 
     ############
     # sesssion #
@@ -234,7 +241,7 @@ let
     # pane-border
     set -g pane-active-border-style ""
     set -g pane-border-style ""
-    set -g pane-border-format "#{?pane_active,${lBracketSimbol}#[reverse]${focusPane}#[default]${rBracketSimbol},}"
+    set -g pane-border-format "#{?pane_active,${lBracketSimbol}#[reverse] #T ${focusPane} #[default]${rBracketSimbol},}"
     set -g pane-border-status off
 
     # resurrect

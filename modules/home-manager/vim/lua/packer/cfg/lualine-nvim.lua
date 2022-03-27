@@ -74,6 +74,7 @@ local conditions = {
 
 local config = {
   options = {
+    thene = 'auto',
     component_separators = '',
     section_separators = '',
   },
@@ -86,7 +87,11 @@ local config = {
     lualine_x = {},
   },
   inactive_sections = {
-    lualine_a = {},
+    lualine_a = {
+      'filename',
+      file_status = false,
+      path = 1,
+    },
     lualine_b = {},
     lualine_y = {},
     lualine_z = {},
@@ -111,7 +116,7 @@ ins_left({
   'mode',
   fmt = function(str)
     vim.api.nvim_command('hi! LualineMode guifg=' .. mode_color_fg[vim.fn.mode()] .. ' guibg=' .. mode_color_bg[vim.fn.mode()])
-    vim.api.nvim_command('hi! LualineModeRev guifg=' .. mode_color_bg[vim.fn.mode()] .. ' guibg=' .. mode_color_fg[vim.fn.mode()])
+    vim.api.nvim_command('hi! LualineModeRev guifg=' .. mode_color_bg[vim.fn.mode()])
     return " " .. str:sub(1,3)
   end,
   padding = { left = 1, right = 1 },
@@ -119,16 +124,9 @@ ins_left({
 })
 
 ins_left({
-  function() return '' end,
-  padding = { left = 0, right = 0 },
-  color = 'LualineModeRev',
-})
-
-ins_left({
   'branch',
   icon = '',
   cond = conditions.hide_in_width,
-  color = default_color,
 })
 
 ins_left({
@@ -139,7 +137,6 @@ ins_left{
   function() return '  ' end,
   padding = { left = 0, right = 0 },
   cond = conditions.hide_in_width,
-  color = default_color,
 }
 
 ins_left({
@@ -148,7 +145,6 @@ ins_left({
   path = 1,
   padding = { left = 0, right = 0 },
   cond = conditions.hide_in_width,
-  color = default_color,
 })
 
 ins_right({
@@ -162,14 +158,12 @@ ins_right({
 ins_right({
   'location',
   padding = { left = 0, right = 1 },
-  color = default_color,
 })
 ins_right({
   'o:encoding',
   fmt = string.upper,
   padding = { left = 0, right = 1 },
   cond = conditions.hide_in_width,
-  color = default_color,
 })
 ins_right({
   'fileformat',
@@ -177,7 +171,6 @@ ins_right({
   fmt = string.upper,
   padding = { left = 0, right = 1 },
   cond = conditions.hide_in_width,
-  color = default_color,
 })
 
 -- lsp status
@@ -198,7 +191,6 @@ ins_right({
     return msg
   end,
   icon_enabled = false,
-  color = default_color,
 })
 
 lualine.setup(config)

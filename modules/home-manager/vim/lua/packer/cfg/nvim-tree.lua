@@ -5,5 +5,8 @@ require('nvim-tree').setup {
     side = 'left',
     hide_root_folder = true,
   },
+  update_focused_file = {
+    enable = true,
+  },
 }
 

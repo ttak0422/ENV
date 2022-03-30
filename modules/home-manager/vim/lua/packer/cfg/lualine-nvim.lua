@@ -89,8 +89,6 @@ local config = {
   inactive_sections = {
     lualine_a = {
       'filename',
-      file_status = false,
-      path = 1,
     },
     lualine_b = {},
     lualine_y = {},

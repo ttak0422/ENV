@@ -1,4 +1,5 @@
-let mapleader="\<Space>"
+" https://github.com/AlexPl292/IdeaVim-EasyMotion/issues/36
+let mapleader=" "
 
 nnoremap <Leader>, :bprev<CR>
 nnoremap <Leader>. :bnext<CR>

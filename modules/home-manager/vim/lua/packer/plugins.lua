@@ -179,6 +179,12 @@ local function init()
   }
 
   use {
+    'm-demare/hlargs.nvim',
+    requires = { 'nvim-treesitter/nvim-treesitter' },
+    config = [[require('hlargs').setup()]],
+  }
+
+  use {
     'windwp/nvim-autopairs',
     opt = true,
     event = { 'CursorMoved', 'InsertEnter' },

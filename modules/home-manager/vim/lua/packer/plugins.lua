@@ -22,7 +22,7 @@ local function init()
     ft = 'nix',
   }
 
-  use 'editorconfig/editorconfig-vim'
+  use 'gpanders/editorconfig.nvim'
 
   use {
     'kevinhwang91/nvim-hlslens',

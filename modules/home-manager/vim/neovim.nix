@@ -31,6 +31,9 @@ let
     " disable default plugin
     let g:did_load_filetypes = 1
 
+    " set filetypes
+    autocmd BufNewFile,BufRead *.fs,*.fsi,*.fsx set filetype=fsharp
+
     ${fileContents ./vim/util.vim}
 
     " sonictemplate

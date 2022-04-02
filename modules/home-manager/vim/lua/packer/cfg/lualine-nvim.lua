@@ -1,6 +1,8 @@
 local lualine = require('lualine')
 
 local colors = {
+  fg       = '#dcd7ba',
+  bg       = '#1f1f28',
   yellow   = '#ECBE7B',
   cyan     = '#008080',
   darkblue = '#081633',
@@ -11,31 +13,32 @@ local colors = {
   blue     = '#51afef',
   red      = '#ec5f67',
   white    = '#ffffff',
+  gray     = '#969696',
   subFg    = '#111a1F',
   subBg    = '#6998B3',
 }
 
 local mode_color_fg = {
-  n      = colors.darkblue,
-  i      = colors.darkblue,
-  v      = colors.darkblue,
-  [''] = colors.darkblue,
-  V      = colors.darkblue,
-  c      = colors.darkblue,
-  no     = colors.darkblue,
-  s      = colors.darkblue,
-  S      = colors.darkblue,
-  [''] = colors.darkblue,
-  ic     = colors.darkblue,
-  R      = colors.darkblue,
-  Rv     = colors.darkblue,
-  cv     = colors.darkblue,
-  ce     = colors.darkblue,
-  r      = colors.darkblue,
-  rm     = colors.darkblue,
-  ['r?'] = colors.darkblue,
-  ['!']  = colors.darkblue,
-  t      = colors.darkblue,
+  n      = colors.bg,
+  i      = colors.bg,
+  v      = colors.bg,
+  [''] = colors.bg,
+  V      = colors.bg,
+  c      = colors.bg,
+  no     = colors.bg,
+  s      = colors.bg,
+  S      = colors.bg,
+  [''] = colors.bg,
+  ic     = colors.bg,
+  R      = colors.bg,
+  Rv     = colors.bg,
+  cv     = colors.bg,
+  ce     = colors.bg,
+  r      = colors.bg,
+  rm     = colors.bg,
+  ['r?'] = colors.bg,
+  ['!']  = colors.bg,
+  t      = colors.bg,
 }
 local mode_color_bg = {
   n      = colors.red,
@@ -71,7 +74,7 @@ local conditions = {
 
 local config = {
   options = {
-    theme = 'auto',
+    thene = 'auto',
     component_separators = '',
     section_separators = '',
   },
@@ -84,7 +87,9 @@ local config = {
     lualine_x = {},
   },
   inactive_sections = {
-    lualine_a = {},
+    lualine_a = {
+      'filename',
+    },
     lualine_b = {},
     lualine_y = {},
     lualine_z = {},
@@ -103,26 +108,41 @@ local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
 end
 
+local default_color = { fg = colors.fg, bg = colors.bg, }
 
 ins_left({
   'mode',
   fmt = function(str)
     vim.api.nvim_command('hi! LualineMode guifg=' .. mode_color_fg[vim.fn.mode()] .. ' guibg=' .. mode_color_bg[vim.fn.mode()])
-    vim.api.nvim_command('hi! LualineModeRev guifg=' .. mode_color_bg[vim.fn.mode()] .. ' guibg=' .. mode_color_fg[vim.fn.mode()])
+    vim.api.nvim_command('hi! LualineModeRev guifg=' .. mode_color_bg[vim.fn.mode()])
     return " " .. str:sub(1,3)
   end,
   padding = { left = 1, right = 1 },
   color = 'LualineMode',
 })
-ins_left({
-  function() return '' end,
-  padding = { left = 0, right = 0 },
-  color = 'LualineModeRev',
-})
 
 ins_left({
   'branch',
   icon = '',
+  cond = conditions.hide_in_width,
+})
+
+ins_left({
+  function() return '%=' end,
+})
+
+ins_left{
+  function() return '  ' end,
+  padding = { left = 0, right = 0 },
+  cond = conditions.hide_in_width,
+}
+
+ins_left({
+  'filename',
+  file_status = false,
+  path = 1,
+  padding = { left = 0, right = 0 },
+  cond = conditions.hide_in_width,
 })
 
 ins_right({
@@ -130,6 +150,12 @@ ins_right({
   always_visible = true,
   sources = { 'nvim_diagnostic' },
   symbols = { error = '', warn = '', info = '', hint = '' },
+  padding = { left = 0, right = 1 },
+})
+
+ins_right({
+  'location',
+  padding = { left = 0, right = 1 },
 })
 
 ins_right({
@@ -147,22 +173,13 @@ ins_right({
   fmt = string.upper,
   padding = { left = 0, right = 1 },
   cond = conditions.hide_in_width,
-  color = { fg = colors.subFg, bg = colors.subBg },
 })
 ins_right({
   'fileformat',
   symbols = { unix = "LF", dos = "CRLF", mac = "CR"},
   fmt = string.upper,
   padding = { left = 0, right = 1 },
-  color = { fg = colors.subFg, bg = colors.subBg },
   cond = conditions.hide_in_width,
-})
-ins_right({
-  function ()
-    return ''
-  end,
-  padding = { left = 0, right = 0 },
-  color = { fg = colors.subBg },
 })
 
 -- lsp status
@@ -183,9 +200,6 @@ ins_right({
     return msg
   end,
   icon_enabled = false,
-  color = {
-    gui = 'bold',
-  },
 })
 
 lualine.setup(config)

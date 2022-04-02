@@ -22,7 +22,7 @@ local function init()
     ft = 'nix',
   }
 
-  use 'editorconfig/editorconfig-vim'
+  use 'gpanders/editorconfig.nvim'
 
   use {
     'kevinhwang91/nvim-hlslens',
@@ -68,7 +68,6 @@ local function init()
 
   use {
     'themercorp/themer.lua',
-    opt = true,
     config = [[require'packer.cfg.themer-lua']],
   }
 
@@ -94,11 +93,11 @@ local function init()
     config = [[require'packer.cfg.lualine-nvim']],
   }
 
-  use {
-    'lewis6991/gitsigns.nvim',
-    requires = 'nvim-lua/plenary.nvim',
-    config = [[require'packer.cfg.gitsigns-nvim']],
-  }
+  -- use {
+  --   'lewis6991/gitsigns.nvim',
+  --   requires = 'nvim-lua/plenary.nvim',
+  --   config = [[require'packer.cfg.gitsigns-nvim']],
+  -- }
 
   use {
     'lukas-reineke/indent-blankline.nvim',
@@ -152,17 +151,14 @@ local function init()
   use {
     'phaazon/hop.nvim',
     opt = true,
-    cmd = {
-
-      'HopChar1', 'HopChar2', 'HopLineAC', 'HopLineBC'},
-      config = [[require'packer.cfg.hop-nvim']],
+    cmd = {'HopChar1', 'HopChar2', 'HopLineAC', 'HopLineBC'},
+    config = [[require'packer.cfg.hop-nvim']],
   }
 
   use {
     'hrsh7th/nvim-cmp',
     requires = {
       { 'hrsh7th/vim-vsnip' },
-      { 'jiangmiao/auto-pairs' },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp' , after = 'nvim-cmp' },
       { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
@@ -180,6 +176,12 @@ local function init()
     event = 'InsertEnter',
     wants = 'nvim-treesitter',
     after = 'nvim-cmp',
+  }
+
+  use {
+    'm-demare/hlargs.nvim',
+    requires = { 'nvim-treesitter/nvim-treesitter' },
+    config = [[require('hlargs').setup()]],
   }
 
   use {
@@ -400,6 +402,14 @@ local function init()
     opt = true,
     event = 'WinScrolled',
     config = [[require'packer.cfg.neoscroll-nvim']],
+  }
+
+  use {
+    'narutoxy/dim.lua',
+    requires = { 'nvim-treesitter/nvim-treesitter', 'neovim/nvim-lspconfig' },
+    config = function()
+      require('dim').setup()
+    end
   }
 
 end

@@ -4,9 +4,6 @@ vim.cmd([[
       \ 'useSkkServer': v:true,
       \ 'globalJisyo': '~/.skk/SKK-JISYO.L',
       \ })
-    call skkeleton#register_kanatable('rom', {
-      \ "z\<Space>": ["\u3000", ''],
-      \ })
   endfunction
   augroup skkeleton-initialize-pre
     autocmd!

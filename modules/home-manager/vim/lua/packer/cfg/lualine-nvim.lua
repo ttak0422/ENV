@@ -159,14 +159,8 @@ ins_right({
 })
 
 ins_right({
-  function () return '' end,
-  padding = { left = 0, right = 0 },
-  color = { fg = colors.subBg },
-})
-ins_right({
   'location',
   padding = { left = 1, right = 1 },
-  color = { fg = colors.subFg, bg = colors.subBg },
 })
 ins_right({
   'o:encoding',

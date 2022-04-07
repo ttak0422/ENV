@@ -14,6 +14,20 @@ let
     '';
   };
 
+  skk-dict = stdenv.mkDerivation {
+    name = "skk-dict";
+    src = builtins.fetchTarball {
+      url =
+        "https://github.com/skk-dev/dict/archive/c6e6a8822b673bfe3e7182f99cdffd1f7735a61e.tar.gz";
+      sha256 = "1hafjawl2nyvcdm8lffz61ry1jsvyr0ssz4b5n95p6wjldq4l4ld";
+    };
+    noBuild = true;
+    installPhase = ''
+      mkdir -p $out
+      cp -r ./* $out
+    '';
+  };
+
   # configuration requires write access...
   # jdt-language-server = stdenv.mkDerivation {
   #   name = "jdt-language-server";
@@ -30,4 +44,4 @@ let
   #     cp -r ./* $out
   #   '';
   # };
-in { inherit fzy-lua-native; }
+in { inherit fzy-lua-native skk-dict; }

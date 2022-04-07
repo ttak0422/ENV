@@ -44,7 +44,10 @@ in {
     packages = with pkgs;
       [ gcc python39Packages.pynvim lombok glow llvm ]
       ++ [ tree-sitter templates ];
-    file = { ".config/nvim/lua/packer".source = packerPackage; };
+    file = {
+      ".config/nvim/lua/packer".source = packerPackage;
+      ".skk".source = external.skk-dict;
+    };
   };
   programs.neovim = {
     inherit extraConfig;

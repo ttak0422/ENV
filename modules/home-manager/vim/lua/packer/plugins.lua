@@ -412,6 +412,24 @@ local function init()
     end
   }
 
+  use {
+    'delphinus/skkeleton_indicator.nvim',
+    wants = 'vim-skk/skkeleton',
+    config = [[require'packer.cfg.skkeleton_indicator-nvim']],
+  }
+
+  -- deno --
+  use {
+    'vim-denops/denops.vim',
+  }
+
+  use {
+    'vim-skk/skkeleton',
+    wants = 'vim-denops/denops.vim',
+    config = [[require'packer.cfg.skkeleton-config']],
+    setup = [[require'packer.cfg.skkeleton-setup']],
+  }
+
 end
 
 local plugins = setmetatable({}, {

@@ -40,6 +40,10 @@ set noshowmode
 
 set nobackup
 set nowritebackup
+set noswapfile
+
+" 編集中のファイル変更時にリロード
+set autoread
 
 " grepをrgに置き換え
 let &grepprg = 'rg --vimgrep --hidden'

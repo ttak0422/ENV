@@ -155,11 +155,6 @@ ins_right({
 
 ins_right({
   'location',
-  padding = { left = 0, right = 1 },
-})
-
-ins_right({
-  'location',
   padding = { left = 1, right = 1 },
 })
 ins_right({

@@ -43,7 +43,7 @@ in {
   home = {
     packages = with pkgs;
       [ gcc python39Packages.pynvim lombok glow llvm ]
-      ++ [ tree-sitter templates ];
+      ++ [ tree-sitter templates neovim-remote ];
     file = {
       ".config/nvim/lua/packer".source = packerPackage;
       ".skk".source = external.skk-dict;

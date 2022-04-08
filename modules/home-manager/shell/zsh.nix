@@ -52,6 +52,7 @@ in {
       ignoreDups = true;
       ignoreSpace = true;
     };
+    # todo refactor
     initExtra = ''
       ${basicConfig}
       ${functionConfig}
@@ -77,6 +78,7 @@ in {
       fi
 
       export DOTNET_ROOT=$(dirname $(realpath $(which dotnet)))
+      export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
       export PATH=$HOME/.dotnet/tools:$HOME/.local/bin:$PATH
     '';
     sessionVariables = { EDITOR = "vim"; };

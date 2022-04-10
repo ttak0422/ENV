@@ -23,7 +23,7 @@
     </tr>
     <tr>
       <td>Main</td>
-      <td><a href="https://github.com/ttak0422/ENV/tree/develop/">Stable</a></td>
+      <td><a href="https://github.com/ttak0422/ENV/tree/main/">Stable</a></td>
       <td>-</td>
     </tr>
   </tbody>

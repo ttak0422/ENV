@@ -398,6 +398,13 @@ local function init()
   }
 
   use {
+    'dstein64/nvim-scrollview',
+    opt = true,
+    event = 'WinScrolled',
+    config = [[require'packer.cfg.nvim-scrollview']],
+  }
+
+  use {
     'karb94/neoscroll.nvim',
     opt = true,
     event = 'WinScrolled',

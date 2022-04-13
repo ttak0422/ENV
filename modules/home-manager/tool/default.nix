@@ -5,6 +5,8 @@
     exa # ls clone
     fd # find clone
     figlet # ascii
+    gnugrep
+    gnused
     hey # load test tool
     htop # top clone
     jq # JSON processor

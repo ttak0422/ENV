@@ -28,6 +28,7 @@ wk.register({
       p = { '<cmd>Telescope find_files<cr>', 'find files' },
       b = { '<cmd>Telescope buffers<cr>', 'find buffers' },
     },
+    F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
     ['r'] = {
       name = 'run',
       f = { '<cmd>RunFile<cr>', 'run file' },

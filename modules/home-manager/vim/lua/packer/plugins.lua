@@ -412,6 +412,10 @@ local function init()
   }
 
   use {
+    'nvim-pack/nvim-spectre',
+  }
+
+  use {
     'narutoxy/dim.lua',
     requires = { 'nvim-treesitter/nvim-treesitter', 'neovim/nvim-lspconfig' },
     config = function()

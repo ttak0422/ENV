@@ -105,6 +105,9 @@ let
     # color
     set -g message-style bg=${colors.green},fg=${colors.darkblue}
 
+    # status
+    set-window-option -g status-style bg=default
+
     # status-left
     set -g status-left "#[bg=${colors.red},fg=${colors.darkblue}] ${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol} ,}#[default]"
 

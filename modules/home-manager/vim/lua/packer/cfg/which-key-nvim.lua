@@ -65,3 +65,9 @@ wk.register({
     b = { '<cmd>BufferLinePick<CR>', 'pick buffer' },
   },
 })
+
+wk.register({
+  ['<leader>'] = {
+    c = { '<cmd>OSCYank<CR>', 'OSCYank' },
+  },
+}, { mode = 'v' })

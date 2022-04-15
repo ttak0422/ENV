@@ -161,12 +161,25 @@ local function init()
       { 'hrsh7th/vim-vsnip' },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp' , after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp-signature-help' , after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-calc' , after = 'nvim-cmp' },
       { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-emoji', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-vsnip', after = { 'nvim-cmp', 'vim-vsnip' } },
+      { 'ray-x/cmp-treesitter', after = 'nvim-cmp' },
     },
     event = { 'InsertEnter', 'CmdlineEnter' },
     config = [[require'packer.cfg.nvim-cmp']],
+  }
+
+  use {
+    'hrsh7th/cmp-cmdline',
+    wants = {
+      'nvim-cmp',
+      'cmp-buffer',
+    },
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    config = [[require'packer.cfg.cmp-cmdline']],
+    after = 'nvim-cmp',
   }
 
   use {
@@ -291,13 +304,13 @@ local function init()
     config = [[require'packer.cfg.trouble-nvim']],
   }
 
-  use {
-    'gelguy/wilder.nvim',
-    opt = true,
-    event = 'CmdlineEnter',
-    requires =  { 'romgrk/fzy-lua-native', after = 'wilder.nvim' },
-    config = [[require'packer.cfg.wilder-nvim']],
-  }
+  -- use {
+  --   'gelguy/wilder.nvim',
+  --   opt = true,
+  --   event = 'CmdlineEnter',
+  --   requires =  { 'romgrk/fzy-lua-native', after = 'wilder.nvim' },
+  --   config = [[require'packer.cfg.wilder-nvim']],
+  -- }
 
   use {
     'ojroques/vim-oscyank',

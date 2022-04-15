@@ -27,7 +27,7 @@ with lib; {
       yabai -m rule --add app='AnyConnect' manage=off
       yabai -m rule --add app='Alacritty' manage=off
       yabai -m rule --add app='システム環境設定' manage=off
-      yabai -m space --gap abs:12         
+      yabai -m space --gap abs:12
       yabai -m config mouse_modifier               alt
       yabai -m config mouse_action1                move
       yabai -m config mouse_action2                resize

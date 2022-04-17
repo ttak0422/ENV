@@ -94,6 +94,15 @@ local function init()
   }
 
   use {
+    'mvllow/modes.nvim',
+    event = 'InsertEnter',
+    config = [[require'packer.cfg.modes-nvim']],
+    setup = function ()
+      vim.opt.cursorline = true
+    end
+  }
+
+  use {
     'lewis6991/gitsigns.nvim',
     requires = 'nvim-lua/plenary.nvim',
     config = [[require'packer.cfg.gitsigns-nvim']],
@@ -135,6 +144,12 @@ local function init()
     'romgrk/nvim-treesitter-context',
     wants = 'nvim-treesitter',
     config = [[require'packer.cfg.nvim-treesitter-context']],
+  }
+
+  use {
+    'haringsrob/nvim_context_vt',
+    wants = 'nvim-treesitter',
+    config = [[require'packer.cfg.nvim_context_vt']],
   }
 
   use {
@@ -255,7 +270,8 @@ local function init()
     'williamboman/nvim-lsp-installer',
     requires = {
       'nvim-lspconfig',
-      'hrsh7th/cmp-nvim-lsp'
+      'hrsh7th/cmp-nvim-lsp',
+      'RRethy/vim-illuminate'
     },
     config = [[require'packer.cfg.nvim-lsp-installer']],
   }

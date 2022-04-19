@@ -108,6 +108,21 @@ local function init()
     config = [[require'packer.cfg.gitsigns-nvim']],
   }
 
+  -- use {
+  --   'akinsho/git-conflict.nvim',
+  --   opt = true,
+  --   event = { 'CursorMoved', 'InsertEnter' },
+
+  -- }
+
+  use {
+    'gelguy/wilder.nvim',
+    opt = true,
+    event = 'CmdlineEnter',
+    requires =  { 'romgrk/fzy-lua-native', after = 'wilder.nvim' },
+    config = [[require'packer.cfg.wilder-nvim']],
+  }
+
   use {
     'lukas-reineke/indent-blankline.nvim',
     setup = function ()
@@ -184,17 +199,6 @@ local function init()
     },
     event = { 'InsertEnter', 'CmdlineEnter' },
     config = [[require'packer.cfg.nvim-cmp']],
-  }
-
-  use {
-    'hrsh7th/cmp-cmdline',
-    wants = {
-      'nvim-cmp',
-      'cmp-buffer',
-    },
-    event = { 'InsertEnter', 'CmdlineEnter' },
-    config = [[require'packer.cfg.cmp-cmdline']],
-    after = 'nvim-cmp',
   }
 
   use {

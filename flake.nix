@@ -22,12 +22,9 @@
       inherit (darwin.lib) darwinSystem;
       inherit (home-manager.lib) homeManagerConfiguration;
       inherit (flake-utils.lib) eachDefaultSystem eachSystem allSystems;
-      inherit (builtins) readFile fromJSON;
 
-      workFile = readFile ./untrack/work.json;
-      work = fromJSON workFile;
-      workUserName = work.name;
-      workUserEmail = work.mail;
+      workUserName = "REPLACE";
+      workUserEmail = "REPLACE";
 
       userName = "ttak0422";
       userEmail = "ttak0422@gmail.com";

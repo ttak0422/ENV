@@ -122,6 +122,7 @@
           modules = mkDarwinModules {
             inherit userName specialArgs;
             host = "${workUserName}";
+            user = workUserName;
             userConfig = ./modules/darwin/work.nix;
             userHmConfig = ./modules/home-manager/work.nix;
             userHomebrewConfig = ./modules/homebrew/work.nix;

@@ -108,12 +108,12 @@ local function init()
     config = [[require'packer.cfg.gitsigns-nvim']],
   }
 
-  -- use {
-  --   'akinsho/git-conflict.nvim',
-  --   opt = true,
-  --   event = { 'CursorMoved', 'InsertEnter' },
-
-  -- }
+  use {
+    'tkmpypy/chowcho.nvim',
+    opt = true,
+    cmd = { 'Chowcho' },
+    config = [[require'packer.cfg.chowcho-nvim']],
+  }
 
   use {
     'gelguy/wilder.nvim',
@@ -323,14 +323,6 @@ local function init()
     requires = 'kyazdani42/nvim-web-devicons',
     config = [[require'packer.cfg.trouble-nvim']],
   }
-
-  -- use {
-  --   'gelguy/wilder.nvim',
-  --   opt = true,
-  --   event = 'CmdlineEnter',
-  --   requires =  { 'romgrk/fzy-lua-native', after = 'wilder.nvim' },
-  --   config = [[require'packer.cfg.wilder-nvim']],
-  -- }
 
   use {
     'ojroques/vim-oscyank',

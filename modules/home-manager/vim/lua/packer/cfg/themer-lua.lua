@@ -1,3 +1,3 @@
 require'themer'.setup {
-  colorscheme = 'kanagawa',
+  colorscheme = 'github_dark',
 }

@@ -119,7 +119,7 @@
         workDarwin = let
           system = "x86_64-darwin";
           specialArgs = { inherit inputs workUserName workUserEmail; };
-          modules = mkPersonalDarwinModules {
+          modules = mkDarwinModules {
             inherit userName specialArgs;
             host = "${workUserName}";
             userConfig = ./modules/darwin/work.nix;

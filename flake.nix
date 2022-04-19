@@ -127,7 +127,7 @@
             userConfig = ./modules/darwin/work.nix;
             userHmConfig = ./modules/home-manager/work.nix;
             userHomebrewConfig = ./modules/homebrew/work.nix;
-          };
+          } ++ [ ./modules/nix/prelude.nix ];
         in darwinSystem { inherit system specialArgs modules; };
 
         # macos (x86_64)

@@ -18,13 +18,19 @@
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
     let
-      userName = "ttak0422";
-      userEmail = "ttak0422@gmail.com";
-
       inherit (nixpkgs.lib) attrValues optionalAttrs;
       inherit (darwin.lib) darwinSystem;
       inherit (home-manager.lib) homeManagerConfiguration;
       inherit (flake-utils.lib) eachDefaultSystem eachSystem allSystems;
+      inherit (builtins) readFile fromJSON;
+
+      workFile = readFile (./. + "./untrack/work.json");
+      work = fromJSON workFile;
+      workUserName = work.name;
+      workUserEmail = work.mail;
+
+      userName = "ttak0422";
+      userEmail = "ttak0422@gmail.com";
 
       nixpkgsConfig = {
         config = { allowUnfree = true; };
@@ -107,6 +113,18 @@
           modules = mkPersonalDarwinModules {
             inherit userName specialArgs;
             host = "${userName}-intel";
+          };
+        in darwinSystem { inherit system specialArgs modules; };
+
+        workDarwin = let
+          system = "x86_64-darwin";
+          specialArgs = { inherit inputs workUserName workUserEmail; };
+          modules = mkPersonalDarwinModules {
+            inherit userName specialArgs;
+            host = "${workUserName}";
+            userConfig = ./modules/darwin/work.nix;
+            userHmConfig = ./modules/home-manager/work.nix;
+            userHomebrewConfig = ./modules/homebrew/work.nix;
           };
         in darwinSystem { inherit system specialArgs modules; };
 

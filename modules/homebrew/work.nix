@@ -11,6 +11,7 @@
     ];
     casks = [
       "alacritty"
+      "aquaskk"
       "cyberduck"
       "displaylink"
       "firefox"

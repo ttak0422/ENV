@@ -69,6 +69,9 @@ local function init()
   use {
     'themercorp/themer.lua',
     config = [[require'packer.cfg.themer-lua']],
+    setup = function ()
+      vim.cmd 'colorscheme themer_github_dark'
+    end,
   }
 
   use {

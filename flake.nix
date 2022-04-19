@@ -116,7 +116,8 @@
         workDarwin = let
           system = "x86_64-darwin";
           specialArgs = {
-            inherit inputs workUserName;
+            inherit inputs;
+            userName = workUserName;
             userEmail = workUserEmail;
           };
           modules = mkDarwinModules {

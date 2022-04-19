@@ -24,7 +24,7 @@
       inherit (flake-utils.lib) eachDefaultSystem eachSystem allSystems;
       inherit (builtins) readFile fromJSON;
 
-      workFile = readFile (./. + "./untrack/work.json");
+      workFile = readFile ./untrack/work.json;
       work = fromJSON workFile;
       workUserName = work.name;
       workUserEmail = work.mail;

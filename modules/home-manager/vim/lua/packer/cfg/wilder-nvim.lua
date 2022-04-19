@@ -14,11 +14,10 @@ wilder.set_option('pipeline', {
 })
 
 wilder.set_option('renderer', wilder.popupmenu_renderer(
-  wilder.popupmenu_palette_theme({
+  wilder.popupmenu_border_theme({
+    highlights = {
+      border = 'Normal',
+    },
     border = 'rounded',
-    max_height = '50%',
-    min_height = 0,
-    prompt_position = 'top',
-    reverse = 0,
   })
 ))

@@ -63,6 +63,7 @@ wk.register({
     },
     P = { '<cmd>lua require("goto-preview").close_all_win()<CR>', 'close all preview' },
     b = { '<cmd>BufferLinePick<CR>', 'pick buffer' },
+    w = { '<cmd>Chowcho<cr>', 'choose pane'},
   },
 })
 

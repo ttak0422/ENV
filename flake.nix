@@ -115,7 +115,10 @@
 
         workDarwin = let
           system = "x86_64-darwin";
-          specialArgs = { inherit inputs workUserName workUserEmail; };
+          specialArgs = {
+            inherit inputs workUserName;
+            userEmail = workUserEmail;
+          };
           modules = mkDarwinModules {
             inherit userName specialArgs;
             host = "${workUserName}";

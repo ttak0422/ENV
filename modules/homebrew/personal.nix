@@ -18,6 +18,7 @@
       "flutter"
       "font-fira-code"
       "font-hack-nerd-font"
+      "font-jetbrains-mono"
       "iterm2"
       "jetbrains-toolbox"
       "karabiner-elements"

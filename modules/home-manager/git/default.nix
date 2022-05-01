@@ -2,7 +2,7 @@
 let
   core = {
     autocrlf = "false";
-    editor = "vim";
+    editor = "nvim";
   };
   color = {
     ui = "auto";
@@ -48,6 +48,7 @@ let
   extraConfig = {
     inherit core color;
     commit.template = "~/.config/git/commit";
+    init.defaultBranch = "main";
   };
 in {
   imports = [ ./tig.nix ];

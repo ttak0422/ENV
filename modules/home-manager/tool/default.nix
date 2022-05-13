@@ -14,6 +14,7 @@
     lazygit # git tui
     neofetch # system information tool
     nixfmt
+    peco
     pkg-config # compile helper
     pwgen # password generator
     ranger # cui filer

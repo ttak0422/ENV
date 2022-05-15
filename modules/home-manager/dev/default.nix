@@ -5,6 +5,7 @@
     ./dotnet.nix
     ./go.nix
     ./jvm.nix
+    ./lua.nix
     ./nix.nix
     ./node.nix
     ./python.nix

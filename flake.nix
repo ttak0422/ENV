@@ -14,6 +14,8 @@
       flake = false;
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # rokka-nvim.url = "path:/Users/ttak0422/ghq/github.com/ttak0422/rokka-nvim";
+    rokka-nvim.url = "github:ttak0422/rokka-nvim";
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
@@ -37,7 +39,8 @@
 
       mkHomeManagerConfig =
         args@{ userHmConfig ? ./modules/home-manager/tiny.nix, ... }: {
-          imports = [ userHmConfig ];
+          imports = [ userHmConfig inputs.rokka-nvim.hmModule ];
+
         };
 
       mkDarwinModules = args@{ user, host

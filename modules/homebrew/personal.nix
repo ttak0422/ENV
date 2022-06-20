@@ -24,6 +24,7 @@
       "karabiner-elements"
       "keycastr"
       "kitty"
+      "neovide"
       "slack"
       "tableplus"
       "visual-studio-code"

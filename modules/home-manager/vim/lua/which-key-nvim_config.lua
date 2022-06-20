@@ -1,10 +1,3 @@
-local term = require'toggleterm.terminal'.Terminal
-local tig = term:new({cmd = 'tig', direction = 'float', hidden = true})
-
-function TigToggle()
-  tig:toggle()
-end
-
 local wk = require'which-key'
 
 wk.setup()
@@ -18,19 +11,16 @@ wk.register({
       d = { '<cmd>TroubleToggle document_diagnostics<cr>', 'Toggle Diagnostics (document)' },
       D = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Toggle Diagnostics (workspace)' },
       m = { '<cmd>Glow<cr>', 'Toggle Markdown Preview' },
-      o = { '<cmd>AerialToggle<cr>', 'Toggle Outline' },
     },
     ['f'] = {
       name = 'find',
-      f = { '<cmd>Telescope live_grep_raw<cr>', 'find contents' },
+      f = { '<cmd>Telescope live_grep_args<cr>', 'find contents' },
       p = { '<cmd>Telescope find_files<cr>', 'find files' },
       b = { '<cmd>Telescope buffers<cr>', 'find buffers' },
     },
     F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
     ['r'] = {
       name = 'run',
-      f = { '<cmd>RunFile<cr>', 'run file' },
-      p = { '<cmd>RunProject<cr>', 'run project' },
     },
     s = { '<cmd>HopChar1<cr>', 'hop to char' },
     S = { '<cmd>HopChar2<cr>', 'hop to chars' },

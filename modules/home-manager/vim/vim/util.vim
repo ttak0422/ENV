@@ -48,3 +48,7 @@ set autoread
 " grepをrgに置き換え
 let &grepprg = 'rg --vimgrep --hidden'
 set grepformat=%f:%l:%c:%m
+
+" jkのwrap対応
+nnoremap j gj
+nnoremap k gk

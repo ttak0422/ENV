@@ -40,14 +40,12 @@ cmp.setup({
     end, { 'i', 's' }),
   },
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
-    { name = 'vsnip' },
     { name = 'path' },
+    { name = 'buffer' },
     { name = 'calc' },
     { name = 'treesitter' },
-  }, {
-    { name = 'buffer' },
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' },
   }),
   formatting = {
     format = lspkind.cmp_format({

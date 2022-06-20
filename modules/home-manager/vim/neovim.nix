@@ -134,9 +134,19 @@ let
       plugin = vim-nix;
       fileTypes = [ "nix" ];
     }
+    { plugin = vim-vsnip; }
     {
       plugin = nvim-cmp;
       depends = [
+        {
+          plugin = lspkind-nvim;
+          config = readFile ./lua/lspkind_config.lua;
+        }
+        {
+          plugin = cmp-vsnip;
+          depends = [ vim-vsnip ];
+        }
+        nvim-autopairs
         nvim-treesitter
         cmp-path
         cmp-buffer
@@ -152,16 +162,9 @@ let
         vim.cmd[[silent source ${cmp-treesitter}/after/plugin/cmp_treesitter.lua]]
         vim.cmd[[silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua]]
         vim.cmd[[silent source ${myPlugins.cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua]]
-
-        vim.opt.completeopt = "menu,menuone,noselect"
-        local cmp = require'cmp'
-        cmp.setup {
-          sources = {
-            { name = 'path' }
-          }
-        }
-      '';
+      '' + (readFile ./lua/nvim-cmp_config.lua);
       events = [ "InsertEnter" ];
+      delay = true;
     }
     {
       plugin = myPlugins.lspsaga-nvim;
@@ -365,10 +368,8 @@ in {
   };
   programs.neovim = {
     inherit extraConfig;
-    plugins = [ pkgs.vimPlugins.nvim-treesitter ];
     enable = true;
     package = pkgs.neovim-nightly;
-    extraPackages = [ pkgs.shfmt ];
     withNodeJs = true;
   };
 }

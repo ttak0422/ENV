@@ -292,6 +292,7 @@ let
     }
     {
       plugin = registers-nvim;
+      config = readFile ./lua/registers_config.lua;
       delay = true;
     }
     {

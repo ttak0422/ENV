@@ -354,6 +354,7 @@ in {
     plugins = startupPlugins ++ statusline ++ commandline ++ window ++ view
       ++ code ++ tool;
     extraConfig = ''
+      vim.o.guifont = 'JetBrainsMonoExtraBold Nerd Font Mono'
       vim.opt.termguicolors = true
       vim.opt.laststatus = 3
     '';

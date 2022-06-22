@@ -239,4 +239,81 @@ in {
       sha256 = "04mvffc813v783jhvq6ng8x4n2wp7mi96g8mmrxi3a7a8h84qh53";
     };
   };
+
+  dash-nvim = buildVimPluginFrom2Nix {
+    pname = "dash.nvim";
+    version = "20220621";
+    src = fetchFromGitHub {
+      owner = "jbyuki";
+      repo = "dash.nvim";
+      rev = "2165c473ac6b7b018059ac4dc0a6a301d4841e1e";
+      sha256 = "055rw3qlaashbvl67wpmvq8b0d1d6y3x0pkm15wn13imyxivb5a9";
+    };
+  };
+
+  telescope-command-palette-nvim = buildVimPluginFrom2Nix {
+    pname = "telescope-command-palette.nvim";
+    version = "20220622";
+    src = fetchFromGitHub {
+      owner = "LinArcX";
+      repo = "telescope-command-palette.nvim";
+      rev = "1944d6312b29a0b41531ea3cf3912f03e4eb1705";
+      sha256 = "04mvffc813v783jhvq6ng8x4n2wp7mi96g8mmrxi3a7a8h84qh53";
+    };
+  };
+
+  nvim-transparent = buildVimPluginFrom2Nix {
+    pname = "nvim-transparent";
+    version = "20220622";
+    src = fetchFromGitHub {
+      owner = "xiyaowong";
+      repo = "nvim-transparent";
+      rev = "ed488bee61d544f9a52516c661f5df493253a1b4";
+      sha256 = "08fnbqb10zxc6qwiswnqa5xf9g8k9q8pg5mwrl2ww2qcxnxbfw1p";
+    };
+  };
+
+  org-bullets-nvim = buildVimPluginFrom2Nix {
+    pname = "org-bullets.nvim";
+    version = "20220622";
+    src = fetchFromGitHub {
+      owner = "akinsho";
+      repo = "org-bullets.nvim";
+      rev = "8a9eccd664a3b670fbde97059f8376c869797284";
+      sha256 = "1x2gnylj52d0d0g2739iw8m7b9fsdxvpr74r86rj7zl9gigbqf7l";
+    };
+  };
+
+  headlines-nvim = buildVimPluginFrom2Nix {
+    pname = "headlines.nvim";
+    version = "20220622";
+    src = fetchFromGitHub {
+      owner = "lukas-reineke";
+      repo = "headlines.nvim";
+      rev = "347ef0371451d9bfbf010c6743fb74997b5b9a80";
+      sha256 = "19696gygnwy52rkr4s8pbshnirx3xgar7wzihnyjnm6b28ld41ay";
+    };
+  };
+
+  mdeval-nvim = buildVimPluginFrom2Nix {
+    pname = "mdeval.nvim";
+    version = "20220622";
+    src = fetchFromGitHub {
+      owner = "jubnzv";
+      repo = "mdeval.nvim";
+      rev = "b2beafe64dc84327604e5b5d86bb212b479fda07";
+      sha256 = "1i6sk6hc9xhbs6g0hd3ychpqvs64vd6rxigv6dg9xyxqd1zvbaaq";
+    };
+  };
+
+  incline-nvim = buildVimPluginFrom2Nix {
+    pname = "incline.nvim";
+    version = "20220622";
+    src = fetchFromGitHub {
+      owner = "b0o";
+      repo = "incline.nvim";
+      rev = "a43a25047f267b9526f17d7fcde176dfb5f872bd";
+      sha256 = "1466ipj96nbc8548mjmkkhbf9wbs7m7x0frblxz8b2n2j89annbm";
+    };
+  };
 }

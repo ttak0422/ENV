@@ -83,6 +83,17 @@ let
 
   view = with pkgs.vimPlugins; [
     {
+      plugin = myPlugins.incline-nvim;
+      config = readFile ./lua/incline_config.lua;
+      enable = false;
+      delay = true;
+    }
+    {
+      plugin = myPlugins.headlines-nvim;
+      config = readFile ./lua/headlines_config.lua;
+      fileTypes = [ "markdown" "rmd" "vimwiki" "orgmode" ];
+    }
+    {
       plugin = stabilize-nvim;
       config = ''
         require'stabilize'.setup()
@@ -133,6 +144,12 @@ let
     {
       plugin = vim-nix;
       fileTypes = [ "nix" ];
+    }
+    {
+      plugin = myPlugins.flare-nvim;
+      config = readFile ./lua/flare_config.lua;
+      events = [ "InsertEnter" ];
+      delay = true;
     }
     { plugin = vim-vsnip; }
     {
@@ -305,6 +322,37 @@ let
 
   tool = with pkgs.vimPlugins; [
     {
+      plugin = myPlugins.mdeval-nvim;
+      config = readFile ./lua/mdeval_config.lua;
+      extraPackages = [ pkgs.coreutils-full ];
+    }
+    {
+      plugin = myPlugins.org-bullets-nvim;
+      enable = false;
+      depends = [ nvim-treesitter ];
+      config = readFile ./lua/org-bullets_config.lua;
+    }
+    {
+      plugin = orgmode;
+      depends = [
+        nvim-cmp
+        nvim-treesitter
+      ];
+      startup = ''
+        vim.opt.conceallevel = 2
+        vim.opt.concealcursor = 'nc'
+      '';
+      config = readFile ./lua/orgmode_config.lua;
+      fileTypes = [ "org" ];
+    }
+    {
+      plugin = fidget-nvim;
+      config = ''
+        require'fidget'.setup{}
+      '';
+      enable = false;
+    }
+    {
       plugin = zen-mode-nvim;
       depends = [ twilight-nvim twilight-nvim ];
       config = readFile ./lua/zen-mode_config.lua;
@@ -326,7 +374,9 @@ let
     {
       plugin = nvim-spectre;
       depends = [ plenary-nvim ];
+      config = readFile ./lua/spectre_config.lua;
       extraPackages = [ pkgs.gnused ];
+      delay = true; # WIP
     }
 
     {

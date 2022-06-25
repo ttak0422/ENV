@@ -59,12 +59,17 @@ let
     delay = true;
   }];
 
-  commandline = with pkgs.vimPlugins; [{
-    plugin = wilder-nvim;
-    depends = [ myPlugins.fzy-lua-native ];
-    events = [ "CmdlineEnter" ];
-    config = readFile ./lua/wilder-nvim_config.lua;
-  }];
+  commandline = with pkgs.vimPlugins; [
+    myPlugins.fzy-lua-native
+    {
+      plugin = wilder-nvim;
+      depends = [ myPlugins.fzy-lua-native ];
+      events = [ "CmdlineEnter" ];
+      config = readFile ./lua/wilder-nvim_config.lua;
+      extraPackages = with pkgs; [ fd ];
+      delay = true;
+    }
+  ];
 
   window = with pkgs.vimPlugins; [
     { plugin = myPlugins.winresizer; }
@@ -82,12 +87,12 @@ let
   ];
 
   view = with pkgs.vimPlugins; [
-    {
-      plugin = myPlugins.incline-nvim;
-      config = readFile ./lua/incline_config.lua;
-      enable = false;
-      delay = true;
-    }
+    # {
+    #   plugin = myPlugins.incline-nvim;
+    #   config = readFile ./lua/incline_config.lua;
+    #   enable = false;
+    #   delay = true;
+    # }
     {
       plugin = myPlugins.headlines-nvim;
       config = readFile ./lua/headlines_config.lua;
@@ -334,10 +339,7 @@ let
     }
     {
       plugin = orgmode;
-      depends = [
-        nvim-cmp
-        nvim-treesitter
-      ];
+      depends = [ nvim-cmp nvim-treesitter ];
       startup = ''
         vim.opt.conceallevel = 2
         vim.opt.concealcursor = 'nc'
@@ -373,7 +375,7 @@ let
     }
     {
       plugin = nvim-spectre;
-      depends = [ plenary-nvim ];
+      depends = [ plenary-nvim nvim-web-devicons ];
       config = readFile ./lua/spectre_config.lua;
       extraPackages = [ pkgs.gnused ];
       delay = true; # WIP
@@ -423,5 +425,6 @@ in {
     enable = true;
     package = pkgs.neovim-nightly;
     withNodeJs = true;
+    withPython3 = true;
   };
 }

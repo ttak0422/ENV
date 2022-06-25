@@ -1,4 +1,4 @@
-local lualine = require'lualine'
+local lualine = require 'lualine'
 
 local colors = {
   fg       = '#dcd7ba',
@@ -22,13 +22,13 @@ local mode_color_fg = {
   n      = colors.bg,
   i      = colors.bg,
   v      = colors.bg,
-  [''] = colors.bg,
+  ['']  = colors.bg,
   V      = colors.bg,
   c      = colors.bg,
   no     = colors.bg,
   s      = colors.bg,
   S      = colors.bg,
-  [''] = colors.bg,
+  ['']  = colors.bg,
   ic     = colors.bg,
   R      = colors.bg,
   Rv     = colors.bg,
@@ -44,13 +44,13 @@ local mode_color_bg = {
   n      = colors.red,
   i      = colors.green,
   v      = colors.blue,
-  [''] = colors.blue,
+  ['']  = colors.blue,
   V      = colors.blue,
   c      = colors.magenta,
   no     = colors.red,
   s      = colors.orange,
   S      = colors.orange,
-  [''] = colors.orange,
+  ['']  = colors.orange,
   ic     = colors.yellow,
   R      = colors.violet,
   Rv     = colors.violet,
@@ -82,20 +82,20 @@ local config = {
   sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_y = {},
-    lualine_z = {},
     lualine_c = {},
     lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
   },
   inactive_sections = {
     lualine_a = {
       'filename',
     },
     lualine_b = {},
-    lualine_y = {},
-    lualine_z = {},
     lualine_c = {},
     lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
   },
 }
 
@@ -114,9 +114,10 @@ local default_color = { fg = colors.fg, bg = colors.bg, }
 ins_left({
   'mode',
   fmt = function(str)
-    vim.api.nvim_command('hi! LualineMode guifg=' .. mode_color_fg[vim.fn.mode()] .. ' guibg=' .. mode_color_bg[vim.fn.mode()])
+    vim.api.nvim_command('hi! LualineMode guifg=' ..
+      mode_color_fg[vim.fn.mode()] .. ' guibg=' .. mode_color_bg[vim.fn.mode()])
     vim.api.nvim_command('hi! LualineModeRev guifg=' .. mode_color_bg[vim.fn.mode()])
-    return " " .. str:sub(1,3)
+    return " " .. str:sub(1, 3)
   end,
   padding = { left = 1, right = 1 },
   color = 'LualineMode',
@@ -126,23 +127,26 @@ ins_left({
   'branch',
   icon = '',
   cond = conditions.hide_in_width,
+  padding = { left = 1, right = 0 },
 })
 
 ins_left({
-  function() return '%=' end,
-})
-
-ins_left{
-  function() return '  ' end,
-  padding = { left = 0, right = 0 },
+  'diff',
+  colored = false,
+  symbols = {added = ' ', modified = ' ', removed = ' ' },
   cond = conditions.hide_in_width,
-}
+  padding = { left = 1, right = 0 },
+  always_visible = true,
+})
 
-ins_left({
-  'filename',
-  file_status = false,
-  path = 1,
-  padding = { left = 0, right = 0 },
+ins_right({
+  'location',
+  padding = { left = 0, right = 1 },
+})
+
+ins_right({
+  function() return '|' end,
+  padding = { left = 0, right = 1 },
   cond = conditions.hide_in_width,
 })
 
@@ -150,30 +154,62 @@ ins_right({
   'diagnostics',
   always_visible = true,
   sources = { 'nvim_diagnostic' },
-  symbols = { error = '', warn = '', info = '', hint = '' },
+  sections = { 'error', 'warn' },
+  symbols = { error = ' ', warn = ' ' },
+  colored = false,
   padding = { left = 0, right = 1 },
 })
 
 ins_right({
-  'location',
-  padding = { left = 1, right = 1 },
+  function() return '|' end,
+  padding = { left = 0, right = 1 },
+  cond = conditions.hide_in_width,
 })
+
 ins_right({
   'o:encoding',
   fmt = string.upper,
-  padding = { left = 0, right = 1 },
   cond = conditions.hide_in_width,
+  padding = { left = 0, right = 1 },
 })
+
 ins_right({
-  'fileformat',
-  symbols = { unix = "LF", dos = "CRLF", mac = "CR"},
-  fmt = string.upper,
+  function() return '|' end,
   padding = { left = 0, right = 1 },
   cond = conditions.hide_in_width,
 })
 
--- lsp status
 ins_right({
+  'fileformat',
+  symbols = { unix = "LF", dos = "CRLF", mac = "CR" },
+  fmt = string.upper,
+  cond = conditions.hide_in_width,
+  padding = { left = 0, right = 1 },
+})
+
+ins_right({
+  function() return '|' end,
+  padding = { left = 0, right = 1 },
+  cond = conditions.hide_in_width,
+})
+
+ins_right({
+  'filetype',
+  colored = false,
+  icons_enabled = false,
+  padding = { left = 0, right = 1 },
+  cond = conditions.hide_in_width,
+})
+
+ins_right({
+  function() return '|' end,
+  padding = { left = 0, right = 1 },
+  cond = conditions.hide_in_width,
+})
+
+
+-- lsp status
+ins_right {
   function()
     local msg = '⭘'
     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
@@ -189,7 +225,13 @@ ins_right({
     end
     return msg
   end,
-  icon_enabled = false,
+  padding = { left = 0, right = 1 },
+}
+
+ins_right({
+  function() return '▊' end,
+  padding = { left = 0, right = 0 },
+  cond = conditions.hide_in_width,
 })
 
 lualine.setup(config)

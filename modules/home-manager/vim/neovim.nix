@@ -55,6 +55,9 @@ let
 
   statusline = with pkgs.vimPlugins; [{
     plugin = lualine-nvim;
+    startup = ''
+      vim.opt.laststatus = 3
+    '';
     config = readFile ./lua/lualine_config.lua;
     delay = true;
   }];
@@ -94,9 +97,20 @@ let
     #   delay = true;
     # }
     {
+      plugin = myPlugins.nvim-transparent;
+      config = ''
+        require("transparent").setup({
+          enable = true,
+        })
+      '';
+      commands =
+        [ "TransparentEnable" "TransparentDisable" "TransparentToggle" ];
+    }
+    {
       plugin = myPlugins.headlines-nvim;
       config = readFile ./lua/headlines_config.lua;
       fileTypes = [ "markdown" "rmd" "vimwiki" "orgmode" ];
+      enable = false;
     }
     {
       plugin = stabilize-nvim;
@@ -176,6 +190,7 @@ let
         cmp-treesitter
         cmp-nvim-lsp
         myPlugins.cmp-nvim-lsp-signature-help
+        myPlugins.orgmode
       ];
       config = ''
         vim.cmd[[silent source ${cmp-path}/after/plugin/cmp_path.lua]]
@@ -198,7 +213,7 @@ let
     }
     {
       plugin = nvim-lspconfig;
-      depends = [ myPlugins.nvim-lsp-installer nvim-cmp ];
+      depends = [ { plugin = myPlugins.nvim-lsp-installer; } nvim-cmp ];
       config = readFile ./lua/nvim-lspconfig_config.lua;
       delay = true;
     }
@@ -239,7 +254,10 @@ let
       depends = [ nvim-ts-rainbow nvim-ts-autotag ];
       delay = true;
       config = readFile ./lua/nvim-treesitter_config.lua;
-      extraPackages = [ pkgs.tree-sitter ];
+      extraPackages = with pkgs; [
+        tree-sitter
+        tree-sitter-grammars.tree-sitter-org-nvim
+      ];
     }
     {
       plugin = nvim_context_vt;
@@ -333,12 +351,12 @@ let
     }
     {
       plugin = myPlugins.org-bullets-nvim;
-      enable = false;
       depends = [ nvim-treesitter ];
       config = readFile ./lua/org-bullets_config.lua;
+      enable = false;
     }
     {
-      plugin = orgmode;
+      plugin = myPlugins.orgmode;
       depends = [ nvim-cmp nvim-treesitter ];
       startup = ''
         vim.opt.conceallevel = 2
@@ -408,7 +426,6 @@ in {
     extraConfig = ''
       vim.o.guifont = 'JetBrainsMonoExtraBold Nerd Font Mono'
       vim.opt.termguicolors = true
-      vim.opt.laststatus = 3
     '';
   };
   home = {

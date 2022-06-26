@@ -316,4 +316,15 @@ in {
       sha256 = "1466ipj96nbc8548mjmkkhbf9wbs7m7x0frblxz8b2n2j89annbm";
     };
   };
+
+  orgmode = buildVimPluginFrom2Nix {
+    pname = "orgmode";
+    version = "20220626";
+    src = fetchFromGitHub {
+      owner = "nvim-orgmode";
+      repo = "orgmode";
+      rev = "3186ac3805ce9726c85a6ebdda741c33148f6535";
+      sha256 = "126i2mi2p0230i44wvf7w6fa5fz2plslc0607zi439k63g1frk2y";
+    };
+  };
 }

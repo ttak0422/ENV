@@ -2,8 +2,9 @@
   description = "my ENV.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixpkgs-21.11-darwin";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-22.05-darwin";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.05-darwin";
     darwin.url = "github:LnL7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
@@ -14,8 +15,8 @@
       flake = false;
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    # rokka-nvim.url = "path:/Users/ttak0422/ghq/github.com/ttak0422/rokka-nvim";
-    rokka-nvim.url = "github:ttak0422/rokka-nvim";
+    rokka-nvim.url = "path:/Users/ttak0422/ghq/github.com/ttak0422/rokka-nvim";
+    # rokka-nvim.url = "github:ttak0422/rokka-nvim";
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
@@ -32,7 +33,10 @@
       userEmail = "ttak0422@gmail.com";
 
       nixpkgsConfig = {
-        config = { allowUnfree = true; };
+        config = {
+          allowUnfree = true;
+          allowBroken = true;
+        };
         overlays = attrValues self.overlays
           ++ [ inputs.neovim-nightly-overlay.overlay ];
       };
@@ -40,7 +44,9 @@
       mkHomeManagerConfig =
         args@{ userHmConfig ? ./modules/home-manager/tiny.nix, ... }: {
           imports = [ userHmConfig inputs.rokka-nvim.hmModule ];
-
+          home = {
+            stateVersion = "22.05";
+          };
         };
 
       mkDarwinModules = args@{ user, host

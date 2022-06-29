@@ -13,6 +13,14 @@ cmp.setup({
       vim.fn['vsnip#anonymous'](args.body)
     end,
   },
+  window = {
+    completion = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
+    documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    }
+  },
   mapping = {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -53,12 +61,11 @@ cmp.setup({
     format = lspkind.cmp_format({
       with_text = false,
       maxwidth = 50,
-      before = function (entry, vim_item)
+      before = function(entry, vim_item)
         return vim_item
       end
     })
   }
 })
 
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
-
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))

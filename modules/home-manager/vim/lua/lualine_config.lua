@@ -131,12 +131,38 @@ ins_left({
 })
 
 ins_left({
+  function() return '%=' end,
+})
+
+ins_left {
+  function() return '  ' end,
+  padding = { left = 0, right = 0 },
+  cond = conditions.hide_in_width,
+}
+
+ins_left({
+  'filename',
+  file_status = false,
+  show_filename_only = true,
+  hide_filename_extension = true,
+  show_modified_status = false,
+  padding = { left = 0, right = 0 },
+  cond = conditions.hide_in_width,
+})
+
+ins_right({
   'diff',
   colored = false,
-  symbols = {added = ' ', modified = ' ', removed = ' ' },
+  symbols = { added = ' ', modified = ' ', removed = ' ' },
   cond = conditions.hide_in_width,
-  padding = { left = 1, right = 0 },
+  padding = { left = 0, right = 1 },
   always_visible = true,
+})
+
+ins_right({
+  function() return '|' end,
+  padding = { left = 0, right = 1 },
+  cond = conditions.hide_in_width,
 })
 
 ins_right({

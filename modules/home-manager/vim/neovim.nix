@@ -152,6 +152,32 @@ let
     }
   ];
 
+  ime = [
+    {
+      plugin = myPlugins.skkeleton;
+      depends = [
+        myPlugins.denops-vim
+        myPlugins.skkeleton_indicator-nvim
+      ];
+      startup = ''
+        vim.cmd([[
+          function! s:skkeleton_init() abort
+            call skkeleton#config({
+              \ 'useSkkServer': v:true,
+              \ 'globalJisyo': '${external.skk-dict}/SKK-JISYO.L',
+              \ })
+          endfunction
+          augroup skkeleton-initialize-pre
+            autocmd!
+            autocmd User skkeleton-initialize-pre call s:skkeleton_init()
+          augroup END
+        ]])
+      '';
+      config = readFile ./lua/skkeleton_config.lua + readFile ./lua/skkeleton_indicator_config.lua;
+      delay = true;
+    }
+  ];
+
   code = with pkgs.vimPlugins; [
     {
       plugin = myPlugins.filetype-nvim;
@@ -191,6 +217,10 @@ let
         cmp-nvim-lsp
         myPlugins.cmp-nvim-lsp-signature-help
         myPlugins.orgmode
+        {
+          plugin = myPlugins.cmp-skkeleton;
+          depends = [ myPlugins.skkeleton ];
+        }
       ];
       config = ''
         vim.cmd[[silent source ${cmp-path}/after/plugin/cmp_path.lua]]
@@ -199,6 +229,7 @@ let
         vim.cmd[[silent source ${cmp-treesitter}/after/plugin/cmp_treesitter.lua]]
         vim.cmd[[silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua]]
         vim.cmd[[silent source ${myPlugins.cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua]]
+        vim.cmd[[silent source ${myPlugins.cmp-skkeleton}/after/plugin/cmp_skkeleton.lua]]
       '' + (readFile ./lua/nvim-cmp_config.lua);
       events = [ "InsertEnter" ];
       delay = true;
@@ -213,7 +244,7 @@ let
     }
     {
       plugin = nvim-lspconfig;
-      depends = [ { plugin = myPlugins.nvim-lsp-installer; } nvim-cmp ];
+      depends = [{ plugin = myPlugins.nvim-lsp-installer; } nvim-cmp];
       config = readFile ./lua/nvim-lspconfig_config.lua;
       delay = true;
     }
@@ -256,7 +287,7 @@ let
       config = readFile ./lua/nvim-treesitter_config.lua;
       extraPackages = with pkgs; [
         tree-sitter
-        tree-sitter-grammars.tree-sitter-org-nvim
+        # tree-sitter-grammars.tree-sitter-org-nvim
       ];
     }
     {
@@ -353,11 +384,19 @@ let
       plugin = myPlugins.org-bullets-nvim;
       depends = [ nvim-treesitter ];
       config = readFile ./lua/org-bullets_config.lua;
-      enable = false;
+    }
+    {
+      plugin = myPlugins.headlines-nvim;
+      config = readFile ./lua/headlines_config.lua;
     }
     {
       plugin = myPlugins.orgmode;
-      depends = [ nvim-cmp nvim-treesitter ];
+      depends = [
+        nvim-cmp
+        nvim-treesitter
+        myPlugins.org-bullets-nvim
+        myPlugins.headlines-nvim
+      ];
       startup = ''
         vim.opt.conceallevel = 2
         vim.opt.concealcursor = 'nc'
@@ -396,9 +435,7 @@ let
       depends = [ plenary-nvim nvim-web-devicons ];
       config = readFile ./lua/spectre_config.lua;
       extraPackages = [ pkgs.gnused ];
-      delay = true; # WIP
     }
-
     {
       plugin = diffview-nvim;
       depends = [{ plugin = plenary-nvim; }];
@@ -418,20 +455,19 @@ let
       config = "";
     }
   ];
-in {
+in
+{
   programs.rokka-nvim = {
     enable = true;
     plugins = startupPlugins ++ statusline ++ commandline ++ window ++ view
-      ++ code ++ tool;
+      ++ code ++ tool ++ ime;
     extraConfig = ''
       vim.o.guifont = 'JetBrainsMonoExtraBold Nerd Font Mono'
       vim.opt.termguicolors = true
     '';
   };
   home = {
-    packages = with pkgs;
-      [ gcc python39Packages.pynvim lombok llvm ]
-      ++ [ tree-sitter templates neovim-remote ];
+    # packages = with pkgs; [ gcc python39Packages.pynvim lombok llvm ] ++ [ tree-sitter templates neovim-remote ];
     file = {
       ".config/nvim/lua/packer".source = packerPackage;
       ".skk".source = external.skk-dict;

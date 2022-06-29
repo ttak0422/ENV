@@ -3,7 +3,8 @@ let
   inherit (stdenv) mkDerivation;
   inherit (pkgs) fetchFromGitHub;
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
-in {
+in
+{
   serenade = buildVimPluginFrom2Nix {
     pname = "serenade";
     version = "2022-06-17";
@@ -56,6 +57,17 @@ in {
       repo = "skkeleton_indicator.nvim";
       rev = "7630bb99ba99f73e07d17f711e50aab24a5417ce";
       sha256 = "0xjrhcgjm38a0dx42n21pwrwclm3ls22cr1a85rgslk7gjkip185";
+    };
+  };
+
+  cmp-skkeleton = buildVimPluginFrom2Nix {
+    pname = "cmp-skkeleton";
+    version = "20220629";
+    src = fetchFromGitHub {
+      owner = "rinx";
+      repo = "cmp-skkeleton";
+      rev = "f03f3019d2afd6885878ffd6471bb3983b4aacc9";
+      sha256 = "0d0iajdkplw3h9cv9hpjw6m1pilv6waf3swzsygda31nbn48r6v4";
     };
   };
 
@@ -325,6 +337,17 @@ in {
       repo = "orgmode";
       rev = "3186ac3805ce9726c85a6ebdda741c33148f6535";
       sha256 = "126i2mi2p0230i44wvf7w6fa5fz2plslc0607zi439k63g1frk2y";
+    };
+  };
+
+  nvim-treesitter = buildVimPluginFrom2Nix {
+    pname = "nvim-treesitter";
+    version = "20220627";
+    src = fetchFromGitHub {
+      owner = "nvim-treesitter";
+      repo = "nvim-treesitter";
+      rev = "b7fbf9ed2d9c9a93d24514f4b8d04de87538dc42";
+      sha256 = "00rcdzwpriifb48i7r6fnpigrj1mqfj31j6yj71lpfy7s10cxjcv";
     };
   };
 }

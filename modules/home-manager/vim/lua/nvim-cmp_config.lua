@@ -21,7 +21,7 @@ cmp.setup({
       border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
     }
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<S-Space>'] = cmp.mapping.complete(),

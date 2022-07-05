@@ -25,11 +25,9 @@
       "keycastr"
       "kitty"
       "neovide"
-      "slack"
       "tableplus"
       "visual-studio-code"
-      # "bitwarden"
-      # wait for m1 support
+      "bitwarden"
     ];
   };
 }

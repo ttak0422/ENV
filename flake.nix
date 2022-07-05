@@ -35,7 +35,7 @@
       nixpkgsConfig = {
         config = {
           allowUnfree = true;
-	  allowBroken = true;
+	  # allowBroken = true;
         };
         overlays = attrValues self.overlays
           ++ [ inputs.neovim-nightly-overlay.overlay ];

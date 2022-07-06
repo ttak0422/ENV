@@ -453,6 +453,11 @@ let
       plugin = venn-nvim;
       config = "";
     }
+    {
+      plugin = toggleterm-nvim;
+      config = readFile ./lua/toggleterm_config.lua;
+      optional = false;
+    }
   ];
 in
 {

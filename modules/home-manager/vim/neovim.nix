@@ -194,6 +194,7 @@ let
       plugin = myPlugins.flare-nvim;
       config = readFile ./lua/flare_config.lua;
       events = [ "InsertEnter" ];
+      enable = false;
       delay = true;
     }
     { plugin = vim-vsnip; }

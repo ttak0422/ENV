@@ -13,6 +13,7 @@
       "alacritty"
       "aquaskk"
       "cyberduck"
+      "google-chrome"
       "displaylink"
       "firefox"
       "flutter"

@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }: {
-  home.packages = with pkgs; [
+  home.packages = with pkgs.pkgs-stable; [
     bat # cat clone
     coreutils-full # cat, ls, mv, wget, ...
     exa # ls clone

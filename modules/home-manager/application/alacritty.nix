@@ -3,7 +3,7 @@ let
   configPath = ".config/alacritty/alacritty.yml";
   fontSize = 14;
   padding = fontSize / 2;
-  fontFamily = "JetBrainsMonoExtraBold Nerd Font Mono";
+  fontFamily = "JetBrains Mono";
   backgroundOpacity = 0.9;
   config = ''
     # ayu-mirage (neovim-ayuに寄せる)
@@ -51,9 +51,12 @@ let
       size: ${toString fontSize}
       normal:
         family: ${fontFamily}
-        style: Extra Bold
+        style: Regular
+      bold:
+        family: ${fontFamily}
+        style: Bold
       italic:
         family: ${fontFamily}
-        style: Extra Bold Italic
+        style: Italic
   '';
 in { home.file."${configPath}".text = config; }

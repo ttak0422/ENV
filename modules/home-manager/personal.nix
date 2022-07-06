@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
   imports = [
     # ./prelude.nix
-    # ./application
+    ./application
     # ./dev
     # ./git
     # ./shell

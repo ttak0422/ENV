@@ -3,7 +3,7 @@ let
   configPath = ".config/alacritty/alacritty.yml";
   fontSize = 14;
   padding = fontSize / 2;
-  fontFamily = "JetBrains Mono";
+  fontFamily = "JetBrainsMono Nerd Font";
   backgroundOpacity = 0.9;
   config = ''
     # ayu-mirage (neovim-ayuに寄せる)

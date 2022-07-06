@@ -10,7 +10,6 @@ let
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
   templates = pkgs.callPackage ./templates { };
   external = pkgs.callPackage ./external.nix { };
-  packerPackage = pkgs.callPackage ./lua/packer { };
   myPlugins = pkgs.callPackage ./my-plugins.nix { };
   lua = luaCode: ''
     lua <<EOF
@@ -472,7 +471,6 @@ in
   };
   home = {
     file = {
-      ".config/nvim/lua/packer".source = packerPackage;
       ".skk".source = external.skk-dict;
     };
   };

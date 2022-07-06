@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 with lib; {
   services.yabai = {
-    enable = true;
+    enable = false;
     package = pkgs.yabai;
     enableScriptingAddition = false;
     config = {

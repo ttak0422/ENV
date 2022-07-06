@@ -63,14 +63,12 @@ let
   }];
 
   commandline = with pkgs.vimPlugins; [
-    myPlugins.fzy-lua-native
     {
       plugin = wilder-nvim;
       depends = [ myPlugins.fzy-lua-native ];
       events = [ "CmdlineEnter" ];
       config = readFile ./lua/wilder-nvim_config.lua;
       extraPackages = with pkgs; [ fd ];
-      delay = true;
     }
   ];
 
@@ -468,7 +466,6 @@ in
     '';
   };
   home = {
-    # packages = with pkgs; [ gcc python39Packages.pynvim lombok llvm ] ++ [ tree-sitter templates neovim-remote ];
     file = {
       ".config/nvim/lua/packer".source = packerPackage;
       ".skk".source = external.skk-dict;
@@ -478,6 +475,7 @@ in
     inherit extraConfig;
     enable = true;
     package = pkgs.neovim-nightly;
+    plugins = with pkgs.vimPlugins; [ wilder-nvim ];
     withNodeJs = true;
     withPython3 = true;
   };

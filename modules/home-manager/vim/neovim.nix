@@ -120,6 +120,7 @@ let
     }
     {
       plugin = indent-blankline-nvim;
+      depends = [ nvim-treesitter ];
       config = readFile ./lua/indent-blankline-nvim_config.lua;
       delay = true;
     }

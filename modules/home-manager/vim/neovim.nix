@@ -275,13 +275,7 @@ let
       plugin = trouble-nvim;
       depends = [ nvim-web-devicons ];
       commands = [ "TroubleToggle" ];
-      config = ''
-        require'trouble'.setup{
-          use_diagnostic_signs = true,
-          auto_fold = false,
-          auto_preview = false,
-        }
-      '';
+      config = readFile ./lua/trouble_config.lua;
     }
     {
       plugin = myPlugins.spaceless-nvim;

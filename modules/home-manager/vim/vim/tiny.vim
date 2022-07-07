@@ -1,8 +1,8 @@
 " https://github.com/AlexPl292/IdeaVim-EasyMotion/issues/36
 let mapleader=" "
 
-nnoremap <Leader>, :bprev<CR>
-nnoremap <Leader>. :bnext<CR>
+nnoremap <Leader>h :bprev<CR>
+nnoremap <Leader>l :bnext<CR>
 nnoremap <Leader>q :bd<CR>
 nnoremap <silent> <ESC><ESC> :nohl<CR>
 inoremap jk  <Esc>

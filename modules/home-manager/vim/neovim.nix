@@ -244,7 +244,21 @@ let
     }
     {
       plugin = nvim-lspconfig;
-      depends = [{ plugin = myPlugins.nvim-lsp-installer; } nvim-cmp];
+      depends = [
+        {
+          plugin = fidget-nvim;
+          config = ''
+            require'fidget'.setup{}
+          '';
+        }
+        {
+          plugin = myPlugins.nvim-lsp-installer;
+          extraPackages = with pkgs; [
+            cargo
+          ];
+        }
+        nvim-cmp
+      ];
       config = readFile ./lua/nvim-lspconfig_config.lua;
       delay = true;
     }
@@ -403,13 +417,6 @@ let
       '';
       config = readFile ./lua/orgmode_config.lua;
       fileTypes = [ "org" ];
-    }
-    {
-      plugin = fidget-nvim;
-      config = ''
-        require'fidget'.setup{}
-      '';
-      enable = false;
     }
     {
       plugin = zen-mode-nvim;

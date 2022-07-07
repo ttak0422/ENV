@@ -22,6 +22,8 @@ let
     " set filetypes
     autocmd BufNewFile,BufRead *.fs,*.fsi,*.fsx set filetype=fsharp
 
+    let g:neovide_cursor_vfx_mode = "pixiedust"
+
     ${fileContents ./vim/util.vim}
   '';
 

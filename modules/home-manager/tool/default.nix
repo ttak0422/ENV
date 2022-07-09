@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+let
+  nixTool = with pkgs; [
+    nix-prefetch-git
+    nix-prefetch-github
+  ];
+in {
   home.packages = with pkgs.pkgs-stable; [
     bat # cat clone
     coreutils-full # cat, ls, mv, wget, ...
@@ -20,6 +26,6 @@
     ranger # cui filer
     wget # GNU Wget
     yq # JSON processor
-  ];
+  ] ++ nixTool;
   imports = [ ./direnv.nix ./fzf.nix ./pet.nix ./ripgrep.nix ];
 }

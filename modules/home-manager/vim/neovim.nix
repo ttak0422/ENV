@@ -19,9 +19,6 @@ let
   readLua = path: lua (fileContents path);
 
   extraConfig = ''
-    " set filetypes
-    autocmd BufNewFile,BufRead *.fs,*.fsi,*.fsx set filetype=fsharp
-
     let g:neovide_cursor_vfx_mode = "pixiedust"
 
     ${fileContents ./vim/util.vim}
@@ -179,6 +176,11 @@ let
   ];
 
   code = with pkgs.vimPlugins; [
+    {
+      plugin = myPlugins.neofsharp-vim;
+      fileTypes = [ "fs" "fsx" "fsi" "fsproj" ];
+      optional = false;
+    }
     {
       plugin = myPlugins.filetype-nvim;
       startup = ''
@@ -627,7 +629,7 @@ in
     enable = true;
     package = pkgs.neovim-nightly;
     plugins = with pkgs.vimPlugins; [ wilder-nvim ];
-    extraPython3Packages = ps: with ps; [];
+    extraPython3Packages = ps: with ps; [ ];
     withNodeJs = true;
     withPython3 = true;
   };

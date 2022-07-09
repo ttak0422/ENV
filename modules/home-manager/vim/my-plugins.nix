@@ -350,4 +350,16 @@ in
       sha256 = "00rcdzwpriifb48i7r6fnpigrj1mqfj31j6yj71lpfy7s10cxjcv";
     };
   };
+
+  neofsharp-vim = buildVimPluginFrom2Nix {
+    pname = "neofsharp.vim";
+    version = "20220710";
+    src = fetchFromGitHub {
+      owner = "adelarsq";
+      repo = "neofsharp.vim";
+      rev = "5df2f3a767df5a3b1b096e6cad67f55e24cb4033";
+      sha256 = "1rkh9mcyjkiph0lfgal60ishkqmr46b0qswi62j4wnpym3z714z7";
+    };
+  };
+
 }

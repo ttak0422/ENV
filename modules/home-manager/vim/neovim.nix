@@ -252,15 +252,158 @@ let
             require'fidget'.setup{}
           '';
         }
-        {
-          plugin = myPlugins.nvim-lsp-installer;
-          extraPackages = with pkgs; [
-            cargo
-          ];
-        }
         nvim-cmp
       ];
-      config = readFile ./lua/nvim-lspconfig_config.lua;
+      config = ''
+        local on_attach = function(client, bufnr)
+          local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
+          local opts = { noremap = true, silent = true }
+          vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+          vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+
+          local bufopts = { noremap = true, silent = true, buffer = bufnr }
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+          vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+          vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+
+          vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+          vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+          vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
+
+          vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+          vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+          vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+          vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
+        end
+
+        local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+        local lspconfig = require('lspconfig')
+        local util = require 'lspconfig.util'
+
+        vim.diagnostic.config {
+          severity_sort = true
+        }
+
+        local signs = {
+          { name = 'DiagnosticSignError', text = '' },
+          { name = 'DiagnosticSignWarn', text = '' },
+          { name = 'DiagnosticSignHint', text = '' },
+          { name = 'DiagnosticSignInfo', text = '' },
+        }
+
+        for _, sign in ipairs(signs) do
+          vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+        end
+
+        lspconfig.jdtls.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+          cmd = {
+            '${pkgs.jdt-language-server}/bin/jdt-language-server',
+            '-data',
+            os.getenv("HOME") .. '/.cache/jdtls/workspace',
+          },
+        }
+
+        -- lua
+        lspconfig.sumneko_lua.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+
+        -- nix
+        lspconfig.rnix.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+
+        -- bash
+        lspconfig.bashls.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+
+        -- fsharp
+        -- `dotnet tool install --global fsautocomplete`
+        lspconfig.fsautocomplete.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+
+        local node_root_dir = util.root_pattern('package.json', 'node_modules')
+        local is_node_repo = node_root_dir('.') ~= nil
+
+        if not is_node_repo then
+          -- deno
+          vim.g.markdown_fenced_languages = {'ts=typescript'}
+          lspconfig.denols.setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            autostart = not(is_node_repo),
+          }
+        else
+          -- node
+          lspconfig.tsserver.setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            autostart = is_node_repo,
+          }
+        end
+
+        -- python
+        lspconfig.pyright.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+
+        -- ruby
+        lspconfig.solargraph.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+
+        -- toml
+        lspconfig.taplo.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+
+        -- rust
+        lspconfig.rust_analyzer.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+
+        -- go
+        lspconfig.gopls.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+
+        -- yaml
+        lspconfig.yamlls.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+      '';
+      extraPackages = with pkgs; [
+        deno
+        gopls
+        nodePackages.bash-language-server
+        nodePackages.pyright
+        nodePackages.typescript-language-server
+        nodePackages.yaml-language-server
+        rnix-lsp
+        rubyPackages.solargraph
+        rust-analyzer
+        sumneko-lua-language-server
+        taplo-cli
+      ];
       delay = true;
     }
     {
@@ -296,7 +439,6 @@ let
       config = readFile ./lua/nvim-treesitter_config.lua;
       extraPackages = with pkgs; [
         tree-sitter
-        # tree-sitter-grammars.tree-sitter-org-nvim
       ];
     }
     {
@@ -320,6 +462,7 @@ let
     {
       plugin = vim-oscyank;
       commands = [ "OSCYank" ];
+      optional = false;
     }
     {
       plugin = editorconfig-nvim;
@@ -477,12 +620,16 @@ in
     file = {
       ".skk".source = external.skk-dict;
     };
+    sessionVariables = {
+      JAVA_OPTS = "-javaagent:${pkgs.lombok}/share/java/lombok.jar";
+    };
   };
   programs.neovim = {
     inherit extraConfig;
     enable = true;
     package = pkgs.neovim-nightly;
     plugins = with pkgs.vimPlugins; [ wilder-nvim ];
+    extraPython3Packages = ps: with ps; [];
     withNodeJs = true;
     withPython3 = true;
   };

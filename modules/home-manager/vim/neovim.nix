@@ -246,6 +246,14 @@ let
       commands = [ "Lspsaga" ];
     }
     {
+      plugin = myPlugins.dim-lua;
+      delay = true;
+      depends = [ nvim-treesitter nvim-lspconfig ];
+      config = ''
+        require('dim').setup({})
+      '';
+    }
+    {
       plugin = nvim-lspconfig;
       depends = [
         {

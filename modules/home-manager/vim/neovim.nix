@@ -344,14 +344,12 @@ let
           lspconfig.denols.setup {
             on_attach = on_attach,
             capabilities = capabilities,
-            autostart = not(is_node_repo),
           }
         else
           -- node
           lspconfig.tsserver.setup {
             on_attach = on_attach,
             capabilities = capabilities,
-            autostart = is_node_repo,
           }
         end
 

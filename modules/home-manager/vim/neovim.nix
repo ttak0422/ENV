@@ -625,9 +625,6 @@ in
     '';
   };
   home = {
-    file = {
-      ".skk".source = external.skk-dict;
-    };
     sessionVariables = {
       JAVA_OPTS = "-javaagent:${pkgs.lombok}/share/java/lombok.jar";
     };

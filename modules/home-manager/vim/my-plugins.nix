@@ -40,12 +40,12 @@ in
 
   skkeleton = buildVimPluginFrom2Nix {
     pname = "skkeleton";
-    version = "20220613";
+    version = "20220711";
     src = fetchFromGitHub {
       owner = "vim-skk";
       repo = "skkeleton";
-      rev = "79c703865707984761f379870dd3a7522ac5ef04";
-      sha256 = "1bhlr1brs077k71bskwj0wm2ifpw3j7vmfrksp7h1zgz2ps6a0l0";
+      rev = "42f81f8b32f282b77cdabbc8641e552ba20a57ff";
+      sha256 = "01vjc30cwwk3rhmbli2qcki2r5ndypp984sqhqncv5j5fswf5b5g";
     };
   };
 

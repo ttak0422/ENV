@@ -5,9 +5,6 @@ let
   else
     "/usr/local/bin";
 in {
-  environment.shellInit = ''
-    eval "$(${brewPrefix}/brew shellenv)"
-  '';
   homebrew = {
     enable = true;
     brewPrefix = brewPrefix;

@@ -108,7 +108,6 @@
             host = "mbp";
           } ++ [
             ./modules/nix/prelude.nix
-            { homebrew.brewPrefix = "/opt/homebrew/bin"; }
           ];
         in darwinSystem { inherit system modules specialArgs; };
 

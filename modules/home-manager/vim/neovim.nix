@@ -220,10 +220,10 @@ let
         cmp-nvim-lsp
         myPlugins.cmp-nvim-lsp-signature-help
         myPlugins.orgmode
-        {
-          plugin = myPlugins.cmp-skkeleton;
-          depends = [ myPlugins.skkeleton ];
-        }
+        # {
+        #   plugin = myPlugins.cmp-skkeleton;
+        #   depends = [ myPlugins.skkeleton ];
+        # }
       ];
       config = ''
         vim.cmd[[silent source ${cmp-path}/after/plugin/cmp_path.lua]]
@@ -232,7 +232,6 @@ let
         vim.cmd[[silent source ${cmp-treesitter}/after/plugin/cmp_treesitter.lua]]
         vim.cmd[[silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua]]
         vim.cmd[[silent source ${myPlugins.cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua]]
-        vim.cmd[[silent source ${myPlugins.cmp-skkeleton}/after/plugin/cmp_skkeleton.lua]]
       '' + (readFile ./lua/nvim-cmp_config.lua);
       events = [ "InsertEnter" ];
       delay = true;

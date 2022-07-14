@@ -45,6 +45,9 @@ set noswapfile
 " 編集中のファイル変更時にリロード
 set autoread
 
+" cmdline非表示
+set cmdheight=0
+
 " grepをrgに置き換え
 let &grepprg = 'rg --vimgrep --hidden'
 set grepformat=%f:%l:%c:%m

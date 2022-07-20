@@ -177,6 +177,11 @@ let
 
   code = with pkgs.vimPlugins; [
     {
+      plugin = luasnip;
+      depends = [ friendly-snippets ];
+      config = readFile ./lua/luasnip_config.lua;
+    }
+    {
       plugin = myPlugins.neofsharp-vim;
       fileTypes = [ "fs" "fsx" "fsi" "fsproj" ];
       optional = false;
@@ -218,6 +223,10 @@ let
         cmp-calc
         cmp-treesitter
         cmp-nvim-lsp
+        {
+          plugin = cmp_luasnip;
+          depends = [ luasnip ];
+        }
         myPlugins.cmp-nvim-lsp-signature-help
         myPlugins.orgmode
         # {
@@ -231,6 +240,7 @@ let
         vim.cmd[[silent source ${cmp-calc}/after/plugin/cmp_calc.lua]]
         vim.cmd[[silent source ${cmp-treesitter}/after/plugin/cmp_treesitter.lua]]
         vim.cmd[[silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua]]
+        vim.cmd[[silent source ${cmp_luasnip}/after/plugin/cmp_luasnip.lua]]
         vim.cmd[[silent source ${myPlugins.cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua]]
       '' + (readFile ./lua/nvim-cmp_config.lua);
       events = [ "InsertEnter" ];

@@ -10,7 +10,7 @@ local lspkind = require('lspkind')
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body)
+      require'luasnip'.lsp_expand(args.body)
     end,
   },
   window = {
@@ -53,6 +53,7 @@ cmp.setup({
     { name = 'treesitter' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
+    { name = 'luasnip' },
     { name = 'orgmode' },
   }, {
     { name = 'buffer' },

@@ -48,6 +48,10 @@ set autoread
 " cmdline非表示
 " set cmdheight=0
 
+" 改行時にコメントを維持しない
+autocmd FileType * setlocal formatoptions-=r
+autocmd FileType * setlocal formatoptions-=o
+
 " grepをrgに置き換え
 let &grepprg = 'rg --vimgrep --hidden'
 set grepformat=%f:%l:%c:%m

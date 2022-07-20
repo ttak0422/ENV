@@ -329,6 +329,18 @@ in
     };
   };
 
+  # PR #25
+  incline-nvim-pr = buildVimPluginFrom2Nix {
+    pname = "incline.nvim";
+    version = "20220720";
+    src = fetchFromGitHub {
+      owner = "deresmos";
+      repo = "incline.nvim";
+      rev = "36787c855af67c12e8e0b448ef419c6376fbc914";
+      sha256 = "0aygnczz0ysdhb63dvxbfa1zd0pd5ynj8c1mk2mf9jhmhwmrjyd1";
+    };
+  };
+
   orgmode = buildVimPluginFrom2Nix {
     pname = "orgmode";
     version = "20220626";

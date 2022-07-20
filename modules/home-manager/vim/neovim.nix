@@ -86,12 +86,11 @@ let
   ];
 
   view = with pkgs.vimPlugins; [
-    # {
-    #   plugin = myPlugins.incline-nvim;
-    #   config = readFile ./lua/incline_config.lua;
-    #   enable = false;
-    #   delay = true;
-    # }
+    {
+      plugin = myPlugins.incline-nvim-pr;
+      config = readFile ./lua/incline_config.lua;
+      delay = true;
+    }
     {
       plugin = myPlugins.nvim-transparent;
       config = ''
@@ -139,6 +138,7 @@ let
       plugin = bufferline-nvim;
       depends = [ nvim-web-devicons ];
       delay = true;
+      enable = false;
       config = readFile ./lua/bufferline_config.lua;
     }
     {

@@ -6,6 +6,7 @@ return {
   keys = {
     { key = '-', mods = 'CMD|SHIFT', action = wezterm.action.IncreaseFontSize },
   },
+  window_decorations = 'RESIZE',
   enable_tab_bar = false,
 	adjust_window_size_when_changing_font_size = false,
 }

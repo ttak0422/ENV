@@ -138,7 +138,6 @@ let
       plugin = bufferline-nvim;
       depends = [ nvim-web-devicons ];
       delay = true;
-      enable = false;
       config = readFile ./lua/bufferline_config.lua;
     }
     {

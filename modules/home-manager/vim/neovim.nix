@@ -227,7 +227,7 @@ let
           depends = [ luasnip ];
         }
         myPlugins.cmp-nvim-lsp-signature-help
-        myPlugins.orgmode
+        # myPlugins.orgmode
         # {
         #   plugin = myPlugins.cmp-skkeleton;
         #   depends = [ myPlugins.skkeleton ];
@@ -552,10 +552,12 @@ let
       plugin = myPlugins.org-bullets-nvim;
       depends = [ nvim-treesitter ];
       config = readFile ./lua/org-bullets_config.lua;
+      enable = false;
     }
     {
       plugin = myPlugins.headlines-nvim;
       config = readFile ./lua/headlines_config.lua;
+      enable = false;
     }
     {
       plugin = myPlugins.orgmode;
@@ -571,6 +573,7 @@ let
       '';
       config = readFile ./lua/orgmode_config.lua;
       fileTypes = [ "org" ];
+      enable = false;
     }
     {
       plugin = zen-mode-nvim;

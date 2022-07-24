@@ -327,7 +327,6 @@ let
             os.getenv("HOME") .. '/.cache/jdtls/workspace',
           },
         }
-
         -- lua
         lspconfig.sumneko_lua.setup {
           on_attach = on_attach,
@@ -407,19 +406,20 @@ let
           capabilities = capabilities,
         }
       '';
-      extraPackages = with pkgs; [
-        deno
+      extraPackages = (with pkgs; [
         gopls
-        nodePackages.bash-language-server
-        nodePackages.pyright
-        nodePackages.typescript-language-server
-        nodePackages.yaml-language-server
         rnix-lsp
         rubyPackages.solargraph
         rust-analyzer
         sumneko-lua-language-server
+      ]) ++ (with pkgs.pkgs-stable; [
+        deno
+        nodePackages.bash-language-server
+        nodePackages.pyright
+        nodePackages.typescript-language-server
+        nodePackages.yaml-language-server
         taplo-cli
-      ];
+      ]);
       delay = true;
     }
     {
@@ -496,7 +496,7 @@ let
       ];
       config = readFile ./lua/telescope-nvim_config.lua;
       commands = [ "Telescope" ];
-      extraPackages = with pkgs; [ fzf ripgrep ];
+      extraPackages = with pkgs.pkgs-stable; [ fzf ripgrep ];
     }
     {
       plugin = nvim-bqf;

@@ -17,6 +17,10 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     # rokka-nvim.url = "path:/Users/ttak0422/ghq/github.com/ttak0422/rokka-nvim";
     rokka-nvim.url = "github:ttak0422/rokka-nvim";
+
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    nix-doom-emacs.inputs.emacs-overlay.follows = "emacs-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
@@ -35,7 +39,7 @@
       nixpkgsConfig = {
         config = {
           allowUnfree = true;
-	  # allowBroken = true;
+          # allowBroken = true;
         };
         overlays = attrValues self.overlays
           ++ [ inputs.neovim-nightly-overlay.overlay ];
@@ -43,15 +47,19 @@
 
       mkHomeManagerConfig =
         args@{ userHmConfig ? ./modules/home-manager/tiny.nix, ... }: {
-          imports = [ userHmConfig inputs.rokka-nvim.hmModule ];
+          imports = [ userHmConfig inputs.rokka-nvim.hmModule inputs.nix-doom-emacs.hmModule ];
           home = {
             stateVersion = "22.11";
           };
         };
 
-      mkDarwinModules = args@{ user, host
+      mkDarwinModules =
+        args@{ user
+        , host
         , userConfig ? ./modules/darwin/tiny.nix
-        , userHomebrewConfig ? ./modules/homebrew/tiny.nix, ... }: [
+        , userHomebrewConfig ? ./modules/homebrew/tiny.nix
+        , ...
+        }: [
           userConfig
           userHomebrewConfig
           home-manager.darwinModules.home-manager
@@ -76,7 +84,8 @@
           userHmConfig = ./modules/home-manager/personal.nix;
           userHomebrewConfig = ./modules/homebrew/personal.nix;
         };
-    in {
+    in
+    {
       checks = {
         x86_64-darwin = {
           ci = self.darwinConfigurations.ci.config.system.build.toplevel;
@@ -100,64 +109,75 @@
 
       darwinConfigurations = {
         # aarch64-darwin
-        darwinM1 = let
-          system = "aarch64-darwin";
-          specialArgs = { inherit inputs userName userEmail; };
-          modules = mkPersonalDarwinModules {
-            inherit userName specialArgs;
-            host = "mbp";
-          } ++ [
-            ./modules/nix/prelude.nix
-          ];
-        in darwinSystem { inherit system modules specialArgs; };
+        darwinM1 =
+          let
+            system = "aarch64-darwin";
+            specialArgs = { inherit inputs userName userEmail; };
+            modules = mkPersonalDarwinModules
+              {
+                inherit userName specialArgs;
+                host = "mbp";
+              } ++ [
+              ./modules/nix/prelude.nix
+            ];
+          in
+          darwinSystem { inherit system modules specialArgs; };
 
         # x86_64-darwin
-        darwinIntel = let
-          system = "x86_64-darwin";
-          specialArgs = { inherit inputs userName userEmail; };
-          modules = mkPersonalDarwinModules {
-            inherit userName specialArgs;
-            host = "${userName}-intel";
-          };
-        in darwinSystem { inherit system specialArgs modules; };
+        darwinIntel =
+          let
+            system = "x86_64-darwin";
+            specialArgs = { inherit inputs userName userEmail; };
+            modules = mkPersonalDarwinModules {
+              inherit userName specialArgs;
+              host = "${userName}-intel";
+            };
+          in
+          darwinSystem { inherit system specialArgs modules; };
 
-        workDarwin = let
-          system = "x86_64-darwin";
-          specialArgs = {
-            inherit inputs;
-            userName = workUserName;
-            userEmail = workUserEmail;
-          };
-          modules = mkDarwinModules {
-            inherit userName specialArgs;
-            host = "${workUserName}";
-            user = workUserName;
-            userConfig = ./modules/darwin/work.nix;
-            userHmConfig = ./modules/home-manager/work.nix;
-            userHomebrewConfig = ./modules/homebrew/work.nix;
-          } ++ [ ./modules/nix/prelude.nix ];
-        in darwinSystem { inherit system specialArgs modules; };
+        workDarwin =
+          let
+            system = "x86_64-darwin";
+            specialArgs = {
+              inherit inputs;
+              userName = workUserName;
+              userEmail = workUserEmail;
+            };
+            modules = mkDarwinModules
+              {
+                inherit userName specialArgs;
+                host = "${workUserName}";
+                user = workUserName;
+                userConfig = ./modules/darwin/work.nix;
+                userHmConfig = ./modules/home-manager/work.nix;
+                userHomebrewConfig = ./modules/homebrew/work.nix;
+              } ++ [ ./modules/nix/prelude.nix ];
+          in
+          darwinSystem { inherit system specialArgs modules; };
 
         # macos (x86_64)
-        ci = let
-          system = "x86_64-darwin";
-          userName' = "runner";
-          specialArgs = {
-            inherit inputs userEmail;
-            userName = userName';
-          };
-          modules = mkDarwinModules {
-            inherit specialArgs;
-            user = userName';
-            host = "${userName}-intel";
-            userConfig = ./modules/darwin/personal.nix;
-            userHmConfig = ./modules/home-manager/personal.nix;
-          };
-        in darwinSystem { inherit system specialArgs modules; };
+        ci =
+          let
+            system = "x86_64-darwin";
+            userName' = "runner";
+            specialArgs = {
+              inherit inputs userEmail;
+              userName = userName';
+            };
+            modules = mkDarwinModules {
+              inherit specialArgs;
+              user = userName';
+              host = "${userName}-intel";
+              userConfig = ./modules/darwin/personal.nix;
+              userHmConfig = ./modules/home-manager/personal.nix;
+            };
+          in
+          darwinSystem { inherit system specialArgs modules; };
       };
     } // eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};
-      in {
+      in
+      {
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [ nixfmt pre-commit ];
           shellHook = "";

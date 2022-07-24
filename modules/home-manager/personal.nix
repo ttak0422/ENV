@@ -8,6 +8,7 @@
     ./tmux
     ./tool
     ./vim
+    ./emacs
     ./window-manager
   ];
   home.packages = with pkgs; [ cachix asciinema ];

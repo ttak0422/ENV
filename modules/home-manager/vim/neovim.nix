@@ -60,15 +60,13 @@ let
     delay = true;
   }];
 
-  commandline = with pkgs.vimPlugins; [
-    {
-      plugin = wilder-nvim;
-      depends = [ myPlugins.fzy-lua-native ];
-      events = [ "CmdlineEnter" ];
-      config = readFile ./lua/wilder-nvim_config.lua;
-      extraPackages = with pkgs; [ fd ];
-    }
-  ];
+  commandline = with pkgs.vimPlugins; [{
+    plugin = wilder-nvim;
+    depends = [ myPlugins.fzy-lua-native ];
+    events = [ "CmdlineEnter" ];
+    config = readFile ./lua/wilder-nvim_config.lua;
+    extraPackages = with pkgs; [ fd ];
+  }];
 
   window = with pkgs.vimPlugins; [
     { plugin = myPlugins.winresizer; }
@@ -148,31 +146,27 @@ let
     }
   ];
 
-  ime = [
-    {
-      plugin = myPlugins.skkeleton;
-      depends = [
-        myPlugins.denops-vim
-        myPlugins.skkeleton_indicator-nvim
-      ];
-      startup = ''
-        vim.cmd([[
-          function! s:skkeleton_init() abort
-            call skkeleton#config({
-              \ 'useSkkServer': v:true,
-              \ 'globalJisyo': '${external.skk-dict}/SKK-JISYO.L',
-              \ })
-          endfunction
-          augroup skkeleton-initialize-pre
-            autocmd!
-            autocmd User skkeleton-initialize-pre call s:skkeleton_init()
-          augroup END
-        ]])
-      '';
-      config = readFile ./lua/skkeleton_config.lua + readFile ./lua/skkeleton_indicator_config.lua;
-      delay = true;
-    }
-  ];
+  ime = [{
+    plugin = myPlugins.skkeleton;
+    depends = [ myPlugins.denops-vim myPlugins.skkeleton_indicator-nvim ];
+    startup = ''
+      vim.cmd([[
+        function! s:skkeleton_init() abort
+          call skkeleton#config({
+            \ 'useSkkServer': v:true,
+            \ 'globalJisyo': '${external.skk-dict}/SKK-JISYO.L',
+            \ })
+        endfunction
+        augroup skkeleton-initialize-pre
+          autocmd!
+          autocmd User skkeleton-initialize-pre call s:skkeleton_init()
+        augroup END
+      ]])
+    '';
+    config = readFile ./lua/skkeleton_config.lua
+      + readFile ./lua/skkeleton_indicator_config.lua;
+    delay = true;
+  }];
 
   code = with pkgs.vimPlugins; [
     {
@@ -453,9 +447,7 @@ let
       depends = [ nvim-ts-rainbow nvim-ts-autotag ];
       delay = true;
       config = readFile ./lua/nvim-treesitter_config.lua;
-      extraPackages = with pkgs; [
-        tree-sitter
-      ];
+      extraPackages = with pkgs; [ tree-sitter ];
     }
     {
       plugin = nvim_context_vt;
@@ -624,8 +616,7 @@ let
       optional = false;
     }
   ];
-in
-{
+in {
   programs.rokka-nvim = {
     enable = true;
     plugins = startupPlugins ++ statusline ++ commandline ++ window ++ view

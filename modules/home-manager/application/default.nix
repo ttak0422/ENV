@@ -1,1 +1,3 @@
-{ config, pkgs, lib, ... }: { imports = [ ./alacritty.nix ./kitty.nix ./wezterm.nix ]; }
+{ config, pkgs, lib, ... }: {
+  imports = [ ./alacritty.nix ./kitty.nix ./wezterm.nix ];
+}

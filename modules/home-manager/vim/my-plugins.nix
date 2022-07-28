@@ -3,8 +3,7 @@ let
   inherit (stdenv) mkDerivation;
   inherit (pkgs) fetchFromGitHub;
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
-in
-{
+in {
   serenade = buildVimPluginFrom2Nix {
     pname = "serenade";
     version = "2022-06-17";

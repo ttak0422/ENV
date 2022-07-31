@@ -18,8 +18,8 @@
   <tbody>
     <tr>
       <td>Develop</td>
-      <td><a href="https://github.com/ttak0422/ENV/tree/develop/">Unstable</a></td>
-      <td><img alt="status" src="https://img.shields.io/github/workflow/status/ttak0422/ENV/CI?style=flat"></td>
+      <td><a href="https://github.com/ttak0422/ENV/actions/workflows/dev.yml">Unstable</a></td>
+      <td><img alt="status" src="https://github.com/ttak0422/ENV/actions/workflows/dev.yml/badge.svg"></td>
     </tr>
     <tr>
       <td>Main</td>

@@ -685,7 +685,8 @@
         "nix-doom-emacs": "nix-doom-emacs",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-stable": "nixpkgs-stable",
-        "rokka-nvim": "rokka-nvim"
+        "rokka-nvim": "rokka-nvim",
+        "yabai": "yabai"
       }
     },
     "rotate-text": {
@@ -764,6 +765,22 @@
       "original": {
         "owner": "hlissner",
         "repo": "ws-butler",
+        "type": "github"
+      }
+    },
+    "yabai": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1654271960,
+        "narHash": "sha256-aFXkexCHY1T5Gb8ueLaXE/Is0NMjNtbsY+V9xz/OZO4=",
+        "owner": "koekeishiya",
+        "repo": "yabai",
+        "rev": "32ce2f9590151b37c288cfe5559375bd0e1522e6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "koekeishiya",
+        "repo": "yabai",
         "type": "github"
       }
     }

@@ -29,6 +29,7 @@ in {
       commitizen # git commit helper
       zoxide # fast cd
       cue # data constraint language
+      bottom # system monitor
     ] ++ nixTool;
   imports = [ ./direnv.nix ./fzf.nix ./pet.nix ./ripgrep.nix ];
 }

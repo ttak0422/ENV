@@ -30,6 +30,7 @@ in {
       zoxide # fast cd
       cue # data constraint language
       bottom # system monitor
+      pre-commit
     ] ++ nixTool;
   imports = [ ./direnv.nix ./fzf.nix ./pet.nix ./ripgrep.nix ];
 }

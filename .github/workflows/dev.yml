@@ -22,6 +22,7 @@ jobs:
           filters: |
             nix:
               - '**.nix'
+              - 'flake.lock'
 
       - name: Setup Nix
         if: steps.changes.outputs.nix == 'true'

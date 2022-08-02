@@ -373,4 +373,15 @@ in {
     };
   };
 
+  git-conflict-nvim = buildVimPluginFrom2Nix {
+    pname = "git-conflict.nvim";
+    version = "2022-08-03";
+    src = fetchFromGitHub {
+      owner = "akinsho";
+      repo = "git-conflict.nvim";
+      rev = "80bc8931d4ed8c8c4d289a08e1838fcf4741408d";
+      sha256 = "07zk1fh1ira2ynfxql1c7z3qimp0wkl7dq7libnjgzca6a7qc4ml";
+    };
+  };
+
 }

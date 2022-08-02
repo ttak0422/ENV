@@ -536,6 +536,13 @@ let
 
   tool = with pkgs.vimPlugins; [
     {
+      plugin = myPlugins.git-conflict-nvim;
+      delay = true;
+      config = ''
+        require'git-conflict'.setup()
+      '';
+    }
+    {
       plugin = myPlugins.mdeval-nvim;
       config = readFile ./lua/mdeval_config.lua;
       extraPackages = [ pkgs.coreutils-full ];

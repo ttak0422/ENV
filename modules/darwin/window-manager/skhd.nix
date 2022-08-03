@@ -72,7 +72,7 @@ let
 
     # chrome
     ${mod} - c : ${CHROME}/bin/CHROME
-      '';
+  '';
   SWAP_TERM = pkgs.writeScriptBin "SWAP_TERM" ''
     #!/usr/bin/osascript
 

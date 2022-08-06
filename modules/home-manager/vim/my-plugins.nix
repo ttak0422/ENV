@@ -383,4 +383,14 @@ in {
     };
   };
 
+  fine-cmdline-nvim = buildVimPluginFrom2Nix {
+    pname = "fine-cmdline.nvim";
+    version = "2022-08-06";
+    src = fetchFromGitHub {
+      owner = "VonHeikemen";
+      repo = "fine-cmdline.nvim";
+      rev = "ead2b85e455eacde10469a8fcf1a717822d2bb9a";
+      sha256 = "1rdr7w527l85pr0vhcpyx3c0z1acln9g1s5hnvf5hccimg7hg9ni";
+    };
+  };
 }

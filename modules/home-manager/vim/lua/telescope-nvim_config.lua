@@ -3,7 +3,8 @@ telescope.setup {
   defaults = {
     layout_strategy = 'vertical',
     layout_config = { height = 0.95 },
-    path_display={'smart'},
+    -- path_display={'smart'},
+    shorten_path = true;
   },
   extensions = {
     fzf = {

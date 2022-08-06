@@ -440,7 +440,7 @@ let
     {
       plugin = which-key-nvim;
       config = readFile ./lua/which-key-nvim_config.lua;
-      delay = true;
+      optional = false;
     }
     {
       plugin = nvim-treesitter;

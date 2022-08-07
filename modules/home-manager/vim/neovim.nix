@@ -66,13 +66,20 @@ let
     delay = true;
   }];
 
-  commandline = with pkgs.vimPlugins; [{
-    plugin = wilder-nvim;
-    depends = [ myPlugins.fzy-lua-native ];
-    events = [ "CmdlineEnter" ];
-    config = readFile ./lua/wilder-nvim_config.lua;
-    extraPackages = with pkgs; [ fd ];
-  }];
+  commandline = with pkgs.vimPlugins; [
+    {
+      plugin = wilder-nvim;
+      depends = [ myPlugins.fzy-lua-native ];
+      events = [ "CmdlineEnter" ];
+      config = readFile ./lua/wilder-nvim_config.lua;
+      extraPackages = with pkgs; [ fd ];
+    }
+    {
+      plugin = mkdir-nvim;
+      events = [ "CmdlineEnter" ];
+
+    }
+  ];
 
   window = with pkgs.vimPlugins; [
     { plugin = myPlugins.winresizer; }

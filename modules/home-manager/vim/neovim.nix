@@ -170,6 +170,11 @@ let
 
   code = with pkgs.vimPlugins; [
     {
+      plugin = Shade-nvim;
+      config = readFile ./lua/Shade-nvim.lua;
+      events = [ "WinNew" ];
+    }
+    {
       plugin = luasnip;
       depends = [ friendly-snippets ];
       config = readFile ./lua/luasnip_config.lua;

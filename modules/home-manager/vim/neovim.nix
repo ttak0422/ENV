@@ -503,6 +503,10 @@ let
           optimize = false;
         }
         myPlugins.telescope-live-grep-args-nvim
+        {
+          plugin = project-nvim;
+          config = readFile ./lua/project-nvim.lua;
+        }
       ];
       config = readFile ./lua/telescope-nvim_config.lua;
       commands = [ "Telescope" ];

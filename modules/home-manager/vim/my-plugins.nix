@@ -393,4 +393,15 @@ in {
       sha256 = "1rdr7w527l85pr0vhcpyx3c0z1acln9g1s5hnvf5hccimg7hg9ni";
     };
   };
+
+  themer-lua = buildVimPluginFrom2Nix {
+    pname = "themer-lua";
+    version = "2022-08-07";
+    src = fetchFromGitHub {
+      owner = "ThemerCorp";
+      repo = "themer.lua";
+      rev = "a3d16aa7f478088545466991cf1d89cf26066382";
+      sha256 = "0rrnsvx59nkz47b6hvvgir51jk3kks5w48x837l8inc9751j18n3";
+    };
+  };
 }

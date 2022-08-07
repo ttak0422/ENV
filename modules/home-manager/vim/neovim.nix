@@ -38,7 +38,13 @@ let
       optional = false;
     }
     {
+      plugin = myPlugins.themer-lua;
+      optional = false;
+      config = readFile ./lua/themer-lua_config.lua;
+    }
+    {
       plugin = myPlugins.serenade;
+      enable = false;
       startup = ''
         vim.cmd([[colorscheme serenade]])
       '';

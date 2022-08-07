@@ -63,6 +63,9 @@ in {
       export DOTNET_ROOT=$(dirname $(realpath $(which dotnet)))
       export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
       export PATH=$HOME/.dotnet/tools:$HOME/.local/bin:$PATH
+      if [ -f /opt/homebrew/bin/brew ]; then
+        export PATH=/opt/homebrew/bin:$PATH
+      fi
     '';
     sessionVariables = { EDITOR = "vim"; };
     plugins = [

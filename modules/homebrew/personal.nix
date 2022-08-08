@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
   imports = [ ./prelude.nix ];
   homebrew = {
-    brews = [ "lunchy" ];
+    brews = [ "lunchy" "qemu" ];
     taps = [
       "homebrew/cask"
       "homebrew/cask-drivers"

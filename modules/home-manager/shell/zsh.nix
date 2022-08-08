@@ -58,6 +58,7 @@ in {
       ${functionConfig}
       ${keybindConfig}
 
+      source <(kubectl completion zsh)
       export NEOVIDE_FRAMELESS=true
       export NEOVIDE_FRAME=buttonless
       export DOTNET_ROOT=$(dirname $(realpath $(which dotnet)))

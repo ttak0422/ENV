@@ -167,7 +167,7 @@ let
         function! s:skkeleton_init() abort
           call skkeleton#config({
             \ 'useSkkServer': v:true,
-            \ 'globalJisyo': '${external.skk-dict}/SKK-JISYO.L',
+            \ 'globalJisyo': '${pkgs.skk-dicts}/share/SKK-JISYO.L',
             \ })
         endfunction
         augroup skkeleton-initialize-pre

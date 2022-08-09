@@ -1,3 +1,3 @@
 require("themer").setup({
-  colorscheme = "dracula",
+  colorscheme = "gruvbox",
 })

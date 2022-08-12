@@ -58,7 +58,7 @@
         overlays = attrValues self.overlays ++ [
           inputs.neovim-nightly-overlay.overlay
           # inputs.emacs-overlay.overlay
-          inputs.emacs.overlay
+          # inputs.emacs.overlay
         ] ++ (with inputs;
           [
             (final: prev: {

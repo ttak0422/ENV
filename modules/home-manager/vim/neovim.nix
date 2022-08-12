@@ -166,8 +166,13 @@ let
       vim.cmd([[
         function! s:skkeleton_init() abort
           call skkeleton#config({
-            \ 'useSkkServer': v:true,
             \ 'globalJisyo': '${pkgs.skk-dicts}/share/SKK-JISYO.L',
+            \ 'globalJisyoEncoding': 'utf-8',
+            \ 'useSkkServer': v:true,
+            \ 'skkServerHost': '127.0.0.1',
+            \ 'skkServerPort': 1178,
+            \ 'skkServerReqEnc': 'euc-jp',
+            \ 'skkServerResEnc': 'euc-jp',
             \ })
         endfunction
         augroup skkeleton-initialize-pre

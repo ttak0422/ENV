@@ -50,6 +50,8 @@ let
     ${mod} - z : yabai -m window --toggle zoom-fullscreen
     # float window
     ${mod} - f : yabai -m window --toggle float && yabai -m window --grid 10:10:2:1:7:8
+    ${mod} - left : yabai -m window --toggle float && yabai -m window --grid 10:10:0:0:5:10
+    ${mod} - right : yabai -m window --toggle float && yabai -m window --grid 10:10:5:0:5:10
 
     # [WIP] dense padding
     shift + ${mod} - x : yabai -m config top_padding ${
@@ -78,10 +80,10 @@ let
 
     on checkFrontmost (name)
       tell application "System Events"
-        try 
-          set n to name of first window of (first application process whose frontmost is true) 
+        try
+          set n to name of first window of (first application process whose frontmost is true)
           return n = name
-        on error  
+        on error
           return false
         end try
       end tell

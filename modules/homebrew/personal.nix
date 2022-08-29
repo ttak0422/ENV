@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
   imports = [ ./prelude.nix ];
   homebrew = {
-    brews = [ "lunchy" "qemu" ];
+    brews = [ "lunchy" "qemu" "svn" ];
     taps = [
       "homebrew/cask"
       "homebrew/cask-drivers"
@@ -17,6 +17,8 @@
       "displaylink"
       "firefox"
       "flutter"
+      "font-roboto"
+      "font-roboto-mono"
       "font-fira-code"
       "font-hack-nerd-font"
       "font-jetbrains-mono-nerd-font"

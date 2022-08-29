@@ -1,2 +1,2 @@
-{ config, pkgs, lib, ... }: { services.emacs = { enable = true; }; }
+{ config, pkgs, lib, ... }: { services.emacs = { enable = false; }; }
 

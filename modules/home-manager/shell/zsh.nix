@@ -25,6 +25,10 @@ let
       zle -N pet-select
       stty -ixon
       bindkey '^e' pet-select
+
+      autoload -Uz edit-command-line
+      zle -N edit-command-line
+      bindkey '^xe' edit-command-line
     '';
   in ''
     function zvm_after_init() {

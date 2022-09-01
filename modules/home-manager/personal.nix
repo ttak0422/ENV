@@ -11,6 +11,7 @@
     ./vim
     ./virtualization
     ./window-manager
+    ./utils/darwin.nix
   ];
   home.packages = with pkgs; [ cachix asciinema ];
 }

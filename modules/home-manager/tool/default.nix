@@ -31,6 +31,10 @@ in {
       cue # data constraint language
       bottom # system monitor
       pre-commit
+      graphviz # dot
+      plantuml # uml
+      sqlite # db engine
+      texlive.combined.scheme-full # TeX
     ] ++ nixTool;
   imports = [ ./direnv.nix ./fzf.nix ./pet.nix ./ripgrep.nix ];
 }

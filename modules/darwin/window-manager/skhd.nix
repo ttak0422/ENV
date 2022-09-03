@@ -72,8 +72,10 @@ let
     # term
     ${mod} - t : ${terminal}
 
-    # chrome
+    # application
     ${mod} - c : ${CHROME}/bin/CHROME
+    ${mod} - e : ${EMACS}/bin/EMACS
+
   '';
   SWAP_TERM = pkgs.writeScriptBin "SWAP_TERM" ''
     #!/usr/bin/osascript
@@ -104,6 +106,13 @@ let
   CHROME = pkgs.writeScriptBin "CHROME" ''
     #!/usr/bin/osascript
     tell application "Google Chrome"
+      make new window
+    end tell
+  '';
+  EMACS = pkgs.writeScriptBin "EMACS" ''
+    #!/usr/bin/osascript
+
+    tell application "Emacs"
       make new window
     end tell
   '';

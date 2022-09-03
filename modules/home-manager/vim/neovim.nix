@@ -656,7 +656,7 @@ in {
     plugins = startupPlugins ++ statusline ++ commandline ++ window ++ view
       ++ code ++ tool ++ ime;
     extraConfig = ''
-      vim.o.guifont = 'JetBrainsMonoExtraBold Nerd Font Mono'
+      vim.o.guifont = 'JetBrainsMono Nerd Font Mono'
       vim.opt.termguicolors = true
     '';
   };

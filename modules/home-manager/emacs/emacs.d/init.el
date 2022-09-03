@@ -119,30 +119,3 @@
   :setq
   (nano-modeline-prefix . 'status)
   (nano-modeline-prefix-padding . 1))
-;;(leaf nano-emacs
-;;  :init
-;;	(leaf mini-frame :ensure t)
-;;  :el-get rougier/nano-emacs
-;;  ;;:require nano-faces nano-theme
-;;  :require nano-theme
-;;	:config
-;;	;;(nano-faces)
-;;	;;(nano-theme)
-;;  :setq
-;;  (nano-fonts-use t)
-;;  (nano-font-size . 18)
-;;  (nano-mode))
-
-;; modeline
-;;(leaf *modeline-settings
-;;  :config
-;;  (leaf doom-modeline
-;;    :ensure t
-;;    :hook (after-init-hook . doom-modeline-mode))
-;;    :config
-;;    (line-number-mode 0)
-;;    (column-number-mode 0)
-;;  )
-;; (leaf doom-modeline
-;;   :ensure t
-;;   :hook (after-init-hook . (doom-modeline-mode 1)))

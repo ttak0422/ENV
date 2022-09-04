@@ -188,6 +188,22 @@ let
 
   code = with pkgs.vimPlugins; [
     {
+      plugin = myPlugins.vim-migemo;
+      config = ''
+        vim.g.migemodict = '${external.migemo-dict}/migemo-dict'
+      '';
+      extraPackages = [ pkgs.cmigemo ];
+      enable = false;
+    }
+    {
+      plugin = myPlugins.migemo-search;
+      extraPackages = [ pkgs.cmigemo ];
+      config = ''
+        vim.g.migemosearch_migemodict = '${external.migemo-dict}/migemo-dict}'
+      '';
+      enable = false;
+    }
+    {
       plugin = Shade-nvim;
       config = readFile ./lua/Shade-nvim.lua;
       events = [ "WinNew" ];

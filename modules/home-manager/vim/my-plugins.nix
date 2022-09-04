@@ -404,4 +404,26 @@ in {
       sha256 = "0rrnsvx59nkz47b6hvvgir51jk3kks5w48x837l8inc9751j18n3";
     };
   };
+
+  vim-migemo = buildVimPluginFrom2Nix {
+    pname = "vim-migemo";
+    version = "2022-09-03";
+    src = fetchFromGitHub {
+      owner = "haya14busa";
+      repo = "vim-migemo";
+      rev = "9c83047985c3c141fef55a38ee525ff7ab4ed415";
+      sha256 = "01qb69dlh1fs5532iv8rmq9ly27z9xjmr4qgppswrqsis99sp53x";
+    };
+  };
+
+  migemo-search = buildVimPluginFrom2Nix {
+    pname = "migemo-search";
+    version = "2022-09-04";
+    src = fetchFromGitHub {
+      owner = "rhysd";
+      repo = "migemo-search.vim";
+      rev = "b44696e0adf1e82f2eeacd7f3f3e745e46a0ee31";
+      sha256 = "1c2rjkk1761cspx2vilcd2dzynsrjvywg2ppr0jyv0dkyxcpc398";
+    };
+  };
 }

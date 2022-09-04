@@ -1,5 +1,4 @@
-{ pkgs, lib, stdenv }:
-let
+{ pkgs, lib, stdenv }: {
   fzy-lua-native = stdenv.mkDerivation {
     name = "fzy-lua-native";
     src = builtins.fetchTarball {
@@ -13,4 +12,11 @@ let
       cp -r ./* $out
     '';
   };
-in { inherit fzy-lua-native skk-dict; }
+  migemo-dict = pkgs.fetchzip {
+    name = "migemo-dict";
+    url =
+      "https://github.com/oguna/migemo-dict-latest/releases/download/v2021-05-07/migemo-dict.zip";
+    sha256 = "sha256-40fuRCmRL9FABt4jrhTp1S/FW9fiRLieEQwcS3UKIyE=";
+  };
+}
+

@@ -13,7 +13,6 @@
   (leaf leaf-keywords
     :ensure t
     :init
-    ;; optional packages if you want to use :hydra, :el-get, :blackout,,,
     (leaf hydra :ensure t)
     (leaf el-get :ensure t)
     (leaf blackout :ensure t)
@@ -38,6 +37,25 @@
 (leaf savehist
   :init
   (savehist-mode))
+(leaf company
+  :ensure t
+  :blackout t
+  :leaf-defer nil
+  :bind (
+    (company-active-map
+      ("M-n" . nil)
+      ("M-p" . nil)
+      ("C-s" . company-filter-candidates)
+      ("C-n" . company-select-next)
+      ("C-p" . company-select-previous)
+      ("<tab>" . company-complete-selection))
+    (company-search-map
+      ("C-n" . company-select-next)
+      ("C-p" . company-select-previous)))
+  :custom (
+    (company-minimum-prefix-length . 1)
+    (company-transformers . '(company-sort-by-occurrence)))
+  :global-minor-mode global-company-mode)
 
 ;; evil
 (leaf evil
@@ -75,6 +93,13 @@
     pangu-spacing-real-insert-separtor t))
 (global-pangu-spacing-mode 1)
 
+;; typescript
+(leaf typescript-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode)))
+
 ;; org
 (leaf org
   :ensure t
@@ -82,14 +107,11 @@
   (org-startup-folded . nil)
   (org-directory . "~/org")
   (org-default-notes-file . "noname.org")
-  (org-confirm-babel-evaluate . nil)
   (org-hide-emphasis-markers . t)
   :bind
   (("C-c l" . org-store-link)
    ("C-c c" . org-capture)
-   ("C-c a" . org-agenda)
-   )
-  )
+   ("C-c a" . org-agenda)))
 (leaf org-fragtog
   :ensure t
   :hook (org-mode-hook . org-fragtog-mode))

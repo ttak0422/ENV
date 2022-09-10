@@ -143,9 +143,7 @@ ins_left {
 ins_left({
   'filename',
   file_status = false,
-  show_filename_only = true,
-  hide_filename_extension = true,
-  show_modified_status = false,
+  path = 1,
   padding = { left = 0, right = 0 },
   cond = conditions.hide_in_width,
 })

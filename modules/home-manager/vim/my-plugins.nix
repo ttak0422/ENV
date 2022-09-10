@@ -1,7 +1,7 @@
 { pkgs, lib, stdenv }:
 let
   inherit (stdenv) mkDerivation;
-  inherit (pkgs) fetchFromGitHub;
+  inherit (pkgs) fetchFromGitHub fetchFromGitLab;
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
 in {
   serenade = buildVimPluginFrom2Nix {
@@ -424,6 +424,17 @@ in {
       repo = "migemo-search.vim";
       rev = "b44696e0adf1e82f2eeacd7f3f3e745e46a0ee31";
       sha256 = "1c2rjkk1761cspx2vilcd2dzynsrjvywg2ppr0jyv0dkyxcpc398";
+    };
+  };
+
+  nvim-dd = buildVimPluginFrom2Nix {
+    pname = "nvim-dd";
+    version = "2022-09-11";
+    src = fetchFromGitLab {
+      owner = "yorickpeterse";
+      repo = "nvim-dd";
+      rev = "4ab78f8c9759db3416ad155d5859c91e7bf3f427";
+      sha256 = "0mdr9sx34xmydwjnyz6gkd9ingayqqg0w34yvvni3408y73i1i27";
     };
   };
 }

@@ -189,6 +189,15 @@ let
 
   code = with pkgs.vimPlugins; [
     {
+      plugin = myPlugins.nvim-dd;
+      config = ''
+        require('dd').setup({
+          timeout = 1000
+        })
+      '';
+      delay = true;
+    }
+    {
       plugin = myPlugins.vim-migemo;
       config = ''
         vim.g.migemodict = '${external.migemo-dict}/migemo-dict'

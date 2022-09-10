@@ -137,6 +137,7 @@ let
     }
     {
       plugin = neoscroll-nvim;
+      enable = false;
       delay = true;
       config = ''
         require'neoscroll'.setup{

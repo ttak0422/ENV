@@ -26,6 +26,11 @@ let
 
   startupPlugins = with pkgs.vimPlugins; [
     {
+      plugin = scrollbar-nvim;
+      config = readFile ./lua/scrollbar-nvim.lua;
+      optional = false;
+    }
+    {
       plugin = impatient-nvim;
       enable = false;
       optional = false;
@@ -129,10 +134,6 @@ let
       plugin = indent-blankline-nvim;
       depends = [ nvim-treesitter ];
       config = readFile ./lua/indent-blankline-nvim_config.lua;
-      delay = true;
-    }
-    {
-      plugin = nvim-scrollview;
       delay = true;
     }
     {

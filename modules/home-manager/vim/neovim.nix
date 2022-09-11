@@ -103,6 +103,11 @@ let
 
   view = with pkgs.vimPlugins; [
     {
+      plugin = aerial-nvim;
+      config = readFile ./lua/aerial-nvim.lua;
+      commands = [ "AerialToggle" ];
+    }
+    {
       plugin = myPlugins.incline-nvim-pr;
       config = readFile ./lua/incline_config.lua;
       delay = true;

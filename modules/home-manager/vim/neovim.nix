@@ -190,6 +190,14 @@ let
 
   code = with pkgs.vimPlugins; [
     {
+      plugin = range-highlight-nvim;
+      depends = [ cmd-parser-nvim ];
+      config = ''
+        require('range-highlight').setup{}
+      '';
+      events = [ "CmdlineEnter" ];
+    }
+    {
       plugin = myPlugins.nvim-dd;
       config = ''
         require('dd').setup({

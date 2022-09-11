@@ -105,12 +105,12 @@ in {
 
   chowcho-nvim = buildVimPluginFrom2Nix {
     pname = "chowcho.nvim";
-    version = "20220627";
+    version = "2022-09-11";
     src = fetchFromGitHub {
       owner = "tkmpypy";
       repo = "chowcho.nvim";
-      rev = "38342e101abace221cab499ce4da1c12744f44fe";
-      sha256 = "0zzhi944hgb583y3vni67kqhqra7gz2pcclibhzsp6d5y0mxk1pp";
+      rev = "0edaed82ebc8f38c0a14a3d776baddb4d134cbda";
+      sha256 = "1drqpncw6x0xzbrx2pq68502gs7n54c6kyydnrmycgl7sl57d4j9";
     };
   };
 

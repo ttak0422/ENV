@@ -10,7 +10,7 @@ local lspkind = require('lspkind')
 cmp.setup({
   snippet = {
     expand = function(args)
-      require'luasnip'.lsp_expand(args.body)
+      require 'luasnip'.lsp_expand(args.body)
     end,
   },
   window = {
@@ -54,7 +54,6 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'luasnip' },
-  }, {
     { name = 'buffer' },
   }),
   formatting = {

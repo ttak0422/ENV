@@ -328,6 +328,7 @@ let
           '';
         }
         nvim-cmp
+        null-ls-nvim
       ];
       config = ''
         local on_attach = function(client, bufnr)
@@ -353,6 +354,17 @@ let
           vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
           vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
           vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
+
+          if client.supports_method('textDocument/formatting') then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd('BufWritePre', {
+              group = augroup,
+              buffer = bufnr,
+              callback = function()
+                vim.lsp.buf.format({ bufnr = bufnr })
+              end,
+            })
+          end
         end
 
         local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -462,6 +474,26 @@ let
           on_attach = on_attach,
           capabilities = capabilities,
         }
+
+        -- eslint
+        lspconfig.eslint.setup{
+          on_attach = on_attach,
+          capabilities = capabilities,
+          cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server', '--stdio' },
+        }
+
+        -- null-ls
+        local null_ls = require('null-ls')
+        null_ls.setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
+          sources = {
+            -- prettier
+            null_ls.builtins.formatting.prettier.with {
+              prefer_local = 'node_modules/.bin'
+            },
+          },
+        })
       '';
       extraPackages = (with pkgs; [
         gopls
@@ -469,6 +501,7 @@ let
         rubyPackages.solargraph
         rust-analyzer
         sumneko-lua-language-server
+        nodePackages.vscode-langservers-extracted
       ]) ++ (with pkgs.pkgs-stable; [
         deno
         nodePackages.bash-language-server

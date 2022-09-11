@@ -437,4 +437,15 @@ in {
       sha256 = "0mdr9sx34xmydwjnyz6gkd9ingayqqg0w34yvvni3408y73i1i27";
     };
   };
+
+  prettier-nvim = buildVimPluginFrom2Nix {
+    pname = "prettier.nvim";
+    version = "2022-09-11";
+    src = fetchFromGitHub {
+      owner = "MunifTanjim";
+      repo = "prettier.nvim";
+      rev = "7bf4d17280a30f05d0bf5cd1efd4d9f644f7d878";
+      sha256 = "0r4ax2k0dmhp8xnjwdgsb2yhbzryfm43zbr22ck7sdyjs3hxldhs";
+    };
+  };
 }

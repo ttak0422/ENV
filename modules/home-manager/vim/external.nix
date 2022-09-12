@@ -1,5 +1,4 @@
-{ pkgs, lib, stdenv }:
-let
+{ pkgs, lib, stdenv }: {
   fzy-lua-native = stdenv.mkDerivation {
     name = "fzy-lua-native";
     src = builtins.fetchTarball {
@@ -13,35 +12,11 @@ let
       cp -r ./* $out
     '';
   };
-
-  skk-dict = stdenv.mkDerivation {
-    name = "skk-dict";
-    src = builtins.fetchTarball {
-      url =
-        "https://github.com/skk-dev/dict/archive/c6e6a8822b673bfe3e7182f99cdffd1f7735a61e.tar.gz";
-      sha256 = "1hafjawl2nyvcdm8lffz61ry1jsvyr0ssz4b5n95p6wjldq4l4ld";
-    };
-    noBuild = true;
-    installPhase = ''
-      mkdir -p $out
-      cp -r ./* $out
-    '';
+  migemo-dict = pkgs.fetchzip {
+    name = "migemo-dict";
+    url =
+      "https://github.com/oguna/migemo-dict-latest/releases/download/v2021-05-07/migemo-dict.zip";
+    sha256 = "sha256-40fuRCmRL9FABt4jrhTp1S/FW9fiRLieEQwcS3UKIyE=";
   };
+}
 
-  # configuration requires write access...
-  # jdt-language-server = stdenv.mkDerivation {
-  #   name = "jdt-language-server";
-  #   src = builtins.fetchurl {
-  #     url =
-  #       "https://download.eclipse.org/jdtls/milestones/1.7.0/jdt-language-server-1.7.0-202112161541.tar.gz";
-  #     sha256 = "0ll5rgd8i8wfg2zz0ciapakl66qqaw344129qj72cyiixkgjh31g";
-  #   };
-  #   noBuild = true;
-  #   sourceRoot = ".";
-  #   installPhase = ''
-  #     ls
-  #     mkdir -p $out
-  #     cp -r ./* $out
-  #   '';
-  # };
-in { inherit fzy-lua-native skk-dict; }

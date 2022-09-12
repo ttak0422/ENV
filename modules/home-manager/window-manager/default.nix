@@ -1,1 +1,1 @@
-{ config, pkgs, lib, ... }: { imports = [ ./yabai.nix ]; }
+{ config, pkgs, lib, ... }: { imports = [ ]; }

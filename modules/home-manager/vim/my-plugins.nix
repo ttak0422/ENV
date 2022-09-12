@@ -1,7 +1,7 @@
 { pkgs, lib, stdenv }:
 let
   inherit (stdenv) mkDerivation;
-  inherit (pkgs) fetchFromGitHub;
+  inherit (pkgs) fetchFromGitHub fetchFromGitLab;
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
 in {
   serenade = buildVimPluginFrom2Nix {
@@ -105,12 +105,12 @@ in {
 
   chowcho-nvim = buildVimPluginFrom2Nix {
     pname = "chowcho.nvim";
-    version = "20220627";
+    version = "2022-09-11";
     src = fetchFromGitHub {
       owner = "tkmpypy";
       repo = "chowcho.nvim";
-      rev = "38342e101abace221cab499ce4da1c12744f44fe";
-      sha256 = "0zzhi944hgb583y3vni67kqhqra7gz2pcclibhzsp6d5y0mxk1pp";
+      rev = "0edaed82ebc8f38c0a14a3d776baddb4d134cbda";
+      sha256 = "1drqpncw6x0xzbrx2pq68502gs7n54c6kyydnrmycgl7sl57d4j9";
     };
   };
 
@@ -328,14 +328,13 @@ in {
     };
   };
 
-  # PR #25
   incline-nvim-pr = buildVimPluginFrom2Nix {
     pname = "incline.nvim";
-    version = "20220720";
+    version = "2022-08-06";
     src = fetchFromGitHub {
       owner = "deresmos";
       repo = "incline.nvim";
-      rev = "36787c855af67c12e8e0b448ef419c6376fbc914";
+      rev = "44d4e6f4dcf2f98cf7b62a14e3c10749fc5c6e35";
       sha256 = "0aygnczz0ysdhb63dvxbfa1zd0pd5ynj8c1mk2mf9jhmhwmrjyd1";
     };
   };
@@ -384,4 +383,80 @@ in {
     };
   };
 
+  fine-cmdline-nvim = buildVimPluginFrom2Nix {
+    pname = "fine-cmdline.nvim";
+    version = "2022-08-06";
+    src = fetchFromGitHub {
+      owner = "VonHeikemen";
+      repo = "fine-cmdline.nvim";
+      rev = "ead2b85e455eacde10469a8fcf1a717822d2bb9a";
+      sha256 = "1rdr7w527l85pr0vhcpyx3c0z1acln9g1s5hnvf5hccimg7hg9ni";
+    };
+  };
+
+  themer-lua = buildVimPluginFrom2Nix {
+    pname = "themer-lua";
+    version = "2022-08-07";
+    src = fetchFromGitHub {
+      owner = "ThemerCorp";
+      repo = "themer.lua";
+      rev = "a3d16aa7f478088545466991cf1d89cf26066382";
+      sha256 = "0rrnsvx59nkz47b6hvvgir51jk3kks5w48x837l8inc9751j18n3";
+    };
+  };
+
+  vim-migemo = buildVimPluginFrom2Nix {
+    pname = "vim-migemo";
+    version = "2022-09-03";
+    src = fetchFromGitHub {
+      owner = "haya14busa";
+      repo = "vim-migemo";
+      rev = "9c83047985c3c141fef55a38ee525ff7ab4ed415";
+      sha256 = "01qb69dlh1fs5532iv8rmq9ly27z9xjmr4qgppswrqsis99sp53x";
+    };
+  };
+
+  migemo-search = buildVimPluginFrom2Nix {
+    pname = "migemo-search";
+    version = "2022-09-04";
+    src = fetchFromGitHub {
+      owner = "rhysd";
+      repo = "migemo-search.vim";
+      rev = "b44696e0adf1e82f2eeacd7f3f3e745e46a0ee31";
+      sha256 = "1c2rjkk1761cspx2vilcd2dzynsrjvywg2ppr0jyv0dkyxcpc398";
+    };
+  };
+
+  nvim-dd = buildVimPluginFrom2Nix {
+    pname = "nvim-dd";
+    version = "2022-09-11";
+    src = fetchFromGitLab {
+      owner = "yorickpeterse";
+      repo = "nvim-dd";
+      rev = "4ab78f8c9759db3416ad155d5859c91e7bf3f427";
+      sha256 = "0mdr9sx34xmydwjnyz6gkd9ingayqqg0w34yvvni3408y73i1i27";
+    };
+  };
+
+  prettier-nvim = buildVimPluginFrom2Nix {
+    pname = "prettier.nvim";
+    version = "2022-09-11";
+    src = fetchFromGitHub {
+      owner = "MunifTanjim";
+      repo = "prettier.nvim";
+      rev = "7bf4d17280a30f05d0bf5cd1efd4d9f644f7d878";
+      sha256 = "0r4ax2k0dmhp8xnjwdgsb2yhbzryfm43zbr22ck7sdyjs3hxldhs";
+    };
+  };
+
+  sidebar-nvim = buildVimPluginFrom2Nix {
+    pname = "sidebar-nvim";
+    version = "2022-09-12";
+    src = fetchFromGitHub {
+      owner = "sidebar-nvim";
+      repo = "sidebar.nvim";
+      rev = "4e07c8ea5cc86e21d69bb000f9f8e5df536da8b4";
+      sha256 = "1w2nlr87654dyhl7bgydkfza1xky6iaf3xxz74i73s6g6l3ww5wb";
+    };
+  };
 }

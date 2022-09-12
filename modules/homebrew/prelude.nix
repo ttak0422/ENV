@@ -1,13 +1,8 @@
-{ config, pkgs, lib, ... }:
-let
-  brewPrefix = if pkgs.system == "aarch64-darwin" then
-    "/opt/homebrew/bin"
-  else
-    "/usr/local/bin";
-in {
+{ config, pkgs, lib, ... }: {
   homebrew = {
     enable = true;
-    brewPrefix = brewPrefix;
+    autoUpdate = true;
+    cleanup = "zap";
     global = {
       brewfile = true;
       noLock = true;

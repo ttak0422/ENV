@@ -26,6 +26,11 @@ let
 
   startupPlugins = with pkgs.vimPlugins; [
     {
+      plugin = scrollbar-nvim;
+      config = readFile ./lua/scrollbar-nvim.lua;
+      optional = false;
+    }
+    {
       plugin = impatient-nvim;
       enable = false;
       optional = false;
@@ -38,7 +43,13 @@ let
       optional = false;
     }
     {
+      plugin = myPlugins.themer-lua;
+      optional = false;
+      config = readFile ./lua/themer-lua_config.lua;
+    }
+    {
       plugin = myPlugins.serenade;
+      enable = false;
       startup = ''
         vim.cmd([[colorscheme serenade]])
       '';
@@ -60,13 +71,20 @@ let
     delay = true;
   }];
 
-  commandline = with pkgs.vimPlugins; [{
-    plugin = wilder-nvim;
-    depends = [ myPlugins.fzy-lua-native ];
-    events = [ "CmdlineEnter" ];
-    config = readFile ./lua/wilder-nvim_config.lua;
-    extraPackages = with pkgs; [ fd ];
-  }];
+  commandline = with pkgs.vimPlugins; [
+    {
+      plugin = wilder-nvim;
+      depends = [ myPlugins.fzy-lua-native ];
+      events = [ "CmdlineEnter" ];
+      config = readFile ./lua/wilder-nvim_config.lua;
+      extraPackages = with pkgs; [ fd ];
+    }
+    {
+      plugin = mkdir-nvim;
+      events = [ "CmdlineEnter" ];
+
+    }
+  ];
 
   window = with pkgs.vimPlugins; [
     { plugin = myPlugins.winresizer; }
@@ -84,6 +102,16 @@ let
   ];
 
   view = with pkgs.vimPlugins; [
+    {
+      plugin = myPlugins.sidebar-nvim;
+      config = readFile ./lua/sidebar-nvim.lua;
+      commands = [ "SidebarNvimToggle" "SidebarNvimOpen" ];
+    }
+    {
+      plugin = aerial-nvim;
+      config = readFile ./lua/aerial-nvim.lua;
+      commands = [ "AerialToggle" ];
+    }
     {
       plugin = myPlugins.incline-nvim-pr;
       config = readFile ./lua/incline_config.lua;
@@ -119,11 +147,8 @@ let
       delay = true;
     }
     {
-      plugin = nvim-scrollview;
-      delay = true;
-    }
-    {
       plugin = neoscroll-nvim;
+      enable = false;
       delay = true;
       config = ''
         require'neoscroll'.setup{
@@ -153,8 +178,13 @@ let
       vim.cmd([[
         function! s:skkeleton_init() abort
           call skkeleton#config({
+            \ 'globalJisyo': '${pkgs.skk-dicts}/share/SKK-JISYO.L',
+            \ 'globalJisyoEncoding': 'utf-8',
             \ 'useSkkServer': v:true,
-            \ 'globalJisyo': '${external.skk-dict}/SKK-JISYO.L',
+            \ 'skkServerHost': '127.0.0.1',
+            \ 'skkServerPort': 1178,
+            \ 'skkServerReqEnc': 'euc-jp',
+            \ 'skkServerResEnc': 'euc-jp',
             \ })
         endfunction
         augroup skkeleton-initialize-pre
@@ -169,6 +199,44 @@ let
   }];
 
   code = with pkgs.vimPlugins; [
+    {
+      plugin = range-highlight-nvim;
+      depends = [ cmd-parser-nvim ];
+      config = ''
+        require('range-highlight').setup{}
+      '';
+      events = [ "CmdlineEnter" ];
+    }
+    {
+      plugin = myPlugins.nvim-dd;
+      config = ''
+        require('dd').setup({
+          timeout = 1000
+        })
+      '';
+      delay = true;
+    }
+    {
+      plugin = myPlugins.vim-migemo;
+      config = ''
+        vim.g.migemodict = '${external.migemo-dict}/migemo-dict'
+      '';
+      extraPackages = [ pkgs.cmigemo ];
+      enable = false;
+    }
+    {
+      plugin = myPlugins.migemo-search;
+      extraPackages = [ pkgs.cmigemo ];
+      config = ''
+        vim.g.migemosearch_migemodict = '${external.migemo-dict}/migemo-dict}'
+      '';
+      enable = false;
+    }
+    {
+      plugin = Shade-nvim;
+      config = readFile ./lua/Shade-nvim.lua;
+      events = [ "WinNew" ];
+    }
     {
       plugin = luasnip;
       depends = [ friendly-snippets ];
@@ -265,6 +333,7 @@ let
           '';
         }
         nvim-cmp
+        null-ls-nvim
       ];
       config = ''
         local on_attach = function(client, bufnr)
@@ -290,6 +359,17 @@ let
           vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
           vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
           vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
+
+          if client.supports_method('textDocument/formatting') then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd('BufWritePre', {
+              group = augroup,
+              buffer = bufnr,
+              callback = function()
+                vim.lsp.buf.format({ bufnr = bufnr })
+              end,
+            })
+          end
         end
 
         local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -399,6 +479,26 @@ let
           on_attach = on_attach,
           capabilities = capabilities,
         }
+
+        -- eslint
+        lspconfig.eslint.setup{
+          on_attach = on_attach,
+          capabilities = capabilities,
+          cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server', '--stdio' },
+        }
+
+        -- null-ls
+        local null_ls = require('null-ls')
+        null_ls.setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
+          sources = {
+            -- prettier
+            null_ls.builtins.formatting.prettier.with {
+              prefer_local = 'node_modules/.bin'
+            },
+          },
+        })
       '';
       extraPackages = (with pkgs; [
         gopls
@@ -406,6 +506,7 @@ let
         rubyPackages.solargraph
         rust-analyzer
         sumneko-lua-language-server
+        nodePackages.vscode-langservers-extracted
       ]) ++ (with pkgs.pkgs-stable; [
         deno
         nodePackages.bash-language-server
@@ -423,6 +524,7 @@ let
       config = ''
         require'todo-comments'.setup {}
       '';
+      delay = true;
     }
     {
       plugin = trouble-nvim;
@@ -440,7 +542,7 @@ let
     {
       plugin = which-key-nvim;
       config = readFile ./lua/which-key-nvim_config.lua;
-      delay = true;
+      optional = false;
     }
     {
       plugin = nvim-treesitter;
@@ -485,6 +587,10 @@ let
           optimize = false;
         }
         myPlugins.telescope-live-grep-args-nvim
+        {
+          plugin = project-nvim;
+          config = readFile ./lua/project-nvim.lua;
+        }
       ];
       config = readFile ./lua/telescope-nvim_config.lua;
       commands = [ "Telescope" ];
@@ -629,7 +735,7 @@ in {
     plugins = startupPlugins ++ statusline ++ commandline ++ window ++ view
       ++ code ++ tool ++ ime;
     extraConfig = ''
-      vim.o.guifont = 'JetBrainsMonoExtraBold Nerd Font Mono'
+      vim.o.guifont = 'JetBrainsMono Nerd Font Mono'
       vim.opt.termguicolors = true
     '';
   };

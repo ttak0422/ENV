@@ -25,6 +25,10 @@ let
       zle -N pet-select
       stty -ixon
       bindkey '^e' pet-select
+
+      autoload -Uz edit-command-line
+      zle -N edit-command-line
+      bindkey '^xe' edit-command-line
     '';
   in ''
     function zvm_after_init() {
@@ -58,11 +62,15 @@ in {
       ${functionConfig}
       ${keybindConfig}
 
+      source <(kubectl completion zsh)
       export NEOVIDE_FRAMELESS=true
       export NEOVIDE_FRAME=buttonless
       export DOTNET_ROOT=$(dirname $(realpath $(which dotnet)))
       export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
       export PATH=$HOME/.dotnet/tools:$HOME/.local/bin:$PATH
+      if [ -f /opt/homebrew/bin/brew ]; then
+        export PATH=/opt/homebrew/bin:$PATH
+      fi
     '';
     sessionVariables = { EDITOR = "vim"; };
     plugins = [

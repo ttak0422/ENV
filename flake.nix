@@ -28,6 +28,8 @@
       url = "github:ttak0422/rokka-nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # emacs for mac
+    emacs.url = "github:cmacrae/emacs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     nix-doom-emacs = {
       url = "github:nix-community/nix-doom-emacs";
@@ -53,31 +55,34 @@
           allowUnfree = true;
           # allowBroken = true;
         };
-        overlays = attrValues self.overlays
-          ++ [ inputs.neovim-nightly-overlay.overlay ] ++ (with inputs;
-            [
-              (final: prev: {
-                # https://github.com/shaunsingh/nix-darwin-dotfiles/blob/2de71812cf0d1b75397e2f3ad90749ee26232ce6/flake.nix#L102-L115
-                yabai = let
-                  version = "4.0.1";
-                  buildSymlinks = prev.runCommand "build-symlinks" { } ''
-                    mkdir -p $out/bin
-                    ln -s /usr/bin/xcrun /usr/bin/xcodebuild /usr/bin/tiffutil /usr/bin/qlmanage $out/bin
-                  '';
-                in prev.yabai.overrideAttrs (old: {
-                  inherit version;
-                  nativeBuildInputs = [ buildSymlinks ];
-                  src = inputs.yabai;
-                  buildInputs = with prev.darwin.apple_sdk.frameworks; [
-                    Carbon
-                    Cocoa
-                    ScriptingBridge
-                    prev.xxd
-                    SkyLight
-                  ];
-                });
-              })
-            ]);
+        overlays = attrValues self.overlays ++ [
+          inputs.neovim-nightly-overlay.overlay
+          # inputs.emacs-overlay.overlay
+          # inputs.emacs.overlay
+        ] ++ (with inputs;
+          [
+            (final: prev: {
+              # https://github.com/shaunsingh/nix-darwin-dotfiles/blob/2de71812cf0d1b75397e2f3ad90749ee26232ce6/flake.nix#L102-L115
+              yabai = let
+                version = "4.0.1";
+                buildSymlinks = prev.runCommand "build-symlinks" { } ''
+                  mkdir -p $out/bin
+                  ln -s /usr/bin/xcrun /usr/bin/xcodebuild /usr/bin/tiffutil /usr/bin/qlmanage $out/bin
+                '';
+              in prev.yabai.overrideAttrs (old: {
+                inherit version;
+                nativeBuildInputs = [ buildSymlinks ];
+                src = inputs.yabai;
+                buildInputs = with prev.darwin.apple_sdk.frameworks; [
+                  Carbon
+                  Cocoa
+                  ScriptingBridge
+                  prev.xxd
+                  SkyLight
+                ];
+              });
+            })
+          ]);
       };
 
       mkHomeManagerConfig =

@@ -3,7 +3,8 @@ telescope.setup {
   defaults = {
     layout_strategy = 'vertical',
     layout_config = { height = 0.95 },
-    path_display={'smart'},
+    -- path_display={'smart'},
+    shorten_path = true;
   },
   extensions = {
     fzf = {
@@ -20,3 +21,4 @@ telescope.setup {
 
 telescope.load_extension('live_grep_args')
 telescope.load_extension('fzf')
+telescope.load_extension('projects')

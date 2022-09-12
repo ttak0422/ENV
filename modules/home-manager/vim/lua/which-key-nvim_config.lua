@@ -1,4 +1,4 @@
-local wk = require'which-key'
+local wk = require 'which-key'
 
 wk.setup()
 wk.register({
@@ -11,11 +11,13 @@ wk.register({
       d = { '<cmd>TroubleToggle document_diagnostics<cr>', 'Toggle Diagnostics (document)' },
       D = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Toggle Diagnostics (workspace)' },
       m = { '<cmd>Glow<cr>', 'Toggle Markdown Preview' },
+      o = { '<cmd>SidebarNvimToggle<CR>', 'Toggle Outline' },
     },
     ['f'] = {
       name = 'find',
       f = { '<cmd>Telescope live_grep_args<cr>', 'find contents' },
       p = { '<cmd>Telescope find_files<cr>', 'find files' },
+      P = { '<cmd>Telescope projects<cr>', 'find projects' },
       b = { '<cmd>Telescope buffers<cr>', 'find buffers' },
     },
     F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
@@ -36,6 +38,7 @@ wk.register({
 wk.register({
   ['<c-w>'] = {
     z = { '<cmd>ZoomWinTabToggle<cr>', 'zoom pane' },
+    ['<c-w>'] = { '<cmd>Chowcho<cr>', 'chose window' }
   },
 })
 
@@ -50,7 +53,7 @@ wk.register({
     },
     P = { '<cmd>lua require("goto-preview").close_all_win()<CR>', 'close all preview' },
     b = { '<cmd>BufferLinePick<CR>', 'pick buffer' },
-    w = { '<cmd>Chowcho<cr>', 'choose pane'},
+    w = { '<cmd>Chowcho<cr>', 'choose pane' },
   },
 })
 

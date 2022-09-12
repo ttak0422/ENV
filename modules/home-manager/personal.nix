@@ -1,15 +1,17 @@
 { config, pkgs, lib, ... }: {
   imports = [
-    ./prelude.nix
     ./application
     ./dev
+    ./emacs
     ./git
+    ./prelude.nix
     ./shell
     ./tmux
     ./tool
     ./vim
-    ./emacs
+    ./virtualization
     ./window-manager
+    ./utils/darwin.nix
   ];
   home.packages = with pkgs; [ cachix asciinema ];
 }

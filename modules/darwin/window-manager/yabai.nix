@@ -20,6 +20,7 @@ with lib; {
       active_window_opacity = "1.0";
       normal_window_opacity = "1.0";
     };
+    # WIP: emacs起動後再起動が必要なことがある
     extraConfig = ''
       yabai -m rule --add app='Finder' manage=off
       yabai -m rule --add app='zoom.us' manage=off
@@ -27,6 +28,7 @@ with lib; {
       yabai -m rule --add app='AnyConnect' manage=off
       yabai -m rule --add app='Alacritty' manage=off
       yabai -m rule --add app='システム環境設定' manage=off
+      yabai -m rule --add app=Emacs manage=on
       yabai -m space --gap abs:12
       yabai -m config mouse_modifier               alt
       yabai -m config mouse_action1                move

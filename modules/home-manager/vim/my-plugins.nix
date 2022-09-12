@@ -448,4 +448,15 @@ in {
       sha256 = "0r4ax2k0dmhp8xnjwdgsb2yhbzryfm43zbr22ck7sdyjs3hxldhs";
     };
   };
+
+  sidebar-nvim = buildVimPluginFrom2Nix {
+    pname = "sidebar-nvim";
+    version = "2022-09-12";
+    src = fetchFromGitHub {
+      owner = "sidebar-nvim";
+      repo = "sidebar.nvim";
+      rev = "4e07c8ea5cc86e21d69bb000f9f8e5df536da8b4";
+      sha256 = "1w2nlr87654dyhl7bgydkfza1xky6iaf3xxz74i73s6g6l3ww5wb";
+    };
+  };
 }

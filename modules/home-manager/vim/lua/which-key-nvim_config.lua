@@ -1,4 +1,4 @@
-local wk = require'which-key'
+local wk = require 'which-key'
 
 wk.setup()
 wk.register({
@@ -11,7 +11,7 @@ wk.register({
       d = { '<cmd>TroubleToggle document_diagnostics<cr>', 'Toggle Diagnostics (document)' },
       D = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Toggle Diagnostics (workspace)' },
       m = { '<cmd>Glow<cr>', 'Toggle Markdown Preview' },
-      O = { '<cmd>AerialToggle!<CR>', 'Toggle Outline' },
+      o = { '<cmd>SidebarNvimToggle<CR>', 'Toggle Outline' },
     },
     ['f'] = {
       name = 'find',
@@ -53,7 +53,7 @@ wk.register({
     },
     P = { '<cmd>lua require("goto-preview").close_all_win()<CR>', 'close all preview' },
     b = { '<cmd>BufferLinePick<CR>', 'pick buffer' },
-    w = { '<cmd>Chowcho<cr>', 'choose pane'},
+    w = { '<cmd>Chowcho<cr>', 'choose pane' },
   },
 })
 

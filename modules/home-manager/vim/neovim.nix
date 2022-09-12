@@ -103,6 +103,11 @@ let
 
   view = with pkgs.vimPlugins; [
     {
+      plugin = myPlugins.sidebar-nvim;
+      config = readFile ./lua/sidebar-nvim.lua;
+      commands = [ "SidebarNvimToggle" "SidebarNvimOpen" ];
+    }
+    {
       plugin = aerial-nvim;
       config = readFile ./lua/aerial-nvim.lua;
       commands = [ "AerialToggle" ];

@@ -519,6 +519,7 @@ let
       config = ''
         require'todo-comments'.setup {}
       '';
+      delay = true;
     }
     {
       plugin = trouble-nvim;

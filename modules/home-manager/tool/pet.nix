@@ -35,6 +35,11 @@ let
       description = "filter & map";
       command = "find . -name '<RegExp=*.ext>' | xargs <Fn=foo>";
     }
+    {
+      description = "prefetch git";
+      tag = [ "nix" ];
+      command = "nix-prefetch-git --url '<Repository>'";
+    }
   ];
 in {
   home = {

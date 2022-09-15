@@ -93,6 +93,11 @@
     pangu-spacing-real-insert-separtor t))
 (global-pangu-spacing-mode 1)
 
+;; ui
+(leaf all-the-icons :ensure t)
+(leaf neotree
+	:ensure t)
+
 ;; typescript
 (leaf typescript-mode
   :ensure t

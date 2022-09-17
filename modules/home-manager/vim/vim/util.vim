@@ -38,9 +38,16 @@ set hidden
 " モードをstatusに表示しない
 set noshowmode
 
-set nobackup
-set nowritebackup
-set noswapfile
+" set nobackup
+" set nowritebackup
+" set noswapfile
+" swap dir
+set directory=/var/tmp
+set backupdir=/var/tmp
+
+" undo
+set undodir=/var/tmp
+set undofile
 
 " 編集中のファイル変更時にリロード
 set autoread

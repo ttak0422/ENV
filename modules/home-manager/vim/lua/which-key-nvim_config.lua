@@ -3,16 +3,25 @@ local wk = require 'which-key'
 wk.setup()
 wk.register({
   ['<leader>'] = {
-    ['<leader>'] = {
+    -- easy motion
+    ['<leader>'] = { '<cmd>HopChar1<cr>', 'hop to char' },
+    j = { '<cmd>HopLineAC<cr>', 'hop to under line' },
+    k = { '<cmd>HopLineBC<cr>', 'hop to upper line' },
+    S = { '<cmd>HopChar2<cr>', 'hop to chars' },
+
+    -- toggle
+    ['t'] = {
       name = 'toggle',
-      z = { '<cmd>ZenMode<cr>', 'Toggle ZenMode' },
-      b = { '<cmd>NvimTreeToggle<cr>', 'Toggle File Tree' },
-      w = { '<cmd>WhichKey<cr>', 'Toggle WhichKey' },
-      d = { '<cmd>TroubleToggle document_diagnostics<cr>', 'Toggle Diagnostics (document)' },
-      D = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Toggle Diagnostics (workspace)' },
-      m = { '<cmd>Glow<cr>', 'Toggle Markdown Preview' },
-      o = { '<cmd>SidebarNvimToggle<CR>', 'Toggle Outline' },
+      z = { '<cmd>ZenMode<cr>', 'toggle zen' },
+      b = { '<cmd>NvimTreeToggle<cr>', 'toggle file tree' },
+      w = { '<cmd>WhichKey<cr>', 'toggle WhichKey' },
+      d = { '<cmd>TroubleToggle document_diagnostics<cr>', 'toggle diagnostics (document)' },
+      D = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'toggle diagnostics (workspace)' },
+      m = { '<cmd>Glow<cr>', 'toggle markdown' },
+      o = { '<cmd>SidebarNvimToggle<CR>', 'toggle outline' },
     },
+
+    -- find
     ['f'] = {
       name = 'find',
       f = { '<cmd>Telescope live_grep_args<cr>', 'find contents' },
@@ -20,18 +29,16 @@ wk.register({
       P = { '<cmd>Telescope projects<cr>', 'find projects' },
       b = { '<cmd>Telescope buffers<cr>', 'find buffers' },
     },
-    F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
-    ['r'] = {
-      name = 'run',
-    },
-    s = { '<cmd>HopChar1<cr>', 'hop to char' },
-    S = { '<cmd>HopChar2<cr>', 'hop to chars' },
-    j = { '<cmd>HopLineAC<cr>', 'hop to under line' },
-    k = { '<cmd>HopLineBC<cr>', 'hop to upper line' },
-    Q = { '<cmd>BufDel!<cr>', 'close buffer force' },
-    q = { '<cmd>BufDel<cr>', 'close buffer' },
+
+    -- lsp
     ca = { '<cmd>Lspsaga code_action<cr>', 'code action' },
     rn = { '<cmd>Lspsaga rename<cr>', 'rename' },
+
+    -- other
+    q = { '<cmd>BufDel<cr>', 'close buffer' },
+    Q = { '<cmd>BufDel!<cr>', 'close buffer force' },
+    F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
+
   },
 })
 

@@ -459,4 +459,26 @@ in {
       sha256 = "1w2nlr87654dyhl7bgydkfza1xky6iaf3xxz74i73s6g6l3ww5wb";
     };
   };
+
+  pretty-fold-nvim = buildVimPluginFrom2Nix {
+    pname = "prettier-fold.nvim";
+    version = "2022-09-17";
+    src = fetchFromGitHub {
+      owner = "anuvyklack";
+      repo = "pretty-fold.nvim";
+      rev = "a7d8b424abe0eedf50116c460fbe6dfd5783b1d5";
+      sha256 = "0fjjd5zyh588czz886v29wff8jy5fwa4nbjfailwph4p9b1xj0rx";
+    };
+  };
+
+  fold-preview-nvim = buildVimPluginFrom2Nix {
+    pname = "fold-preview-nvim";
+    version = "2022-09-17";
+    src = fetchFromGitHub {
+      owner = "anuvyklack";
+      repo = "fold-preview.nvim";
+      rev = "33c24101dc1b2be29876ee3354de98bb8bd14cb0";
+      sha256 = "1awjqyi9fwxjq7l1mk493788215ihsyafnfwml8yd6s9mzxfdj4h";
+    };
+  };
 }

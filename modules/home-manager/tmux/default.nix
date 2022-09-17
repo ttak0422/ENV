@@ -156,8 +156,8 @@ let
     ##########
     # status #
     ##########
-    # set -g status on
-    # ${statusConfig}
+    set -g status off
+    # {statusConfig}
 
     ############
     # sesssion #

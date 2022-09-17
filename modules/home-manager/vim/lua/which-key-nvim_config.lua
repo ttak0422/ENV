@@ -58,6 +58,10 @@ wk.register({
 })
 
 wk.register({
+  ['<Tab>'] = { [[@=(foldlevel('.')?'za':"\<Tab>")<CR>]], 'toggle fold' },
+})
+
+wk.register({
   ['<leader>'] = {
     c = { '<cmd>OSCYank<CR>', 'OSCYank' },
   },

@@ -62,6 +62,19 @@ let
     }
   ];
 
+  custom = with pkgs.vimPlugins; [{
+    # foldmethod
+    plugin = myPlugins.pretty-fold-nvim;
+    depends = [ myPlugins.fold-preview-nvim ];
+    startup = ''
+      -- default
+      vim.opt.foldmethod = 'indent'
+      vim.opt.foldlevel = 10
+    '';
+    config = readFile ./lua/pretty-fold-nvim.lua;
+    delay = true;
+  }];
+
   statusline = with pkgs.vimPlugins; [{
     plugin = lualine-nvim;
     startup = ''
@@ -732,8 +745,8 @@ let
 in {
   programs.rokka-nvim = {
     enable = true;
-    plugins = startupPlugins ++ statusline ++ commandline ++ window ++ view
-      ++ code ++ tool ++ ime;
+    plugins = startupPlugins ++ custom ++ statusline ++ commandline ++ window
+      ++ view ++ code ++ tool ++ ime;
     extraConfig = ''
       vim.o.guifont = 'JetBrainsMono Nerd Font Mono'
       vim.opt.termguicolors = true

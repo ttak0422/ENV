@@ -7,39 +7,12 @@ let
   defaultShell = "${pkgs.zsh}/bin/zsh";
   statusInterval = 60;
   resizeAmount = 5;
-  focusPane = "‹:)~❁";
+  normalSimbol = "‹:)";
+  activeSimbol = "‹:)~";
   lBracketSimbol = "\\ue0b6";
   rBracketSimbol = "\\ue0b4";
-  sessionSimbol = "\\uf53a";
-  zoomSimbol = "\\uf519";
-  loaSimbol = "\\uf91e";
-  # vimで利用するもとと同じ
-  colors = {
-    yellow = "#ECBE7B";
-    cyan = "#008080";
-    darkblue = "#081633";
-    green = "#98be65";
-    orange = "#FF8800";
-    violet = "#a9a1e1";
-    magenta = "#c678dd";
-    blue = "#51afef";
-    red = "#ec5f67";
-    white = "#ffffff";
-    gray = "#969696";
-  };
-  colors = {
+  zoomSimbol = "";
 
-  };
-  one = {
-    bg = "#282c34";
-    fg = "#abb2bf";
-    yellow = "#e5c07b";
-    blue = "#61afef";
-    green = "#98c379";
-    red = "#e06c75";
-  };
-
-  # helper script
   scripts = let
     shebang = ''
       #!${pkgs.bash}/bin/bash
@@ -95,54 +68,8 @@ let
     urlview
   ];
 
-  statusConfig = ''
-    set-option -g status-interval ${toString statusInterval}
-
-    # width
-    set -g status-left-length 40
-    set -g status-right-length 80
-
-    # color
-    set -g message-style bg=${colors.green},fg=${colors.darkblue}
-
-    # status
-    set-window-option -g status-style bg=default
-
-    # status-left
-    set -g status-left "#[bg=${colors.red},fg=${colors.darkblue}] ${sessionSimbol} #S #{?window_zoomed_flag,${zoomSimbol} ,}#[default]"
-
-    # status-center
-    set-option -g status-justify "centre"
-    set-window-option -g window-status-format " #W "
-    set-window-option -g window-status-current-format "#{?client_prefix,#[bg=${colors.green}],#[bg=${colors.blue}]}#[fg=${colors.darkblue},bold] #W #[default]"
-
-    # status-right
-    set -g status-right " ${loaSimbol}#(${scripts.TMUX_LOA}/bin/TMUX_LOA) "
-
-    set -g status-position bottom
-  '';
-  # tmux.conf
-  extraConfig = ''
+  prelude = ''
     set-option -ga terminal-overrides ",screen-256color:Tc"
-
-    #########
-    # basic #
-    #########
-
-    bind d detach-client
-    bind : command-prompt
-
-    # copy
-    bind [ copy-mode
-
-    # paste
-    bind ] paste-buffer
-
-    # clock
-    bind t clock-mode
-
-    # zoom
-    bind z resize-pane -Z\; ${borderUpdate}
 
     # mouse
     set-option -g mouse on
@@ -150,45 +77,39 @@ let
     # bell
     set-option -g bell-action none
 
-    # run
-    run-shell "${scripts.TMUX_UPDATE_BORDER}/bin/TMUX_UPDATE_BORDER #{window_zoomed_flag}";
+    # window: renumber
+    set-option -g renumber-windows on
+  '';
 
-    ##########
-    # status #
-    ##########
-    set -g status off
-    # {statusConfig}
+  bindings = ''
+    # basic
+    bind d detach-client
+    bind : command-prompt
+    # copy
+    bind [ copy-mode
+    # paste
+    bind ] paste-buffer
+    # clock
+    bind t clock-mode
+    # zoom
+    bind z resize-pane -Z
 
-    ############
-    # sesssion #
-    ############
-
-    # session
+    # session: create
     bind C-n command-prompt -I "" "new -s '%%'"
-
-    # choose
+    # session: choose
     bind s choose-session
-
-    # rename
+    # session: rename
     bind S command-prompt -I "#S" "rename-session '%%'"
 
-    ##########
-    # window #
-    ##########
-
-    # new
-    bind c new-window\; ${borderUpdate}
-
-    # close
-    bind X confirm-before -p "kill-window #W? (y/n)" "${borderUpdate2}"
-
-    # choose
+    # window: create
+    bind c new-window
+    # window: close
+    bind X confirm-before -p "kill-window #W? (y/n)" kill-window
+    # window: choose
     bind w choose-window
-
-    # rename
+    # window: rename
     bind W command-prompt -I "#W" "rename-window '%%'"
-
-    # select-window
+    # window: move
     bind 1 select-window -t :1
     bind 2 select-window -t :2
     bind 3 select-window -t :3
@@ -199,62 +120,55 @@ let
     bind 8 select-window -t :8
     bind 9 select-window -t :9
     bind 0 select-window -t :10
-
-    # move-window
     bind -r , previous-window
     bind -r . next-window
 
-    # renumber
-    set-option -g renumber-windows on
-
-    # swap-windw
-    bind -r < \
-    swap-window -t -1\; \
-      previous-window
-    bind -r > \
-    swap-window -t +1\; \
-      next-window
-
-    ########
-    # pane #
-    ########
-
-    # split pane
-    bind | split-window -h -c '#{pane_current_path}'\; ${borderUpdate}
-    bind - split-window -v -c '#{pane_current_path}'\; ${borderUpdate}
-
-    # close
-    bind x confirm-before -p "kill-pane #W? (y/n)" "${borderUpdate2}"
-
-    # rename
+    # pane: split
+    bind | split-window -h -c '#{pane_current_path}'
+    bind - split-window -v -c '#{pane_current_path}'
+    # pane: close
+    bind x confirm-before -p "kill-pane #T? (y/n)" kill-pane
+    # pane: rename
     bind P command-prompt -I "" "select-pane -T '%%'"
-
-    # move-pane
+    # pane: move
     bind -r h select-pane -L
     bind -r j select-pane -D
     bind -r k select-pane -U
     bind -r l select-pane -R
-
-    # resize-pane
+    # pane: resize
     bind -r H resize-pane -L ${toString resizeAmount}
     bind -r J resize-pane -D ${toString resizeAmount}
     bind -r K resize-pane -U ${toString resizeAmount}
     bind -r L resize-pane -R ${toString resizeAmount}
+  '';
 
-    # pane-border
+  statusline = ''
+    set -g status off
+  '';
+
+  paneborder = ''
     set -g pane-active-border-style ""
     set -g pane-border-style ""
-    set -g pane-border-format "#{?pane_active,${lBracketSimbol}#[reverse] #T ${focusPane} #[default]${rBracketSimbol},}"
-    set -g pane-border-status off
+    set -g pane-border-format "#{?pane_active,${lBracketSimbol}#[reverse]#{?window_zoomed_flag,${zoomSimbol},} #S / #W / #T - (#(${scripts.TMUX_LOA}/bin/TMUX_LOA) #{?client_prefix,${activeSimbol},${normalSimbol}} #[default]${rBracketSimbol},}"
+    set -g pane-border-status top
+  '';
 
-    # resurrect
+  session = ''
+    # session: resurrect
     set -g @resurrect-strategy-nvim 'session'
-    # continuum
+    # session: continuum
     set -g @continuum-boot 'on'
     set -g @continuum-boot-options 'alacritty'
     set -g @continuum-save-interval '5' # minutes
     set -g @continuum-restore 'on'
+  '';
 
+  extraConfig = ''
+    ${prelude}
+    ${bindings}
+    ${statusline}
+    ${paneborder}
+    ${session}
   '';
 in {
   home.packages = scriptPackages;

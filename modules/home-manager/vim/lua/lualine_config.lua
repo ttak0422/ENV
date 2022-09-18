@@ -204,6 +204,18 @@ ins_right({
 })
 
 ins_right({
+  function() return 'Space:' .. vim.o.shiftwidth end,
+  padding = { left = 0, right = 1 },
+  cond = conditions.hide_in_width,
+})
+
+ins_right({
+  function() return '|' end,
+  padding = { left = 0, right = 1 },
+  cond = conditions.hide_in_width,
+})
+
+ins_right({
   'fileformat',
   symbols = { unix = "LF", dos = "CRLF", mac = "CR" },
   fmt = string.upper,

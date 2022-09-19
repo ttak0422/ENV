@@ -27,7 +27,7 @@ wk.register({
       f = { '<cmd>Telescope live_grep_args<cr>', 'find contents' },
       p = { '<cmd>Telescope find_files<cr>', 'find files' },
       P = { '<cmd>Telescope projects<cr>', 'find projects' },
-      b = { '<cmd>Telescope buffers<cr>', 'find buffers' },
+      b = { '<cmd>Telescope buffers previewer=false theme=cursor<cr>', 'find buffers' },
     },
 
     -- lsp
@@ -38,7 +38,6 @@ wk.register({
     q = { '<cmd>BufDel<cr>', 'close buffer' },
     Q = { '<cmd>BufDel!<cr>', 'close buffer force' },
     F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
-
   },
 })
 
@@ -69,7 +68,7 @@ wk.register({
 })
 
 wk.register({
-  ['<leader>'] = {
-    c = { '<cmd>OSCYank<CR>', 'OSCYank' },
-  },
+--  ['<leader>'] = {
+--    T = { '<cmd>Translate<cr>', 'translate' },
+--  },
 }, { mode = 'v' })

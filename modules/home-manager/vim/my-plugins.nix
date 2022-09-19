@@ -481,4 +481,15 @@ in {
       sha256 = "1awjqyi9fwxjq7l1mk493788215ihsyafnfwml8yd6s9mzxfdj4h";
     };
   };
+
+  vim-translator = buildVimPluginFrom2Nix {
+    pname = "vim-translator";
+    version = "2022-09-19";
+    src = fetchFromGitHub {
+      owner = "voldikss";
+      repo = "vim-translator";
+      rev = "42e5262a9491ae746f0d4e225ffffc86a3f714de";
+      sha256 = "049kfcra3dqzz2r38qanbg2lai9c7bs6y5rngmkzs1d7prsw67zv";
+    };
+  };
 }

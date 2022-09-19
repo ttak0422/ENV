@@ -655,6 +655,13 @@ let
 
   tool = with pkgs.vimPlugins; [
     {
+      plugin = myPlugins.vim-translator;
+      config = ''
+        vim.g.translator_target_lang = 'ja'
+      '';
+      commands = [ "Translate" ];
+    }
+    {
       plugin = myPlugins.git-conflict-nvim;
       delay = true;
       config = ''

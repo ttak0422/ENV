@@ -38,6 +38,9 @@ set hidden
 " モードをstatusに表示しない
 set noshowmode
 
+" truecolor
+set termguicolors
+
 " set nobackup
 " set nowritebackup
 " set noswapfile
@@ -60,8 +63,8 @@ autocmd FileType * setlocal formatoptions-=r
 autocmd FileType * setlocal formatoptions-=o
 
 " grepをrgに置き換え
-let &grepprg = 'rg --vimgrep --hidden'
-set grepformat=%f:%l:%c:%m
+" let &grepprg = 'rg --vimgrep --hidden'
+" set grepformat=%f:%l:%c:%m
 
 " jkのwrap対応
 nnoremap j gj

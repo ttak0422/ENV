@@ -13,14 +13,14 @@ cmp.setup({
       require 'luasnip'.lsp_expand(args.body)
     end,
   },
-  window = {
-    completion = {
-      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-    },
-    documentation = {
-      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-    }
-  },
+  -- window = {
+  --   completion = {
+  --     border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+  --   },
+  --   documentation = {
+  --     border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+  --   }
+  -- },
   mapping = cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -54,7 +54,14 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'luasnip' },
-    { name = 'buffer' },
+    { name = 'nvim_lua' },
+    { name = 'buffer',
+      option = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end
+      }
+    },
   }),
   formatting = {
     format = lspkind.cmp_format({

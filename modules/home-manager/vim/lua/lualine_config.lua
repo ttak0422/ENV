@@ -78,6 +78,7 @@ local config = {
     component_separators = '',
     section_separators = '',
     globalstatus = true,
+    ignore_focus = { 'SidebarNvim' },
   },
   sections = {
     lualine_a = {},
@@ -131,48 +132,43 @@ ins_left({
 })
 
 ins_left({
-  function() return '%=' end,
-})
-
-ins_left {
-  function() return '  ' end,
-  padding = { left = 0, right = 0 },
-  cond = conditions.hide_in_width,
-}
-
-ins_left({
-  'filename',
-  file_status = false,
-  path = 1,
-  padding = { left = 0, right = 0 },
-  cond = conditions.hide_in_width,
-})
-
-ins_right({
   'diff',
   colored = false,
   symbols = { added = ' ', modified = ' ', removed = ' ' },
   cond = conditions.hide_in_width,
-  padding = { left = 0, right = 1 },
+  padding = { left = 1, right = 0 },
   always_visible = true,
 })
 
-ins_right({
-  function() return '|' end,
-  padding = { left = 0, right = 1 },
-  cond = conditions.hide_in_width,
+ins_left({
+  function() return '%=' end,
 })
 
-ins_right({
-  'location',
-  padding = { left = 0, right = 1 },
-})
+-- ins_left {
+--   function() return '  ' end,
+--   padding = { left = 0, right = 0 },
+--   cond = conditions.hide_in_width,
+-- }
 
-ins_right({
-  function() return '|' end,
-  padding = { left = 0, right = 1 },
-  cond = conditions.hide_in_width,
-})
+-- ins_left({
+--   'filename',
+--   file_status = false,
+--   path = 1,
+--   padding = { left = 0, right = 0 },
+--   cond = conditions.hide_in_width,
+-- })
+
+-- ins_right({
+--   function() return '|' end,
+--   padding = { left = 0, right = 1 },
+--   cond = conditions.hide_in_width,
+-- })
+
+-- ins_right({
+--   function() return '|' end,
+--   padding = { left = 0, right = 1 },
+--   cond = conditions.hide_in_width,
+-- })
 
 ins_right({
   'diagnostics',
@@ -182,13 +178,19 @@ ins_right({
   symbols = { error = ' ', warn = ' ' },
   colored = false,
   padding = { left = 0, right = 1 },
-})
-
-ins_right({
-  function() return '|' end,
-  padding = { left = 0, right = 1 },
   cond = conditions.hide_in_width,
 })
+
+-- ins_right({
+--   'location',
+--   padding = { left = 0, right = 1 },
+-- })
+
+-- ins_right({
+--   function() return '|' end,
+--   padding = { left = 0, right = 1 },
+--   cond = conditions.hide_in_width,
+-- })
 
 ins_right({
   'o:encoding',
@@ -197,11 +199,11 @@ ins_right({
   padding = { left = 0, right = 1 },
 })
 
-ins_right({
-  function() return '|' end,
-  padding = { left = 0, right = 1 },
-  cond = conditions.hide_in_width,
-})
+-- ins_right({
+--   function() return '|' end,
+--   padding = { left = 0, right = 1 },
+--   cond = conditions.hide_in_width,
+-- })
 
 ins_right({
   function() return 'Space:' .. vim.o.shiftwidth end,
@@ -209,11 +211,11 @@ ins_right({
   cond = conditions.hide_in_width,
 })
 
-ins_right({
-  function() return '|' end,
-  padding = { left = 0, right = 1 },
-  cond = conditions.hide_in_width,
-})
+-- ins_right({
+--   function() return '|' end,
+--   padding = { left = 0, right = 1 },
+--   cond = conditions.hide_in_width,
+-- })
 
 ins_right({
   'fileformat',
@@ -223,11 +225,11 @@ ins_right({
   padding = { left = 0, right = 1 },
 })
 
-ins_right({
-  function() return '|' end,
-  padding = { left = 0, right = 1 },
-  cond = conditions.hide_in_width,
-})
+-- ins_right({
+--   function() return '|' end,
+--   padding = { left = 0, right = 1 },
+--   cond = conditions.hide_in_width,
+-- })
 
 ins_right({
   'filetype',

@@ -4,85 +4,144 @@ let
   inherit (builtins) concatStringsSep map fetchTarball readFile;
   inherit (lib.strings) fileContents;
   inherit (lib.lists) singleton;
-
   inherit (pkgs) fetchFromGitHub;
   inherit (pkgs.stdenv) mkDerivation;
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
   templates = pkgs.callPackage ./templates { };
   external = pkgs.callPackage ./external.nix { };
   myPlugins = pkgs.callPackage ./my-plugins.nix { };
-  lua = luaCode: ''
-    lua <<EOF
-    ${luaCode}
-    EOF
-  '';
-  readLua = path: lua (fileContents path);
+
+  # TODO: smart override
+  custom-nvim-treesitter = myPlugins.nvim-treesitter;
+  custom-gitsigns-nvim = myPlugins.gitsigns-nvim;
 
   extraConfig = ''
     let g:neovide_cursor_vfx_mode = "pixiedust"
 
+    ${fileContents ./vim/nvim.vim}
     ${fileContents ./vim/util.vim}
   '';
 
-  startupPlugins = with pkgs.vimPlugins; [
+  startup = with pkgs.vimPlugins; [
     {
-      plugin = scrollbar-nvim;
-      config = readFile ./lua/scrollbar-nvim.lua;
+      plugin = myPlugins.filetype-nvim;
+      startup = ''
+        vim.g.did_load_filetypes = 1
+      '';
       optional = false;
     }
     {
-      plugin = impatient-nvim;
-      enable = false;
+      plugin = myPlugins.serenade;
+      startup = "vim.cmd([[colorscheme serenade]])";
       optional = false;
+      enable = false;
+    }
+    {
+      plugin = nightfox-nvim;
+      startup = "vim.cmd([[colorscheme nightfox]])";
+      optional = false;
+    }
+    {
+      plugin = lsp-colors-nvim;
       config = ''
-        require('impatient').enable_profile()
+        require("lsp-colors").setup({})
       '';
+      optional = false;
     }
     {
       plugin = vim-sensible;
       optional = false;
-    }
-    {
-      plugin = myPlugins.themer-lua;
-      optional = false;
-      config = readFile ./lua/themer-lua_config.lua;
-    }
-    {
-      plugin = myPlugins.serenade;
-      enable = false;
-      startup = ''
-        vim.cmd([[colorscheme serenade]])
-      '';
-      optional = false;
+      comment = "必須設定群";
     }
     {
       plugin = myPlugins.alpha-nvim;
       config = readFile ./lua/alpha-nvim_config.lua;
       optional = false;
+      comment = "splashscreen";
+    }
+    {
+      plugin = which-key-nvim;
+      config = readFile ./lua/which-key-nvim_config.lua;
+      optional = false;
+      comment = "whichkey";
     }
   ];
 
-  custom = with pkgs.vimPlugins; [{
-    # foldmethod
-    plugin = myPlugins.pretty-fold-nvim;
-    depends = [ myPlugins.fold-preview-nvim ];
+  ime = [{
+    plugin = myPlugins.skkeleton;
+    depends = [ myPlugins.denops-vim ];
+    dependsAfter = [ myPlugins.skkeleton_indicator-nvim ];
     startup = ''
-      -- default
-      vim.opt.foldmethod = 'indent'
-      vim.opt.foldlevel = 10
+      vim.cmd([[
+        function! s:skkeleton_init() abort
+          call skkeleton#config({
+            \ 'globalJisyo': '${pkgs.skk-dicts}/share/SKK-JISYO.L',
+            \ 'globalJisyoEncoding': 'utf-8',
+            \ 'useSkkServer': v:true,
+            \ 'skkServerHost': '127.0.0.1',
+            \ 'skkServerPort': 1178,
+            \ 'skkServerReqEnc': 'euc-jp',
+            \ 'skkServerResEnc': 'euc-jp',
+            \ })
+        endfunction
+        augroup skkeleton-initialize-pre
+          autocmd!
+          autocmd User skkeleton-initialize-pre call s:skkeleton_init()
+        augroup END
+      ]])
     '';
-    config = readFile ./lua/pretty-fold-nvim.lua;
+    config = readFile ./lua/skkeleton_config.lua
+      + readFile ./lua/skkeleton_indicator_config.lua;
     delay = true;
   }];
 
-  statusline = with pkgs.vimPlugins; [{
-    plugin = lualine-nvim;
-    startup = ''
-      vim.opt.laststatus = 3
-    '';
-    config = readFile ./lua/lualine_config.lua;
-    delay = true;
-  }];
+  custom = with pkgs.vimPlugins; [
+    {
+      plugin = myPlugins.pretty-fold-nvim;
+      depends = [ myPlugins.fold-preview-nvim ];
+      startup = ''
+        -- default
+        vim.opt.foldmethod = 'indent'
+        vim.opt.foldlevel = 10
+      '';
+      config = readFile ./lua/pretty-fold-nvim.lua;
+      delay = true;
+      comment = "折り畳み強化";
+    }
+    {
+      plugin = nvim-bqf;
+      fileTypes = [ "qf" ];
+      events = [ "QuickFixCmdPre" ];
+      comment = "QuickFix強化";
+    }
+    {
+      plugin = nvim-hlslens;
+      events = [ "CmdlineEnter" ];
+      comment = "hl強化";
+    }
+  ];
+
+  statusline = with pkgs.vimPlugins; [
+    {
+      plugin = lualine-nvim;
+      startup = ''
+        vim.opt.laststatus = 3
+      '';
+      config = readFile ./lua/lualine_config.lua;
+      delay = true;
+    }
+    {
+      plugin = myPlugins.windline-nvim;
+      startup = ''
+        vim.opt.laststatus = 3
+      '';
+      delay = true;
+      config = ''
+        require('wlsample.vscode')
+      '';
+      enable = false;
+    }
+  ];
 
   commandline = with pkgs.vimPlugins; [
     {
@@ -95,7 +154,6 @@ let
     {
       plugin = mkdir-nvim;
       events = [ "CmdlineEnter" ];
-
     }
   ];
 
@@ -111,10 +169,28 @@ let
         }
       '';
     }
+  ];
 
+  language = with pkgs.vimPlugins; [
+    {
+      plugin = vim-nix;
+      fileTypes = [ "nix" ];
+    }
+    {
+      plugin = myPlugins.neofsharp-vim;
+      fileTypes = [ "fs" "fsx" "fsi" "fsproj" ];
+    }
   ];
 
   view = with pkgs.vimPlugins; [
+    {
+      plugin = nvim-web-devicons;
+      config = ''
+        require'nvim-web-devicons'.setup {
+         default = true;
+        }
+      '';
+    }
     {
       plugin = myPlugins.sidebar-nvim;
       config = readFile ./lua/sidebar-nvim.lua;
@@ -128,7 +204,8 @@ let
     {
       plugin = myPlugins.incline-nvim-pr;
       config = readFile ./lua/incline_config.lua;
-      delay = true;
+      # delay = true;
+      comment = "ペインにファイル名を表示";
     }
     {
       plugin = myPlugins.nvim-transparent;
@@ -155,7 +232,7 @@ let
     }
     {
       plugin = indent-blankline-nvim;
-      depends = [ nvim-treesitter ];
+      depends = [ custom-nvim-treesitter ];
       config = readFile ./lua/indent-blankline-nvim_config.lua;
       delay = true;
     }
@@ -177,41 +254,21 @@ let
       config = readFile ./lua/bufferline_config.lua;
     }
     {
-      plugin = gitsigns-nvim;
+      plugin = custom-gitsigns-nvim;
       depends = [ plenary-nvim ];
       config = readFile ./lua/gitsigns_config.lua;
       delay = true;
     }
   ];
 
-  ime = [{
-    plugin = myPlugins.skkeleton;
-    depends = [ myPlugins.denops-vim myPlugins.skkeleton_indicator-nvim ];
-    startup = ''
-      vim.cmd([[
-        function! s:skkeleton_init() abort
-          call skkeleton#config({
-            \ 'globalJisyo': '${pkgs.skk-dicts}/share/SKK-JISYO.L',
-            \ 'globalJisyoEncoding': 'utf-8',
-            \ 'useSkkServer': v:true,
-            \ 'skkServerHost': '127.0.0.1',
-            \ 'skkServerPort': 1178,
-            \ 'skkServerReqEnc': 'euc-jp',
-            \ 'skkServerResEnc': 'euc-jp',
-            \ })
-        endfunction
-        augroup skkeleton-initialize-pre
-          autocmd!
-          autocmd User skkeleton-initialize-pre call s:skkeleton_init()
-        augroup END
-      ]])
-    '';
-    config = readFile ./lua/skkeleton_config.lua
-      + readFile ./lua/skkeleton_indicator_config.lua;
-    delay = true;
-  }];
-
   code = with pkgs.vimPlugins; [
+    {
+      plugin = custom-nvim-treesitter;
+      dependsAfter = [ nvim-ts-rainbow nvim-ts-autotag ];
+      delay = true;
+      config = readFile ./lua/nvim-treesitter_config.lua;
+      extraPackages = with pkgs; [ tree-sitter ];
+    }
     {
       plugin = range-highlight-nvim;
       depends = [ cmd-parser-nvim ];
@@ -228,6 +285,7 @@ let
         })
       '';
       delay = true;
+      comment = "diagnostics throttle";
     }
     {
       plugin = myPlugins.vim-migemo;
@@ -256,22 +314,6 @@ let
       config = readFile ./lua/luasnip_config.lua;
     }
     {
-      plugin = myPlugins.neofsharp-vim;
-      fileTypes = [ "fs" "fsx" "fsi" "fsproj" ];
-      optional = false;
-    }
-    {
-      plugin = myPlugins.filetype-nvim;
-      startup = ''
-        vim.g.did_load_filetypes = 1
-      '';
-      optional = false;
-    }
-    {
-      plugin = vim-nix;
-      fileTypes = [ "nix" ];
-    }
-    {
       plugin = myPlugins.flare-nvim;
       config = readFile ./lua/flare_config.lua;
       events = [ "InsertEnter" ];
@@ -281,7 +323,7 @@ let
     { plugin = vim-vsnip; }
     {
       plugin = nvim-cmp;
-      depends = [
+      dependsAfter = [
         {
           plugin = lspkind-nvim;
           config = readFile ./lua/lspkind_config.lua;
@@ -291,22 +333,18 @@ let
           depends = [ vim-vsnip ];
         }
         nvim-autopairs
-        nvim-treesitter
+        custom-nvim-treesitter
         cmp-path
         cmp-buffer
         cmp-calc
         cmp-treesitter
         cmp-nvim-lsp
+        cmp-nvim-lua
         {
           plugin = cmp_luasnip;
           depends = [ luasnip ];
         }
         myPlugins.cmp-nvim-lsp-signature-help
-        # myPlugins.orgmode
-        # {
-        #   plugin = myPlugins.cmp-skkeleton;
-        #   depends = [ myPlugins.skkeleton ];
-        # }
       ];
       config = ''
         vim.cmd[[silent source ${cmp-path}/after/plugin/cmp_path.lua]]
@@ -315,26 +353,21 @@ let
         vim.cmd[[silent source ${cmp-treesitter}/after/plugin/cmp_treesitter.lua]]
         vim.cmd[[silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua]]
         vim.cmd[[silent source ${cmp_luasnip}/after/plugin/cmp_luasnip.lua]]
+        vim.cmd[[silent source ${cmp-nvim-lua}/after/plugin/cmp_nvim_lua.lua]]
         vim.cmd[[silent source ${myPlugins.cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua]]
       '' + (readFile ./lua/nvim-cmp_config.lua);
-      events = [ "InsertEnter" ];
       delay = true;
     }
     {
       plugin = myPlugins.lspsaga-nvim;
       depends = [ nvim-lspconfig ];
-      config = ''
-        require 'lspsaga'.init_lsp_saga {}
-      '';
+      # config = ''
+      #   require 'lspsaga'.init_lsp_saga {}
+      # '';
+      config = readFile ./lua/lspsaga-nvim.lua;
+
       commands = [ "Lspsaga" ];
-    }
-    {
-      plugin = myPlugins.dim-lua;
       delay = true;
-      depends = [ nvim-treesitter nvim-lspconfig ];
-      config = ''
-        require('dim').setup({})
-      '';
     }
     {
       plugin = nvim-lspconfig;
@@ -553,20 +586,8 @@ let
       delay = true;
     }
     {
-      plugin = which-key-nvim;
-      config = readFile ./lua/which-key-nvim_config.lua;
-      optional = false;
-    }
-    {
-      plugin = nvim-treesitter;
-      depends = [ nvim-ts-rainbow nvim-ts-autotag ];
-      delay = true;
-      config = readFile ./lua/nvim-treesitter_config.lua;
-      extraPackages = with pkgs; [ tree-sitter ];
-    }
-    {
       plugin = nvim_context_vt;
-      depends = [ nvim-treesitter ];
+      depends = [ custom-nvim-treesitter ];
       delay = true;
       config = readFile ./lua/nvim_context_vt_config.lua;
     }
@@ -610,14 +631,6 @@ let
       extraPackages = with pkgs.pkgs-stable; [ fzf ripgrep ];
     }
     {
-      plugin = nvim-bqf;
-      fileTypes = [ "qf" ];
-    }
-    {
-      plugin = nvim-hlslens;
-      events = [ "CmdlineEnter" ];
-    }
-    {
       plugin = quick-scope;
       startup = ''
         vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
@@ -647,7 +660,7 @@ let
     }
     {
       plugin = nvim-autopairs;
-      depends = [ nvim-treesitter ];
+      depends = [ custom-nvim-treesitter ];
       config = readFile ./lua/nvim-autopairs_config.lua;
       events = [ "InsertEnter" ];
     }
@@ -675,7 +688,7 @@ let
     }
     {
       plugin = myPlugins.org-bullets-nvim;
-      depends = [ nvim-treesitter ];
+      depends = [ custom-nvim-treesitter ];
       config = readFile ./lua/org-bullets_config.lua;
       enable = false;
     }
@@ -688,7 +701,7 @@ let
       plugin = myPlugins.orgmode;
       depends = [
         nvim-cmp
-        nvim-treesitter
+        custom-nvim-treesitter
         myPlugins.org-bullets-nvim
         myPlugins.headlines-nvim
       ];
@@ -708,7 +721,7 @@ let
     }
     {
       plugin = twilight-nvim;
-      depends = [ nvim-treesitter ];
+      depends = [ custom-nvim-treesitter ];
       config = readFile ./lua/twilight_config.lua;
     }
     {
@@ -751,26 +764,16 @@ let
   ];
 in {
   programs.rokka-nvim = {
+    inherit extraConfig;
     enable = true;
-    plugins = startupPlugins ++ custom ++ statusline ++ commandline ++ window
-      ++ view ++ code ++ tool ++ ime;
-    extraConfig = ''
-      vim.o.guifont = 'JetBrainsMono Nerd Font Mono'
-      vim.opt.termguicolors = true
-    '';
+    plugins = startup ++ ime ++ custom ++ statusline ++ commandline ++ window
+      ++ language ++ view ++ code ++ tool;
+    withNodeJs = true;
+    withPython3 = true;
   };
   home = {
     sessionVariables = {
       JAVA_OPTS = "-javaagent:${pkgs.lombok}/share/java/lombok.jar";
     };
-  };
-  programs.neovim = {
-    inherit extraConfig;
-    enable = true;
-    package = pkgs.neovim-nightly;
-    plugins = with pkgs.vimPlugins; [ wilder-nvim ];
-    extraPython3Packages = ps: with ps; [ ];
-    withNodeJs = true;
-    withPython3 = true;
   };
 }

@@ -9,6 +9,22 @@ saga.init_lsp_saga {
     show_file = true,
     click_support = false,
   },
+  code_action_lightbulb = {
+    enable = true,
+    enable_in_insert = true,
+    cache_code_action = true,
+    sign = false,
+    update_time = 150,
+    sign_priority = 20,
+    virtual_text = true,
+  },
+  finder_action_keys = {
+    open = 'o',
+    vsplit = 'v',
+    split = 's',
+    tabe = 't',
+    quit = 'q',
+  },
 }
 local function get_file_name(include_path)
   local file_name = require('lspsaga.symbolwinbar').get_file_name()

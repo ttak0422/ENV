@@ -50,12 +50,12 @@ in {
 
   skkeleton_indicator-nvim = buildVimPluginFrom2Nix {
     pname = "skkeleton_indicator.nvim";
-    version = "20220617";
+    version = "2022-09-24";
     src = fetchFromGitHub {
       owner = "delphinus";
       repo = "skkeleton_indicator.nvim";
-      rev = "7630bb99ba99f73e07d17f711e50aab24a5417ce";
-      sha256 = "0xjrhcgjm38a0dx42n21pwrwclm3ls22cr1a85rgslk7gjkip185";
+      rev = "a9451438d82b0ebe165bbb49b0abb40ebf87298e";
+      sha256 = "1zli11qj3clw7r7197gpmhn9m1f8fmvk996jls2ga2lvnd6pkr97";
     };
   };
 
@@ -138,12 +138,12 @@ in {
 
   lspsaga-nvim = buildVimPluginFrom2Nix {
     pname = "lspsaga.nvim";
-    version = "20220628";
+    version = "2022-09-25";
     src = fetchFromGitHub {
       owner = "glepnir";
       repo = "lspsaga.nvim";
-      rev = "a520a3e17bf11bb09e00a94ddd6fa965fa1ec232";
-      sha256 = "01rizlak7rf0ngzsdr49lzhkmliihcw3bymm5cg45hypznai9900";
+      rev = "dfd219cd46f817c55961de05b0267b871139d8d6";
+      sha256 = "15wnrh8lykzdl1gwz1s7r4h7d4v32kqkv5fp1skvvxmi6zvnhm21";
     };
   };
 
@@ -352,12 +352,12 @@ in {
 
   nvim-treesitter = buildVimPluginFrom2Nix {
     pname = "nvim-treesitter";
-    version = "20220627";
+    version = "2022-09-24";
     src = fetchFromGitHub {
       owner = "nvim-treesitter";
       repo = "nvim-treesitter";
-      rev = "b7fbf9ed2d9c9a93d24514f4b8d04de87538dc42";
-      sha256 = "00rcdzwpriifb48i7r6fnpigrj1mqfj31j6yj71lpfy7s10cxjcv";
+      rev = "26105050aae3a15dd85feaeb0439e253e31d5ceb";
+      sha256 = "0mmhs46bvcjq2v7a2swpniyjd180n6hj2jp7r3mgc8jn2y4121gf";
     };
   };
 
@@ -490,6 +490,28 @@ in {
       repo = "vim-translator";
       rev = "42e5262a9491ae746f0d4e225ffffc86a3f714de";
       sha256 = "049kfcra3dqzz2r38qanbg2lai9c7bs6y5rngmkzs1d7prsw67zv";
+    };
+  };
+
+  gitsigns-nvim = buildVimPluginFrom2Nix {
+    pname = "gitsigns-nvim";
+    version = "2022-09-24";
+    src = fetchFromGitHub {
+      owner = "lewis6991";
+      repo = "gitsigns.nvim";
+      rev = "f98c85e7c3d65a51f45863a34feb4849c82f240f";
+      sha256 = "0ljzja43jdkv77nh4253x3gwk2hjx968yk7b5ag4y1mvyp1540qn";
+    };
+  };
+
+  windline-nvim = buildVimPluginFrom2Nix {
+    pname = "windline-nvim";
+    version = "2022-09-24";
+    src = fetchFromGitHub {
+      owner = "windwp";
+      repo = "windline.nvim";
+      rev = "da7fd528ffd9c927acaa14bc37dbfb37b4a323a2";
+      sha256 = "13c3bq0fhjkd6jy2qdqiryghfphskwdc93si6if48pndwc6rkm4s";
     };
   };
 }

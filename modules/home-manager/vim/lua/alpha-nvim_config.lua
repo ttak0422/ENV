@@ -1,5 +1,5 @@
-local alpha = require'alpha'
-local dashboard = require'alpha.themes.dashboard'
+local alpha = require 'alpha'
+local dashboard = require 'alpha.themes.dashboard'
 local logo = {
   '            ▒       ▒▒▒▒      ▒▒',
   '          ▒▓▓▓▒     ░▒▒▒▒   ▒▒▒▒░',
@@ -27,6 +27,7 @@ local logo = {
 }
 dashboard.section.header.val = logo
 dashboard.section.buttons.val = {
+  dashboard.button('<Leader>fP', '  Find Project'),
   dashboard.button('<Leader>fp', '  Find File'),
   dashboard.button('<Leader>ff', '  Find Word'),
 }

@@ -74,6 +74,9 @@ let
     # mouse
     set-option -g mouse on
 
+    # clipboard
+    set -s set-clipboard on
+
     # bell
     set-option -g bell-action none
 

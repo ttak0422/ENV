@@ -606,6 +606,9 @@ let
     {
       plugin = vim-oscyank;
       commands = [ "OSCYank" ];
+      startup = ''
+        vim.g.oscyank_term = 'default'
+      '';
       optional = false;
     }
     {

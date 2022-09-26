@@ -1,4 +1,4 @@
 { config, pkgs, lib, ... }: {
-  imports = [ ./prelude.nix ./system ./window-manager ];
+  imports = [ ./emacs ./prelude.nix ./system ./window-manager ];
 }
 

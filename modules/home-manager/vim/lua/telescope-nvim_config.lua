@@ -1,10 +1,9 @@
-local telescope = require'telescope'
+local telescope = require 'telescope'
 telescope.setup {
   defaults = {
     layout_strategy = 'vertical',
     layout_config = { height = 0.95 },
-    -- path_display={'smart'},
-    shorten_path = true;
+    path_display = { 'truncate' },
   },
   extensions = {
     fzf = {

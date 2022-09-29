@@ -25,9 +25,9 @@ wk.register({
     ['f'] = {
       name = 'find',
       f = { '<cmd>Telescope live_grep_args<cr>', 'find contents' },
-      p = { '<cmd>Telescope find_files<cr>', 'find files' },
-      P = { '<cmd>Telescope projects<cr>', 'find projects' },
-      b = { '<cmd>Telescope buffers previewer=false theme=cursor<cr>', 'find buffers' },
+      p = { '<cmd>Telescope find_files theme=ivy<cr>', 'find files' },
+      P = { '<cmd>Telescope projects theme=ivy<cr>', 'find projects' },
+      b = { '<cmd>Telescope buffers theme=ivy<cr>', 'find buffers' },
     },
 
     -- lsp

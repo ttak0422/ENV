@@ -48,12 +48,10 @@ cmp.setup({
     end, { 'i', 's' }),
   },
   sources = cmp.config.sources({
-    { name = 'path' },
-    { name = 'calc' },
-    { name = 'treesitter' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'luasnip' },
+    { name = 'treesitter' },
     { name = 'nvim_lua' },
     { name = 'buffer',
       option = {
@@ -62,6 +60,8 @@ cmp.setup({
         end
       }
     },
+    { name = 'path' },
+    { name = 'calc' },
   }),
   formatting = {
     format = lspkind.cmp_format({

@@ -452,6 +452,7 @@ let
             '${pkgs.jdt-language-server}/bin/jdt-language-server',
             '-data',
             os.getenv("HOME") .. '/.cache/jdtls/workspace',
+            '-Xms5G'
           },
         }
         -- lua

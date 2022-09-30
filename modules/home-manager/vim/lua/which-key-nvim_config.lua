@@ -24,7 +24,7 @@ wk.register({
     -- find
     ['f'] = {
       name = 'find',
-      f = { '<cmd>Telescope live_grep_args<cr>', 'find contents' },
+      f = { '<cmd>Telescope live_grep_args theme=ivy<cr>', 'find contents' },
       p = { '<cmd>Telescope find_files theme=ivy<cr>', 'find files' },
       P = { '<cmd>Telescope projects theme=ivy<cr>', 'find projects' },
       b = { '<cmd>Telescope buffers theme=ivy<cr>', 'find buffers' },
@@ -68,7 +68,7 @@ wk.register({
 })
 
 wk.register({
---  ['<leader>'] = {
---    T = { '<cmd>Translate<cr>', 'translate' },
---  },
+  --  ['<leader>'] = {
+  --    T = { '<cmd>Translate<cr>', 'translate' },
+  --  },
 }, { mode = 'v' })

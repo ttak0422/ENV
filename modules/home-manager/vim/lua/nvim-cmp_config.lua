@@ -53,15 +53,20 @@ cmp.setup({
     { name = 'luasnip' },
     { name = 'treesitter' },
     { name = 'nvim_lua' },
+    { name = 'path' },
+    { name = 'calc' },
+  }, {
     { name = 'buffer',
       option = {
         get_bufnrs = function()
-          return vim.api.nvim_list_bufs()
+          local bufs = {}
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            bufs[vim.api.nvim_win_get_buf(win)] = true
+          end
+          return vim.tbl_keys(bufs)
         end
       }
     },
-    { name = 'path' },
-    { name = 'calc' },
   }),
   formatting = {
     format = lspkind.cmp_format({

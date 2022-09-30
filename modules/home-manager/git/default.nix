@@ -24,6 +24,7 @@ let
     ".vs"
     ".env"
     ".envrc"
+    ".settings"
   ];
   commitTemplate = ''
 

@@ -184,6 +184,11 @@ let
 
   view = with pkgs.vimPlugins; [
     {
+      plugin = nvim-notify;
+      config = readFile ./lua/nvim-notify.lua;
+      delay = true;
+    }
+    {
       plugin = nvim-web-devicons;
       config = ''
         require'nvim-web-devicons'.setup {

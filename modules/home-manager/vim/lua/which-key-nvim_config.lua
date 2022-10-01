@@ -64,7 +64,7 @@ wk.register({
 })
 
 wk.register({
-  ['<S-Tab>'] = { [[@=(foldlevel('.')?'za':"\<Tab>")<CR>]], 'toggle fold' },
+  ['<Tab>'] = { [[@=(foldlevel('.')?'za':"\<Tab>")<CR>]], 'toggle fold' },
 })
 
 wk.register({

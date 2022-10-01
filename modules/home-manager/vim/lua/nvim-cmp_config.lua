@@ -13,14 +13,6 @@ cmp.setup({
       require 'luasnip'.lsp_expand(args.body)
     end,
   },
-  -- window = {
-  --   completion = {
-  --     border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-  --   },
-  --   documentation = {
-  --     border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-  --   }
-  -- },
   mapping = cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -48,10 +40,10 @@ cmp.setup({
     end, { 'i', 's' }),
   },
   sources = cmp.config.sources({
+    { name = 'treesitter' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'luasnip' },
-    { name = 'treesitter' },
     { name = 'nvim_lua' },
     { name = 'path' },
     { name = 'calc' },

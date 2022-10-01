@@ -427,6 +427,9 @@ let
         plugin = nvim-jdtls;
         depends = [ nvim-cmp myPlugins.lspsaga-nvim ];
         config = ''
+          local jdtls = require('jdtls')
+          local root = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'})
+          local workspace = os.getenv('HOME') .. '/.local/share/eclipse/' .. vim.fn.fnamemodify(root, ':p:h:t')
           ${lspSharedConfig}
           local config = {
             on_attach = on_attach,
@@ -434,13 +437,21 @@ let
             cmd = {
               '${pkgs.jdt-language-server}/bin/jdt-language-server',
               '-data',
-              os.getenv("HOME") .. '/.cache/jdtls/workspace',
+              workspace,
               '-Xms128m',
               '-Xmx5G',
               '-XX:+UseG1GC',
             },
+            root_dir = root,
+            settings = {
+              java = {
+              },
+            },
+            init_options = {
+              bundles = {},
+            },
           }
-          require('jdtls').start_or_attach(config)
+          jdtls.start_or_attach(config)
 
           local group_name = 'jdtls_lsp'
           vim.api.nvim_create_augroup(group_name, { clear = true, })
@@ -448,7 +459,7 @@ let
             group = group_name,
             pattern = {'java'},
             callback = function()
-              require('jdtls').start_or_attach(config)
+              jdtls.start_or_attach(config)
             end,
           })
         '';

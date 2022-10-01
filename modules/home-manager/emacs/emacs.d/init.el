@@ -125,6 +125,16 @@
 (leaf org-bullets
   :ensure t
   :hook (org-mode-hook . (lambda () (org-bullets-mode 1))))
+(leaf org-roam
+  :ensure t)
+(leaf org-roam-ui
+  :ensure t
+  :after org-roam
+  :setq
+  ((org-roam-ui-sync-theme . t)
+   (org-roam-ui-follow . t)
+   (org-roam-ui-update-on-save . t)
+   (org-roam-ui-open-on-start . t)))
 
 ;; theme
 (leaf nano-theme

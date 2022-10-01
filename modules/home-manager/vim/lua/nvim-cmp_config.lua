@@ -40,9 +40,9 @@ cmp.setup({
     end, { 'i', 's' }),
   },
   sources = cmp.config.sources({
-    { name = 'treesitter' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
+    { name = 'treesitter' },
     { name = 'luasnip' },
     { name = 'nvim_lua' },
     { name = 'path' },

@@ -428,30 +428,69 @@ let
         depends = [ nvim-cmp myPlugins.lspsaga-nvim ];
         config = ''
           local jdtls = require('jdtls')
-          local root = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'})
-          local workspace = os.getenv('HOME') .. '/.local/share/eclipse/' .. vim.fn.fnamemodify(root, ':p:h:t')
-          ${lspSharedConfig}
-          local config = {
-            on_attach = on_attach,
-            capabilities = capabilities,
-            cmd = {
-              '${pkgs.jdt-language-server}/bin/jdt-language-server',
-              '-data',
-              workspace,
-              '-Xms128m',
-              '-Xmx5G',
-              '-XX:+UseG1GC',
-            },
-            root_dir = root,
-            settings = {
-              java = {
+          local mk_config = function()
+            local root = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'})
+            local workspace = os.getenv('HOME') .. '/.local/share/eclipse/' .. vim.fn.fnamemodify(root, ':p:h:t')
+            ${lspSharedConfig}
+            return {
+              on_attach = on_attach,
+              capabilities = capabilities,
+              cmd = {
+                '${pkgs.jdt-language-server}/bin/jdt-language-server',
+                '-data',
+                workspace,
+                '-Xms128m',
+                '-Xmx5G',
+                '-XX:+UseG1GC',
               },
-            },
-            init_options = {
-              bundles = {},
-            },
-          }
-          jdtls.start_or_attach(config)
+              root_dir = root,
+              settings = {
+                java = {
+                  signatureHelp = { enabled = true, description = { enabled = true } },
+                  completion = {
+                    favoriteStaticMembers = {
+                      'org.hamcrest.MatcherAssert.assertThat',
+                      'org.hamcrest.Matchers.*',
+                      'org.hamcrest.CoreMatchers.*',
+                      'org.junit.jupiter.api.Assertions.*',
+                      'java.util.Objects.requireNonNull',
+                      'java.util.Objects.requireNonNullElse',
+                      'org.mockito.Mockito.*'
+                    },
+                    importOrder = {
+                      'org.springframework',
+                      'java',
+                      'javax',
+                      'com',
+                      'org'
+                    },
+                    filteredTypes = {
+                      'com.sun.*',
+                      'io.micrometer.shaded.*',
+                      'java.awt.*',
+                      'jdk.*',
+                      'sun.*',
+                    },
+                  };
+                },
+              },
+              init_options = {
+                bundles = {},
+              },
+              flags = {
+                allow_incremental_sync = true,
+              },
+              handlers = {
+                ['client/registerCapability'] = function(_, _, _, _)
+                  return {
+                    result = nil,
+                    error = nil,
+                  }
+                end
+              },
+            }
+          end
+          jdtls.start_or_attach(mk_config())
 
           local group_name = 'jdtls_lsp'
           vim.api.nvim_create_augroup(group_name, { clear = true, })
@@ -459,7 +498,7 @@ let
             group = group_name,
             pattern = {'java'},
             callback = function()
-              jdtls.start_or_attach(config)
+              jdtls.start_or_attach(mk_config())
             end,
           })
         '';

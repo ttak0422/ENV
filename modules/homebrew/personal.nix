@@ -9,7 +9,12 @@
       "koekeishiya/formulae"
       "d12frosted/emacs-plus"
     ];
-    brews = [ "lunchy" "qemu" "svn" "emacs-plus@29" ];
+    brews = [
+      "lunchy"
+      "qemu"
+      "svn"
+      # "emacs-plus@29"
+    ];
     casks = [
       "alacritty"
       "aquaskk"

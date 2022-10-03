@@ -377,6 +377,22 @@
         "type": "github"
       }
     },
+    "gitsigns-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1663543397,
+        "narHash": "sha256-FgNSwvW7Bk+eKutMj0zqEorJ3+ijCALtOXs2OYiSX1I=",
+        "owner": "lewis6991",
+        "repo": "gitsigns.nvim",
+        "rev": "f98c85e7c3d65a51f45863a34feb4849c82f240f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lewis6991",
+        "repo": "gitsigns.nvim",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -652,6 +668,22 @@
         "type": "github"
       }
     },
+    "nvim-treesitter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1664785779,
+        "narHash": "sha256-Ia7bexjruXikvfKYM7IQY/+3raa5Y1iLY/kEbO/L8Ac=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "rev": "7ccb9a056fa43da243e3a439109c354c551c51b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "type": "github"
+      }
+    },
     "ob-racket": {
       "flake": false,
       "locked": {
@@ -781,6 +813,7 @@
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-stable": "nixpkgs-stable",
         "rokka-nvim": "rokka-nvim",
+        "vim-plugins-overlay": "vim-plugins-overlay",
         "yabai": "yabai"
       }
     },
@@ -816,6 +849,22 @@
         "type": "github"
       }
     },
+    "tint-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1664292894,
+        "narHash": "sha256-4I+48RvyDyXR6+Slqqsx0fWMG9s9AbgnzTDkmm2Kyzk=",
+        "owner": "levouh",
+        "repo": "tint.nvim",
+        "rev": "f6a259861ba8c0d88afc2ef05140ddf345eb0296",
+        "type": "github"
+      },
+      "original": {
+        "owner": "levouh",
+        "repo": "tint.nvim",
+        "type": "github"
+      }
+    },
     "ts-fold": {
       "flake": false,
       "locked": {
@@ -847,6 +896,24 @@
         "type": "github"
       }
     },
+    "vim-plugins-overlay": {
+      "inputs": {
+        "gitsigns-nvim": "gitsigns-nvim",
+        "nvim-treesitter": "nvim-treesitter",
+        "tint-nvim": "tint-nvim",
+        "zoomwintab-vim": "zoomwintab-vim"
+      },
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-4HxUO+U9OnJVsYnFd5acJjE5cYzwLawkxRwd1kpjXbs=",
+        "path": "./vim-plugins-overlay",
+        "type": "path"
+      },
+      "original": {
+        "path": "./vim-plugins-overlay",
+        "type": "path"
+      }
+    },
     "ws-butler": {
       "flake": false,
       "locked": {
@@ -876,6 +943,22 @@
       "original": {
         "owner": "koekeishiya",
         "repo": "yabai",
+        "type": "github"
+      }
+    },
+    "zoomwintab-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1633858999,
+        "narHash": "sha256-zgB2CNhk3WotprS5ozzFJ98C6rQ/0tTbGiqubEFiaaE=",
+        "owner": "troydm",
+        "repo": "zoomwintab.vim",
+        "rev": "7a354f3f0aa7807d822c03c8c24dc6c1cced9d3c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "troydm",
+        "repo": "zoomwintab.vim",
         "type": "github"
       }
     }

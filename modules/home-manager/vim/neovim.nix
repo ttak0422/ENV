@@ -11,10 +11,6 @@ let
   external = pkgs.callPackage ./external.nix { };
   myPlugins = pkgs.callPackage ./my-plugins.nix { };
 
-  # TODO: smart override
-  custom-nvim-treesitter = myPlugins.nvim-treesitter;
-  custom-gitsigns-nvim = myPlugins.gitsigns-nvim;
-
   extraConfig = ''
     let g:neovide_cursor_vfx_mode = "pixiedust"
 
@@ -97,12 +93,16 @@ let
 
   custom = with pkgs.vimPlugins; [
     {
+      plugin = zoomwintab-vim;
+      commands = [ "ZoomWinTabToggle" ];
+    }
+    {
       plugin = myPlugins.pretty-fold-nvim;
       depends = [ myPlugins.fold-preview-nvim ];
       startup = ''
         -- default
         vim.opt.foldmethod = 'indent'
-        vim.opt.foldlevel = 10
+        vim.opt.foldlevel = 20
       '';
       config = readFile ./lua/pretty-fold-nvim.lua;
       delay = true;
@@ -237,7 +237,7 @@ let
     }
     {
       plugin = indent-blankline-nvim;
-      depends = [ custom-nvim-treesitter ];
+      depends = [ nvim-treesitter ];
       config = readFile ./lua/indent-blankline-nvim_config.lua;
       delay = true;
     }
@@ -259,7 +259,7 @@ let
       config = readFile ./lua/bufferline_config.lua;
     }
     {
-      plugin = custom-gitsigns-nvim;
+      plugin = gitsigns-nvim;
       depends = [ plenary-nvim ];
       config = readFile ./lua/gitsigns_config.lua;
       delay = true;
@@ -317,7 +317,7 @@ let
       '';
     in [
       {
-        plugin = custom-nvim-treesitter;
+        plugin = nvim-treesitter;
         dependsAfter = [ nvim-ts-rainbow nvim-ts-autotag ];
         delay = true;
         config = readFile ./lua/nvim-treesitter_config.lua;
@@ -361,6 +361,16 @@ let
         plugin = Shade-nvim;
         config = readFile ./lua/Shade-nvim.lua;
         events = [ "WinNew" ];
+        enable = false;
+        comment = "フォーカスしていないPaneを暗く";
+      }
+      {
+        plugin = tint-nvim;
+        config = ''
+          require('tint').setup()
+        '';
+        events = [ "WinNew" ];
+        comment = "フォーカスしていないPaneを暗く";
       }
       {
         plugin = luasnip;
@@ -387,7 +397,7 @@ let
             depends = [ vim-vsnip ];
           }
           nvim-autopairs
-          custom-nvim-treesitter
+          nvim-treesitter
           cmp-path
           cmp-buffer
           cmp-calc
@@ -679,7 +689,7 @@ let
       }
       {
         plugin = nvim_context_vt;
-        depends = [ custom-nvim-treesitter ];
+        depends = [ nvim-treesitter ];
         delay = true;
         config = readFile ./lua/nvim_context_vt_config.lua;
       }
@@ -755,7 +765,7 @@ let
       }
       {
         plugin = nvim-autopairs;
-        depends = [ custom-nvim-treesitter ];
+        depends = [ nvim-treesitter ];
         config = readFile ./lua/nvim-autopairs_config.lua;
         events = [ "InsertEnter" ];
       }
@@ -783,7 +793,7 @@ let
     }
     {
       plugin = myPlugins.org-bullets-nvim;
-      depends = [ custom-nvim-treesitter ];
+      depends = [ nvim-treesitter ];
       config = readFile ./lua/org-bullets_config.lua;
       enable = false;
     }
@@ -796,7 +806,7 @@ let
       plugin = myPlugins.orgmode;
       depends = [
         nvim-cmp
-        custom-nvim-treesitter
+        nvim-treesitter
         myPlugins.org-bullets-nvim
         myPlugins.headlines-nvim
       ];
@@ -816,7 +826,7 @@ let
     }
     {
       plugin = twilight-nvim;
-      depends = [ custom-nvim-treesitter ];
+      depends = [ nvim-treesitter ];
       config = readFile ./lua/twilight_config.lua;
     }
     {

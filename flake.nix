@@ -38,6 +38,7 @@
       url = "github:nix-community/nix-doom-emacs";
       inputs.emacs-overlay.follows = "emacs-overlay";
     };
+    vim-plugins-overlay.url = "path:./vim-plugins-overlay";
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
@@ -60,6 +61,7 @@
         };
         overlays = attrValues self.overlays ++ [
           inputs.neovim-nightly-overlay.overlay
+          inputs.vim-plugins-overlay.overlay
           # inputs.emacs-overlay.overlay
           # inputs.emacs.overlay
         ] ++ (with inputs;

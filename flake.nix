@@ -38,7 +38,7 @@
       url = "github:nix-community/nix-doom-emacs";
       inputs.emacs-overlay.follows = "emacs-overlay";
     };
-    vim-plugins-overlay.url = "path:./vim-plugins-overlay";
+    vim-plugins-overlay.url = "github:ttak0422/vim-plugins-overlay";
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:

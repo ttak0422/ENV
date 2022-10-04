@@ -633,11 +633,11 @@
     "nvim-treesitter_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1664785779,
-        "narHash": "sha256-Ia7bexjruXikvfKYM7IQY/+3raa5Y1iLY/kEbO/L8Ac=",
+        "lastModified": 1664893941,
+        "narHash": "sha256-JNk4poUc8L2F1ivAckZ12G7DhKeQJE6ITLVaVmdb42w=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "7ccb9a056fa43da243e3a439109c354c551c51b6",
+        "rev": "ffd4525fd9e61950520cea4737abc1800ad4aabb",
         "type": "github"
       },
       "original": {
@@ -885,14 +885,17 @@
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-4HxUO+U9OnJVsYnFd5acJjE5cYzwLawkxRwd1kpjXbs=",
-        "path": "./vim-plugins-overlay",
-        "type": "path"
+        "lastModified": 1664901240,
+        "narHash": "sha256-XKu66m2DBNVN+ls6Ue720bgOiNftfAUOGSNdl64lG4A=",
+        "owner": "ttak0422",
+        "repo": "vim-plugins-overlay",
+        "rev": "66796b2a36c259d86f14c524dd579e28d93b51a1",
+        "type": "github"
       },
       "original": {
-        "path": "./vim-plugins-overlay",
-        "type": "path"
+        "owner": "ttak0422",
+        "repo": "vim-plugins-overlay",
+        "type": "github"
       }
     },
     "ws-butler": {

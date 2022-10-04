@@ -22,15 +22,15 @@
       url = "github:koekeishiya/yabai";
       flake = false;
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    rokka-nvim = {
-      url = "path:/Users/ttak0422/ghq/github.com/ttak0422/rokka-nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    neovim-nightly-overlay.url = "github:ttak0422/vim-plugins-overlay";
     # rokka-nvim = {
-    #   url = "github:ttak0422/rokka-nvim";
+    #   url = "path:/Users/ttak0422/ghq/github.com/ttak0422/rokka-nvim";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+    rokka-nvim = {
+      url = "github:ttak0422/rokka-nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # emacs for mac
     emacs.url = "github:cmacrae/emacs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";

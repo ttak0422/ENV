@@ -23,7 +23,6 @@ let
     ".ionide"
     ".vs"
     ".env"
-    ".envrc"
     ".settings"
   ];
   commitTemplate = ''

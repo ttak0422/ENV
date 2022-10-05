@@ -69,7 +69,7 @@
             (final: prev: {
               # https://github.com/shaunsingh/nix-darwin-dotfiles/blob/2de71812cf0d1b75397e2f3ad90749ee26232ce6/flake.nix#L102-L115
               yabai = let
-                version = "4.0.1";
+                version = "latest";
                 buildSymlinks = prev.runCommand "build-symlinks" { } ''
                   mkdir -p $out/bin
                   ln -s /usr/bin/xcrun /usr/bin/xcodebuild /usr/bin/tiffutil /usr/bin/qlmanage $out/bin

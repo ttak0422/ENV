@@ -158,7 +158,10 @@ let
   ];
 
   window = with pkgs.vimPlugins; [
-    { plugin = myPlugins.winresizer; }
+    {
+      plugin = winresizer;
+      delay = true;
+    }
     {
       plugin = myPlugins.chowcho-nvim;
       depends = [ nvim-web-devicons ];

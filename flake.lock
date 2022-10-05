@@ -882,19 +882,36 @@
         "gitsigns-nvim": "gitsigns-nvim_2",
         "nvim-treesitter": "nvim-treesitter_2",
         "tint-nvim": "tint-nvim_2",
+        "winresizer": "winresizer",
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1664901240,
-        "narHash": "sha256-XKu66m2DBNVN+ls6Ue720bgOiNftfAUOGSNdl64lG4A=",
+        "lastModified": 1664989719,
+        "narHash": "sha256-iggQZzTnhUop0HFaeV1Sacc7LOeMyQDI/Lyr8f1oL+Y=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "66796b2a36c259d86f14c524dd579e28d93b51a1",
+        "rev": "ff9cd59cfac04ca6683d090d9e98406504ec72bf",
         "type": "github"
       },
       "original": {
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
+        "type": "github"
+      }
+    },
+    "winresizer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1660565878,
+        "narHash": "sha256-5LR9A23BvpCBY9QVSF9PadRuDSBjv+knHSmdQn/3mH0=",
+        "owner": "simeji",
+        "repo": "winresizer",
+        "rev": "9bd559a03ccec98a458e60c705547119eb5350f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "simeji",
+        "repo": "winresizer",
         "type": "github"
       }
     },

@@ -449,12 +449,28 @@ let
               on_attach = on_attach,
               capabilities = capabilities,
               cmd = {
-                '${pkgs.jdt-language-server}/bin/jdt-language-server',
-                '-data',
-                workspace,
+                'java',
+                '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+                '-Dosgi.bundles.defaultStartLevel=4',
+                '-Declipse.product=org.eclipse.jdt.ls.core.product',
+                '-Dosgi.sharedConfiguration.area=${pkgs.jdt-language-server}/share/config',
+                '-Dosgi.sharedConfiguration.area.readOnly=true',
+                '-Dosgi.checkConfiguration=true',
+                '-Dosgi.configuration.c:ascaded=true',
+                '-Dlog.level=ALL',
                 '-Xms128m',
                 '-Xmx5G',
                 '-XX:+UseG1GC',
+                '-javaagent:${pkgs.lombok}/share/java/lombok.jar',
+                '-jar',
+                vim.fn.glob('${pkgs.jdt-language-server}/share/java/plugins/org.eclipse.equinox.launcher_*.jar'),
+                '--add-modules=ALL-SYSTEM',
+                '--add-opens',
+                'java.base/java.util=ALL-UNNAMED',
+                '--add-opens',
+                'java.base/java.lang=ALL-UNNAMED',
+                '-data',
+                workspace,
               },
               root_dir = root,
               settings = {
@@ -516,6 +532,7 @@ let
           })
         '';
         fileTypes = [ "java" ];
+        extraPackages = with pkgs; [ jdk ];
       }
       {
         plugin = nvim-lspconfig;
@@ -878,10 +895,5 @@ in {
       ++ language ++ view ++ code ++ tool;
     withNodeJs = true;
     withPython3 = true;
-  };
-  home = {
-    sessionVariables = {
-      JAVA_OPTS = "-javaagent:${pkgs.lombok}/share/java/lombok.jar";
-    };
   };
 }

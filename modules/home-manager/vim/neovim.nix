@@ -488,6 +488,7 @@ let
                     },
                     importOrder = {
                       'org.springframework',
+                      'java.util',
                       'java',
                       'javax',
                       'com',
@@ -507,7 +508,9 @@ let
                 bundles = {},
               },
               flags = {
+                debounce_text_changes = 150,
                 allow_incremental_sync = true,
+                server_side_fuzzy_completion = true,
               },
               handlers = {
                 ['client/registerCapability'] = function(_, _, _, _)

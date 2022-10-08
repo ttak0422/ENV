@@ -24,6 +24,7 @@ let
     ".vs"
     ".env"
     ".settings"
+    ".vimrc.lua"
   ];
   commitTemplate = ''
 

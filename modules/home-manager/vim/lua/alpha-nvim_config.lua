@@ -41,5 +41,6 @@ dashboard.section.buttons.val = {
   dashboard.button('<Leader>fP', ' Find Project'),
   dashboard.button('<Leader>fp', ' Find File'),
   dashboard.button('<Leader>ff', ' Find Word'),
+  dashboard.button('ConfigEdit', ' Edit Config')
 }
 alpha.setup(dashboard.opts)

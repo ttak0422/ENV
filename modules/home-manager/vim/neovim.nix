@@ -20,10 +20,19 @@ let
 
   startup = with pkgs.vimPlugins; [
     {
+      plugin = nvim-config-local;
+      config = readFile ./lua/nvim-config-local.lua;
+      optional = false;
+    }
+    {
       plugin = myPlugins.filetype-nvim;
       startup = ''
         vim.g.did_load_filetypes = 1
       '';
+      optional = false;
+    }
+    {
+      plugin = catppuccin-nvim;
       optional = false;
     }
     {
@@ -92,6 +101,10 @@ let
   }];
 
   custom = with pkgs.vimPlugins; [
+    {
+      plugin = confirm-quit-nvim;
+      delay = true;
+    }
     {
       plugin = zoomwintab-vim;
       commands = [ "ZoomWinTabToggle" ];
@@ -510,7 +523,7 @@ let
               flags = {
                 debounce_text_changes = 150,
                 allow_incremental_sync = true,
-                server_side_fuzzy_completion = true,
+                -- server_side_fuzzy_completion = true,
               },
               handlers = {
                 ['client/registerCapability'] = function(_, _, _, _)

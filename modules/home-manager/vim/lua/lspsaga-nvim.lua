@@ -2,12 +2,23 @@ local keymap = vim.keymap.set
 local saga = require('lspsaga')
 
 saga.init_lsp_saga {
+  border_style = 'single',
+  saga_winblend = 15,
   symbol_in_winbar = {
     in_custom = true,
     enable = true,
     separator = '  ',
     show_file = true,
     click_support = false,
+  },
+  show_outline = {
+    win_position = 'right',
+    win_width = 35,
+    auto_enter = true,
+    auto_preview = true,
+    virt_text = '┃',
+    jump_key = 'o',
+    auto_refresh = true,
   },
   code_action_lightbulb = {
     enable = true,

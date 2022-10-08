@@ -108,6 +108,13 @@ let
 
   custom = with pkgs.vimPlugins; [
     {
+      plugin = stickybuf-nvim;
+      config = ''
+        require('stickybuf').setup()
+      '';
+      delay = true;
+    }
+    {
       plugin = confirm-quit-nvim;
       delay = true;
     }

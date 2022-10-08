@@ -18,7 +18,8 @@ wk.register({
       d = { '<cmd>TroubleToggle document_diagnostics<cr>', 'toggle diagnostics (document)' },
       D = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'toggle diagnostics (workspace)' },
       m = { '<cmd>Glow<cr>', 'toggle markdown' },
-      o = { '<cmd>SidebarNvimToggle<CR>', 'toggle outline' },
+      o = { '<cmd>LSoutlineToggle<cr>', 'toggle outline' },
+      O = { '<cmd>SidebarNvimToggle<cr>', 'toggle outline' },
     },
 
     -- find
@@ -28,6 +29,7 @@ wk.register({
       p = { '<cmd>Telescope find_files theme=ivy<cr>', 'find files' },
       P = { '<cmd>Telescope projects theme=ivy<cr>', 'find projects' },
       b = { '<cmd>Telescope buffers theme=ivy<cr>', 'find buffers' },
+      c = { '<cmd>Telescope command_history theme=ivy<cr>', 'find command history' },
     },
 
     -- lsp
@@ -37,7 +39,7 @@ wk.register({
     -- other
     q = { '<cmd>BufDel<cr>', 'close buffer' },
     Q = { '<cmd>BufDel!<cr>', 'close buffer force' },
-    F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
+    -- F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
   },
 })
 

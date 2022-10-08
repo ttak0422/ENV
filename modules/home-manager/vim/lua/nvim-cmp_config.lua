@@ -40,15 +40,12 @@ cmp.setup({
     end, { 'i', 's' }),
   },
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
-    { name = 'treesitter' },
-    { name = 'luasnip' },
-    { name = 'nvim_lua' },
-    { name = 'path' },
-    { name = 'calc' },
-  }, {
+    { name = 'nvim_lsp', priority = 10, },
+    { name = 'nvim_lsp_signature_help', priority = 10, },
+    { name = 'luasnip', priority = 7, },
+    { name = 'treesitter', priority = 5, },
     { name = 'buffer',
+      priority = 3,
       option = {
         get_bufnrs = function()
           local bufs = {}
@@ -59,10 +56,14 @@ cmp.setup({
         end
       }
     },
+    { name = 'path', priority = 2, },
+    { name = 'nvim_lua', priority = 1, },
+    { name = 'calc', priority = 1, },
+  }, {
   }),
   formatting = {
     format = lspkind.cmp_format({
-      with_text = false,
+      mode = 'symbol_text',
       maxwidth = 50,
       before = function(entry, vim_item)
         return vim_item

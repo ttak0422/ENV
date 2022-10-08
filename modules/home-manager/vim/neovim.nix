@@ -439,7 +439,7 @@ let
         delay = true;
       }
       {
-        plugin = myPlugins.lspsaga-nvim;
+        plugin = lspsaga-nvim;
         depends = [ nvim-lspconfig ];
         # config = ''
         #   require 'lspsaga'.init_lsp_saga {}
@@ -451,7 +451,7 @@ let
       }
       {
         plugin = nvim-jdtls;
-        depends = [ nvim-cmp myPlugins.lspsaga-nvim ];
+        depends = [ nvim-cmp lspsaga-nvim ];
         config = ''
           local jdtls = require('jdtls')
           local mk_config = function()
@@ -561,7 +561,7 @@ let
           }
           nvim-cmp
           null-ls-nvim
-          myPlugins.lspsaga-nvim
+          lspsaga-nvim
         ];
         config = ''
           ${lspSharedConfig}

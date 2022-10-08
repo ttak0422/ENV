@@ -415,6 +415,22 @@
         "type": "github"
       }
     },
+    "lspsaga-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1665056789,
+        "narHash": "sha256-neAEwxm6kwyqdRLbtIiLV22w4i9j3ET0PivDn7gPwtw=",
+        "owner": "glepnir",
+        "repo": "lspsaga.nvim",
+        "rev": "5e32611144d8f560ed845e5d16f09e5e786d3efc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "glepnir",
+        "repo": "lspsaga.nvim",
+        "type": "github"
+      }
+    },
     "neovim-nightly-overlay": {
       "inputs": {
         "gitsigns-nvim": "gitsigns-nvim",
@@ -830,6 +846,22 @@
         "type": "github"
       }
     },
+    "stickybuf-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1664556279,
+        "narHash": "sha256-o87pPmTt2vMDAo/ayQZruQuplaCtD5skTBgnG1lh9E8=",
+        "owner": "stevearc",
+        "repo": "stickybuf.nvim",
+        "rev": "cde97217a7e81ea4488e0c32b8ae6c9d181156c8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "stickybuf.nvim",
+        "type": "github"
+      }
+    },
     "tint-nvim": {
       "flake": false,
       "locked": {
@@ -897,17 +929,19 @@
       "inputs": {
         "confirm-quit-nvim": "confirm-quit-nvim",
         "gitsigns-nvim": "gitsigns-nvim_2",
+        "lspsaga-nvim": "lspsaga-nvim",
         "nvim-treesitter": "nvim-treesitter_2",
+        "stickybuf-nvim": "stickybuf-nvim",
         "tint-nvim": "tint-nvim_2",
         "winresizer": "winresizer",
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1665166975,
-        "narHash": "sha256-ajYwD4poQlHfMQ99QfbmNrEHsSdks5zmujdUEmBIVEA=",
+        "lastModified": 1665210310,
+        "narHash": "sha256-JpdE8t+gzpOq/+KJYB0uCk9vC2QDWP8jTTDXDjzSoOQ=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "ee5a048f0f4671404604512689623e702c96f7ad",
+        "rev": "0abc651a32d991f810699edaff9086feb45f7f23",
         "type": "github"
       },
       "original": {

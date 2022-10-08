@@ -905,6 +905,7 @@ let
       depends = [ nvim-web-devicons ];
       commands = [ "NvimTreeToggle" ];
       config = readFile ./lua/nvim-tree_config.lua;
+      delay = true;
     }
     {
       plugin = venn-nvim;

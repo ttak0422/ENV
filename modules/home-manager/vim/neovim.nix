@@ -50,6 +50,7 @@ let
       plugin = nightfox-nvim;
       startup = "vim.cmd([[colorscheme nightfox]])";
       optional = false;
+      enable = false;
     }
     {
       plugin = lsp-colors-nvim;

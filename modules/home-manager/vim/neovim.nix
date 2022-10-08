@@ -20,6 +20,15 @@ let
 
   startup = with pkgs.vimPlugins; [
     {
+      plugin = catppuccin-nvim;
+      startup = ''
+        vim.g.catppuccin_flavour = 'mocha'
+        require('catppuccin').setup()
+        vim.cmd[[colorscheme catppuccin]]
+      '';
+      optional = false;
+    }
+    {
       plugin = nvim-config-local;
       config = readFile ./lua/nvim-config-local.lua;
       optional = false;
@@ -29,10 +38,6 @@ let
       startup = ''
         vim.g.did_load_filetypes = 1
       '';
-      optional = false;
-    }
-    {
-      plugin = catppuccin-nvim;
       optional = false;
     }
     {

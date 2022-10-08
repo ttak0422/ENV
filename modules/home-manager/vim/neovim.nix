@@ -21,11 +21,7 @@ let
   startup = with pkgs.vimPlugins; [
     {
       plugin = catppuccin-nvim;
-      startup = ''
-        vim.g.catppuccin_flavour = 'mocha'
-        require('catppuccin').setup()
-        vim.cmd[[colorscheme catppuccin]]
-      '';
+      startup = readFile ./lua/catppuccin.lua;
       optional = false;
     }
     {

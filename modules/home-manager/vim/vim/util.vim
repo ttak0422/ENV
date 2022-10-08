@@ -56,7 +56,8 @@ set undofile
 set autoread
 
 " cmdline非表示
-set cmdheight=0
+" set cmdheight=0
+set cmdheight=1
 
 " 改行時にコメントを維持しない
 autocmd FileType * setlocal formatoptions-=r

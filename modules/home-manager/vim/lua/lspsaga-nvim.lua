@@ -3,7 +3,6 @@ local saga = require('lspsaga')
 
 saga.init_lsp_saga {
   border_style = 'none',
-  saga_winblend = 15,
   symbol_in_winbar = {
     in_custom = true,
     enable = true,

@@ -2,7 +2,7 @@ local keymap = vim.keymap.set
 local saga = require('lspsaga')
 
 saga.init_lsp_saga {
-  border_style = 'single',
+  border_style = 'none',
   saga_winblend = 15,
   symbol_in_winbar = {
     in_custom = true,

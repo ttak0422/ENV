@@ -559,7 +559,10 @@ let
             '';
           }
           nvim-cmp
-          null-ls-nvim
+          {
+            plugin = null-ls-nvim;
+            depends = [ plenary-nvim ];
+          }
           lspsaga-nvim
         ];
         config = ''
@@ -679,6 +682,12 @@ let
               null_ls.builtins.formatting.prettier.with {
                 prefer_local = 'node_modules/.bin'
               },
+              -- nix lint
+              null_ls.builtins.code_actions.statix,
+              -- nix fmt
+              null_ls.builtins.formatting.nixfmt,
+              -- lua fmt
+              null_ls.builtins.formatting.stylua,
             },
           })
         '';
@@ -688,7 +697,12 @@ let
           rubyPackages.solargraph
           rust-analyzer
           sumneko-lua-language-server
+          stylua
+          nodePackages.prettier
           nodePackages.vscode-langservers-extracted
+          statix
+          nixfmt
+          google-java-format
         ]) ++ (with pkgs.pkgs-stable; [
           deno
           nodePackages.bash-language-server
@@ -913,3 +927,4 @@ in {
     withPython3 = true;
   };
 }
+

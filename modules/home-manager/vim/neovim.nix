@@ -399,7 +399,6 @@ let
         enable = false;
         delay = true;
       }
-      { plugin = vim-vsnip; }
       {
         plugin = nvim-cmp;
         dependsAfter = [
@@ -410,6 +409,7 @@ let
           {
             plugin = cmp-vsnip;
             depends = [ vim-vsnip ];
+            enable = false;
           }
           nvim-autopairs
           nvim-treesitter

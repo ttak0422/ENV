@@ -895,6 +895,12 @@ let
       extraPackages = [ pkgs.gnused ];
     }
     {
+      plugin = neogit;
+      config = readFile ./lua/neogit.lua;
+      depends = [ diffview-nvim ];
+      commands = [ "Neogit" ];
+    }
+    {
       plugin = diffview-nvim;
       depends = [{ plugin = plenary-nvim; }];
       commands = [ "DiffviewOpen" "DiffviewToggleFiles" ];

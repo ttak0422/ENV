@@ -9,7 +9,7 @@ require('catppuccin').setup {
     lsp_saga = true,
     lsp_trouble = true,
     mini = false,
-    neogit = false,
+    neogit = true,
     notify = true,
     nvimtree = true,
     telescope = true,

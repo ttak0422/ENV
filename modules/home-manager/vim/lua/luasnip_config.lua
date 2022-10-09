@@ -15,7 +15,7 @@ require('luasnip.loaders.from_vscode').lazy_load({
     'go',
     'haskell',
     'html',
-    'java',
+    -- 'java',
     'javascript',
     'julia',
     'kotlin',

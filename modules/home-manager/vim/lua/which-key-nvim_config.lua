@@ -39,6 +39,7 @@ wk.register({
     -- other
     q = { '<cmd>BufDel<cr>', 'close buffer' },
     Q = { '<cmd>BufDel!<cr>', 'close buffer force' },
+    G = { '<cmd>Neogit<cr>', 'neovim git client'},
     -- F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
   },
 })

@@ -87,3 +87,9 @@ function! VimGrep(...)
 endfunction
 
 command! -nargs=+ VimGrep call VimGrep(<f-args>)
+
+" https://vim-jp.org/vim-users-jp/2011/03/12/Hack-206.html
+augroup vimrc-checktime
+  autocmd!
+  autocmd WinEnter * checktime
+augroup END

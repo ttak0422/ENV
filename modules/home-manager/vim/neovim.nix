@@ -294,7 +294,7 @@ let
   code = with pkgs.vimPlugins;
 
     let
-      # require lspsaga nvim-cmp(lsp)
+      # require lspsaga, nvim-cmp(lsp), virtual-types-nvim
       lspSharedConfig = ''
         local on_attach = function(client, bufnr)
           local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -326,11 +326,22 @@ let
           vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', bufopts)
           vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
 
+          if client.supports_method('textDocument/codeLens') then
+            require('virtualtypes').on_attach(client, bufnr)
+          end
+
         end
 
         local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
       '';
+      lspDepends = [ fidget-nvim nvim-cmp lspsaga-nvim virtual-types-nvim ];
     in [
+      {
+        plugin = fidget-nvim;
+        config = ''
+          require'fidget'.setup{}
+        '';
+      }
       {
         plugin = nvim-treesitter;
         dependsAfter = [ nvim-ts-rainbow nvim-ts-autotag ];
@@ -450,7 +461,7 @@ let
       }
       {
         plugin = nvim-jdtls;
-        depends = [ nvim-cmp lspsaga-nvim ];
+        depends = lspDepends ++ [ ];
         config = ''
           local jdtls = require('jdtls')
           local mk_config = function()
@@ -553,20 +564,10 @@ let
       }
       {
         plugin = nvim-lspconfig;
-        depends = [
-          {
-            plugin = fidget-nvim;
-            config = ''
-              require'fidget'.setup{}
-            '';
-          }
-          nvim-cmp
-          {
-            plugin = null-ls-nvim;
-            depends = [ plenary-nvim ];
-          }
-          lspsaga-nvim
-        ];
+        depends = lspDepends ++ [{
+          plugin = null-ls-nvim;
+          depends = [ plenary-nvim ];
+        }];
         config = ''
           ${lspSharedConfig}
 

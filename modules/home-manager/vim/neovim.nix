@@ -151,6 +151,7 @@ let
       '';
       config = readFile ./lua/lualine_config.lua;
       delay = true;
+      enable = false;
     }
     {
       plugin = myPlugins.windline-nvim;
@@ -161,7 +162,6 @@ let
       config = ''
         require('wlsample.vscode')
       '';
-      enable = false;
     }
   ];
 

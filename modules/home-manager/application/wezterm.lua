@@ -9,8 +9,8 @@ return {
   window_padding = {
     left = 5,
     right = 5,
-    top = 0,
-    bottom = 0,
+    top = 5,
+    bottom = 5,
   },
   window_decorations = 'RESIZE',
   enable_tab_bar = false,

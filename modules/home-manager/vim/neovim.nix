@@ -486,6 +486,8 @@ let
               },
               root_dir = root,
               settings = {
+                ['java.format.settings.url'] = vim.g.java_format_settings_url,
+                ['java.format.settings.profile'] = vim.g.java_format_settings_profile,
                 java = {
                   signatureHelp = { enabled = true, description = { enabled = true } },
                   completion = {

@@ -897,7 +897,7 @@ let
     {
       plugin = neogit;
       config = readFile ./lua/neogit.lua;
-      depends = [ diffview-nvim ];
+      depends = [ diffview-nvim plenary-nvim ];
       commands = [ "Neogit" ];
     }
     {

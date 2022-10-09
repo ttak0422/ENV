@@ -10,7 +10,7 @@ return {
     left = 5,
     right = 5,
     top = 5,
-    bottom = 5,
+    bottom = 0,
   },
   window_decorations = 'RESIZE',
   enable_tab_bar = false,

@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation {
   name = "ttak0422-templates";
-  src = ./.;
+  src = ./src;
   installPhase = ''
     mkdir $out
     cp -r ./* $out

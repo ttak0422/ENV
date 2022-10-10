@@ -767,6 +767,13 @@ let
         commands = [ "Neogen" ];
       }
       {
+        plugin = vim-sonictemplate;
+        startup = ''
+          vim.g.sonictemplate_vim_template_dir = '${templates}'
+        '';
+        commands = [ "Template" ];
+      }
+      {
         plugin = todo-comments-nvim;
         depends = [ plenary-nvim ];
         commands =

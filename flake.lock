@@ -381,11 +381,11 @@
     "gitsigns-nvim_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1665157991,
-        "narHash": "sha256-HGYUDb2xLwrEEGJP7zfrnBoY8kJ52ey5mcMnVjm2JvE=",
+        "lastModified": 1665390078,
+        "narHash": "sha256-U9/ZChOuUOoo3MWpdH7AQJ/B1psx6DABVd3gFMl59bs=",
         "owner": "lewis6991",
         "repo": "gitsigns.nvim",
-        "rev": "9787c94178b4062f30d2f06b6d52984217196647",
+        "rev": "9d18976c10413e52d76d41a771f042704786ce2e",
         "type": "github"
       },
       "original": {
@@ -950,21 +950,38 @@
         "nvim-treesitter": "nvim-treesitter_2",
         "stickybuf-nvim": "stickybuf-nvim",
         "tint-nvim": "tint-nvim_2",
+        "vim-sonictemplate": "vim-sonictemplate",
         "virtual-types-nvim": "virtual-types-nvim",
         "winresizer": "winresizer",
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1665376500,
-        "narHash": "sha256-8a86QFJJQChKjg/+qTcDi3Ll5BqW1GiNzcgbWgouirA=",
+        "lastModified": 1665400996,
+        "narHash": "sha256-fYrkvgZNWkrXGCSU3PmG3L1bjEr9Idy2Z2KnpMmUCDI=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "1e1e1a016bbcd3278a9b058b325c2f90b7bfcef9",
+        "rev": "04eb71e90a9987b6d3c23183fd805823d6f468e6",
         "type": "github"
       },
       "original": {
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
+        "type": "github"
+      }
+    },
+    "vim-sonictemplate": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1663506718,
+        "narHash": "sha256-0/IwBJ8KUMJFf8hQ5I83n7PuN02gUL+MbBiC2UMg4dc=",
+        "owner": "mattn",
+        "repo": "vim-sonictemplate",
+        "rev": "e6ac8cbac7d28271b2e043b4e8e893c2aeb8b816",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattn",
+        "repo": "vim-sonictemplate",
         "type": "github"
       }
     },

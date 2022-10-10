@@ -4,7 +4,7 @@ let
   inherit (builtins) concatStringsSep map fetchTarball readFile;
   inherit (lib.strings) fileContents;
   inherit (lib.lists) singleton;
-  inherit (pkgs) fetchFromGitHub;
+  inherit (pkgs) fetchFromGitHub writeText;
   inherit (pkgs.stdenv) mkDerivation;
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
   templates = pkgs.callPackage ./templates { };
@@ -727,6 +727,27 @@ let
           taplo-cli
         ]);
         delay = true;
+      }
+      {
+        plugin = nvim-lint;
+        config = ''
+          local lint = require("lint")
+          lint.linters.checkstyle.config_file = '${
+            pkgs.writeText "checkstyle.xml"
+            (readFile ./../../../configs/google_checks.xml)
+          }'
+          lint.linters_by_ft = {
+            java = { "checkstyle" },
+          }
+          vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+            callback = function()
+              require("lint").try_lint()
+            end,
+          })
+        '';
+        depends = [ nvim-jdtls ];
+        extraPackages = [ pkgs.checkstyle ];
+        fileTypes = [ "java" ];
       }
       {
         plugin = todo-comments-nvim;

@@ -756,6 +756,12 @@ let
         fileTypes = [ "java" ];
       }
       {
+        plugin = neogen;
+        depends = [ nvim-treesitter luasnip ];
+        config = readFile ./lua/neogen.lua;
+        commands = [ "Neogen" ];
+      }
+      {
         plugin = todo-comments-nvim;
         depends = [ plenary-nvim ];
         commands =

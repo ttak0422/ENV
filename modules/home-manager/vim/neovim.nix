@@ -464,6 +464,50 @@ let
         depends = lspDepends ++ [ ];
         config = ''
           local jdtls = require('jdtls')
+
+          local make_settings = function()
+            local url = vim.g.java_format_settings_url
+            local profile = vim.g.java_format_settings_profile
+            local cfg = {
+              java = {
+                signatureHelp = { enabled = true, description = { enabled = true } },
+                completion = {
+                  favoriteStaticMembers = {
+                    'org.hamcrest.MatcherAssert.assertThat',
+                    'org.hamcrest.Matchers.*',
+                    'org.hamcrest.CoreMatchers.*',
+                    'org.junit.jupiter.api.Assertions.*',
+                    'java.util.Objects.requireNonNull',
+                    'java.util.Objects.requireNonNullElse',
+                    'org.mockito.Mockito.*'
+                  },
+                  importOrder = {
+                    'org.springframework',
+                    'java.util',
+                    'java',
+                    'javax',
+                    'com',
+                    'org'
+                  },
+                  filteredTypes = {
+                    'com.sun.*',
+                    'io.micrometer.shaded.*',
+                    'java.awt.*',
+                    'jdk.*',
+                    'sun.*',
+                  },
+                };
+              },
+            }
+            if url ~= nil then
+              cfg['java.format.settings.url'] = url
+            end
+            if profile ~= nil then
+              cfg['java.format.settings.profile'] = profile
+            end
+            return cfg
+          end
+
           local mk_config = function()
             local root = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'})
             local workspace = os.getenv('HOME') .. '/.local/share/eclipse/' .. vim.fn.fnamemodify(root, ':p:h:t')
@@ -496,39 +540,7 @@ let
                 workspace,
               },
               root_dir = root,
-              settings = {
-                ['java.format.settings.url'] = vim.g.java_format_settings_url,
-                ['java.format.settings.profile'] = vim.g.java_format_settings_profile,
-                java = {
-                  signatureHelp = { enabled = true, description = { enabled = true } },
-                  completion = {
-                    favoriteStaticMembers = {
-                      'org.hamcrest.MatcherAssert.assertThat',
-                      'org.hamcrest.Matchers.*',
-                      'org.hamcrest.CoreMatchers.*',
-                      'org.junit.jupiter.api.Assertions.*',
-                      'java.util.Objects.requireNonNull',
-                      'java.util.Objects.requireNonNullElse',
-                      'org.mockito.Mockito.*'
-                    },
-                    importOrder = {
-                      'org.springframework',
-                      'java.util',
-                      'java',
-                      'javax',
-                      'com',
-                      'org'
-                    },
-                    filteredTypes = {
-                      'com.sun.*',
-                      'io.micrometer.shaded.*',
-                      'java.awt.*',
-                      'jdk.*',
-                      'sun.*',
-                    },
-                  };
-                },
-              },
+              settings = make_settings(),
               init_options = {
                 bundles = {},
               },

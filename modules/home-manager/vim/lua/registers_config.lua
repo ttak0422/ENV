@@ -1,1 +1,5 @@
-vim.g.registers_window_border = 'single'
+require("registers").setup({
+  window = {
+    transparency = 0,
+  },
+})

@@ -12,6 +12,7 @@ require('catppuccin').setup {
     neogit = true,
     notify = true,
     nvimtree = true,
+    symbols_outline = true,
     telescope = true,
     treesitter = true,
     treesitter_context = false,

@@ -18,7 +18,7 @@ wk.register({
       d = { '<cmd>TroubleToggle document_diagnostics<cr>', 'toggle diagnostics (document)' },
       D = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'toggle diagnostics (workspace)' },
       m = { '<cmd>Glow<cr>', 'toggle markdown' },
-      o = { '<cmd>LSoutlineToggle<cr>', 'toggle outline' },
+      o = { '<cmd>SymbolsOutline<cr>', 'toggle outline' },
       O = { '<cmd>SidebarNvimToggle<cr>', 'toggle outline' },
     },
 

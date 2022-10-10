@@ -230,6 +230,12 @@ let
       plugin = aerial-nvim;
       config = readFile ./lua/aerial-nvim.lua;
       commands = [ "AerialToggle" ];
+      enable = false;
+    }
+    {
+      plugin = symbols-outline-nvim;
+      config = readFile ./lua/symbols-outline-nvim.lua;
+      commands = [ "SymbolsOutline" ];
     }
     {
       plugin = myPlugins.incline-nvim-pr;

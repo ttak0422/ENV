@@ -1,0 +1,4 @@
+\(\S\+\)\.null$
+	Optional.ofNullable({{$1}})
+		.{{_cursor_}}
+

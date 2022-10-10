@@ -738,10 +738,15 @@ let
         plugin = nvim-lint;
         config = ''
           local lint = require("lint")
-          lint.linters.checkstyle.config_file = '${
-            pkgs.writeText "checkstyle.xml"
-            (readFile ./../../../configs/google_checks.xml)
-          }'
+          local local_config = vim.g.checkstyle_config_file
+          if local_config ~= nil then
+            lint.linters.checkstyle.config_file = local_config
+          else
+            lint.linters.checkstyle.config_file = '${
+              pkgs.writeText "checkstyle.xml"
+              (readFile ./../../../configs/google_checks.xml)
+            }'
+          end
           lint.linters_by_ft = {
             java = { "checkstyle" },
           }

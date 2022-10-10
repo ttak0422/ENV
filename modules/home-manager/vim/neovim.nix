@@ -839,6 +839,10 @@ let
             plugin = project-nvim;
             config = readFile ./lua/project-nvim.lua;
           }
+          {
+            plugin = telescope-sonictemplate-nvim;
+            depends = [ vim-sonictemplate ];
+          }
         ];
         config = readFile ./lua/telescope-nvim_config.lua;
         commands = [ "Telescope" ];

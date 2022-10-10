@@ -878,6 +878,22 @@
         "type": "github"
       }
     },
+    "telescope-sonictemplate-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1632573283,
+        "narHash": "sha256-IbMIPEcHC8j+t4XUS6TFFGWNSCCd5LpsG/n1FPQQzmc=",
+        "owner": "tamago324",
+        "repo": "telescope-sonictemplate.nvim",
+        "rev": "9edeeea022d9e35287fa80a91ed5bffb950cc096",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tamago324",
+        "repo": "telescope-sonictemplate.nvim",
+        "type": "github"
+      }
+    },
     "tint-nvim": {
       "flake": false,
       "locked": {
@@ -949,6 +965,7 @@
         "neogen": "neogen",
         "nvim-treesitter": "nvim-treesitter_2",
         "stickybuf-nvim": "stickybuf-nvim",
+        "telescope-sonictemplate-nvim": "telescope-sonictemplate-nvim",
         "tint-nvim": "tint-nvim_2",
         "vim-sonictemplate": "vim-sonictemplate",
         "virtual-types-nvim": "virtual-types-nvim",
@@ -956,11 +973,11 @@
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1665400996,
-        "narHash": "sha256-fYrkvgZNWkrXGCSU3PmG3L1bjEr9Idy2Z2KnpMmUCDI=",
+        "lastModified": 1665416304,
+        "narHash": "sha256-a6aG/+M5X9HYRMOTfPKYx4IJqrQ8Liz1xI18BRGFqIQ=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "04eb71e90a9987b6d3c23183fd805823d6f468e6",
+        "rev": "11fdf52800f7777500c3f0051d65167fe5336a86",
         "type": "github"
       },
       "original": {

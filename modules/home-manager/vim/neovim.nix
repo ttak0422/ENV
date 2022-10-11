@@ -773,6 +773,7 @@ let
           vim.g.sonictemplate_postfix_key = '<c-t>'
         '';
         commands = [ "Template" ];
+        delay = true;
       }
       {
         plugin = todo-comments-nvim;

@@ -56,11 +56,10 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp", priority = 10 },
 		{ name = "nvim_lsp_signature_help", priority = 10 },
-		{ name = "luasnip", priority = 7 },
-		{ name = "treesitter", priority = 5 },
+		{ name = "treesitter", priority = 7 },
 		{
 			name = "buffer",
-			priority = 3,
+			priority = 5,
 			option = {
 				get_bufnrs = function()
 					local bufs = {}
@@ -71,6 +70,7 @@ cmp.setup({
 				end,
 			},
 		},
+		{ name = "luasnip", priority = 3 },
 		{ name = "path", priority = 2 },
 		{ name = "nvim_lua", priority = 1 },
 		{ name = "calc", priority = 1 },

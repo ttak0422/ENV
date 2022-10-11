@@ -1,4 +1,4 @@
-\(\S\+\)\.null$
+\(\S\+\)\.na$
 	Optional.ofNullable({{$1}})
 		.{{_cursor_}}
 

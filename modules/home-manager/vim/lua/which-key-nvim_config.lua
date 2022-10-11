@@ -27,6 +27,7 @@ wk.register({
       name = "find",
       f = { "<cmd>Telescope live_grep_args theme=ivy<cr>", "find contents" },
       p = { "<cmd>Telescope find_files theme=ivy<cr>", "find files" },
+      r = { "<cmd>Telescope oldfiles theme=ivy<cr>", "find files" },
       P = { "<cmd>Telescope projects theme=ivy<cr>", "find projects" },
       b = { "<cmd>Telescope buffers theme=ivy<cr>", "find buffers" },
       c = { "<cmd>Telescope command_history theme=ivy<cr>", "find command history" },

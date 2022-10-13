@@ -316,8 +316,9 @@ let
 
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
           vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-          -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-          vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', bufopts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+          -- vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', bufopts)
+          -- vim.keymap.set('n', 'K', '<cmd>DocsViewToggle<CR>', bufopts)
           vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
 
           vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
@@ -342,6 +343,12 @@ let
       '';
       lspDepends = [ fidget-nvim nvim-cmp lspsaga-nvim virtual-types-nvim ];
     in [
+      {
+        plugin = nvim-docs-view;
+        enable = false;
+        config = readFile ./lua/nvim-docs-view.lua;
+        commands = [ "DocsViewToggle" ];
+      }
       {
         plugin = fidget-nvim;
         config = ''

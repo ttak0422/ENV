@@ -888,6 +888,14 @@ let
 
   tool = with pkgs.vimPlugins; [
     {
+      plugin = comfortable-motion-vim;
+      delay = true;
+      config = ''
+        vim.g.comfortable_motion_scroll_down_key = "j"
+        vim.g.comfortable_motion_scroll_up_key = "k"
+      '';
+    }
+    {
       plugin = myPlugins.vim-translator;
       config = ''
         vim.g.translator_target_lang = 'ja'

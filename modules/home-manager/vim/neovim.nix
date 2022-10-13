@@ -333,17 +333,32 @@ let
           vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', bufopts)
           vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
 
-          if client.supports_method('textDocument/codeLens') then
-            require('virtualtypes').on_attach(client, bufnr)
+          -- if client.supports_method('textDocument/codeLens') then
+          --   require('virtualtypes').on_attach(client, bufnr)
+          -- end
+          if client.supports_method('textDocument/inlayHint') then
+            require('lsp-inlayhints').on_attach(client, bufnr)
           end
 
         end
 
         local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
       '';
-      lspDepends = [ fidget-nvim nvim-cmp lspsaga-nvim virtual-types-nvim ];
+      lspDepends = [
+        fidget-nvim
+        nvim-cmp
+        lspsaga-nvim
+        # virtual-types-nvim
+        lsp-inlayhints-nvim
+      ];
       lspExtraPackages = with pkgs; [ ];
     in [
+      {
+        plugin = lsp-inlayhints-nvim;
+        config = ''
+          require('lsp-inlayhints').setup{}
+        '';
+      }
       {
         plugin = nvim-docs-view;
         enable = false;
@@ -484,33 +499,76 @@ let
             local profile = vim.g.java_format_settings_profile
             local cfg = {
               java = {
-                signatureHelp = { enabled = true, description = { enabled = true } },
-                completion = {
-                  favoriteStaticMembers = {
-                    'org.hamcrest.MatcherAssert.assertThat',
-                    'org.hamcrest.Matchers.*',
-                    'org.hamcrest.CoreMatchers.*',
-                    'org.junit.jupiter.api.Assertions.*',
-                    'java.util.Objects.requireNonNull',
-                    'java.util.Objects.requireNonNullElse',
-                    'org.mockito.Mockito.*'
+                import = {
+                  gradle = {
+                    enabled = true,
+                    offline = {
+                      enabled = true
+                    }
                   },
-                  importOrder = {
-                    'org.springframework',
-                    'java.util',
-                    'java',
-                    'javax',
-                    'com',
-                    'org'
+                  maven = {
+                    enabled = true
                   },
-                  filteredTypes = {
-                    'com.sun.*',
-                    'io.micrometer.shaded.*',
-                    'java.awt.*',
-                    'jdk.*',
-                    'sun.*',
+                  exclusions = {
+                    "**/node_modules/**",
+                    "**/.metadata/**",
+                    "**/archetype-resources/**",
+                    "**/META-INF/maven/**",
                   },
-                };
+                },
+                eclipse = {
+                  downloadSources = true,
+                },
+                configuration = {
+                  updateBuildConfiguration = "automatic",
+                },
+                maven = {
+                  downloadSources = true,
+                  updateSnapshots = true,
+                },
+                implementationsCodeLens = {
+                  enabled = true,
+                },
+                referencesCodeLens = {
+                  enabled = true,
+                },
+                references = {
+                  includeDecompiledSources = true,
+                },
+                inlayHints = {
+                  parameterNames = {
+                    enabled = 'literals', -- literals, all, none
+                  },
+                },
+              },
+              signatureHelp = { enabled = true, description = { enabled = true } },
+              completion = {
+                enabled = true,
+                guessMethodArguments = true,
+                favoriteStaticMembers = {
+                  'org.hamcrest.MatcherAssert.assertThat',
+                  'org.hamcrest.Matchers.*',
+                  'org.hamcrest.CoreMatchers.*',
+                  'org.junit.jupiter.api.Assertions.*',
+                  'java.util.Objects.requireNonNull',
+                  'java.util.Objects.requireNonNullElse',
+                  'org.mockito.Mockito.*'
+                },
+                importOrder = {
+                  'org.springframework',
+                  'java.util',
+                  'java',
+                  'javax',
+                  'com',
+                  'org'
+                },
+                filteredTypes = {
+                  'com.sun.*',
+                  'io.micrometer.shaded.*',
+                  'java.awt.*',
+                  'jdk.*',
+                  'sun.*',
+                },
               },
             }
             if url ~= nil then

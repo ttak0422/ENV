@@ -342,6 +342,7 @@ let
         local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
       '';
       lspDepends = [ fidget-nvim nvim-cmp lspsaga-nvim virtual-types-nvim ];
+      lspExtraPackages = with pkgs; [ ];
     in [
       {
         plugin = nvim-docs-view;
@@ -585,7 +586,7 @@ let
           })
         '';
         fileTypes = [ "java" ];
-        extraPackages = with pkgs; [ jdk ];
+        extraPackages = lspExtraPackages ++ (with pkgs; [ jdk ]);
       }
       {
         plugin = nvim-lspconfig;
@@ -719,7 +720,7 @@ let
             },
           })
         '';
-        extraPackages = (with pkgs; [
+        extraPackages = lspExtraPackages ++ (with pkgs; [
           gopls
           rnix-lsp
           rubyPackages.solargraph
@@ -963,7 +964,7 @@ let
       plugin = glow-nvim;
       commands = [ "Glow" ];
       startup = ''
-        vim.g.glow_border = 'rounded'
+        vim.g.glow_border = 'none'
       '';
       extraPackages = [ pkgs.glow ];
     }

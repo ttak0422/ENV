@@ -209,6 +209,11 @@ let
 
   view = with pkgs.vimPlugins; [
     {
+      plugin = nvim-scrollview;
+      config = readFile ./lua/nvim-scrollview.lua;
+      delay = true;
+    }
+    {
       plugin = nvim-notify;
       config = readFile ./lua/nvim-notify.lua;
       delay = true;

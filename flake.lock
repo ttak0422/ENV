@@ -482,11 +482,11 @@
     "neogen": {
       "flake": false,
       "locked": {
-        "lastModified": 1663835183,
-        "narHash": "sha256-5wplf09XOljcQKYcnJTIQHJygNBVJw+tUcvWasLQbkc=",
+        "lastModified": 1665781236,
+        "narHash": "sha256-Bn9rZeWCt4dKXzdjij3alJjHm9Zv/RpK66E4lEtG6dg=",
         "owner": "danymat",
         "repo": "neogen",
-        "rev": "967b280d7d7ade52d97d06e868ec4d9a0bc59282",
+        "rev": "8bddb5acfc21c08e129de0354714004b737bc26e",
         "type": "github"
       },
       "original": {
@@ -745,11 +745,11 @@
     "nvim-treesitter_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1665648296,
-        "narHash": "sha256-MvRoWjTIveExsxoRAMSn7fOeN6QjrmDGYZiZeTJpAWA=",
+        "lastModified": 1665733069,
+        "narHash": "sha256-PdJ1DDklpM9TJiWopLdQtJphT/JhgQuYEwmzkDF3FqU=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "d3ca4de41faf996258b72924ecb1ecc2df69846e",
+        "rev": "c8533707679b99dc80d5f46f7b519081fb9c1ac9",
         "type": "github"
       },
       "original": {
@@ -990,6 +990,22 @@
         "type": "github"
       }
     },
+    "toolwindow-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1623087678,
+        "narHash": "sha256-/QBV04XyWzr3XcE/HPhnPgBaowHcwVgF7oE+sosycEI=",
+        "owner": "EthanJWright",
+        "repo": "toolwindow.nvim",
+        "rev": "149665bbf0821c2461073c147d06de371251e2f9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "EthanJWright",
+        "repo": "toolwindow.nvim",
+        "type": "github"
+      }
+    },
     "ts-fold": {
       "flake": false,
       "locked": {
@@ -1035,17 +1051,18 @@
         "stickybuf-nvim": "stickybuf-nvim",
         "telescope-sonictemplate-nvim": "telescope-sonictemplate-nvim",
         "tint-nvim": "tint-nvim_2",
+        "toolwindow-nvim": "toolwindow-nvim",
         "vim-sonictemplate": "vim-sonictemplate",
         "virtual-types-nvim": "virtual-types-nvim",
         "winresizer": "winresizer",
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1665671275,
-        "narHash": "sha256-Cb4uxC8ZMEmgr7UkHdCs5jNflEw+3pq1waHFvWBrdOc=",
+        "lastModified": 1665772617,
+        "narHash": "sha256-dLgmHyriq34+Cn/Vp//qgZWeXGokdndDJqoj3+g/oSg=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "1f1cac2f9729219a4929992185c1984a6a0add40",
+        "rev": "b0befcb62d45f29c57167f5857c2db1a935e84ed",
         "type": "github"
       },
       "original": {

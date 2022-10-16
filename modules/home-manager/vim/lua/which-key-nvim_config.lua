@@ -1,3 +1,20 @@
+local Terminal = nil
+local tigTerm = nil
+
+local function getTerm()
+	if not Terminal then
+		Terminal = require("toggleterm.terminal").Terminal
+	end
+	return Terminal
+end
+
+function _ToggleTigTerm()
+	if not tigTerm then
+		tigTerm = getTerm():new({ cmd = "tig", hidden = true, direction = "float" })
+	end
+	tigTerm:toggle()
+end
+
 local wk = require("which-key")
 
 wk.setup()
@@ -27,6 +44,7 @@ wk.register({
 			o = { "<cmd>SymbolsOutline<cr>", "toggle outline" },
 			O = { "<cmd>SidebarNvimToggle<cr>", "toggle outline" },
 			q = { "<cmd>lua require('toolwindow').close()<cr>", "toggle toolwindows" },
+			g = { "<cmd>lua _ToggleTigTerm()<cr>", "toggle tig" },
 		},
 
 		-- find
@@ -56,7 +74,8 @@ wk.register({
 		-- other
 		q = { "<cmd>BufDel<cr>", "close buffer" },
 		Q = { "<cmd>BufDel!<cr>", "close buffer force" },
-		G = { "<cmd>Neogit<cr>", "neovim git client" },
+		-- G = { "<cmd>Neogit<cr>", "neovim git client" },
+		G = { "<cmd>lua _toggleTigTerm()<cr>", "toggle tig term" },
 		-- F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
 	},
 })

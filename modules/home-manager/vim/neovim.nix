@@ -11,8 +11,18 @@ let
   external = pkgs.callPackage ./external.nix { };
   myPlugins = pkgs.callPackage ./my-plugins.nix { };
 
+  extraPackages = with pkgs; [
+    neovim-remote
+  ];
+
   extraConfig = ''
     let g:neovide_cursor_vfx_mode = "pixiedust"
+
+    " nvr
+    if has('nvim')
+      let $GIT_EDITOR = 'nvr --remote-wait'
+    endif
+    autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 
     ${fileContents ./vim/nvim.vim}
     ${fileContents ./vim/util.vim}
@@ -817,7 +827,7 @@ let
         '';
         config = readFile ./lua/formatter-nvim.lua;
         commands = [ "Format" ];
-        extraPackages = with pkgs; [ google-java-format ];
+        extraPackages = with pkgs; [ stylua google-java-format ];
       }
       {
         plugin = nvim-lint;
@@ -1066,10 +1076,10 @@ let
       plugin = diffview-nvim;
       depends = [{ plugin = plenary-nvim; }];
       commands = [ "DiffviewOpen" "DiffviewToggleFiles" ];
-      modules = [ "toggleterm.terminal" ];
       config = ''
         require'diffview'.setup()
       '';
+      delay = true;
     }
     {
       plugin = nvim-tree-lua;
@@ -1085,13 +1095,13 @@ let
     {
       plugin = toggleterm-nvim;
       config = readFile ./lua/toggleterm_config.lua;
-      optional = false;
+      modules = [ "toggleterm" "toggleterm.terminal" ];
     }
   ];
 in
 {
   programs.rokka-nvim = {
-    inherit extraConfig;
+    inherit extraConfig extraPackages;
     # logLevel = "debug";
     enable = true;
     plugins = startup ++ ime ++ custom ++ statusline ++ commandline ++ window

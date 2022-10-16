@@ -71,23 +71,6 @@ set grepformat=%f:%l:%c:%m
 nnoremap j gj
 nnoremap k gk
 
-augroup GrepCmd
-  autocmd!
-  autocmd QuickFixCmdPost [^l]* nested copen
-  autocmd QuickFixCmdPost    l* nested lopen
-augroup END
-
-" VimGrep(pattern, file?)
-function! VimGrep(...)
-  if a:0 >= 2
-    execute 'vimgrep /' . a:1 . '/j ' . a:2
-  else
-    execute 'vimgrep /' . a:1 . '/j %:p'
-  endif
-endfunction
-
-command! -nargs=+ VimGrep call VimGrep(<f-args>)
-
 " https://vim-jp.org/vim-users-jp/2011/03/12/Hack-206.html
 augroup vimrc-checktime
   autocmd!

@@ -11,3 +11,10 @@ let g:loaded_vimball = v:true
 let g:loaded_vimballPlugin = v:true
 " keymap
 tnoremap <C-[> <C-\><C-n>
+
+augroup GrepCmd
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* nested lua require("toolwindow").open_window("quickfix", {stay_after_open = true})
+  autocmd QuickFixCmdPost    l* nested lopen
+augroup END
+

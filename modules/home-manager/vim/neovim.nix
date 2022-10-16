@@ -108,7 +108,9 @@ let
       config = ''
         require('stickybuf').setup()
       '';
-      delay = true;
+      # delay = true;
+      commands = [ "Stickybuf" ];
+      modules = [ "stickybuf" ];
     }
     {
       plugin = confirm-quit-nvim;
@@ -245,6 +247,7 @@ let
     {
       plugin = myPlugins.incline-nvim-pr;
       config = readFile ./lua/incline_config.lua;
+      enable = false;
       # delay = true;
       comment = "ペインにファイル名を表示";
     }
@@ -336,7 +339,7 @@ let
 
           -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
           vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', bufopts)
-          vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
+          -- vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
 
           -- if client.supports_method('textDocument/codeLens') then
           --   require('virtualtypes').on_attach(client, bufnr)
@@ -357,7 +360,8 @@ let
         lsp-inlayhints-nvim
       ];
       lspExtraPackages = with pkgs; [ ];
-    in [
+    in
+    [
       {
         plugin = lsp-inlayhints-nvim;
         config = ''
@@ -656,6 +660,7 @@ let
         depends = lspDepends ++ [{
           plugin = null-ls-nvim;
           depends = [ plenary-nvim ];
+          enable = false;
         }];
         config = ''
           ${lspSharedConfig}
@@ -765,23 +770,23 @@ let
           }
 
           -- null-ls
-          local null_ls = require('null-ls')
-          null_ls.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            sources = {
-              -- prettier
-              null_ls.builtins.formatting.prettier.with {
-                prefer_local = 'node_modules/.bin'
-              },
-              -- nix lint
-              null_ls.builtins.code_actions.statix,
-              -- nix fmt
-              null_ls.builtins.formatting.nixfmt,
-              -- lua fmt
-              null_ls.builtins.formatting.stylua,
-            },
-          })
+          -- local null_ls = require('null-ls')
+          -- null_ls.setup({
+          --   on_attach = on_attach,
+          --   capabilities = capabilities,
+          --   sources = {
+          --     -- prettier
+          --     null_ls.builtins.formatting.prettier.with {
+          --       prefer_local = 'node_modules/.bin'
+          --     },
+          --     -- nix lint
+          --     null_ls.builtins.code_actions.statix,
+          --     -- nix fmt
+          --     null_ls.builtins.formatting.nixfmt,
+          --     -- lua fmt
+          --     null_ls.builtins.formatting.stylua,
+          --   },
+          -- })
         '';
         extraPackages = lspExtraPackages ++ (with pkgs; [
           gopls
@@ -789,11 +794,11 @@ let
           rubyPackages.solargraph
           rust-analyzer
           sumneko-lua-language-server
-          stylua
-          nodePackages.prettier
+          # stylua
+          # nodePackages.prettier
           nodePackages.vscode-langservers-extracted
-          statix
-          nixfmt
+          # statix
+          # nixfmt
           google-java-format
         ]) ++ (with pkgs.pkgs-stable; [
           deno
@@ -804,6 +809,15 @@ let
           taplo-cli
         ]);
         delay = true;
+      }
+      {
+        plugin = formatter-nvim;
+        startup = ''
+          vim.api.nvim_set_keymap('n', '<C-l>', '<cmd>Format<cr>', {silent = true, noremap = true})
+        '';
+        config = readFile ./lua/formatter-nvim.lua;
+        commands = [ "Format" ];
+        extraPackages = with pkgs; [ google-java-format ];
       }
       {
         plugin = nvim-lint;
@@ -848,7 +862,7 @@ let
       }
       {
         plugin = todo-comments-nvim;
-        depends = [ plenary-nvim ];
+        depends = [ plenary-nvim trouble-nvim ];
         commands =
           [ "TodoQuickFix" "TodoLocList" "TodoTrouble" "TodoTelescope" ];
         config = ''
@@ -878,7 +892,7 @@ let
       {
         plugin = goto-preview;
         config = readFile ./lua/goto-preview-nvim_config.lua;
-        delay = true; # WIP
+        modules = [ "goto-preview" ];
       }
       {
         plugin = hop-nvim;
@@ -942,6 +956,7 @@ let
         config = ''
           require 'colorizer'.setup()
         '';
+        enable = false;
         delay = true;
       }
       {
@@ -958,6 +973,10 @@ let
     ];
 
   tool = with pkgs.vimPlugins; [
+    {
+      plugin = toolwindow-nvim;
+      modules = [ "toolwindow" ];
+    }
     {
       plugin = comfortable-motion-vim;
       delay = true;
@@ -1047,6 +1066,7 @@ let
       plugin = diffview-nvim;
       depends = [{ plugin = plenary-nvim; }];
       commands = [ "DiffviewOpen" "DiffviewToggleFiles" ];
+      modules = [ "toggleterm.terminal" ];
       config = ''
         require'diffview'.setup()
       '';
@@ -1068,9 +1088,11 @@ let
       optional = false;
     }
   ];
-in {
+in
+{
   programs.rokka-nvim = {
     inherit extraConfig;
+    # logLevel = "debug";
     enable = true;
     plugins = startup ++ ime ++ custom ++ statusline ++ commandline ++ window
       ++ language ++ view ++ code ++ tool;

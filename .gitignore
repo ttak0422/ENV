@@ -2,3 +2,4 @@ result
 untrack/*
 !.gitkeep
 .direnv/
+.pre-commit-config.yaml

@@ -667,6 +667,20 @@
         "type": "indirect"
       }
     },
+    "nixpkgs_6": {
+      "locked": {
+        "lastModified": 1645655918,
+        "narHash": "sha256-ZfbEFRW7o237+A1P7eTKhXje435FCAoe0blj2n20Was=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "77a7a4197740213879b9a1d2e1788c6c8ade4274",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
     "nixt": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -840,10 +854,31 @@
     "pre-commit-hooks": {
       "inputs": {
         "flake-utils": [
-          "rokka-nvim",
           "flake-utils"
         ],
         "nixpkgs": "nixpkgs_5"
+      },
+      "locked": {
+        "lastModified": 1665584211,
+        "narHash": "sha256-Qc9zn43UjLpP823BP416hAsoaXugwWw+nKPVqsNhqdY=",
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+        "rev": "94b0f300dd9a23d4e851aa2a947a1511d3410e2d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+        "type": "github"
+      }
+    },
+    "pre-commit-hooks_2": {
+      "inputs": {
+        "flake-utils": [
+          "rokka-nvim",
+          "flake-utils"
+        ],
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "lastModified": 1665584211,
@@ -882,7 +917,7 @@
           "nixpkgs"
         ],
         "nixt": "nixt",
-        "pre-commit-hooks": "pre-commit-hooks"
+        "pre-commit-hooks": "pre-commit-hooks_2"
       },
       "locked": {
         "lastModified": 1665899545,
@@ -910,6 +945,7 @@
         "nix-doom-emacs": "nix-doom-emacs",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-stable": "nixpkgs-stable",
+        "pre-commit-hooks": "pre-commit-hooks",
         "rokka-nvim": "rokka-nvim",
         "vim-plugins-overlay": "vim-plugins-overlay",
         "yabai": "yabai"

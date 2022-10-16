@@ -20,7 +20,7 @@ let
 
     " nvr
     if has('nvim')
-      let $GIT_EDITOR = 'nvr --remote-wait'
+      let $GIT_EDITOR = 'nvr -cc new --remote-wait'
     endif
     autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 

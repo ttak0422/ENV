@@ -10,7 +10,7 @@ end
 
 function _ToggleTigTerm()
 	if not tigTerm then
-		tigTerm = getTerm():new({ cmd = "tig", hidden = true, direction = "float" })
+		tigTerm = getTerm():new({ cmd = "tig", hidden = true })
 	end
 	tigTerm:toggle()
 end

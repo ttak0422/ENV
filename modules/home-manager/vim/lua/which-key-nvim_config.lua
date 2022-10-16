@@ -10,7 +10,7 @@ end
 
 function _ToggleTigTerm()
 	if not tigTerm then
-		tigTerm = getTerm():new({ cmd = "tig", hidden = true })
+		tigTerm = getTerm():new({ cmd = "tig", hidden = true, close_on_exit = true })
 	end
 	tigTerm:toggle()
 end

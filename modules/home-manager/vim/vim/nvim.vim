@@ -11,7 +11,11 @@ let g:loaded_vimball = v:true
 let g:loaded_vimballPlugin = v:true
 " keymap
 tnoremap <C-[> <C-\><C-n>
-autocmd WinEnter * if &buftype ==# 'terminal' | startinsert | endif
+augroup NvimTerm
+  autocmd!
+  autocmd WinEnter * if &buftype ==# 'terminal' | startinsert | endif
+  autocmd BufWinEnter,WinEnter term://* startinsert
+augroup END
 
 augroup GrepCmd
   autocmd!

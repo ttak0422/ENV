@@ -56,7 +56,7 @@ wk.register({
 		-- other
 		q = { "<cmd>BufDel<cr>", "close buffer" },
 		Q = { "<cmd>BufDel!<cr>", "close buffer force" },
-		G = { "<cmd>TigOpenProjectRootDir<cr>", "tig" },
+		G = { "<cmd>execute'split term://tig status'<cr>", "tig" },
 		-- F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
 	},
 })

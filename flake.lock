@@ -1063,6 +1063,22 @@
         "type": "github"
       }
     },
+    "tig-explorer-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1628870703,
+        "narHash": "sha256-o0M49+s1KFCRveeoSFy5Rw+X2g2/oXdT2V2zygd9pDI=",
+        "owner": "iberianpig",
+        "repo": "tig-explorer.vim",
+        "rev": "f4ec3e57ccad1b9a28b8607c4a56a0affc686583",
+        "type": "github"
+      },
+      "original": {
+        "owner": "iberianpig",
+        "repo": "tig-explorer.vim",
+        "type": "github"
+      }
+    },
     "tint-nvim": {
       "flake": false,
       "locked": {
@@ -1158,6 +1174,7 @@
         "skkeleton_indicator-nvim": "skkeleton_indicator-nvim",
         "stickybuf-nvim": "stickybuf-nvim",
         "telescope-sonictemplate-nvim": "telescope-sonictemplate-nvim",
+        "tig-explorer-vim": "tig-explorer-vim",
         "tint-nvim": "tint-nvim_2",
         "toolwindow-nvim": "toolwindow-nvim",
         "vim-sonictemplate": "vim-sonictemplate",
@@ -1166,11 +1183,11 @@
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1666016920,
-        "narHash": "sha256-SJ5gxOONZe2DTUngc0820fLydfCtgeHfa6viiVY36ME=",
+        "lastModified": 1666019829,
+        "narHash": "sha256-h3L3/c1++TJ08/kCrpnj4X9F0OOn3/nUIKq2xDQ+ZJM=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "bca4dabfafda4de1bd7a7205658d2092a6769229",
+        "rev": "9cdb1c0e1a99eb0ab4fad96e5d430395aca90c7a",
         "type": "github"
       },
       "original": {

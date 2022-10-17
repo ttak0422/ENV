@@ -84,10 +84,10 @@ let
     }
   ];
 
-  ime = [{
-    plugin = myPlugins.skkeleton;
-    depends = [ myPlugins.denops-vim ];
-    dependsAfter = [ myPlugins.skkeleton_indicator-nvim ];
+  ime = with pkgs.vimPlugins; [{
+    plugin = skkeleton;
+    depends = [ denops-vim ];
+    dependsAfter = [ skkeleton_indicator-nvim ];
     startup = ''
       vim.cmd([[
         function! s:skkeleton_init() abort

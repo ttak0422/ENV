@@ -19,9 +19,9 @@ let
     let g:neovide_cursor_vfx_mode = "pixiedust"
 
     " nvr
-    if has('nvim')
-      let $GIT_EDITOR = 'nvr -cc new --remote-wait'
-    endif
+    let nvrcmd = "nvr --remote-wait"
+    let $VISUAL = nvrcmd
+    let $GIT_EDITOR = nvrcmd
     autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 
     ${fileContents ./vim/nvim.vim}

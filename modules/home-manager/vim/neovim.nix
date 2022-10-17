@@ -984,6 +984,11 @@ let
 
   tool = with pkgs.vimPlugins; [
     {
+      plugin = tig-explorer-vim;
+      depends = [ bclose-vim ];
+      commands = [ "TigOpenProjectRootDir" ];
+    }
+    {
       plugin = toolwindow-nvim;
       modules = [ "toolwindow" ];
     }

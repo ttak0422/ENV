@@ -22,6 +22,7 @@ let
     let nvrcmd = "nvr --remote-wait"
     let $VISUAL = nvrcmd
     let $GIT_EDITOR = nvrcmd
+    autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 
     ${fileContents ./vim/nvim.vim}
     ${fileContents ./vim/util.vim}

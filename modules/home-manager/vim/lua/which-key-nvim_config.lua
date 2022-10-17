@@ -75,7 +75,6 @@ wk.register({
 		q = { "<cmd>BufDel<cr>", "close buffer" },
 		Q = { "<cmd>BufDel!<cr>", "close buffer force" },
 		-- G = { "<cmd>Neogit<cr>", "neovim git client" },
-		G = { "<cmd>lua _toggleTigTerm()<cr>", "toggle tig term" },
 		-- F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
 	},
 })

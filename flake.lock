@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "bclose-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1539182406,
+        "narHash": "sha256-UNguEOuk2yszPAcARPtev6xpyA0YqW++s4sh2y14RyU=",
+        "owner": "rbgrouleff",
+        "repo": "bclose.vim",
+        "rev": "99018b4a2dd18aea1cbd3aa23565b01a0f8c5b73",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rbgrouleff",
+        "repo": "bclose.vim",
+        "type": "github"
+      }
+    },
     "comfortable-motion-vim": {
       "flake": false,
       "locked": {
@@ -1160,6 +1176,7 @@
     },
     "vim-plugins-overlay": {
       "inputs": {
+        "bclose-vim": "bclose-vim",
         "comfortable-motion-vim": "comfortable-motion-vim",
         "confirm-quit-nvim": "confirm-quit-nvim",
         "denops-vim": "denops-vim",
@@ -1183,11 +1200,11 @@
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1666019829,
-        "narHash": "sha256-h3L3/c1++TJ08/kCrpnj4X9F0OOn3/nUIKq2xDQ+ZJM=",
+        "lastModified": 1666023692,
+        "narHash": "sha256-fGbjfnclmHH+IbLHifH7hHlLVfH3lXUmjw0zt3amvNI=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "9cdb1c0e1a99eb0ab4fad96e5d430395aca90c7a",
+        "rev": "a80599cb410e8257493725a0267ca4f943ee5b72",
         "type": "github"
       },
       "original": {

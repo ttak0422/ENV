@@ -357,6 +357,12 @@ let
           if client.supports_method('textDocument/inlayHint') then
             require('lsp-inlayhints').on_attach(client, bufnr)
           end
+          if client.supports_method('textDocument/publishDiagnostics') then
+            vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+              -- delay update diagnostics
+              vim.lsp.diagnostic.on_publish_diagnostics, { update_in_insert = false }
+            )
+          end
 
         end
 
@@ -407,6 +413,7 @@ let
       }
       {
         plugin = myPlugins.nvim-dd;
+        enable = false;
         config = ''
           require('dd').setup({
             timeout = 1000

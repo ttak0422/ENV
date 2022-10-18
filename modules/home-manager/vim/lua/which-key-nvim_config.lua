@@ -1,3 +1,12 @@
+function _OpenTig()
+	vim.cmd([[
+    execute 'new term://tig status'
+    setlocal bufhidden=delete
+    setlocal noswapfile
+    setlocal nobuflisted
+  ]])
+end
+
 local wk = require("which-key")
 
 wk.setup()
@@ -56,7 +65,7 @@ wk.register({
 		-- other
 		q = { "<cmd>BufDel<cr>", "close buffer" },
 		Q = { "<cmd>BufDel!<cr>", "close buffer force" },
-		G = { "<cmd>execute'split term://tig status'<cr>", "tig" },
+		G = { "<cmd>lua _OpenTig()<cr>", "tig" },
 		-- F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
 	},
 })

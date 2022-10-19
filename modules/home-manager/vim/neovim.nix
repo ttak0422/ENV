@@ -938,7 +938,10 @@ let
             plugin = myPlugins.telescope-fzf-native-nvim;
             optimize = false;
           }
-          myPlugins.telescope-live-grep-args-nvim
+          {
+            plugin = telescope-live-grep-args-nvim;
+            extraPackages = [ pkgs.ripgrep ];
+          }
           {
             plugin = project-nvim;
             config = readFile ./lua/project-nvim.lua;

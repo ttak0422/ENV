@@ -357,6 +357,9 @@ let
           if client.supports_method('textDocument/inlayHint') then
             require('lsp-inlayhints').on_attach(client, bufnr)
           end
+          if client.supports_method('textDocument/formatting') then
+            vim.api.nvim_set_keymap('n', '<leader>F', '<cmd>Format<cr>', {silent = true, noremap = true})
+          end
           if client.supports_method('textDocument/publishDiagnostics') then
             vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
               -- delay update diagnostics
@@ -829,9 +832,6 @@ let
       }
       {
         plugin = formatter-nvim;
-        startup = ''
-          vim.api.nvim_set_keymap('n', '<C-l>', '<cmd>Format<cr>', {silent = true, noremap = true})
-        '';
         config = readFile ./lua/formatter-nvim.lua;
         commands = [ "Format" ];
         extraPackages = with pkgs; [ stylua google-java-format ];

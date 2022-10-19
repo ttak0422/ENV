@@ -569,34 +569,34 @@ let
                     enabled = 'literals', -- literals, all, none
                   },
                 },
-              },
-              signatureHelp = { enabled = true, description = { enabled = true } },
-              completion = {
-                enabled = true,
-                guessMethodArguments = true,
-                favoriteStaticMembers = {
-                  'org.hamcrest.MatcherAssert.assertThat',
-                  'org.hamcrest.Matchers.*',
-                  'org.hamcrest.CoreMatchers.*',
-                  'org.junit.jupiter.api.Assertions.*',
-                  'java.util.Objects.requireNonNull',
-                  'java.util.Objects.requireNonNullElse',
-                  'org.mockito.Mockito.*'
-                },
-                importOrder = {
-                  'org.springframework',
-                  'java.util',
-                  'java',
-                  'javax',
-                  'com',
-                  'org'
-                },
-                filteredTypes = {
-                  'com.sun.*',
-                  'io.micrometer.shaded.*',
-                  'java.awt.*',
-                  'jdk.*',
-                  'sun.*',
+                signatureHelp = { enabled = true, description = { enabled = true } },
+                completion = {
+                  enabled = true,
+                  guessMethodArguments = true,
+                  favoriteStaticMembers = {
+                    'org.hamcrest.MatcherAssert.assertThat',
+                    'org.hamcrest.Matchers.*',
+                    'org.hamcrest.CoreMatchers.*',
+                    'org.junit.jupiter.api.Assertions.*',
+                    'java.util.Objects.requireNonNull',
+                    'java.util.Objects.requireNonNullElse',
+                    'org.mockito.Mockito.*'
+                  },
+                  importOrder = {
+                    'org.springframework',
+                    'java.util',
+                    'java',
+                    'javax',
+                    'com',
+                    'org'
+                  },
+                  filteredTypes = {
+                    'com.sun.*',
+                    'io.micrometer.shaded.*',
+                    'java.awt.*',
+                    'jdk.*',
+                    'sun.*',
+                  },
                 },
               },
             }

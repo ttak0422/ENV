@@ -47,6 +47,7 @@ wk.register({
 			P = { "<cmd>Telescope projects theme=ivy<cr>", "find projects" },
 			b = { "<cmd>Telescope buffers theme=ivy<cr>", "find buffers" },
 			c = { "<cmd>Telescope command_history theme=ivy<cr>", "find command history" },
+			C = { "<cmd>Telescope command_palette<cr>", "find command history" },
 			t = { "<cmd>Telescope sonictemplate templates theme=ivy<cr>", "find templates" },
 		},
 

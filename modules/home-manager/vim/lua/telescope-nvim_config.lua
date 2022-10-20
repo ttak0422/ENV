@@ -23,10 +23,14 @@ telescope.setup({
 				},
 			},
 		},
+		command_palette = {
+			{ "Vim", { "check health", ":checkhealth" } },
+		},
 	},
 })
 
 telescope.load_extension("live_grep_args")
 telescope.load_extension("projects")
 telescope.load_extension("file_browser")
+telescope.load_extension("command_palette")
 telescope.load_extensions("sonictemplate")

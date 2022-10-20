@@ -935,6 +935,7 @@ let
         depends = [
           plenary-nvim
           telescope-file-browser-nvim
+          telescope-command-palette-nvim
           {
             plugin = telescope-live-grep-args-nvim;
             extraPackages = [ pkgs.ripgrep ];
@@ -950,6 +951,7 @@ let
         ];
         config = readFile ./lua/telescope-nvim_config.lua;
         commands = [ "Telescope" ];
+        modules = [ "telescope" ];
         extraPackages = with pkgs.pkgs-stable; [ ripgrep ];
       }
       {

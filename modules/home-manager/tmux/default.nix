@@ -13,42 +13,44 @@ let
   rBracketSimbol = "\\ue0b4";
   zoomSimbol = "";
 
-  scripts = let
-    shebang = ''
-      #!${pkgs.bash}/bin/bash
-    '';
-    scriptDefinitions = {
-      TMUX_LOA = ''
-        uptime | awk -F "[:,]"  '{printf "%s %s %s\n",$(NF - 2),$(NF - 1), $NF}'
+  scripts =
+    let
+      shebang = ''
+        #!${pkgs.bash}/bin/bash
       '';
-      TMUX_SINGLE_PANE = ''
-        num=`tmux list-panes | wc -l`;
-        if [[ 1 = $num ]]; then
-          echo 0;
-        else
-          echo 1;
-        fi
-      '';
-      TMUX_UPDATE_BORDER = ''
-        zoomed=''${1:-0}
-        num=`tmux list-panes | wc -l`;
-        if [[ 1 = $num || 1 = $zoomed ]]; then
-          tmux set pane-border-status off
-        else
-          tmux set pane-border-status top
-        fi
-      '';
-      TMUX_KILL_PANE_AND_UPDATE_BORDER = ''
-        tmux kill-pane
-        num=`tmux list-panes | wc -l`;
-        if [[ 1 = $num ]]; then
-          tmux set pane-border-status off
-        else
-          tmux set pane-border-status top
-        fi
-      '';
-    };
-  in mapAttrs (k: v: writeScriptBin k (shebang + v)) scriptDefinitions;
+      scriptDefinitions = {
+        TMUX_LOA = ''
+          uptime | awk -F "[:,]"  '{printf "%s %s %s\n",$(NF - 2),$(NF - 1), $NF}'
+        '';
+        TMUX_SINGLE_PANE = ''
+          num=`tmux list-panes | wc -l`;
+          if [[ 1 = $num ]]; then
+            echo 0;
+          else
+            echo 1;
+          fi
+        '';
+        TMUX_UPDATE_BORDER = ''
+          zoomed=''${1:-0}
+          num=`tmux list-panes | wc -l`;
+          if [[ 1 = $num || 1 = $zoomed ]]; then
+            tmux set pane-border-status off
+          else
+            tmux set pane-border-status top
+          fi
+        '';
+        TMUX_KILL_PANE_AND_UPDATE_BORDER = ''
+          tmux kill-pane
+          num=`tmux list-panes | wc -l`;
+          if [[ 1 = $num ]]; then
+            tmux set pane-border-status off
+          else
+            tmux set pane-border-status top
+          fi
+        '';
+      };
+    in
+    mapAttrs (k: v: writeScriptBin k (shebang + v)) scriptDefinitions;
   scriptPackages = mapAttrsToList (k: v: v) scripts;
 
   # 変更発生時向け
@@ -69,7 +71,8 @@ let
   ];
 
   prelude = ''
-    set-option -ga terminal-overrides ",screen-256color:Tc"
+    set-option -g default-terminal screen-256color
+    set-option -ga terminal-overrides ',xterm-256color:Tc'
 
     # mouse
     set-option -g mouse on
@@ -173,7 +176,8 @@ let
     ${paneborder}
     ${session}
   '';
-in {
+in
+{
   home.packages = scriptPackages;
   programs.tmux = {
     inherit extraConfig;
@@ -187,6 +191,5 @@ in {
     escapeTime = 1;
     baseIndex = 1;
     historyLimit = 5000;
-    terminal = "screen-256color";
   };
 }

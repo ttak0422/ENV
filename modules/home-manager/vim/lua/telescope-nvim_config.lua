@@ -2,11 +2,11 @@ local telescope = require("telescope")
 local lga_actions = require("telescope-live-grep-args.actions")
 
 telescope.setup({
-	defaults = {
-		layout_strategy = "vertical",
-		layout_config = { height = 0.95 },
+	defaults = require("telescope.themes").get_ivy({
 		path_display = { "truncate" },
-	},
+		prompt_prefix = " ",
+		selection_caret = " ",
+	}),
 	extensions = {
 		fzf = {
 			fuzzy = true,

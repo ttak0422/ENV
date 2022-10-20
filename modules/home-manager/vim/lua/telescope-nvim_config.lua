@@ -8,11 +8,12 @@ telescope.setup({
 		selection_caret = " ",
 	}),
 	extensions = {
-		fzf = {
-			fuzzy = true,
-			override_generic_sorter = true,
-			override_file_sorter = true,
-			case_mode = "smart_case",
+		file_browser = {
+			theme = "ivy",
+			mappings = {
+				["i"] = {},
+				["n"] = {},
+			},
 		},
 		live_grep_args = {
 			auto_quoting = true,
@@ -26,6 +27,6 @@ telescope.setup({
 })
 
 telescope.load_extension("live_grep_args")
-telescope.load_extension("fzf")
 telescope.load_extension("projects")
+telescope.load_extension("file_browser")
 telescope.load_extensions("sonictemplate")

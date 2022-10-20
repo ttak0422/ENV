@@ -934,10 +934,7 @@ let
         plugin = telescope-nvim;
         depends = [
           plenary-nvim
-          {
-            plugin = myPlugins.telescope-fzf-native-nvim;
-            optimize = false;
-          }
+          telescope-file-browser-nvim
           {
             plugin = telescope-live-grep-args-nvim;
             extraPackages = [ pkgs.ripgrep ];
@@ -953,7 +950,7 @@ let
         ];
         config = readFile ./lua/telescope-nvim_config.lua;
         commands = [ "Telescope" ];
-        extraPackages = with pkgs.pkgs-stable; [ fzf ripgrep ];
+        extraPackages = with pkgs.pkgs-stable; [ ripgrep ];
       }
       {
         plugin = quick-scope;

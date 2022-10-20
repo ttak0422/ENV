@@ -514,11 +514,11 @@
     "neogen": {
       "flake": false,
       "locked": {
-        "lastModified": 1666002975,
-        "narHash": "sha256-qqeLb0TSlUVBeXbuvuPkOa1EO0U5ojAAMR7YzJ/Vs68=",
+        "lastModified": 1666265687,
+        "narHash": "sha256-btNSc8l2yuGRSf0vquacxIqBGC6YnAp+LGkVw9tWj9Y=",
         "owner": "danymat",
         "repo": "neogen",
-        "rev": "e754659d2ceddc3038117477b6a477ae96167121",
+        "rev": "778dfff282f351048040e7604c3859e5ce76dfc8",
         "type": "github"
       },
       "original": {
@@ -790,11 +790,11 @@
     "nvim-treesitter_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1666168350,
-        "narHash": "sha256-X5bQ6ToLGWn+bHyqqqHV0+bJzkfZ9lJtxLvRnd3uZxU=",
+        "lastModified": 1666250788,
+        "narHash": "sha256-vXzCL00sHomQwHC+iie+AArmLzdC/+KKayze+2g78Nk=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "b9bcbf8d73b5a6c3e04922936b5fc500b436d4f5",
+        "rev": "d49495fe72cbcedc944eece3611005dc0fa6acda",
         "type": "github"
       },
       "original": {
@@ -1063,6 +1063,22 @@
         "type": "github"
       }
     },
+    "telescope-command-palette-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1643653305,
+        "narHash": "sha256-o0BMEETqqBF7rhU9k2I9lwtLOnrW4A3lQGePgJhzuxI=",
+        "owner": "LinArcX",
+        "repo": "telescope-command-palette.nvim",
+        "rev": "1944d6312b29a0b41531ea3cf3912f03e4eb1705",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LinArcX",
+        "repo": "telescope-command-palette.nvim",
+        "type": "github"
+      }
+    },
     "telescope-live-grep-args-nvim": {
       "flake": false,
       "locked": {
@@ -1206,6 +1222,7 @@
         "skkeleton": "skkeleton",
         "skkeleton_indicator-nvim": "skkeleton_indicator-nvim",
         "stickybuf-nvim": "stickybuf-nvim",
+        "telescope-command-palette-nvim": "telescope-command-palette-nvim",
         "telescope-live-grep-args-nvim": "telescope-live-grep-args-nvim",
         "telescope-sonictemplate-nvim": "telescope-sonictemplate-nvim",
         "tig-explorer-vim": "tig-explorer-vim",
@@ -1217,11 +1234,11 @@
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1666196061,
-        "narHash": "sha256-gW//10qicz4HgB9mbPEqEza1OZfNuT1SoYrOpERP+nY=",
+        "lastModified": 1666281917,
+        "narHash": "sha256-hCJmuZ36q2b2BGQ8NzhoEOfaPHXxqDocM782GPfVpWg=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "11bae51915527bdd75b259045252b0fba54f37ed",
+        "rev": "c243a909f023c12c0c8340285b2dcb01a4c4a5eb",
         "type": "github"
       },
       "original": {

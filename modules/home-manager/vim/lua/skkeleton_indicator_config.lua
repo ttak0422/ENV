@@ -1,2 +1,5 @@
-require'skkeleton_indicator'.setup{}
-
+require("skkeleton_indicator").setup({
+	ignoreFt = {
+		"TelescopePrompt",
+	},
+})

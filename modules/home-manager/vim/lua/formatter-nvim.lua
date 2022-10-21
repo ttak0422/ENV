@@ -12,7 +12,7 @@ require("formatter").setup({
 				return {
 					exe = "google-java-format",
 					args = {
-						util.escape_path(util.get_current_buffer_file_path()),
+						"-",
 					},
 					stdin = true,
 				}

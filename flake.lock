@@ -479,6 +479,22 @@
         "type": "github"
       }
     },
+    "legendary-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1665488261,
+        "narHash": "sha256-zeN3tbyH6a7dWB6Hhc08kog7Z4T9T2JgUNeWmc6uRzc=",
+        "owner": "mrjones2014",
+        "repo": "legendary.nvim",
+        "rev": "edeeb1a50c3936d971681af36c3385d18db3230c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrjones2014",
+        "repo": "legendary.nvim",
+        "type": "github"
+      }
+    },
     "lsp-inlayhints-nvim": {
       "flake": false,
       "locked": {
@@ -790,11 +806,11 @@
     "nvim-treesitter_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1666250788,
-        "narHash": "sha256-vXzCL00sHomQwHC+iie+AArmLzdC/+KKayze+2g78Nk=",
+        "lastModified": 1666298463,
+        "narHash": "sha256-p2GgibDg/AikgjYtv8lPge1lq50jPSVdM0TXUqi1HfM=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "d49495fe72cbcedc944eece3611005dc0fa6acda",
+        "rev": "c4c358e9badb181f4a05a4d8fd0c986a1cf5001b",
         "type": "github"
       },
       "original": {
@@ -1082,11 +1098,11 @@
     "telescope-live-grep-args-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1661594012,
-        "narHash": "sha256-T5j2qgoDtVkk1uCLjoNeyw4eTu6eLbTXQHUuvHs3Tls=",
+        "lastModified": 1666296435,
+        "narHash": "sha256-DMHauDTEFLY1rh0GpWMCUGwI0TwgsmqKELUClauKc44=",
         "owner": "nvim-telescope",
         "repo": "telescope-live-grep-args.nvim",
-        "rev": "32b633b062d1168a2d18ad27994e5b4ef97f0a74",
+        "rev": "5a30d23a5b2a6c6a24da41cc7e21e4d68d0d1c6e",
         "type": "github"
       },
       "original": {
@@ -1214,6 +1230,7 @@
         "denops-vim": "denops-vim",
         "gitsigns-nvim": "gitsigns-nvim_2",
         "glow-hover-nvim": "glow-hover-nvim",
+        "legendary-nvim": "legendary-nvim",
         "lsp-inlayhints-nvim": "lsp-inlayhints-nvim",
         "lspsaga-nvim": "lspsaga-nvim",
         "neogen": "neogen",
@@ -1234,11 +1251,11 @@
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1666281917,
-        "narHash": "sha256-hCJmuZ36q2b2BGQ8NzhoEOfaPHXxqDocM782GPfVpWg=",
+        "lastModified": 1666352593,
+        "narHash": "sha256-BQUdj9GKp9nZW3A3WYLz65S/vr+ef4O2NBUc5duztf4=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "c243a909f023c12c0c8340285b2dcb01a4c4a5eb",
+        "rev": "f0d6e884941b3c340c987b1c4bfc66f6ba669f5a",
         "type": "github"
       },
       "original": {

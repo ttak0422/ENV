@@ -345,8 +345,8 @@ let
           -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
           vim.keymap.set('n', 'rn', '<cmd>Lspsaga rename<CR>', bufopts)
 
-          -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-          vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', bufopts)
+          vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+          -- vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', bufopts)
           -- vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
 
           -- if client.supports_method('textDocument/codeLens') then
@@ -375,6 +375,7 @@ let
         lspsaga-nvim
         # virtual-types-nvim
         lsp-inlayhints-nvim
+        telescope-nvim
       ];
       lspExtraPackages = with pkgs; [ ];
     in [

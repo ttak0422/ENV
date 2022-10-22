@@ -80,3 +80,8 @@ augroup vimrc-checktime
   autocmd!
   autocmd WinEnter * checktime
 augroup END
+
+augroup qf
+    autocmd!
+    autocmd FileType qf set nobuflisted
+augroup END

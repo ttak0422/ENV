@@ -71,6 +71,10 @@ set grepformat=%f:%l:%c:%m
 nnoremap j gj
 nnoremap k gk
 
+" コマンド履歴のフィルタリング対応
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
 " https://vim-jp.org/vim-users-jp/2011/03/12/Hack-206.html
 augroup vimrc-checktime
   autocmd!

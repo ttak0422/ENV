@@ -11,9 +11,7 @@ let
   external = pkgs.callPackage ./external.nix { };
   myPlugins = pkgs.callPackage ./my-plugins.nix { };
 
-  extraPackages = with pkgs; [
-    neovim-remote
-  ];
+  extraPackages = with pkgs; [ neovim-remote ];
 
   extraConfig = ''
     let g:neovide_cursor_vfx_mode = "pixiedust"
@@ -379,8 +377,7 @@ let
         lsp-inlayhints-nvim
       ];
       lspExtraPackages = with pkgs; [ ];
-    in
-    [
+    in [
       {
         plugin = lsp-inlayhints-nvim;
         config = ''
@@ -834,7 +831,7 @@ let
         plugin = formatter-nvim;
         config = readFile ./lua/formatter-nvim.lua;
         commands = [ "Format" ];
-        extraPackages = with pkgs; [ stylua google-java-format ];
+        extraPackages = with pkgs; [ stylua google-java-format nixfmt ];
       }
       {
         plugin = nvim-lint;
@@ -931,11 +928,21 @@ let
         delay = true;
       }
       {
+        plugin = dressing-nvim;
+        config = readFile ./lua/dressiong-nvim.lua;
+      }
+      {
+        plugin = legendary-nvim;
+        depends = [ telescope-nvim ];
+        commands = [ "Legendary" ];
+        config = readFile ./lua/legendary-nvim.lua;
+      }
+      {
         plugin = telescope-nvim;
         depends = [
           plenary-nvim
           telescope-file-browser-nvim
-          telescope-command-palette-nvim
+          telescope-ui-select-nvim
           {
             plugin = telescope-live-grep-args-nvim;
             extraPackages = [ pkgs.ripgrep ];
@@ -951,7 +958,7 @@ let
         ];
         config = readFile ./lua/telescope-nvim_config.lua;
         commands = [ "Telescope" ];
-        modules = [ "telescope" ];
+        # modules = [ "telescope" ];
         extraPackages = with pkgs.pkgs-stable; [ ripgrep ];
       }
       {
@@ -1112,8 +1119,7 @@ let
       modules = [ "toggleterm" "toggleterm.terminal" ];
     }
   ];
-in
-{
+in {
   programs.rokka-nvim = {
     inherit extraConfig extraPackages;
     # logLevel = "debug";

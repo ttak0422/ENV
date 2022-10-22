@@ -45,15 +45,8 @@
     };
   };
 
-  outputs =
-    inputs@{ self
-    , nixpkgs
-    , darwin
-    , home-manager
-    , flake-utils
-    , pre-commit-hooks
-    , ...
-    }:
+  outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils
+    , pre-commit-hooks, ... }:
     let
       inherit (nixpkgs.lib) attrValues optionalAttrs;
       inherit (darwin.lib) darwinSystem;
@@ -80,26 +73,24 @@
           [
             (final: prev: {
               # https://github.com/shaunsingh/nix-darwin-dotfiles/blob/2de71812cf0d1b75397e2f3ad90749ee26232ce6/flake.nix#L102-L115
-              yabai =
-                let
-                  version = "latest";
-                  buildSymlinks = prev.runCommand "build-symlinks" { } ''
-                    mkdir -p $out/bin
-                    ln -s /usr/bin/xcrun /usr/bin/xcodebuild /usr/bin/tiffutil /usr/bin/qlmanage $out/bin
-                  '';
-                in
-                prev.yabai.overrideAttrs (old: {
-                  inherit version;
-                  nativeBuildInputs = [ buildSymlinks ];
-                  src = inputs.yabai;
-                  buildInputs = with prev.darwin.apple_sdk.frameworks; [
-                    Carbon
-                    Cocoa
-                    ScriptingBridge
-                    prev.xxd
-                    SkyLight
-                  ];
-                });
+              yabai = let
+                version = "latest";
+                buildSymlinks = prev.runCommand "build-symlinks" { } ''
+                  mkdir -p $out/bin
+                  ln -s /usr/bin/xcrun /usr/bin/xcodebuild /usr/bin/tiffutil /usr/bin/qlmanage $out/bin
+                '';
+              in prev.yabai.overrideAttrs (old: {
+                inherit version;
+                nativeBuildInputs = [ buildSymlinks ];
+                src = inputs.yabai;
+                buildInputs = with prev.darwin.apple_sdk.frameworks; [
+                  Carbon
+                  Cocoa
+                  ScriptingBridge
+                  prev.xxd
+                  SkyLight
+                ];
+              });
             })
           ]);
       };
@@ -114,13 +105,9 @@
           home = { stateVersion = "22.11"; };
         };
 
-      mkDarwinModules =
-        args@{ user
-        , host
+      mkDarwinModules = args@{ user, host
         , userConfig ? ./modules/darwin/tiny.nix
-        , userHomebrewConfig ? ./modules/homebrew/tiny.nix
-        , ...
-        }: [
+        , userHomebrewConfig ? ./modules/homebrew/tiny.nix, ... }: [
           userConfig
           userHomebrewConfig
           home-manager.darwinModules.home-manager
@@ -145,8 +132,7 @@
           userHmConfig = ./modules/home-manager/personal.nix;
           userHomebrewConfig = ./modules/homebrew/personal.nix;
         };
-    in
-    {
+    in {
       checks = {
         x86_64-darwin = {
           ci = self.darwinConfigurations.ci.config.system.build.toplevel;
@@ -170,87 +156,76 @@
 
       darwinConfigurations = {
         # aarch64-darwin
-        darwinM1 =
-          let
-            system = "aarch64-darwin";
-            specialArgs = { inherit inputs userName userEmail; };
-            modules = mkPersonalDarwinModules
-              {
-                inherit userName specialArgs;
-                host = "mbp";
-              } ++ [ ./modules/nix/prelude.nix ];
-          in
-          darwinSystem { inherit system modules specialArgs; };
+        darwinM1 = let
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs userName userEmail; };
+          modules = mkPersonalDarwinModules {
+            inherit userName specialArgs;
+            host = "mbp";
+          } ++ [ ./modules/nix/prelude.nix ];
+        in darwinSystem { inherit system modules specialArgs; };
 
         # x86_64-darwin
-        darwinIntel =
-          let
-            system = "x86_64-darwin";
-            specialArgs = { inherit inputs userName userEmail; };
-            modules = mkPersonalDarwinModules {
-              inherit userName specialArgs;
-              host = "${userName}-intel";
-            };
-          in
-          darwinSystem { inherit system specialArgs modules; };
+        darwinIntel = let
+          system = "x86_64-darwin";
+          specialArgs = { inherit inputs userName userEmail; };
+          modules = mkPersonalDarwinModules {
+            inherit userName specialArgs;
+            host = "${userName}-intel";
+          };
+        in darwinSystem { inherit system specialArgs modules; };
 
-        workDarwin =
-          let
-            system = "x86_64-darwin";
-            specialArgs = {
-              inherit inputs;
-              userName = workUserName;
-              userEmail = workUserEmail;
-            };
-            modules = mkDarwinModules
-              {
-                inherit userName specialArgs;
-                host = "${workUserName}";
-                user = workUserName;
-                userConfig = ./modules/darwin/work.nix;
-                userHmConfig = ./modules/home-manager/work.nix;
-                userHomebrewConfig = ./modules/homebrew/work.nix;
-              } ++ [ ./modules/nix/prelude.nix ];
-          in
-          darwinSystem { inherit system specialArgs modules; };
+        workDarwin = let
+          system = "x86_64-darwin";
+          specialArgs = {
+            inherit inputs;
+            userName = workUserName;
+            userEmail = workUserEmail;
+          };
+          modules = mkDarwinModules {
+            inherit userName specialArgs;
+            host = "${workUserName}";
+            user = workUserName;
+            userConfig = ./modules/darwin/work.nix;
+            userHmConfig = ./modules/home-manager/work.nix;
+            userHomebrewConfig = ./modules/homebrew/work.nix;
+          } ++ [ ./modules/nix/prelude.nix ];
+        in darwinSystem { inherit system specialArgs modules; };
 
         # macos (x86_64)
-        ci =
-          let
-            system = "x86_64-darwin";
-            userName' = "runner";
-            specialArgs = {
-              inherit inputs userEmail;
-              userName = userName';
-            };
-            modules = mkDarwinModules {
-              inherit specialArgs;
-              user = userName';
-              host = "${userName}-intel";
-              userConfig = ./modules/darwin/personal.nix;
-              userHmConfig = ./modules/home-manager/personal.nix;
-            };
-          in
-          darwinSystem { inherit system specialArgs modules; };
+        ci = let
+          system = "x86_64-darwin";
+          userName' = "runner";
+          specialArgs = {
+            inherit inputs userEmail;
+            userName = userName';
+          };
+          modules = mkDarwinModules {
+            inherit specialArgs;
+            user = userName';
+            host = "${userName}-intel";
+            userConfig = ./modules/darwin/personal.nix;
+            userHmConfig = ./modules/home-manager/personal.nix;
+          };
+        in darwinSystem { inherit system specialArgs modules; };
       };
     }
     # WIP
     // eachSystem [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ] (system:
-    let pkgs = nixpkgs.legacyPackages.${system};
-    in
-    {
-      checks = {
-        pre-commit-check = pre-commit-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = {
-            nixpkgs-fmt.enable = true;
-            stylua.enable = true;
+      let pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        checks = {
+          pre-commit-check = pre-commit-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              nixfmt.enable = true;
+              stylua.enable = true;
+            };
           };
         };
-      };
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs; [ ];
-        inherit (self.checks.${system}.pre-commit-check) shellHook;
-      };
-    });
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [ ];
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+        };
+      });
 }

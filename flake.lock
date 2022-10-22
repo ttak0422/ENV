@@ -968,11 +968,11 @@
         "pre-commit-hooks": "pre-commit-hooks_2"
       },
       "locked": {
-        "lastModified": 1665899545,
-        "narHash": "sha256-gZD8t8sFxEUBthBOIf9fG/5tycXK5kBukMzae+pZhK0=",
+        "lastModified": 1666422899,
+        "narHash": "sha256-2k47hvoHz7Lr/8ulE7MjNXiOxqE19/0Zrp1bqBf83TM=",
         "owner": "ttak0422",
         "repo": "rokka-nvim",
-        "rev": "a99637f4e0b27a83a5f008c115e715cd5a1e7b32",
+        "rev": "543e8052b85db18f0dead3714c76b82bd4a051c0",
         "type": "github"
       },
       "original": {

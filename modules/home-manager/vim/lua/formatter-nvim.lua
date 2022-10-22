@@ -18,5 +18,13 @@ require("formatter").setup({
 				}
 			end,
 		},
+		nix = {
+			function()
+				return {
+					exe = "nixfmt",
+					stdin = true,
+				}
+			end,
+		},
 	},
 })

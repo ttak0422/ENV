@@ -15,8 +15,8 @@ augroup NvimTerm
   autocmd!
   autocmd WinEnter * if &buftype ==# 'terminal' | startinsert | endif
   autocmd BufWinEnter,WinEnter term://* startinsert
-  " https://github.com/neovim/neovim/issues/14986
-  autocmd TermClose term://* execute 'bdelete! ' . expand('<abuf>')
+  " https://github.com/neovim/neovim/issues/14986 for tig
+  autocmd TermClose term://\(tig*\) execute 'bdelete! ' . expand('<abuf>')
 augroup END
 
 augroup GrepCmd

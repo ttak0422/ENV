@@ -85,3 +85,6 @@ augroup qf
     autocmd!
     autocmd FileType qf set nobuflisted
 augroup END
+
+" %%で%:h<Tab>
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'

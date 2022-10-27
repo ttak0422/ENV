@@ -109,6 +109,7 @@
 (leaf org
   :ensure t
   :setq
+  (org-startup-indented . t)
   (org-startup-folded . nil)
   (org-directory . "~/org")
   (org-default-notes-file . "noname.org")

@@ -195,7 +195,7 @@ let
       delay = true;
     }
     {
-      plugin = myPlugins.chowcho-nvim;
+      plugin = chowcho-nvim;
       depends = [ nvim-web-devicons ];
       commands = [ "Chowcho" ];
       config = ''
@@ -490,7 +490,7 @@ let
             plugin = cmp_luasnip;
             depends = [ luasnip ];
           }
-          myPlugins.cmp-nvim-lsp-signature-help
+          cmp-nvim-lsp-signature-help
         ];
         config = ''
           vim.cmd[[silent source ${cmp-path}/after/plugin/cmp_path.lua]]
@@ -500,7 +500,7 @@ let
           vim.cmd[[silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua]]
           vim.cmd[[silent source ${cmp_luasnip}/after/plugin/cmp_luasnip.lua]]
           vim.cmd[[silent source ${cmp-nvim-lua}/after/plugin/cmp_nvim_lua.lua]]
-          vim.cmd[[silent source ${myPlugins.cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua]]
+          vim.cmd[[silent source ${cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua]]
         '' + (readFile ./lua/nvim-cmp_config.lua);
         delay = true;
       }
@@ -892,7 +892,7 @@ let
         config = readFile ./lua/trouble_config.lua;
       }
       {
-        plugin = myPlugins.spaceless-nvim;
+        plugin = spaceless-nvim;
         config = ''
           require'spaceless'.setup()
         '';

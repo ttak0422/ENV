@@ -29,7 +29,10 @@
     # };
     rokka-nvim = {
       url = "github:ttak0422/rokka-nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
     };
     # emacs for mac
     emacs.url = "github:cmacrae/emacs";

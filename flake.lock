@@ -426,21 +426,6 @@
         "type": "github"
       }
     },
-    "flake-utils_4": {
-      "locked": {
-        "lastModified": 1653893745,
-        "narHash": "sha256-0jntwV3Z8//YwuOjzhV2sgJJPt+HY6KhU7VZUL0fKZQ=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "1ed9fb1935d260de5fe1c2f7ee0ebaae17ed2fa1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "format-all": {
       "flake": false,
       "locked": {
@@ -1008,7 +993,9 @@
     },
     "rokka-nvim": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
+        "flake-utils": [
+          "flake-utils"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -1321,11 +1308,11 @@
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1667137520,
-        "narHash": "sha256-ieGbIgJNxXDDlWBMY6UU7C/vc6QNEmL5e02YRIiIV78=",
+        "lastModified": 1667139821,
+        "narHash": "sha256-2gasQ0xg6o4wvEdu2uRN8GtVu8ntbz+rrhbGvPVKnO8=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "7f57de999d5f2408ac2f998f9c0dbaa34c6c5bf4",
+        "rev": "d21681d13e0cde64092e7f76ccf8d83fbf163c94",
         "type": "github"
       },
       "original": {

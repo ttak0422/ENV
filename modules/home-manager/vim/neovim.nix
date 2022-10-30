@@ -80,6 +80,11 @@ let
       optional = false;
       comment = "whichkey";
     }
+    {
+      plugin = vimdoc-ja;
+      optional = false;
+      startup = "vim.cmd[[set helplang=ja,en]]";
+    }
   ];
 
   ime = with pkgs.vimPlugins; [{

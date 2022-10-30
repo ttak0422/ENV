@@ -117,6 +117,16 @@ let
 
   custom = with pkgs.vimPlugins; [
     {
+      plugin = vim-poslist;
+      optional = false;
+      config = ''
+        vim.cmd[[
+          nmap <Leader><Leader>h <Plug>(poslist-prev-buf)
+          nmap <Leader><Leader>l <Plug>(poslist-next-buf)
+        ]]
+      '';
+    }
+    {
       plugin = stickybuf-nvim;
       config = ''
         require('stickybuf').setup()

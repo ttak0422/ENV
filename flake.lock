@@ -562,11 +562,11 @@
     "lspsaga-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1666765376,
-        "narHash": "sha256-QprSfsBksT3Eq8nZqRb+JLyKc/mP12d11y+E7pDC7mw=",
+        "lastModified": 1667128718,
+        "narHash": "sha256-QXMwIwdtpyh/1YqcGZkXw1JGv0LEUrzd3XUiHA4xqvw=",
         "owner": "glepnir",
         "repo": "lspsaga.nvim",
-        "rev": "391cf74475ad094ccad7c5501710b27fcdb9b883",
+        "rev": "361e1ad5554ceaa6b1f462125a6a2442cc115f2d",
         "type": "github"
       },
       "original": {
@@ -854,11 +854,11 @@
     "nvim-treesitter_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1667050295,
-        "narHash": "sha256-nHzWOr3MK62vnwwuS0Oi1sRVZhFjqimOstWUArU2jWU=",
+        "lastModified": 1667126322,
+        "narHash": "sha256-dSrliiA+uSZxoUthQDBS56EdnyX8KxFlnANhPNJuBsM=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "9ada5f70f98d51e9e3e76018e783b39fd1cd28f7",
+        "rev": "a2ff4b42e1d446738bf260b245208005fb555d6d",
         "type": "github"
       },
       "original": {
@@ -1313,6 +1313,7 @@
         "tig-explorer-vim": "tig-explorer-vim",
         "tint-nvim": "tint-nvim_2",
         "toolwindow-nvim": "toolwindow-nvim",
+        "vim-poslist": "vim-poslist",
         "vim-sonictemplate": "vim-sonictemplate",
         "vimdoc-ja": "vimdoc-ja",
         "virtual-types-nvim": "virtual-types-nvim",
@@ -1320,16 +1321,32 @@
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1667122415,
-        "narHash": "sha256-Ci1IEXmeH2NfDhG4wcu7Rsp4o3/hhw0nF+vHlzeSAhs=",
+        "lastModified": 1667137520,
+        "narHash": "sha256-ieGbIgJNxXDDlWBMY6UU7C/vc6QNEmL5e02YRIiIV78=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "26e6e812a8b132f0f31210d451d36a500d720af1",
+        "rev": "7f57de999d5f2408ac2f998f9c0dbaa34c6c5bf4",
         "type": "github"
       },
       "original": {
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
+        "type": "github"
+      }
+    },
+    "vim-poslist": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1311481438,
+        "narHash": "sha256-UxXC+W6QI8xUOOsq6Ngov8XTg3y49IeKbmI0IRsex+E=",
+        "owner": "thinca",
+        "repo": "vim-poslist",
+        "rev": "a971f53bbf154543c4068061fdf1f7a19d953cbe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thinca",
+        "repo": "vim-poslist",
         "type": "github"
       }
     },

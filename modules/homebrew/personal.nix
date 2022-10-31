@@ -39,6 +39,7 @@
       "tableplus"
       "visual-studio-code"
       "bitwarden"
+      "processing"
     ];
   };
 }

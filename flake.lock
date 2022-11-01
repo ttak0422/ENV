@@ -163,16 +163,16 @@
     "cmp-calc": {
       "flake": false,
       "locked": {
-        "lastModified": 1667005481,
-        "narHash": "sha256-FqCrXjjMbYd8D7BdvixQeMGCL1FF551LEfBW1f0o6/w=",
+        "lastModified": 1650891770,
+        "narHash": "sha256-zwOsjbIbv5NMFgRHSvR4fVFIQOv8+3ETDxDAZYgut2A=",
         "owner": "hrsh7th",
-        "repo": "nvim-cmp",
-        "rev": "9bb8ee6e2d6ab3c8cc53323b79f05886bc722faa",
+        "repo": "cmp-calc",
+        "rev": "f7efc20768603bd9f9ae0ed073b1c129f63eb312",
         "type": "github"
       },
       "original": {
         "owner": "hrsh7th",
-        "repo": "nvim-cmp",
+        "repo": "cmp-calc",
         "type": "github"
       }
     },
@@ -441,11 +441,11 @@
     "editorconfig-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1667233347,
-        "narHash": "sha256-7u5VKyJ1zAehCJ69HQwwka1c86jhvMFsmQq2GE64Jg0=",
+        "lastModified": 1667312682,
+        "narHash": "sha256-Ylk1KdJtXHwR2ekEvIQSwHaAfxnMB2nL7Tw7EJZ56gw=",
         "owner": "gpanders",
         "repo": "editorconfig.nvim",
-        "rev": "7c4a3c8e7469380d97a3adced2eb6e05f8dc2879",
+        "rev": "e72d2331b43e3f08d0ecca44cecded4e20c01fab",
         "type": "github"
       },
       "original": {
@@ -2066,11 +2066,11 @@
     "registers-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1667119411,
-        "narHash": "sha256-BGbm6lGdufEZtTcJ7m5uBVO1CCti+7LwznE0c3kTiGs=",
+        "lastModified": 1667311480,
+        "narHash": "sha256-WzFbWPqQm0Y2QN2dMhmcxlRw1H9XY88qPuxtuzPRrlM=",
         "owner": "tversteeg",
         "repo": "registers.nvim",
-        "rev": "2f2bd6b35eef47ad78038faea5f21dca4ddad3c2",
+        "rev": "395e119782845fe8fa3b7d6d17c60745a2004515",
         "type": "github"
       },
       "original": {
@@ -2726,11 +2726,11 @@
         "zoomwintab-vim": "zoomwintab-vim_2"
       },
       "locked": {
-        "lastModified": 1667229442,
-        "narHash": "sha256-iTM8jlm5qUQvzZDruMJUA2R2wdHDyccfVEvgHvO6f6A=",
+        "lastModified": 1667314252,
+        "narHash": "sha256-wVEQXZW1xL8bEQp+nkJEb7EkFOkY/QSs9QGLVu04Nt4=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "76694711c0b5ed8769b0cde760276d0ecb17d457",
+        "rev": "ff0ef2a8a6b94600dc0cac70be063b7dba8b20db",
         "type": "github"
       },
       "original": {

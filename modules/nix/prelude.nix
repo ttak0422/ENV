@@ -18,7 +18,7 @@
       ];
       trusted-public-keys = [
         "ttak0422.cachix.org-1:nv62UZqX8/xe5jSyyTu4Z7tSpX1TiCYaYv89Xe7CFaM="
-        "ttak0422.cachix.org-1:nv62UZqX8/xe5jSyyTu4Z7tSpX1TiCYaYv89Xe7CFaM="
+        "ttak0422-vim-plugins-overlay.cachix.org-1:YqM0x7zLhQtcskLyiCGp810p/C7WjQ94jp9CJ7UY46E="
         "emacs.cachix.org-1:b1SMJNLY/mZF6GxQE+eDBeps7WnkT0Po55TAyzwOxTY="
       ];
     };

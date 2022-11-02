@@ -9,7 +9,6 @@ let
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
   templates = pkgs.callPackage ./templates { };
   external = pkgs.callPackage ./external.nix { };
-  myPlugins = pkgs.callPackage ./my-plugins.nix { };
 
   extraPackages = with pkgs; [ neovim-remote ];
 
@@ -38,14 +37,14 @@ let
       optional = false;
     }
     {
-      plugin = myPlugins.filetype-nvim;
+      plugin = filetype-nvim;
       startup = ''
         vim.g.did_load_filetypes = 1
       '';
       optional = false;
     }
     {
-      plugin = myPlugins.serenade;
+      plugin = serenade;
       startup = "vim.cmd([[colorscheme serenade]])";
       optional = false;
       enable = false;
@@ -69,7 +68,7 @@ let
       comment = "必須設定群";
     }
     {
-      plugin = myPlugins.alpha-nvim;
+      plugin = alpha-nvim;
       config = readFile ./lua/alpha-nvim_config.lua;
       optional = false;
       comment = "splashscreen";
@@ -144,8 +143,8 @@ let
       commands = [ "ZoomWinTabToggle" ];
     }
     {
-      plugin = myPlugins.pretty-fold-nvim;
-      depends = [ myPlugins.fold-preview-nvim ];
+      plugin = pretty-fold-nvim;
+      # depends = [ fold-preview-nvim ];
       startup = ''
         -- default
         vim.opt.foldmethod = 'indent'
@@ -165,6 +164,7 @@ let
       plugin = nvim-hlslens;
       events = [ "CmdlineEnter" ];
       comment = "hl強化";
+      config = readFile ./lua/nvim-hlslens.lua;
     }
   ];
 
@@ -179,7 +179,7 @@ let
       enable = false;
     }
     {
-      plugin = myPlugins.windline-nvim;
+      plugin = windline-nvim;
       startup = ''
         vim.opt.laststatus = 3
       '';
@@ -193,7 +193,7 @@ let
   commandline = with pkgs.vimPlugins; [
     {
       plugin = wilder-nvim;
-      depends = [ myPlugins.fzy-lua-native ];
+      depends = [ fzy-lua-native ];
       events = [ "CmdlineEnter" ];
       config = readFile ./lua/wilder-nvim_config.lua;
       extraPackages = with pkgs; [ fd ];
@@ -227,7 +227,7 @@ let
       fileTypes = [ "nix" ];
     }
     {
-      plugin = myPlugins.neofsharp-vim;
+      plugin = neofsharp-vim;
       fileTypes = [ "fs" "fsx" "fsi" "fsproj" ];
     }
   ];
@@ -252,7 +252,7 @@ let
       '';
     }
     {
-      plugin = myPlugins.sidebar-nvim;
+      plugin = sidebar-nvim;
       config = readFile ./lua/sidebar-nvim.lua;
       commands = [ "SidebarNvimToggle" "SidebarNvimOpen" ];
     }
@@ -268,14 +268,14 @@ let
       commands = [ "SymbolsOutline" ];
     }
     {
-      plugin = myPlugins.incline-nvim-pr;
+      plugin = incline-nvim-pr;
       config = readFile ./lua/incline_config.lua;
       enable = false;
       # delay = true;
       comment = "ペインにファイル名を表示";
     }
     {
-      plugin = myPlugins.nvim-transparent;
+      plugin = nvim-transparent;
       config = ''
         require("transparent").setup({
           enable = true,
@@ -285,7 +285,7 @@ let
         [ "TransparentEnable" "TransparentDisable" "TransparentToggle" ];
     }
     {
-      plugin = myPlugins.headlines-nvim;
+      plugin = headlines-nvim;
       config = readFile ./lua/headlines_config.lua;
       fileTypes = [ "markdown" "rmd" "vimwiki" "orgmode" ];
       enable = false;
@@ -336,11 +336,10 @@ let
         local on_attach = function(client, bufnr)
           local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
-          local opts = { noremap = true, silent = true }
-          vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-          vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-
           local bufopts = { noremap = true, silent = true, buffer = bufnr }
+          vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
+          vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
+
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
           vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
           vim.keymap.set('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', bufopts)
@@ -371,7 +370,7 @@ let
             require('lsp-inlayhints').on_attach(client, bufnr)
           end
           if client.supports_method('textDocument/formatting') then
-            vim.api.nvim_set_keymap('n', '<leader>F', '<cmd>Format<cr>', {silent = true, noremap = true})
+            vim.api.nvim_set_keymap('n', '<leader>F', '<cmd>Format<cr>', bufopts)
           end
           if client.supports_method('textDocument/publishDiagnostics') then
             vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
@@ -428,7 +427,7 @@ let
         events = [ "CmdlineEnter" ];
       }
       {
-        plugin = myPlugins.nvim-dd;
+        plugin = nvim-dd;
         enable = false;
         config = ''
           require('dd').setup({
@@ -439,7 +438,7 @@ let
         comment = "diagnostics throttle";
       }
       {
-        plugin = myPlugins.vim-migemo;
+        plugin = vim-migemo;
         config = ''
           vim.g.migemodict = '${external.migemo-dict}/migemo-dict'
         '';
@@ -447,7 +446,7 @@ let
         enable = false;
       }
       {
-        plugin = myPlugins.migemo-search;
+        plugin = migemo-search;
         extraPackages = [ pkgs.cmigemo ];
         config = ''
           vim.g.migemosearch_migemodict = '${external.migemo-dict}/migemo-dict}'
@@ -475,7 +474,7 @@ let
         config = readFile ./lua/luasnip_config.lua;
       }
       {
-        plugin = myPlugins.flare-nvim;
+        plugin = flare-nvim;
         config = readFile ./lua/flare_config.lua;
         events = [ "InsertEnter" ];
         enable = false;
@@ -1016,43 +1015,38 @@ let
       '';
     }
     {
-      plugin = myPlugins.vim-translator;
+      plugin = vim-translator;
       config = ''
         vim.g.translator_target_lang = 'ja'
       '';
       commands = [ "Translate" ];
     }
     {
-      plugin = myPlugins.git-conflict-nvim;
+      plugin = git-conflict-nvim;
       delay = true;
       config = ''
         require'git-conflict'.setup()
       '';
     }
     {
-      plugin = myPlugins.mdeval-nvim;
+      plugin = mdeval-nvim;
       config = readFile ./lua/mdeval_config.lua;
       extraPackages = [ pkgs.coreutils-full ];
     }
     {
-      plugin = myPlugins.org-bullets-nvim;
+      plugin = org-bullets-nvim;
       depends = [ nvim-treesitter ];
       config = readFile ./lua/org-bullets_config.lua;
       enable = false;
     }
     {
-      plugin = myPlugins.headlines-nvim;
+      plugin = headlines-nvim;
       config = readFile ./lua/headlines_config.lua;
       enable = false;
     }
     {
-      plugin = myPlugins.orgmode;
-      depends = [
-        nvim-cmp
-        nvim-treesitter
-        myPlugins.org-bullets-nvim
-        myPlugins.headlines-nvim
-      ];
+      plugin = orgmode;
+      depends = [ nvim-cmp nvim-treesitter org-bullets-nvim headlines-nvim ];
       startup = ''
         vim.opt.conceallevel = 2
         vim.opt.concealcursor = 'nc'

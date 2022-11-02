@@ -845,16 +845,16 @@
     "fzy-lua-native": {
       "flake": false,
       "locked": {
-        "lastModified": 1660357399,
-        "narHash": "sha256-jbLwoZLD6jL9QMIuUXiCbA4nP0Caw+iiHuCCGaxLZQU=",
-        "owner": "gelguy",
-        "repo": "wilder.nvim",
-        "rev": "679f348dc90d80ff9ba0e7c470c40a4d038dcecf",
+        "lastModified": 1664328701,
+        "narHash": "sha256-mVLYuFCCPBqP50Op7Gv4b9m4n7Ynx/1U/0u3ffj1Q3I=",
+        "owner": "romgrk",
+        "repo": "fzy-lua-native",
+        "rev": "085c7d262aa35cc55a8523e8c1618d398bf717a7",
         "type": "github"
       },
       "original": {
-        "owner": "gelguy",
-        "repo": "wilder.nvim",
+        "owner": "romgrk",
+        "repo": "fzy-lua-native",
         "type": "github"
       }
     },
@@ -2748,11 +2748,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1667316063,
-        "narHash": "sha256-i5Njvor9k1czF82Cdamry1LsB3mjZZ9f5qPMSrs7G58=",
+        "lastModified": 1667317721,
+        "narHash": "sha256-Z+S6qnS1T0OqZnwPBhUpwpN/FEfbMDW9tFKpoF5ZDMQ=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "c52c5434918b8368b3569056c89dfd3ea836a4df",
+        "rev": "69c9c6148b4f6a2205552f7e68731ef5c5fa85d3",
         "type": "github"
       },
       "original": {

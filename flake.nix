@@ -22,7 +22,7 @@
       url = "github:koekeishiya/yabai";
       flake = false;
     };
-    neovim-nightly-overlay.url = "github:ttak0422/vim-plugins-overlay";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     # rokka-nvim = {
     #   url = "path:/Users/ttak0422/ghq/github.com/ttak0422/rokka-nvim";
     #   inputs.nixpkgs.follows = "nixpkgs";

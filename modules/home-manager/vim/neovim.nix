@@ -690,11 +690,13 @@ let
       }
       {
         plugin = nvim-lspconfig;
-        depends = lspDepends ++ [{
-          plugin = null-ls-nvim;
-          depends = [ plenary-nvim ];
-          enable = false;
-        }];
+        depends = lspDepends ++ [
+          # {
+          #   plugin = null-ls-nvim;
+          #   depends = [ plenary-nvim ];
+          #   enable = false;
+          # }
+        ];
         config = ''
           ${lspSharedConfig}
 

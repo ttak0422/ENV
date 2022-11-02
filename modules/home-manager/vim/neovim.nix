@@ -803,25 +803,6 @@ let
             capabilities = capabilities,
             cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server', '--stdio' },
           }
-
-          -- null-ls
-          -- local null_ls = require('null-ls')
-          -- null_ls.setup({
-          --   on_attach = on_attach,
-          --   capabilities = capabilities,
-          --   sources = {
-          --     -- prettier
-          --     null_ls.builtins.formatting.prettier.with {
-          --       prefer_local = 'node_modules/.bin'
-          --     },
-          --     -- nix lint
-          --     null_ls.builtins.code_actions.statix,
-          --     -- nix fmt
-          --     null_ls.builtins.formatting.nixfmt,
-          --     -- lua fmt
-          --     null_ls.builtins.formatting.stylua,
-          --   },
-          -- })
         '';
         extraPackages = lspExtraPackages ++ (with pkgs; [
           gopls

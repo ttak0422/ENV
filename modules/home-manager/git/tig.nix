@@ -13,6 +13,7 @@ let
 
     bind main R !git rebase -i %(commit)
     bind diff R !git rebase -i %(commit)
+    bind status D !rm %(file)
 
     color cursor black green bold
   '';

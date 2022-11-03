@@ -92,3 +92,6 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
 " 移動を打ち消し
 nnoremap * *N
 nnoremap # #N
+
+" disable macro
+nnoremap q <Nop>

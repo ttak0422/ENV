@@ -95,3 +95,5 @@ nnoremap # #N
 
 " disable macro
 nnoremap q <Nop>
+" disable <C-g> for tmux
+noremap <C-g> <Nop>

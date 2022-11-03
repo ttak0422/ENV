@@ -815,8 +815,8 @@ let
           # statix
           # nixfmt
           google-java-format
-        ]) ++ (with pkgs.pkgs-stable; [
           deno
+        ]) ++ (with pkgs.pkgs-stable; [
           nodePackages.bash-language-server
           nodePackages.pyright
           nodePackages.typescript-language-server

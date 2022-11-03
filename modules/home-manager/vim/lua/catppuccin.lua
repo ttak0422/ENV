@@ -1,5 +1,5 @@
-vim.g.catppuccin_flavour = 'mocha'
-require('catppuccin').setup {
+vim.g.catppuccin_flavour = "mocha"
+require("catppuccin").setup({
   integrations = {
     aerial = true,
     cmp = true,
@@ -26,18 +26,18 @@ require('catppuccin').setup {
     native_lsp = {
       enabled = true,
       virtual_text = {
-        errors = { 'italic' },
-        hints = { 'italic' },
-        warnings = { 'italic' },
-        information = { 'italic' },
+        errors = { "italic" },
+        hints = { "italic" },
+        warnings = { "italic" },
+        information = { "italic" },
       },
       underlines = {
-        errors = { 'underline' },
-        hints = { 'underline' },
-        warnings = { 'underline' },
-        information = { 'underline' },
+        errors = { "underline" },
+        hints = { "underline" },
+        warnings = { "underline" },
+        information = { "underline" },
       },
     },
   },
-}
-vim.cmd [[colorscheme catppuccin]]
+})
+vim.cmd([[colorscheme catppuccin]])

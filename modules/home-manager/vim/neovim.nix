@@ -4,11 +4,11 @@ let
   inherit (builtins) concatStringsSep map fetchTarball readFile;
   inherit (lib.strings) fileContents;
   inherit (lib.lists) singleton;
-  inherit (pkgs) fetchFromGitHub writeText;
+  inherit (pkgs) fetchFromGitHub writeText callPackage;
   inherit (pkgs.stdenv) mkDerivation;
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
-  templates = pkgs.callPackage ./templates { };
-  external = pkgs.callPackage ./external.nix { };
+  templates = callPackage ./templates { };
+  external = callPackage ./external.nix { };
 
   extraPackages = with pkgs; [ neovim-remote ];
 
@@ -34,13 +34,6 @@ let
     {
       plugin = nvim-config-local;
       config = readFile ./lua/nvim-config-local.lua;
-      optional = false;
-    }
-    {
-      plugin = filetype-nvim;
-      startup = ''
-        vim.g.did_load_filetypes = 1
-      '';
       optional = false;
     }
     {
@@ -84,6 +77,20 @@ let
       optional = false;
       startup = "vim.cmd[[set helplang=ja,en]]";
     }
+    {
+      plugin = vim-poslist;
+      optional = false;
+      config = ''
+        vim.cmd[[
+          nmap <Leader>gh <Plug>(poslist-prev-buf)
+          nmap <Leader>gl <Plug>(poslist-next-buf)
+        ]]
+      '';
+    }
+    {
+      plugin = editorconfig-nvim;
+      optional = false;
+    }
   ];
 
   ime = with pkgs.vimPlugins; [{
@@ -116,21 +123,10 @@ let
 
   custom = with pkgs.vimPlugins; [
     {
-      plugin = vim-poslist;
-      optional = false;
-      config = ''
-        vim.cmd[[
-          nmap <Leader><Leader>h <Plug>(poslist-prev-buf)
-          nmap <Leader><Leader>l <Plug>(poslist-next-buf)
-        ]]
-      '';
-    }
-    {
       plugin = stickybuf-nvim;
       config = ''
         require('stickybuf').setup()
       '';
-      # delay = true;
       commands = [ "Stickybuf" ];
       modules = [ "stickybuf" ];
     }
@@ -201,23 +197,6 @@ let
     {
       plugin = mkdir-nvim;
       events = [ "CmdlineEnter" ];
-    }
-  ];
-
-  window = with pkgs.vimPlugins; [
-    {
-      plugin = winresizer;
-      delay = true;
-    }
-    {
-      plugin = chowcho-nvim;
-      depends = [ nvim-web-devicons ];
-      commands = [ "Chowcho" ];
-      config = ''
-        require'chowcho'.setup {
-          icon_enabled = true,
-        }
-      '';
     }
   ];
 
@@ -328,88 +307,16 @@ let
     }
   ];
 
+  lsp = callPackage ./lsp { };
+
   code = with pkgs.vimPlugins;
 
-    let
-      # require lspsaga, nvim-cmp(lsp), virtual-types-nvim
-      lspSharedConfig = ''
-        local on_attach = function(client, bufnr)
-          local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
-          local bufopts = { noremap = true, silent = true, buffer = bufnr }
-          vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
-          vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
-
-          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-          vim.keymap.set('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', bufopts)
-
-          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-          vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-          vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-          -- vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', bufopts)
-          -- vim.keymap.set('n', 'K', '<cmd>DocsViewToggle<CR>', bufopts)
-          vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-
-          vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-          vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-          vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
-
-          vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-          -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-          vim.keymap.set('n', 'rn', '<cmd>Lspsaga rename<CR>', bufopts)
-
-          vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-          -- vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', bufopts)
-          -- vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
-
-          -- if client.supports_method('textDocument/codeLens') then
-          --   require('virtualtypes').on_attach(client, bufnr)
-          -- end
-          if client.supports_method('textDocument/inlayHint') then
-            require('lsp-inlayhints').on_attach(client, bufnr)
-          end
-          if client.supports_method('textDocument/formatting') then
-            vim.api.nvim_set_keymap('n', '<leader>F', '<cmd>Format<cr>', bufopts)
-          end
-          if client.supports_method('textDocument/publishDiagnostics') then
-            vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-              -- delay update diagnostics
-              vim.lsp.diagnostic.on_publish_diagnostics, { update_in_insert = false }
-            )
-          end
-
-        end
-
-        local capabilities = require('cmp_nvim_lsp').default_capabilities
-      '';
-      lspDepends = [
-        fidget-nvim
-        nvim-cmp
-        lspsaga-nvim
-        # virtual-types-nvim
-        lsp-inlayhints-nvim
-        telescope-nvim
-      ];
-      lspExtraPackages = with pkgs; [ ];
-    in [
-      {
-        plugin = lsp-inlayhints-nvim;
-        config = ''
-          require('lsp-inlayhints').setup{}
-        '';
-      }
+    [
       {
         plugin = nvim-docs-view;
         enable = false;
         config = readFile ./lua/nvim-docs-view.lua;
         commands = [ "DocsViewToggle" ];
-      }
-      {
-        plugin = fidget-nvim;
-        config = ''
-          require'fidget'.setup{}
-        '';
       }
       {
         plugin = nvim-treesitter;
@@ -438,22 +345,6 @@ let
         comment = "diagnostics throttle";
       }
       {
-        plugin = vim-migemo;
-        config = ''
-          vim.g.migemodict = '${external.migemo-dict}/migemo-dict'
-        '';
-        extraPackages = [ pkgs.cmigemo ];
-        enable = false;
-      }
-      {
-        plugin = migemo-search;
-        extraPackages = [ pkgs.cmigemo ];
-        config = ''
-          vim.g.migemosearch_migemodict = '${external.migemo-dict}/migemo-dict}'
-        '';
-        enable = false;
-      }
-      {
         plugin = Shade-nvim;
         config = readFile ./lua/Shade-nvim.lua;
         events = [ "WinNew" ];
@@ -472,13 +363,6 @@ let
         plugin = luasnip;
         depends = [ friendly-snippets ];
         config = readFile ./lua/luasnip_config.lua;
-      }
-      {
-        plugin = flare-nvim;
-        config = readFile ./lua/flare_config.lua;
-        events = [ "InsertEnter" ];
-        enable = false;
-        delay = true;
       }
       {
         plugin = nvim-cmp;
@@ -530,302 +414,6 @@ let
         delay = true;
       }
       {
-        plugin = nvim-jdtls;
-        depends = lspDepends ++ [ ];
-        config = ''
-          local jdtls = require('jdtls')
-
-          local make_settings = function()
-            local url = vim.g.java_format_settings_url
-            local profile = vim.g.java_format_settings_profile
-            local cfg = {
-              java = {
-                import = {
-                  gradle = {
-                    enabled = true,
-                    offline = {
-                      enabled = true
-                    }
-                  },
-                  maven = {
-                    enabled = true
-                  },
-                  exclusions = {
-                    "**/node_modules/**",
-                    "**/.metadata/**",
-                    "**/archetype-resources/**",
-                    "**/META-INF/maven/**",
-                  },
-                },
-                eclipse = {
-                  downloadSources = true,
-                },
-                configuration = {
-                  updateBuildConfiguration = "automatic",
-                },
-                maven = {
-                  downloadSources = true,
-                  updateSnapshots = true,
-                },
-                implementationsCodeLens = {
-                  enabled = true,
-                },
-                referencesCodeLens = {
-                  enabled = true,
-                },
-                references = {
-                  includeDecompiledSources = true,
-                },
-                inlayHints = {
-                  parameterNames = {
-                    enabled = 'literals', -- literals, all, none
-                  },
-                },
-                signatureHelp = { enabled = true, description = { enabled = true } },
-                completion = {
-                  enabled = true,
-                  guessMethodArguments = true,
-                  favoriteStaticMembers = {
-                    'org.hamcrest.MatcherAssert.assertThat',
-                    'org.hamcrest.Matchers.*',
-                    'org.hamcrest.CoreMatchers.*',
-                    'org.junit.jupiter.api.Assertions.*',
-                    'java.util.Objects.requireNonNull',
-                    'java.util.Objects.requireNonNullElse',
-                    'org.mockito.Mockito.*'
-                  },
-                  importOrder = {
-                    'org.springframework',
-                    'java.util',
-                    'java',
-                    'javax',
-                    'com',
-                    'org'
-                  },
-                  filteredTypes = {
-                    'com.sun.*',
-                    'io.micrometer.shaded.*',
-                    'java.awt.*',
-                    'jdk.*',
-                    'sun.*',
-                  },
-                },
-              },
-            }
-            if url ~= nil then
-              cfg['java.format.settings.url'] = url
-            end
-            if profile ~= nil then
-              cfg['java.format.settings.profile'] = profile
-            end
-            return cfg
-          end
-
-          local mk_config = function()
-            local root = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'})
-            local workspace = os.getenv('HOME') .. '/.local/share/eclipse/' .. vim.fn.fnamemodify(root, ':p:h:t')
-            ${lspSharedConfig}
-            return {
-              on_attach = on_attach,
-              capabilities = capabilities,
-              cmd = {
-                'java',
-                '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-                '-Dosgi.bundles.defaultStartLevel=4',
-                '-Declipse.product=org.eclipse.jdt.ls.core.product',
-                '-Dosgi.sharedConfiguration.area=${pkgs.jdt-language-server}/share/config',
-                '-Dosgi.sharedConfiguration.area.readOnly=true',
-                '-Dosgi.checkConfiguration=true',
-                '-Dosgi.configuration.c:ascaded=true',
-                '-Dlog.level=ALL',
-                '-Xms128m',
-                '-Xmx5G',
-                '-XX:+UseG1GC',
-                '-javaagent:${pkgs.lombok}/share/java/lombok.jar',
-                '-jar',
-                vim.fn.glob('${pkgs.jdt-language-server}/share/java/plugins/org.eclipse.equinox.launcher_*.jar'),
-                '--add-modules=ALL-SYSTEM',
-                '--add-opens',
-                'java.base/java.util=ALL-UNNAMED',
-                '--add-opens',
-                'java.base/java.lang=ALL-UNNAMED',
-                '-data',
-                workspace,
-              },
-              root_dir = root,
-              settings = make_settings(),
-              init_options = {
-                bundles = {},
-              },
-              flags = {
-                debounce_text_changes = 150,
-                allow_incremental_sync = true,
-                -- server_side_fuzzy_completion = true,
-              },
-              handlers = {
-                ['client/registerCapability'] = function(_, _, _, _)
-                  return {
-                    result = nil,
-                    error = nil,
-                  }
-                end
-              },
-            }
-          end
-          jdtls.start_or_attach(mk_config())
-
-          local group_name = 'jdtls_lsp'
-          vim.api.nvim_create_augroup(group_name, { clear = true, })
-          vim.api.nvim_create_autocmd({ 'FileType' }, {
-            group = group_name,
-            pattern = {'java'},
-            callback = function()
-              jdtls.start_or_attach(mk_config())
-            end,
-          })
-        '';
-        fileTypes = [ "java" ];
-        extraPackages = lspExtraPackages ++ (with pkgs; [ jdk ]);
-      }
-      {
-        plugin = nvim-lspconfig;
-        depends = lspDepends ++ [
-          # {
-          #   plugin = null-ls-nvim;
-          #   depends = [ plenary-nvim ];
-          #   enable = false;
-          # }
-        ];
-        config = ''
-          ${lspSharedConfig}
-
-          local lspconfig = require('lspconfig')
-          local util = require 'lspconfig.util'
-
-          vim.diagnostic.config {
-            severity_sort = true
-          }
-
-          local signs = {
-            { name = 'DiagnosticSignError', text = '' },
-            { name = 'DiagnosticSignWarn', text = '' },
-            { name = 'DiagnosticSignHint', text = '' },
-            { name = 'DiagnosticSignInfo', text = '' },
-          }
-
-          for _, sign in ipairs(signs) do
-            vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-          end
-
-          -- lua
-          lspconfig.sumneko_lua.setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-
-          -- nix
-          lspconfig.rnix.setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-
-          -- bash
-          lspconfig.bashls.setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-
-          -- fsharp
-          -- `dotnet tool install --global fsautocomplete`
-          lspconfig.fsautocomplete.setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-
-          local node_root_dir = util.root_pattern('package.json', 'node_modules')
-          local is_node_repo = node_root_dir('.') ~= nil
-
-          if not is_node_repo then
-            -- deno
-            vim.g.markdown_fenced_languages = {'ts=typescript'}
-            lspconfig.denols.setup {
-              on_attach = on_attach,
-              capabilities = capabilities,
-            }
-          else
-            -- node
-            lspconfig.tsserver.setup {
-              on_attach = on_attach,
-              capabilities = capabilities,
-            }
-          end
-
-          -- python
-          lspconfig.pyright.setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-
-          -- ruby
-          lspconfig.solargraph.setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-
-          -- toml
-          lspconfig.taplo.setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-
-          -- rust
-          lspconfig.rust_analyzer.setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-
-          -- go
-          lspconfig.gopls.setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-
-          -- yaml
-          lspconfig.yamlls.setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-
-          -- eslint
-          lspconfig.eslint.setup{
-            on_attach = on_attach,
-            capabilities = capabilities,
-            cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server', '--stdio' },
-          }
-        '';
-        extraPackages = lspExtraPackages ++ (with pkgs; [
-          gopls
-          rnix-lsp
-          rubyPackages.solargraph
-          rust-analyzer
-          sumneko-lua-language-server
-          # stylua
-          # nodePackages.prettier
-          nodePackages.vscode-langservers-extracted
-          # statix
-          # nixfmt
-          google-java-format
-          deno
-        ]) ++ (with pkgs.pkgs-stable; [
-          nodePackages.bash-language-server
-          nodePackages.pyright
-          nodePackages.typescript-language-server
-          nodePackages.yaml-language-server
-          taplo-cli
-        ]);
-        delay = true;
-      }
-      {
         plugin = formatter-nvim;
         config = readFile ./lua/formatter-nvim.lua;
         commands = [ "Format" ];
@@ -853,7 +441,6 @@ let
             end,
           })
         '';
-        depends = [ nvim-jdtls ];
         extraPackages = [ pkgs.checkstyle ];
         fileTypes = [ "java" ];
       }
@@ -902,28 +489,12 @@ let
         config = readFile ./lua/nvim_context_vt_config.lua;
       }
       {
-        plugin = goto-preview;
-        config = readFile ./lua/goto-preview-nvim_config.lua;
-        modules = [ "goto-preview" ];
-      }
-      {
-        plugin = hop-nvim;
-        commands = [ "HopChar1" "HopChar2" "HopLineAC" "HopLineBC" ];
-        config = ''
-          require'hop'.setup()
-        '';
-      }
-      {
         plugin = vim-oscyank;
         commands = [ "OSCYank" ];
         startup = ''
           vim.g.oscyank_term = 'default'
         '';
         optional = false;
-      }
-      {
-        plugin = editorconfig-nvim;
-        delay = true;
       }
       {
         plugin = dressing-nvim;
@@ -934,37 +505,6 @@ let
         depends = [ telescope-nvim ];
         commands = [ "Legendary" ];
         config = readFile ./lua/legendary-nvim.lua;
-      }
-      {
-        plugin = telescope-nvim;
-        depends = [
-          plenary-nvim
-          telescope-file-browser-nvim
-          telescope-ui-select-nvim
-          {
-            plugin = telescope-live-grep-args-nvim;
-            extraPackages = [ pkgs.ripgrep ];
-          }
-          {
-            plugin = project-nvim;
-            config = readFile ./lua/project-nvim.lua;
-          }
-          {
-            plugin = telescope-sonictemplate-nvim;
-            depends = [ vim-sonictemplate ];
-          }
-        ];
-        config = readFile ./lua/telescope-nvim_config.lua;
-        commands = [ "Telescope" ];
-        # modules = [ "telescope" ];
-        extraPackages = with pkgs.pkgs-stable; [ ripgrep ];
-      }
-      {
-        plugin = quick-scope;
-        startup = ''
-          vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
-        '';
-        events = [ "CursorMoved" ];
       }
       {
         plugin = nvim-bufdel;
@@ -995,8 +535,84 @@ let
         events = [ "InsertEnter" ];
       }
     ];
+  movement = with pkgs.vimPlugins; [
+    {
+      plugin = telescope-nvim;
+      depends = [
+        plenary-nvim
+        telescope-file-browser-nvim
+        telescope-ui-select-nvim
+        {
+          plugin = telescope-live-grep-args-nvim;
+          extraPackages = [ pkgs.ripgrep ];
+        }
+        {
+          plugin = project-nvim;
+          config = readFile ./lua/project-nvim.lua;
+        }
+        {
+          plugin = telescope-sonictemplate-nvim;
+          depends = [ vim-sonictemplate ];
+        }
+      ];
+      config = readFile ./lua/telescope-nvim_config.lua;
+      commands = [ "Telescope" ];
+      # modules = [ "telescope" ];
+      extraPackages = with pkgs.pkgs-stable; [ ripgrep ];
+    }
+    {
+      plugin = hop-nvim;
+      commands = [ "HopChar1" "HopChar2" "HopLineAC" "HopLineBC" ];
+      config = ''
+        require'hop'.setup()
+      '';
+    }
+    {
+      plugin = quick-scope;
+      startup = ''
+        vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
+      '';
+      events = [ "CursorMoved" ];
+    }
+    {
+      plugin = flare-nvim;
+      config = readFile ./lua/flare_config.lua;
+      events = [ "InsertEnter" ];
+    }
+    {
+      plugin = chowcho-nvim;
+      depends = [ nvim-web-devicons ];
+      commands = [ "Chowcho" ];
+      config = readFile ./lua/chowcho-nvim.lua;
+    }
+    {
+      plugin = vim-migemo;
+      config = ''
+        vim.g.migemodict = '${external.migemo-dict}/migemo-dict'
+      '';
+      extraPackages = [ pkgs.cmigemo ];
+      enable = false;
+    }
+    {
+      plugin = migemo-search;
+      extraPackages = [ pkgs.cmigemo ];
+      config = ''
+        vim.g.migemosearch_migemodict = '${external.migemo-dict}/migemo-dict}'
+      '';
+      enable = false;
+    }
+    {
+      plugin = goto-preview;
+      config = readFile ./lua/goto-preview-nvim_config.lua;
+      modules = [ "goto-preview" ];
+    }
+  ];
 
   tool = with pkgs.vimPlugins; [
+    {
+      plugin = winresizer;
+      delay = true;
+    }
     {
       plugin = tig-explorer-vim;
       depends = [ bclose-vim ];
@@ -1117,8 +733,8 @@ in {
     inherit extraConfig extraPackages;
     # logLevel = "debug";
     enable = true;
-    plugins = startup ++ ime ++ custom ++ statusline ++ commandline ++ window
-      ++ language ++ view ++ code ++ tool;
+    plugins = startup ++ ime ++ custom ++ statusline ++ commandline ++ language
+      ++ view ++ code ++ lsp ++ movement ++ tool;
     withNodeJs = true;
     withPython3 = true;
   };

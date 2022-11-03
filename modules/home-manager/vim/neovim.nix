@@ -481,6 +481,7 @@ let
           require'spaceless'.setup()
         '';
         delay = true;
+        enable = false;
       }
       {
         plugin = nvim_context_vt;

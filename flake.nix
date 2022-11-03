@@ -18,10 +18,6 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
-    yabai = {
-      url = "github:koekeishiya/yabai";
-      flake = false;
-    };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     # rokka-nvim = {
     #   url = "path:/Users/ttak0422/ghq/github.com/ttak0422/rokka-nvim";
@@ -72,30 +68,7 @@
           inputs.vim-plugins-overlay.overlay
           # inputs.emacs-overlay.overlay
           # inputs.emacs.overlay
-        ] ++ (with inputs;
-          [
-            (final: prev: {
-              # https://github.com/shaunsingh/nix-darwin-dotfiles/blob/2de71812cf0d1b75397e2f3ad90749ee26232ce6/flake.nix#L102-L115
-              yabai = let
-                version = "latest";
-                buildSymlinks = prev.runCommand "build-symlinks" { } ''
-                  mkdir -p $out/bin
-                  ln -s /usr/bin/xcrun /usr/bin/xcodebuild /usr/bin/tiffutil /usr/bin/qlmanage $out/bin
-                '';
-              in prev.yabai.overrideAttrs (old: {
-                inherit version;
-                nativeBuildInputs = [ buildSymlinks ];
-                src = inputs.yabai;
-                buildInputs = with prev.darwin.apple_sdk.frameworks; [
-                  Carbon
-                  Cocoa
-                  ScriptingBridge
-                  prev.xxd
-                  SkyLight
-                ];
-              });
-            })
-          ]);
+        ] ++ (with inputs; [ ]);
       };
 
       mkHomeManagerConfig =

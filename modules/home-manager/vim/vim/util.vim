@@ -97,3 +97,7 @@ nnoremap # #N
 nnoremap q <Nop>
 " disable <C-g> for tmux
 noremap <C-g> <Nop>
+
+" emacs bindings
+inoremap <silent> <C-a> <Home>
+inoremap <silent> <C-e> <End>

@@ -72,7 +72,10 @@ in {
         export PATH=/opt/homebrew/bin:$PATH
       fi
     '';
-    sessionVariables = { EDITOR = "vim"; };
+    sessionVariables = {
+      EDITOR = "vim";
+      XDG_CACHE_HOME = "$HOME/.cache";
+    };
     plugins = [
       {
         name = "zsh-vi-mode";

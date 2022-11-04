@@ -32,7 +32,7 @@ local on_attach = function(client, bufnr)
   -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set("n", "rn", "<cmd>Lspsaga rename<CR>", bufopts)
 
-  vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set("n", "<space>ca", require("actions-preview").code_actions, bufopts)
   -- vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', bufopts)
   -- vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
 

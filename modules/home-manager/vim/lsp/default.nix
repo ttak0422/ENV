@@ -15,9 +15,14 @@ let
     # virtual-types-nvim
     lsp-inlayhints-nvim
     telescope-nvim
+    actions-preview-nvim
   ];
   lspSharedExtraPackages = with pkgs; [ ];
 in with pkgs.vimPlugins; [
+  {
+    plugin = actions-preview-nvim;
+    config = readFile ./actions-preview-nvim.lua;
+  }
   {
     plugin = fidget-nvim;
     config = ''

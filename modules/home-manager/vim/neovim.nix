@@ -93,33 +93,51 @@ let
     }
   ];
 
-  ime = with pkgs.vimPlugins; [{
-    plugin = skkeleton;
-    depends = [ denops-vim ];
-    dependsAfter = [ skkeleton_indicator-nvim ];
-    startup = ''
-      vim.cmd([[
-        function! s:skkeleton_init() abort
-          call skkeleton#config({
-            \ 'globalJisyo': '${pkgs.skk-dicts}/share/SKK-JISYO.L',
-            \ 'globalJisyoEncoding': 'utf-8',
-            \ 'useSkkServer': v:true,
-            \ 'skkServerHost': '127.0.0.1',
-            \ 'skkServerPort': 1178,
-            \ 'skkServerReqEnc': 'euc-jp',
-            \ 'skkServerResEnc': 'euc-jp',
-            \ })
-        endfunction
-        augroup skkeleton-initialize-pre
-          autocmd!
-          autocmd User skkeleton-initialize-pre call s:skkeleton_init()
-        augroup END
-      ]])
-    '';
-    config = readFile ./lua/skkeleton_config.lua
-      + readFile ./lua/skkeleton_indicator_config.lua;
-    delay = true;
-  }];
+  input = with pkgs.vimPlugins; [
+    {
+      plugin = skkeleton;
+      depends = [ denops-vim ];
+      dependsAfter = [ skkeleton_indicator-nvim ];
+      startup = ''
+        vim.cmd([[
+          function! s:skkeleton_init() abort
+            call skkeleton#config({
+              \ 'globalJisyo': '${pkgs.skk-dicts}/share/SKK-JISYO.L',
+              \ 'globalJisyoEncoding': 'utf-8',
+              \ 'useSkkServer': v:true,
+              \ 'skkServerHost': '127.0.0.1',
+              \ 'skkServerPort': 1178,
+              \ 'skkServerReqEnc': 'euc-jp',
+              \ 'skkServerResEnc': 'euc-jp',
+              \ })
+          endfunction
+          augroup skkeleton-initialize-pre
+            autocmd!
+            autocmd User skkeleton-initialize-pre call s:skkeleton_init()
+          augroup END
+        ]])
+      '';
+      config = readFile ./lua/skkeleton_config.lua
+        + readFile ./lua/skkeleton_indicator_config.lua;
+      delay = true;
+    }
+    {
+      plugin = dps-dial-vim;
+      depends = [ denops-vim ];
+      config = readFile ./lua/dps-dial-vim.lua;
+      delay = true;
+    }
+    {
+      plugin = nvim-surround;
+      config = readFile ./lua/nvim-surround.lua;
+      delay = true;
+    }
+    {
+      plugin = Comment-nvim;
+      config = readFile ./lua/Comment-nvim.lua;
+      delay = true;
+    }
+  ];
 
   custom = with pkgs.vimPlugins; [
     {
@@ -734,8 +752,8 @@ in {
     inherit extraConfig extraPackages;
     # logLevel = "debug";
     enable = true;
-    plugins = startup ++ ime ++ custom ++ statusline ++ commandline ++ language
-      ++ view ++ code ++ lsp ++ movement ++ tool;
+    plugins = startup ++ input ++ custom ++ statusline ++ commandline
+      ++ language ++ view ++ code ++ lsp ++ movement ++ tool;
     withNodeJs = true;
     withPython3 = true;
   };

@@ -105,6 +105,14 @@
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode)))
 
+(leaf golang
+  :config
+  (leaf go-mode
+    :ensure t
+    :leaf-defer t
+    :init
+    (setq tab-width 2)))
+
 ;; org
 (leaf org
   :ensure t

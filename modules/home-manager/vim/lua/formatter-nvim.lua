@@ -26,5 +26,8 @@ require("formatter").setup({
         }
       end,
     },
+    dart = {
+      require("formatter.filetypes.dart").dartformat,
+    },
   },
 })

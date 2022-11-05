@@ -113,6 +113,12 @@
     :init
     (setq tab-width 2)))
 
+(leaf flutter
+  :config
+  (leaf dart-mode
+  :ensure t
+  :leaf-defer t))
+
 ;; org
 (leaf org
   :ensure t

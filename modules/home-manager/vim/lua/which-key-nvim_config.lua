@@ -74,7 +74,7 @@ wk.register({
 
 wk.register({
   ["<c-w>"] = {
-    z = { "<cmd>ZoomWinTabToggle<cr>", "zoom pane" },
+    z = { "<cmd>TZFocus<cr>", "zoom pane" },
     ["<c-w>"] = { "<cmd>Chowcho<cr>", "chose window" },
   },
 })

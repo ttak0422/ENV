@@ -155,6 +155,7 @@ let
     {
       plugin = zoomwintab-vim;
       commands = [ "ZoomWinTabToggle" ];
+      enable = false;
     }
     {
       plugin = pretty-fold-nvim;
@@ -692,9 +693,14 @@ let
     }
     {
       plugin = zen-mode-nvim;
-      depends = [ twilight-nvim twilight-nvim ];
+      # depends = [ twilight-nvim ];
       config = readFile ./lua/zen-mode_config.lua;
       commands = [ "ZenMode" ];
+    }
+    {
+      plugin = true-zen;
+      config = readFile ./lua/true-zen.lua;
+      commands = [ "TZFocus" ];
     }
     {
       plugin = twilight-nvim;

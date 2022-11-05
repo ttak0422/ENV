@@ -922,6 +922,22 @@
         "type": "github"
       }
     },
+    "flutter-tools-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662665577,
+        "narHash": "sha256-YBir5hBAwg3Ta3gAo6EpwUiKL2Uz5Qc7pkBSDJJSR40=",
+        "owner": "akinsho",
+        "repo": "flutter-tools.nvim",
+        "rev": "15b770dcdca7ad2dab11cdf0dfdca34f04739471",
+        "type": "github"
+      },
+      "original": {
+        "owner": "akinsho",
+        "repo": "flutter-tools.nvim",
+        "type": "github"
+      }
+    },
     "format-all": {
       "flake": false,
       "locked": {
@@ -1769,6 +1785,54 @@
       "original": {
         "owner": "klen",
         "repo": "nvim-config-local",
+        "type": "github"
+      }
+    },
+    "nvim-dap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667599290,
+        "narHash": "sha256-wKxTpY4Dl96GxR+JdhGVxaaqRZMZv+zbiGoPBMYbdEc=",
+        "owner": "mfussenegger",
+        "repo": "nvim-dap",
+        "rev": "6fd283f540f4af6fbd80d6d72e1a0ea6c245aab0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mfussenegger",
+        "repo": "nvim-dap",
+        "type": "github"
+      }
+    },
+    "nvim-dap-ui": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667465266,
+        "narHash": "sha256-ZgsOLNT3r1EU3N9xzjrV5J1MFr/0ypx8D2F/JGqCOI0=",
+        "owner": "rcarriga",
+        "repo": "nvim-dap-ui",
+        "rev": "6a8271505e95913b82305eff63406ef22baad778",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rcarriga",
+        "repo": "nvim-dap-ui",
+        "type": "github"
+      }
+    },
+    "nvim-dap-virtual-text": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659739008,
+        "narHash": "sha256-6QRDR0Oi2lQJGD2yiHr+NeVUeW0jAWY0Cj0gQ1dlBkM=",
+        "owner": "theHamsta",
+        "repo": "nvim-dap-virtual-text",
+        "rev": "2971ce3e89b1711cc26e27f73d3f854b559a77d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "theHamsta",
+        "repo": "nvim-dap-virtual-text",
         "type": "github"
       }
     },
@@ -2917,6 +2981,7 @@
         "filetype-nvim": "filetype-nvim",
         "fine-cmdline-nvim": "fine-cmdline-nvim",
         "flare-nvim": "flare-nvim",
+        "flutter-tools-nvim": "flutter-tools-nvim",
         "formatter-nvim": "formatter-nvim",
         "friendly-snippets": "friendly-snippets",
         "fzy-lua-native": "fzy-lua-native",
@@ -2951,6 +3016,9 @@
         "nvim-cmp": "nvim-cmp",
         "nvim-colorizer-lua": "nvim-colorizer-lua",
         "nvim-config-local": "nvim-config-local",
+        "nvim-dap": "nvim-dap",
+        "nvim-dap-ui": "nvim-dap-ui",
+        "nvim-dap-virtual-text": "nvim-dap-virtual-text",
         "nvim-docs-view": "nvim-docs-view",
         "nvim-hlslens": "nvim-hlslens",
         "nvim-jdtls": "nvim-jdtls",
@@ -3020,11 +3088,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1667615747,
-        "narHash": "sha256-8GRmIlhlwSPViMaUwbRU8UAztXIc5VtclRydd8VlVas=",
+        "lastModified": 1667631546,
+        "narHash": "sha256-rwirLG8eY53XZshW9c5s+RC9Y7Uq5NSIMLJmBs1pEJM=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "be68a25288f5ee8653c12be54433ab13342c8fd4",
+        "rev": "d4618504e47832bc21bf38f0531076473be6b571",
         "type": "github"
       },
       "original": {

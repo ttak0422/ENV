@@ -209,6 +209,7 @@ in with pkgs.vimPlugins; [
       # nixfmt
       google-java-format
       deno
+      dart
     ]) ++ (with pkgs.pkgs-stable; [
       nodePackages.bash-language-server
       nodePackages.pyright
@@ -310,6 +311,12 @@ in with pkgs.vimPlugins; [
         capabilities = capabilities,
       }
 
+      -- dart
+      lspconfig.dartls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+
       -- yaml
       lspconfig.yamlls.setup {
         on_attach = on_attach,
@@ -324,5 +331,13 @@ in with pkgs.vimPlugins; [
       }
     '';
     delay = true;
+  }
+  {
+    plugin = flutter-tools-nvim;
+    depends = [ plenary-nvim ];
+    config = ''
+      require("flutter-tools").setup ({})
+    '';
+    fileTypes = [ "dart" ];
   }
 ]

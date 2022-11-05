@@ -18,6 +18,7 @@
     casks = [
       "alacritty"
       "aquaskk"
+      "cocoapods"
       "cyberduck"
       "google-chrome"
       "displaylink"

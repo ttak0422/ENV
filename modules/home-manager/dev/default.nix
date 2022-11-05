@@ -12,4 +12,5 @@
     ./python.nix
     ./rust.nix
   ];
+  home.packages = with pkgs; [ dart ];
 }

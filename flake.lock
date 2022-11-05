@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "AbbrevMan-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1626378870,
+        "narHash": "sha256-MANttZszqm54LA1OnEQ6D37KjqdikY/lcH4qPHn1cHM=",
+        "owner": "Pocco81",
+        "repo": "AbbrevMan.nvim",
+        "rev": "97b40b51b373d0d1c22f71dd8fce7f61f6bf46a5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Pocco81",
+        "repo": "AbbrevMan.nvim",
+        "type": "github"
+      }
+    },
     "Comment-nvim": {
       "flake": false,
       "locked": {
@@ -2641,6 +2657,22 @@
         "type": "github"
       }
     },
+    "true-zen": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659883982,
+        "narHash": "sha256-QfoKFw3//Mc+2G91MpPPDCfr0t5Pvvrvx5H6gMDi/Lw=",
+        "owner": "Pocco81",
+        "repo": "true-zen.nvim",
+        "rev": "98740c76254c65576ec294551028b65081053588",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Pocco81",
+        "repo": "true-zen.nvim",
+        "type": "github"
+      }
+    },
     "ts-fold": {
       "flake": false,
       "locked": {
@@ -2786,6 +2818,7 @@
     },
     "vim-plugins-overlay": {
       "inputs": {
+        "AbbrevMan-nvim": "AbbrevMan-nvim",
         "Comment-nvim": "Comment-nvim",
         "Shade-nvim": "Shade-nvim",
         "actions-preview-nvim": "actions-preview-nvim",
@@ -2896,6 +2929,7 @@
         "toggleterm-nvim": "toggleterm-nvim",
         "toolwindow-nvim": "toolwindow-nvim",
         "trouble-nvim": "trouble-nvim",
+        "true-zen": "true-zen",
         "twilight-nvim": "twilight-nvim",
         "venn-nvim": "venn-nvim",
         "vim-altercmd": "vim-altercmd",
@@ -2918,11 +2952,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1667542443,
-        "narHash": "sha256-0p6iW+run+kVeArgS8hq+ApYoUZIXXmZxD3IK9h3AK0=",
+        "lastModified": 1667584895,
+        "narHash": "sha256-0U7XUXuTFmKgv7rmA2Lqu9uegtBJGXU5VUBN9OoKowk=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "c7bf10050d28f46dd66ee8fa57c164cdd5177632",
+        "rev": "9f0caa275027deb4dd41e762df200e6d1575e5e9",
         "type": "github"
       },
       "original": {

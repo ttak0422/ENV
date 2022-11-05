@@ -140,6 +140,20 @@ let
   ];
 
   custom = with pkgs.vimPlugins; [
+    # {
+    #   plugin = fine-cmdline-nvim;
+    #   depends = [ nui-nvim ];
+    #   startup = ''
+    #     vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', { noremap = true, silent = true })
+    #   '';
+    #   config = readFile ./lua/fine-cmdline-nvim.lua;
+    #   commands = [ "FineCmdline" ];
+    # }
+    # {
+    #   plugin = searchbox-nvim;
+    #   depends = [ nui-nvim ];
+    #   commands = [ "SearchBoxIncSearch" ];
+    # }
     {
       plugin = colorful-winsep-nvim;
       events = [ "WinNew" ];
@@ -210,19 +224,20 @@ let
     }
   ];
 
-  commandline = with pkgs.vimPlugins; [
-    {
-      plugin = wilder-nvim;
-      depends = [ fzy-lua-native ];
-      events = [ "CmdlineEnter" ];
-      config = readFile ./lua/wilder-nvim_config.lua;
-      extraPackages = with pkgs; [ fd ];
-    }
-    {
-      plugin = mkdir-nvim;
-      events = [ "CmdlineEnter" ];
-    }
-  ];
+  commandline = with pkgs.vimPlugins;
+    [
+      # {
+      #   plugin = wilder-nvim;
+      #   depends = [ fzy-lua-native ];
+      #   events = [ "CmdlineEnter" ];
+      #   config = readFile ./lua/wilder-nvim_config.lua;
+      #   extraPackages = with pkgs; [ fd ];
+      # }
+      {
+        plugin = mkdir-nvim;
+        events = [ "CmdlineEnter" ];
+      }
+    ];
 
   language = with pkgs.vimPlugins; [
     {
@@ -413,6 +428,7 @@ let
             depends = [ luasnip ];
           }
           cmp-nvim-lsp-signature-help
+          cmp-cmdline
         ];
         config = ''
           vim.cmd[[silent source ${cmp-path}/after/plugin/cmp_path.lua]]
@@ -423,6 +439,7 @@ let
           vim.cmd[[silent source ${cmp_luasnip}/after/plugin/cmp_luasnip.lua]]
           vim.cmd[[silent source ${cmp-nvim-lua}/after/plugin/cmp_nvim_lua.lua]]
           vim.cmd[[silent source ${cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua]]
+          vim.cmd[[silent source ${cmp-cmdline}/after/plugin/cmp_cmdline.lua]]
         '' + (readFile ./lua/nvim-cmp_config.lua);
         delay = true;
       }

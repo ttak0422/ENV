@@ -55,10 +55,6 @@ set undofile
 " 編集中のファイル変更時にリロード
 set autoread
 
-" cmdline非表示
-" set cmdheight=0
-set cmdheight=1
-
 " 改行時にコメントを維持しない
 autocmd FileType * setlocal formatoptions-=r
 autocmd FileType * setlocal formatoptions-=o

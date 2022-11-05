@@ -25,3 +25,4 @@ augroup GrepCmd
   autocmd QuickFixCmdPost    l* nested lopen
 augroup END
 
+set cmdheight=0

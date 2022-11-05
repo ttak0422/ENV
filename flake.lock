@@ -352,6 +352,22 @@
         "type": "github"
       }
     },
+    "colorful-winsep-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667308359,
+        "narHash": "sha256-B3RIYLX3u77EzhlLIQ/xt0kL37j/YQyT36mguxQCjy8=",
+        "owner": "nvim-zh",
+        "repo": "colorful-winsep.nvim",
+        "rev": "23b0b419980206fa1d45034dfd88d60c9344250a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-zh",
+        "repo": "colorful-winsep.nvim",
+        "type": "github"
+      }
+    },
     "comfortable-motion-vim": {
       "flake": false,
       "locked": {
@@ -747,6 +763,22 @@
       "original": {
         "owner": "nathom",
         "repo": "filetype.nvim",
+        "type": "github"
+      }
+    },
+    "fine-cmdline-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1656698978,
+        "narHash": "sha256-0aYHz6uRMVjctrDo8JKlTIUP2Oj+MrhBvgXRIwo/ueU=",
+        "owner": "VonHeikemen",
+        "repo": "fine-cmdline.nvim",
+        "rev": "ead2b85e455eacde10469a8fcf1a717822d2bb9a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "VonHeikemen",
+        "repo": "fine-cmdline.nvim",
         "type": "github"
       }
     },
@@ -2321,6 +2353,22 @@
         "type": "github"
       }
     },
+    "searchbox-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667232914,
+        "narHash": "sha256-Bx4Msp96hlcYVDvDC3gBv78zmde0T5XacxgiZt+LULU=",
+        "owner": "VonHeikemen",
+        "repo": "searchbox.nvim",
+        "rev": "110949af8963185b4e732b45ae57beb731bfcede",
+        "type": "github"
+      },
+      "original": {
+        "owner": "VonHeikemen",
+        "repo": "searchbox.nvim",
+        "type": "github"
+      }
+    },
     "serenade": {
       "flake": false,
       "locked": {
@@ -2494,6 +2542,22 @@
       "original": {
         "owner": "nvim-telescope",
         "repo": "telescope-file-browser.nvim",
+        "type": "github"
+      }
+    },
+    "telescope-frecency-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1664305790,
+        "narHash": "sha256-g6qxyw48BsJ1GREuKZeSiKhcbQtNkhys3BD3mzlNDbQ=",
+        "owner": "nvim-telescope",
+        "repo": "telescope-frecency.nvim",
+        "rev": "9634c3508c6565284065ec011476204ce13f354a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-telescope",
+        "repo": "telescope-frecency.nvim",
         "type": "github"
       }
     },
@@ -2840,6 +2904,7 @@
         "cmp-treesitter": "cmp-treesitter",
         "cmp-vsnip": "cmp-vsnip",
         "cmp_luasnip": "cmp_luasnip",
+        "colorful-winsep-nvim": "colorful-winsep-nvim",
         "comfortable-motion-vim": "comfortable-motion-vim",
         "comfortable_motion_scroll_up_key": "comfortable_motion_scroll_up_key",
         "confirm-quit-nvim": "confirm-quit-nvim",
@@ -2850,6 +2915,7 @@
         "editorconfig-nvim": "editorconfig-nvim",
         "fidget-nvim": "fidget-nvim",
         "filetype-nvim": "filetype-nvim",
+        "fine-cmdline-nvim": "fine-cmdline-nvim",
         "flare-nvim": "flare-nvim",
         "formatter-nvim": "formatter-nvim",
         "friendly-snippets": "friendly-snippets",
@@ -2909,6 +2975,7 @@
         "quick-scope": "quick-scope",
         "range-highlight-nvim": "range-highlight-nvim",
         "registers-nvim": "registers-nvim",
+        "searchbox-nvim": "searchbox-nvim",
         "serenade": "serenade",
         "sidebar-nvim": "sidebar-nvim",
         "skkeleton": "skkeleton",
@@ -2919,6 +2986,7 @@
         "symbols-outline-nvim": "symbols-outline-nvim",
         "telescope-command-palette-nvim": "telescope-command-palette-nvim",
         "telescope-file-browser-nvim": "telescope-file-browser-nvim",
+        "telescope-frecency-nvim": "telescope-frecency-nvim",
         "telescope-live-grep-args-nvim": "telescope-live-grep-args-nvim",
         "telescope-nvim": "telescope-nvim",
         "telescope-sonictemplate-nvim": "telescope-sonictemplate-nvim",
@@ -2952,11 +3020,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1667584895,
-        "narHash": "sha256-0U7XUXuTFmKgv7rmA2Lqu9uegtBJGXU5VUBN9OoKowk=",
+        "lastModified": 1667615747,
+        "narHash": "sha256-8GRmIlhlwSPViMaUwbRU8UAztXIc5VtclRydd8VlVas=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "9f0caa275027deb4dd41e762df200e6d1575e5e9",
+        "rev": "be68a25288f5ee8653c12be54433ab13342c8fd4",
         "type": "github"
       },
       "original": {

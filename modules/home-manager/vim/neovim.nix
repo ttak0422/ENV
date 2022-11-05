@@ -141,6 +141,11 @@ let
 
   custom = with pkgs.vimPlugins; [
     {
+      plugin = colorful-winsep-nvim;
+      events = [ "WinNew" ];
+      config = readFile ./lua/colorful-winsep-nvim.lua;
+    }
+    {
       plugin = stickybuf-nvim;
       config = ''
         require('stickybuf').setup()

@@ -240,6 +240,22 @@
         "type": "github"
       }
     },
+    "cmp-cmdline-history": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1651653950,
+        "narHash": "sha256-IcruTOCNxYKmbo0St1U+CmrDStASPLe+rTLNU6/2Xew=",
+        "owner": "dmitmel",
+        "repo": "cmp-cmdline-history",
+        "rev": "003573b72d4635ce636234a826fa8c4ba2895ffe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dmitmel",
+        "repo": "cmp-cmdline-history",
+        "type": "github"
+      }
+    },
     "cmp-nvim-lsp": {
       "flake": false,
       "locked": {
@@ -253,6 +269,22 @@
       "original": {
         "owner": "hrsh7th",
         "repo": "cmp-nvim-lsp",
+        "type": "github"
+      }
+    },
+    "cmp-nvim-lsp-document-symbol": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1666607452,
+        "narHash": "sha256-ox0AJzY4z4lFx5A06IpE7z99pqqP2bN6/sYD0+tP/L4=",
+        "owner": "hrsh7th",
+        "repo": "cmp-nvim-lsp-document-symbol",
+        "rev": "069a207be6a0327dcc62c957dbb38156b210733a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hrsh7th",
+        "repo": "cmp-nvim-lsp-document-symbol",
         "type": "github"
       }
     },
@@ -2915,11 +2947,11 @@
     "vim-matchup": {
       "flake": false,
       "locked": {
-        "lastModified": 1666836671,
-        "narHash": "sha256-76n4g2dbmcpqL8FXPh0Tl1FJYnLf+JmHRJQ+5HRLICE=",
+        "lastModified": 1667673969,
+        "narHash": "sha256-eGNpmdDIe81dVAqqfavCk1mElmmQwLfrhGWaxsrqo9k=",
         "owner": "andymass",
         "repo": "vim-matchup",
-        "rev": "09576fd767cc55ca934a95f9bdcf91aa12c32cd0",
+        "rev": "d37643c3d276799ce5f55fad5d6a7bbd6d185a9f",
         "type": "github"
       },
       "original": {
@@ -2977,7 +3009,9 @@
         "cmp-buffer": "cmp-buffer",
         "cmp-calc": "cmp-calc",
         "cmp-cmdline": "cmp-cmdline",
+        "cmp-cmdline-history": "cmp-cmdline-history",
         "cmp-nvim-lsp": "cmp-nvim-lsp",
+        "cmp-nvim-lsp-document-symbol": "cmp-nvim-lsp-document-symbol",
         "cmp-nvim-lsp-signature-help": "cmp-nvim-lsp-signature-help",
         "cmp-nvim-lua": "cmp-nvim-lua",
         "cmp-path": "cmp-path",
@@ -3105,11 +3139,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1667667261,
-        "narHash": "sha256-DgUMmduQtOzcinnhaKrvClAbws9aDSI3y3nXOalwXNM=",
+        "lastModified": 1667700196,
+        "narHash": "sha256-u1jQcmQbF8UknRkuYMIj+7FQflkqjjUDfzjJrWS3/Qs=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "65672805d3717cf10ed1855b69f49214ddae9c44",
+        "rev": "a71aa7654eca7216dc99cfd468f23a6e80560b26",
         "type": "github"
       },
       "original": {

@@ -102,14 +102,20 @@ cmp.setup({
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = "cmdline" },
+    { name = "cmdline", priority = 10 },
+    { name = "cmdline_history", priority = 8 },
   },
 })
 
-cmp.setup.cmdline("/", {
+cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = "buffer" },
+    {
+      name = "nvim_lsp_document_symbol",
+      priority = 10,
+    },
+    { name = "cmdline_history", priority = 8 },
+    { name = "buffer", priority = 5 },
   },
 })
 

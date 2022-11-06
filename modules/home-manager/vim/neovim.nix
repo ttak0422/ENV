@@ -429,17 +429,24 @@ let
           }
           cmp-nvim-lsp-signature-help
           cmp-cmdline
+          cmp-cmdline-history
+          cmp-nvim-lsp-document-symbol
         ];
         config = ''
-          vim.cmd[[silent source ${cmp-path}/after/plugin/cmp_path.lua]]
-          vim.cmd[[silent source ${cmp-buffer}/after/plugin/cmp_buffer.lua]]
-          vim.cmd[[silent source ${cmp-calc}/after/plugin/cmp_calc.lua]]
-          vim.cmd[[silent source ${cmp-treesitter}/after/plugin/cmp_treesitter.lua]]
-          vim.cmd[[silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua]]
-          vim.cmd[[silent source ${cmp_luasnip}/after/plugin/cmp_luasnip.lua]]
-          vim.cmd[[silent source ${cmp-nvim-lua}/after/plugin/cmp_nvim_lua.lua]]
-          vim.cmd[[silent source ${cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua]]
-          vim.cmd[[silent source ${cmp-cmdline}/after/plugin/cmp_cmdline.lua]]
+          vim.cmd[[
+            silent source ${cmp-path}/after/plugin/cmp_path.lua
+            silent source ${cmp-buffer}/after/plugin/cmp_buffer.lua
+            silent source ${cmp-calc}/after/plugin/cmp_calc.lua
+            silent source ${cmp-treesitter}/after/plugin/cmp_treesitter.lua
+            silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua
+            silent source ${cmp_luasnip}/after/plugin/cmp_luasnip.lua
+            silent source ${cmp-nvim-lua}/after/plugin/cmp_nvim_lua.lua
+            silent source ${cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua
+            silent source ${cmp-cmdline}/after/plugin/cmp_cmdline.lua
+            silent source ${cmp-cmdline-history}/after/plugin/cmp_cmdline_history.lua
+            silent source ${cmp-nvim-lsp-document-symbol}/after/plugin/cmp_nvim_lsp_document_symbol.lua
+          ]]
+
         '' + (readFile ./lua/nvim-cmp_config.lua);
         delay = true;
       }

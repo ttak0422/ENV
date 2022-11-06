@@ -779,7 +779,7 @@ let
     {
       plugin = toggleterm-nvim;
       config = readFile ./lua/toggleterm_config.lua;
-      modules = [ "toggleterm" "toggleterm.terminal" ];
+      commands = [ "ToggleTerm" ];
     }
   ];
 in {

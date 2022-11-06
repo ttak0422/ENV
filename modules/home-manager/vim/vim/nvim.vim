@@ -26,3 +26,5 @@ augroup GrepCmd
 augroup END
 
 set cmdheight=0
+
+au TermClose * call feedkeys("i")

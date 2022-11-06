@@ -96,19 +96,19 @@ wk.register({
 
 wk.register({
   ["<Tab>"] = { [[@=(foldlevel('.')?'za':"\<Tab>")<CR>]], "toggle fold" },
-  --["<C-t>"] = { "<cmd>ToggleTerm<cr>", "toggle terminal" },
-  ["<C-t>"] = {
-    "<cmd>lua require('toolwindow').open_window('term', nil)<cr>",
-    "toggle terminal",
-  },
+  ["<C-t>"] = { "<cmd>ToggleTerm<cr>", "toggle terminal" },
+  --["<C-t>"] = {
+  --  "<cmd>lua require('toolwindow').open_window('term', nil)<cr>",
+  --  "toggle terminal",
+  --},
 })
 
 wk.register({
-  -- ["<C-t>"] = { "<cmd>ToggleTerm<cr>", "toggle terminal" },
-  ["<C-t>"] = {
-    "<cmd>lua require('toolwindow').open_window('term', nil)<cr>",
-    "toggle terminal",
-  },
+  ["<C-t>"] = { "<cmd>ToggleTerm<cr>", "toggle terminal" },
+  -- ["<C-t>"] = {
+  --   "<cmd>lua require('toolwindow').open_window('term', nil)<cr>",
+  --   "toggle terminal",
+  -- },
 }, { mode = "t" })
 
 wk.register({

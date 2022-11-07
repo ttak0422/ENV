@@ -1,6 +1,4 @@
 require("toggleterm").setup({
-	direction = "horizontal",
-	float_opts = {
-		border = "single",
-	},
+  direction = "horizontal",
+  size = math.floor(vim.o.lines * 0.8),
 })

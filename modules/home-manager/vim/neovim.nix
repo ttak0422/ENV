@@ -14,6 +14,7 @@ let
 
   extraConfig = ''
     let g:neovide_cursor_vfx_mode = "pixiedust"
+    set guifont=JetBrainsMono\ Nerd\ Font
 
     " nvr
     let nvrcmd = "nvr --remote-wait"

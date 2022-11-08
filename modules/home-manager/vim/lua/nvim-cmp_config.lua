@@ -1,8 +1,8 @@
 vim.opt.completeopt = "menu,menuone,noselect"
 
 local ELLIPSIS_CHAR = "…"
-local MAX_LABEL_WIDTH = 20
-local MIN_LABEL_WIDTH = 20
+local MAX_LABEL_WIDTH = 30
+local MIN_LABEL_WIDTH = 30
 
 local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)

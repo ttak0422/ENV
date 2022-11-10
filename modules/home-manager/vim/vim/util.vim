@@ -2,6 +2,8 @@ let mapleader="\<Space>"
 
 nnoremap <Leader>h :bprev<CR>
 nnoremap <Leader>l :bnext<CR>
+nnoremap <Leader>H :tabNext<CR>
+nnoremap <Leader>L :tabnext<CR>
 nnoremap <Leader>q :bd<CR>
 nnoremap <silent> <ESC><ESC> :nohl<CR>
 

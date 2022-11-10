@@ -10,7 +10,7 @@ let g:loaded_zipPlugin = v:true
 let g:loaded_vimball = v:true
 let g:loaded_vimballPlugin = v:true
 " keymap
-" tnoremap <C-[> <C-\><C-n>
+tnoremap <C-[> <C-\><C-n>
 augroup NvimTerm
   autocmd!
   autocmd WinEnter * if &buftype ==# 'terminal' | startinsert | endif

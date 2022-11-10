@@ -16,6 +16,7 @@ let
     lsp-inlayhints-nvim
     telescope-nvim
     actions-preview-nvim
+    vim-illuminate
   ];
   lspSharedExtraPackages = with pkgs; [ ];
 in with pkgs.vimPlugins; [
@@ -34,6 +35,10 @@ in with pkgs.vimPlugins; [
     config = ''
       require('lsp-inlayhints').setup{}
     '';
+  }
+  {
+    plugin = vim-illuminate;
+    config = readFile ./vim-illuminate.lua;
   }
   {
     plugin = nvim-jdtls;

@@ -1,5 +1,14 @@
 require("Comment").setup({
+  toggler = {
+    line = "gcc",
+    block = "gCc",
+  },
+  opleader = {
+    line = "gc",
+    block = "gC",
+  },
   mappings = {
-    extra = false,
+    basic = true,
+    extra = true,
   },
 })

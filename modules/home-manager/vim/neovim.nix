@@ -335,7 +335,15 @@ let
     }
     {
       plugin = bufferline-nvim;
-      depends = [ nvim-web-devicons ];
+      depends = [
+        nvim-web-devicons
+        {
+          plugin = scope-nvim;
+          config = ''
+            require("scope").setup()
+          '';
+        }
+      ];
       delay = true;
       config = readFile ./lua/bufferline_config.lua;
     }
@@ -750,6 +758,7 @@ let
       depends = [ plenary-nvim nvim-web-devicons ];
       config = readFile ./lua/spectre_config.lua;
       extraPackages = [ pkgs.gnused ];
+      modules = [ "spectre" ];
     }
     {
       plugin = neogit;

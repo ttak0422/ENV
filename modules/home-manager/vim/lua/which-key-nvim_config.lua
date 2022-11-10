@@ -1,6 +1,6 @@
 function _OpenTig()
   vim.cmd([[
-    execute 'vnew term://tig status'
+    execute 'vnew term://tig'
     setlocal bufhidden=delete
     setlocal noswapfile
     setlocal nobuflisted
@@ -49,6 +49,8 @@ wk.register({
       c = { "<cmd>Telescope command_history theme=ivy<cr>", "find command history" },
       C = { "<cmd>Telescope command_palette<cr>", "find command history" },
       t = { "<cmd>Telescope sonictemplate templates theme=ivy<cr>", "find templates" },
+      h = { "<cmd>Legendary<cr>", "find command palette" },
+      F = { '<cmd>lua require("spectre").open()<cr>', "find and replace with dark power" },
     },
 
     -- lsp
@@ -67,8 +69,6 @@ wk.register({
     q = { "<cmd>BufDel<cr>", "close buffer" },
     Q = { "<cmd>BufDel!<cr>", "close buffer force" },
     G = { "<cmd>lua _OpenTig()<cr>", "tig" },
-    H = { "<cmd>Legendary<cr>", "command palette" },
-    -- F = { '<cmd>lua require("spectre").open()<cr>', 'find and replace with dark power' },
   },
 })
 

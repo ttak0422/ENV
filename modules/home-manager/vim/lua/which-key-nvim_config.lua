@@ -1,6 +1,6 @@
 function _OpenTig()
   vim.cmd([[
-    execute 'vnew term://tig'
+    execute 'new term://tig'
     setlocal bufhidden=delete
     setlocal noswapfile
     setlocal nobuflisted
@@ -69,6 +69,7 @@ wk.register({
     q = { "<cmd>BufDel<cr>", "close buffer" },
     Q = { "<cmd>BufDel!<cr>", "close buffer force" },
     G = { "<cmd>lua _OpenTig()<cr>", "tig" },
+    T = { "<cmd>tabnew<cr>", "tabnew" },
   },
 })
 

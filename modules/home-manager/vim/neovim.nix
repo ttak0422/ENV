@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, nix-filter, ... }:
 
 let
   inherit (builtins) concatStringsSep map fetchTarball readFile;
@@ -7,7 +7,6 @@ let
   inherit (pkgs) fetchFromGitHub writeText callPackage;
   inherit (pkgs.stdenv) mkDerivation;
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
-  templates = callPackage ./templates { };
   external = callPackage ./external.nix { };
 
   extraPackages = with pkgs; [ neovim-remote ];
@@ -356,6 +355,7 @@ let
   ];
 
   lsp = callPackage ./lsp { };
+  template = callPackage ./template { };
 
   code = with pkgs.vimPlugins;
 
@@ -506,15 +506,6 @@ let
         depends = [ nvim-treesitter luasnip ];
         config = readFile ./lua/neogen.lua;
         commands = [ "Neogen" ];
-      }
-      {
-        plugin = vim-sonictemplate;
-        startup = ''
-          vim.g.sonictemplate_vim_template_dir = '${templates}'
-          vim.g.sonictemplate_postfix_key = '<c-t>'
-        '';
-        commands = [ "Template" ];
-        delay = true;
       }
       {
         plugin = todo-comments-nvim;
@@ -798,7 +789,7 @@ in {
     # logLevel = "debug";
     enable = true;
     plugins = startup ++ input ++ custom ++ statusline ++ commandline
-      ++ language ++ view ++ code ++ lsp ++ movement ++ tool;
+      ++ language ++ view ++ code ++ lsp ++ template ++ movement ++ tool;
     withNodeJs = true;
     withPython3 = true;
   };

@@ -1,4 +1,4 @@
-{ pkgs, lib, stdenv }:
+{ pkgs, lib, stdenv, nix-filter }:
 
 stdenv.mkDerivation {
   name = "ttak0422-templates";

@@ -42,6 +42,7 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs = { flake-utils.follows = "flake-utils"; };
     };
+    nix-filter.url = "github:numtide/nix-filter";
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils
@@ -66,6 +67,7 @@
         overlays = attrValues self.overlays ++ [
           inputs.neovim-nightly-overlay.overlay
           inputs.vim-plugins-overlay.overlay
+          inputs.nix-filter.overlays.default
           # inputs.emacs-overlay.overlay
           # inputs.emacs.overlay
         ] ++ (with inputs; [ ]);

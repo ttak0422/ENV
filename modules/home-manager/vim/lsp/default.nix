@@ -151,7 +151,7 @@ in with pkgs.vimPlugins; [
             '-Dosgi.configuration.c:ascaded=true',
             '-Dlog.level=ALL',
             '-Xms128m',
-            '-Xmx5G',
+            '-Xmx12G',
             '-XX:+UseG1GC',
             '-javaagent:${pkgs.lombok}/share/java/lombok.jar',
             '-jar',

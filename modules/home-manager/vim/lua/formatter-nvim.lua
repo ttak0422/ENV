@@ -29,5 +29,8 @@ require("formatter").setup({
     dart = {
       require("formatter.filetypes.dart").dartformat,
     },
+    go = {
+      require("formatter.filetypes.go").gofmt,
+    },
   },
 })

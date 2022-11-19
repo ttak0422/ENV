@@ -41,6 +41,7 @@
       "visual-studio-code"
       "bitwarden"
       "processing"
+      "wezterm"
     ];
   };
 }

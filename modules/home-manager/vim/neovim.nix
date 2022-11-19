@@ -21,6 +21,23 @@ let
     let $GIT_EDITOR = nvrcmd
     autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 
+    augroup extraConfig
+      au!
+      autocmd BufNewFile .editorconfig 0r ${
+        pkgs.writeText "editorconfig" ''
+          root = true
+
+          [*]
+          indent_style = space
+          indent_size = 2
+          # indent_style = tab
+          # tab_width = 2
+          end_of_line = lf
+          insert_final_newline = true
+          charset = utf-8
+        ''
+      }
+    augroup END
     ${fileContents ./vim/nvim.vim}
     ${fileContents ./vim/util.vim}
   '';

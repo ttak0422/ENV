@@ -1,16 +1,14 @@
 { config, pkgs, lib, ... }: {
   nix = {
     package = pkgs.nixVersions.stable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-    # Hack to support legacy worklows that use `<nixpkgs>` etc.
-    nixPath = { nixpkgs = "$HOME/.config/nixpkgs/nixpkgs.nix"; };
     gc = {
       automatic = true;
       options = "--delete-older-than 10d";
     };
     settings = {
+      experimental-features = ''
+        nix-command flakes
+      '';
       substituters = [
         "https://ttak0422.cachix.org"
         "https://ttak0422-vim-plugins-overlay.cachix.org"

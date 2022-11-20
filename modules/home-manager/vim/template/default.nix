@@ -6,7 +6,7 @@ in with pkgs.vimPlugins; [{
   plugin = vim-sonictemplate.overrideAttrs (old: {
     src = nix-filter {
       root = vim-sonictemplate.src;
-      exclude = [ "template/java" ];
+      exclude = [ "template/java" "template/make" ];
     };
   });
   startup = ''

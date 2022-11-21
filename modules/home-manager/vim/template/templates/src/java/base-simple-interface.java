@@ -2,9 +2,6 @@
 
 {{_lang_util_:package}}
 
-import lombok.experimental.UtilityClass;
-
-@UtilityClass
-public class {{_expr_:substitute('{{_name_}}', '\w\+', '\u\0', '')}} {
+public interface {{_expr_:substitute('{{_name_}}', '\w\+', '\u\0', '')}} {
   {{_cursor_}}
 }

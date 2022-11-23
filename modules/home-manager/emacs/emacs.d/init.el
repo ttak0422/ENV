@@ -132,6 +132,11 @@
   (("C-c l" . org-store-link)
    ("C-c c" . org-capture)
    ("C-c a" . org-agenda)))
+(leaf org-download
+  :ensure t
+  :setq
+  (org-download-image-dir . "~/org-roam/img/")
+  :hook (dired-mode-hook . org-download-enable))
 (leaf org-fragtog
   :ensure t
   :hook (org-mode-hook . org-fragtog-mode))

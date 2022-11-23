@@ -303,10 +303,9 @@ let
       commands = [ "SymbolsOutline" ];
     }
     {
-      plugin = incline-nvim-pr;
+      plugin = incline-nvim;
       config = readFile ./lua/incline_config.lua;
-      enable = false;
-      # delay = true;
+      delay = true;
       comment = "ペインにファイル名を表示";
     }
     {
@@ -690,7 +689,6 @@ let
     }
     {
       plugin = comfortable-motion-vim;
-      delay = true;
       config = ''
         vim.g.comfortable_motion_scroll_down_key = "j"
         vim.g.comfortable_motion_scroll_up_key = "k"

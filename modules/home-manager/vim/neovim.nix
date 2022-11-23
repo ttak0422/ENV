@@ -241,20 +241,19 @@ let
     }
   ];
 
-  commandline = with pkgs.vimPlugins;
-    [
-      # {
-      #   plugin = wilder-nvim;
-      #   depends = [ fzy-lua-native ];
-      #   events = [ "CmdlineEnter" ];
-      #   config = readFile ./lua/wilder-nvim_config.lua;
-      #   extraPackages = with pkgs; [ fd ];
-      # }
-      {
-        plugin = mkdir-nvim;
-        events = [ "CmdlineEnter" ];
-      }
-    ];
+  commandline = with pkgs.vimPlugins; [
+    {
+      plugin = wilder-nvim;
+      depends = [ fzy-lua-native ];
+      events = [ "CmdlineEnter" ];
+      config = readFile ./lua/wilder-nvim_config.lua;
+      extraPackages = with pkgs; [ fd ];
+    }
+    {
+      plugin = mkdir-nvim;
+      events = [ "CmdlineEnter" ];
+    }
+  ];
 
   language = with pkgs.vimPlugins; [
     {
@@ -453,9 +452,9 @@ let
             depends = [ luasnip ];
           }
           cmp-nvim-lsp-signature-help
-          cmp-cmdline
-          cmp-cmdline-history
-          cmp-nvim-lsp-document-symbol
+          # cmp-cmdline
+          # cmp-cmdline-history
+          # cmp-nvim-lsp-document-symbol
         ];
         config = ''
           vim.cmd[[
@@ -467,9 +466,9 @@ let
             silent source ${cmp_luasnip}/after/plugin/cmp_luasnip.lua
             silent source ${cmp-nvim-lua}/after/plugin/cmp_nvim_lua.lua
             silent source ${cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua
-            silent source ${cmp-cmdline}/after/plugin/cmp_cmdline.lua
-            silent source ${cmp-cmdline-history}/after/plugin/cmp_cmdline_history.lua
-            silent source ${cmp-nvim-lsp-document-symbol}/after/plugin/cmp_nvim_lsp_document_symbol.lua
+            " silent source ${cmp-cmdline}/after/plugin/cmp_cmdline.lua
+            " silent source ${cmp-cmdline-history}/after/plugin/cmp_cmdline_history.lua
+            " silent source ${cmp-nvim-lsp-document-symbol}/after/plugin/cmp_nvim_lsp_document_symbol.lua
           ]]
 
         '' + (readFile ./lua/nvim-cmp_config.lua);

@@ -95,24 +95,24 @@ cmp.setup({
   },
 })
 
-cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "cmdline", priority = 10 },
-    { name = "cmdline_history", priority = 8 },
-  },
-})
-
-cmp.setup.cmdline({ "/", "?" }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    {
-      name = "nvim_lsp_document_symbol",
-      priority = 10,
-    },
-    { name = "cmdline_history", priority = 8 },
-    { name = "buffer", priority = 5 },
-  },
-})
+-- cmp.setup.cmdline(":", {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = {
+--     { name = "cmdline", priority = 10 },
+--     { name = "cmdline_history", priority = 8 },
+--   },
+-- })
+--
+-- cmp.setup.cmdline({ "/", "?" }, {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = {
+--     {
+--       name = "nvim_lsp_document_symbol",
+--       priority = 10,
+--     },
+--     { name = "cmdline_history", priority = 8 },
+--     { name = "buffer", priority = 5 },
+--   },
+-- })
 
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))

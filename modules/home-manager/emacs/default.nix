@@ -6,6 +6,7 @@ let
       :init
       (leaf ob-typescript :ensure t)
       (leaf ob-deno :ensure t)
+      (leaf ob-go :ensure t)
       :setq
       (org-plantuml-jar-path . "${pkgs.plantuml}/lib/plantuml.jar")
       :config
@@ -34,7 +35,10 @@ let
           ;; ob-typescript
           (typescript . t)
           ;; ob-deno
-          (deno . t)))
+          (deno . t)
+          ;; ob-go
+          (go . t)
+          ))
       :custom
       (;; 実行の確認をしない
        (org-confirm-babel-evaluate . nil)

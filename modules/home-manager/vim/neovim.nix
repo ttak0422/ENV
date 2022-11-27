@@ -148,6 +148,7 @@ let
       plugin = nvim-surround;
       config = readFile ./lua/nvim-surround.lua;
       delay = true;
+      comment = "brackets, braces";
     }
     {
       plugin = Comment-nvim;

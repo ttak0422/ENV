@@ -10,5 +10,4 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 @Configuration
 public class {{_expr_:substitute('{{_name_}}', '\w\+', '\u\0', '')}} {
-  {{_cursor_}}
 }

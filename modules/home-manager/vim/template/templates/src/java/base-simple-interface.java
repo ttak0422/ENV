@@ -3,5 +3,4 @@
 {{_lang_util_:package}}
 
 public interface {{_expr_:substitute('{{_name_}}', '\w\+', '\u\0', '')}} {
-  {{_cursor_}}
 }

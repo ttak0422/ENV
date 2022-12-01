@@ -10,5 +10,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class {{_expr_:substitute('{{_name_}}', '\w\+', '\u\0', '')}} {
-  {{_cursor_}}
 }

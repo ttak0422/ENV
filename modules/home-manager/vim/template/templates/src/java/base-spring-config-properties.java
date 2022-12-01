@@ -12,5 +12,4 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @RequiredArgsConstructor
 @ConfigurationProperties(prefix = "")
 public class {{_expr_:substitute('{{_name_}}', '\w\+', '\u\0', '')}} {
-  {{_cursor_}}
 }

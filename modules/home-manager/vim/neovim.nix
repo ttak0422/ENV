@@ -422,6 +422,7 @@ let
         delay = true;
         config = readFile ./lua/nvim-treesitter_config.lua;
         extraPackages = with pkgs; [ tree-sitter ];
+        commands = [ "TSBufEnable" ];
       }
       {
         plugin = range-highlight-nvim;

@@ -1,12 +1,5 @@
 let mapleader="\<Space>"
 
-nnoremap <Leader>h :bprev<CR>
-nnoremap <Leader>l :bnext<CR>
-nnoremap <Leader>H :tabNext<CR>
-nnoremap <Leader>L :tabnext<CR>
-nnoremap <Leader>q :bd<CR>
-nnoremap <silent> <ESC><ESC> :nohl<CR>
-
 set helplang=ja
 
 " カーソル可視化
@@ -65,10 +58,6 @@ autocmd FileType * setlocal formatoptions-=o
 let &grepprg = 'rg --vimgrep --hidden'
 set grepformat=%f:%l:%c:%m
 
-" jkのwrap対応
-nnoremap j gj
-nnoremap k gk
-
 " コマンド履歴のフィルタリング対応
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -90,12 +79,3 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
 " 移動を打ち消し
 nnoremap * *N
 nnoremap # #N
-
-" disable macro
-nnoremap q <Nop>
-" disable <C-g> for tmux
-noremap <C-g> <Nop>
-
-" emacs bindings
-inoremap <silent> <C-a> <Home>
-inoremap <silent> <C-e> <End>

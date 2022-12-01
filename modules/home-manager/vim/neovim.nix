@@ -12,34 +12,68 @@ let
   extraPackages = with pkgs; [ neovim-remote ];
 
   extraConfig = ''
-    let g:neovide_cursor_vfx_mode = "pixiedust"
-    set guifont=JetBrainsMono\ Nerd\ Font
-
-    " nvr
-    let nvrcmd = "nvr --remote-wait"
-    let $VISUAL = nvrcmd
-    let $GIT_EDITOR = nvrcmd
-    autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
-
-    augroup extraConfig
-      au!
-      autocmd BufNewFile .editorconfig 0r ${
-        pkgs.writeText "editorconfig" ''
-          root = true
-
-          [*]
-          indent_style = space
-          indent_size = 2
-          # indent_style = tab
-          # tab_width = 2
-          end_of_line = lf
-          insert_final_newline = true
-          charset = utf-8
-        ''
-      }
-    augroup END
     ${fileContents ./vim/nvim.vim}
     ${fileContents ./vim/util.vim}
+  '';
+
+  editorconfigTemplate = pkgs.writeText "editorconfig" ''
+    root = true
+
+    [*]
+    indent_style = space
+    indent_size = 2
+    # indent_style = tab
+    # tab_width = 2
+    end_of_line = lf
+    insert_final_newline = true
+    charset = utf-8
+  '';
+
+  extraConfigLua = ''
+    vim.g.loaded_2html_plugin=true
+    vim.g.loaded_gzip=true
+    vim.g.loaded_tar=true
+    vim.g.loaded_tarPlugin=true
+    vim.g.loaded_zip=true
+    vim.g.loaded_zipPlugin=true
+    vim.g.loaded_vimball=true
+    vim.g.loaded_vimballPlugin=true
+
+    vim.opt.cmdheight=1
+
+    local nvrcmd='nvr --remote-wait'
+    vim.env.VISUAL=nvrcmd
+    vim.env.GIT_EDITOR=nvrcmd
+
+    vim.g.neovide_cursor_vfx_mode='pixiedust'
+    vim.opt.guifont='JetBrainsMono Nerd Font'
+
+    vim.api.nvim_create_augroup('extraConfig',{})
+    vim.api.nvim_create_autocmd('BufNewFile',{
+      group='extraConfig',
+      pattern='.editorconfig',
+      callback=function()vim.cmd[[0r ${editorconfigTemplate}]]end,
+    })
+    vim.api.nvim_create_autocmd('FileType',{
+      group='extraConfig',
+      pattern={'gitcommit','gitrebase','gitconfig' },
+      callback=function()vim.bo[0].bufhidden='delete'end,
+    })
+
+    local opts={noremap=true,silent=true}
+    vim.keymap.set('n','<leader>h','<cmd>bprev<cr>',opts)
+    vim.keymap.set('n','<leader>l','<cmd>bnext<cr>',opts)
+    vim.keymap.set('n','<C-h>','<cmd>bprev<cr>',opts)
+    vim.keymap.set('n','<C-l>','<cmd>bnext<cr>',opts)
+    vim.keymap.set('n','<leader>q','<cmd>bd<cr>',opts)
+    vim.keymap.set('n','<esc><esc>','<cmd>nohl<cr>',opts)
+    vim.keymap.set('n','j','gj',opts)
+    vim.keymap.set('n','k','gk',opts)
+    vim.keymap.set('n','q','<nop>',opts)
+    vim.keymap.set('n','<C-g>','<nop>',opts)
+    vim.keymap.set('i','<C-a>','<home>',opts)
+    vim.keymap.set('i','<C-e>','<end>',opts)
+    vim.keymap.set('t','<C-[>','<C-\\><C-n>',opts)
   '';
 
   startup = with pkgs.vimPlugins; [
@@ -800,7 +834,7 @@ let
   ];
 in {
   programs.rokka-nvim = {
-    inherit extraConfig extraPackages;
+    inherit extraConfig extraConfigLua extraPackages;
     # logLevel = "debug";
     enable = true;
     plugins = startup ++ input ++ custom ++ statusline ++ commandline

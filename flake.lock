@@ -2434,11 +2434,11 @@
         "pre-commit-hooks": "pre-commit-hooks_2"
       },
       "locked": {
-        "lastModified": 1669556464,
-        "narHash": "sha256-WxNS5WFOZ6RMCC3+OER//t9C662kjTV5RpRfB79Jodo=",
+        "lastModified": 1669912530,
+        "narHash": "sha256-1YrXgJ2xHNFJ+SfkkiAi+0yo80XpVsFFJsoRn7B/IJg=",
         "owner": "ttak0422",
         "repo": "rokka-nvim",
-        "rev": "a36e8a3f87150fc06dc13b109d1c4b6e3c35b6d0",
+        "rev": "34a5d7e6c84d11444f641af4d621a7f7daae2e3c",
         "type": "github"
       },
       "original": {

@@ -229,9 +229,9 @@ in with pkgs.vimPlugins; [
       # statix
       # nixfmt
       google-java-format
-      deno
       dart
     ]) ++ (with pkgs.pkgs-stable; [
+      deno
       nodePackages.bash-language-server
       nodePackages.pyright
       nodePackages.typescript-language-server

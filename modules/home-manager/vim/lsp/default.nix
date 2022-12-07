@@ -74,6 +74,17 @@ in with pkgs.vimPlugins; [
             },
             configuration = {
               updateBuildConfiguration = "automatic",
+              runtimes = {
+                {
+                  name = "JavaSE-11",
+                  path = "${pkgs.jdk11}/",
+                },
+                {
+                  name = "JavaSE-17",
+                  path = "${pkgs.jdk}/",
+                  default = true,
+                },
+              }
             },
             maven = {
               downloadSources = true,

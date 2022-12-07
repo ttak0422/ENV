@@ -836,6 +836,7 @@ let
 in {
   programs.rokka-nvim = {
     inherit extraConfig extraConfigLua extraPackages;
+    compileInitFile = true;
     # logLevel = "debug";
     enable = true;
     plugins = startup ++ input ++ custom ++ statusline ++ commandline

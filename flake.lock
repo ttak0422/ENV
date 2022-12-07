@@ -1623,11 +1623,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1667292599,
-        "narHash": "sha256-7ISOUI1aj6UKMPIL+wwthENL22L3+A9V+jS8Is3QsRo=",
+        "lastModified": 1670267727,
+        "narHash": "sha256-hUFAn5gjNHIBpLQT0CmqpuQjQwgWUm+D6aziGAYsDmw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "ef2f213d9659a274985778bff4ca322f3ef3ac68",
+        "rev": "a5f661b80e4c163510a5013b585a040a5c7ef55e",
         "type": "github"
       },
       "original": {
@@ -2434,11 +2434,11 @@
         "pre-commit-hooks": "pre-commit-hooks_2"
       },
       "locked": {
-        "lastModified": 1669912530,
-        "narHash": "sha256-1YrXgJ2xHNFJ+SfkkiAi+0yo80XpVsFFJsoRn7B/IJg=",
+        "lastModified": 1670156781,
+        "narHash": "sha256-qwioQAKkuVg6od/BbPoP/oYSUFChgKazfd4CLn4dBdg=",
         "owner": "ttak0422",
         "repo": "rokka-nvim",
-        "rev": "34a5d7e6c84d11444f641af4d621a7f7daae2e3c",
+        "rev": "fdab98c9f19b1bc1f3054e0589e192c06fc306a1",
         "type": "github"
       },
       "original": {

@@ -244,6 +244,7 @@ let
       plugin = nvim-bqf;
       fileTypes = [ "qf" ];
       events = [ "QuickFixCmdPre" ];
+      delay = true;
       comment = "QuickFix強化";
     }
     {

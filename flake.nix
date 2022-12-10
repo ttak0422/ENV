@@ -28,6 +28,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";
+        nix-filter.follows = "nix-filter";
       };
     };
     # emacs for mac

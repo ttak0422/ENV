@@ -2443,6 +2443,9 @@
         "flake-utils": [
           "flake-utils"
         ],
+        "nix-filter": [
+          "nix-filter"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -2450,11 +2453,11 @@
         "pre-commit-hooks": "pre-commit-hooks_2"
       },
       "locked": {
-        "lastModified": 1670156781,
-        "narHash": "sha256-qwioQAKkuVg6od/BbPoP/oYSUFChgKazfd4CLn4dBdg=",
+        "lastModified": 1670663091,
+        "narHash": "sha256-FQ/ZAcoBXjskjwojxBEkBzfnJ/kwVKXhGS003YIxmS8=",
         "owner": "ttak0422",
         "repo": "rokka-nvim",
-        "rev": "fdab98c9f19b1bc1f3054e0589e192c06fc306a1",
+        "rev": "75d2530c4b0a8ea77042e75c37d12b8402b28b23",
         "type": "github"
       },
       "original": {

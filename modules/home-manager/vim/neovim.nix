@@ -78,11 +78,6 @@ let
 
   startup = with pkgs.vimPlugins; [
     {
-      plugin = catppuccin-nvim;
-      startup = readFile ./lua/catppuccin.lua;
-      optional = false;
-    }
-    {
       plugin = nvim-config-local;
       config = readFile ./lua/nvim-config-local.lua;
       optional = false;
@@ -303,6 +298,11 @@ let
   ];
 
   view = with pkgs.vimPlugins; [
+    {
+      plugin = catppuccin-nvim;
+      config = readFile ./lua/catppuccin.lua;
+      modules = [ "catppuccin" "catppuccin.groups.integrations.bufferline" ];
+    }
     {
       plugin = nvim-scrollview;
       config = readFile ./lua/nvim-scrollview.lua;

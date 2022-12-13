@@ -142,7 +142,10 @@ let
   input = with pkgs.vimPlugins; [
     {
       plugin = skkeleton;
-      depends = [ denops-vim ];
+      depends = [{
+        plugin = denops-vim;
+        extraPackages = with pkgs.pkgs-stable; [ deno ];
+      }];
       dependsAfter = [ skkeleton_indicator-nvim ];
       startup = ''
         vim.cmd([[

@@ -1,7 +1,5 @@
 name: Update
 on:
-  schedule:
-    - cron: '0 0 1 * *'
   workflow_dispatch:
 jobs:
   update-darwin:

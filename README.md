@@ -7,29 +7,6 @@
 <img alt="license" src="https://img.shields.io/github/license/ttak0422/ENV">
 </p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Branch</th>
-      <th>Link</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Develop</td>
-      <td><a href="https://github.com/ttak0422/ENV/actions/workflows/dev.yml">Unstable</a></td>
-      <td><img alt="status" src="https://github.com/ttak0422/ENV/actions/workflows/dev.yml/badge.svg"></td>
-    </tr>
-    <tr>
-      <td>Main</td>
-      <td><a href="https://github.com/ttak0422/ENV/tree/main/">Stable</a></td>
-      <td>-</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
 ## Setup
 
 ### Darwin

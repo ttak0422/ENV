@@ -3,13 +3,18 @@ let nixTool = with pkgs; [ nix-prefetch-git nix-prefetch-github ];
 in {
   home.packages = with pkgs.pkgs-stable;
     [
+      # WIP
       bat # cat clone
+      bottom # system monitor
+      commitizen # git commit helper
       coreutils-full # cat, ls, mv, wget, ...
+      cue # data constraint language
       exa # ls clone
       fd # find clone
       figlet # ascii
       gnugrep
       gnused
+      graphviz # dot
       hey # load test tool
       htop # top clone
       jq # JSON processor
@@ -19,22 +24,18 @@ in {
       nixfmt
       peco
       pkg-config # compile helper
+      plantuml # uml
+      pre-commit
       pwgen # password generator
       ranger # cui filer
+      sqlite # db engine
+      tealdeer # tldr
+      texlive.combined.scheme-full # TeX
+      tokei # code count
+      viddy # watch
       wget # GNU Wget
       yq # JSON processor
-      # WIP
-      tealdeer # tldr
-      viddy # watch
-      commitizen # git commit helper
       zoxide # fast cd
-      cue # data constraint language
-      bottom # system monitor
-      pre-commit
-      graphviz # dot
-      plantuml # uml
-      sqlite # db engine
-      texlive.combined.scheme-full # TeX
     ] ++ nixTool;
   imports = [ ./direnv.nix ./fzf.nix ./pet.nix ./ripgrep.nix ];
 }

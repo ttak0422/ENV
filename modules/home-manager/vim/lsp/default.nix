@@ -7,7 +7,6 @@ let
   inherit (pkgs) fetchFromGitHub writeText;
   inherit (pkgs.stdenv) mkDerivation;
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
-  lspSharedConfig = readFile ./lsp-share.lua;
   lspSharedDepends = with pkgs.vimPlugins; [
     fidget-nvim
     nvim-cmp
@@ -43,172 +42,78 @@ in with pkgs.vimPlugins; [
   {
     plugin = nvim-jdtls;
     depends = lspSharedDepends ++ [ ];
-    extraPackages = lspSharedExtraPackages ++ (with pkgs; [ jdk ]);
+    extraPackages = lspSharedExtraPackages;
     config = ''
-      local jdtls = require('jdtls')
-
-      local make_settings = function()
-        local url = vim.g.java_format_settings_url
-        local profile = vim.g.java_format_settings_profile
-        local cfg = {
-          java = {
-            import = {
-              gradle = {
-                enabled = true,
-                offline = {
-                  enabled = true
-                }
-              },
-              maven = {
-                enabled = true
-              },
-              exclusions = {
-                "**/node_modules/**",
-                "**/.metadata/**",
-                "**/archetype-resources/**",
-                "**/META-INF/maven/**",
-              },
-            },
-            eclipse = {
-              downloadSources = true,
-            },
-            configuration = {
-              updateBuildConfiguration = "automatic",
-              runtimes = {
-                {
-                  name = "JavaSE-11",
-                  path = "${pkgs.jdk11}/",
-                },
-                {
-                  name = "JavaSE-17",
-                  path = "${pkgs.jdk}/",
-                  default = true,
-                },
-              }
-            },
-            maven = {
-              downloadSources = true,
-              updateSnapshots = true,
-            },
-            implementationsCodeLens = {
-              enabled = true,
-            },
-            referencesCodeLens = {
-              enabled = true,
-            },
-            references = {
-              includeDecompiledSources = true,
-            },
-            inlayHints = {
-              parameterNames = {
-                enabled = 'literals', -- literals, all, none
-              },
-            },
-            signatureHelp = { enabled = true, description = { enabled = true } },
-            completion = {
-              enabled = true,
-              guessMethodArguments = true,
-              favoriteStaticMembers = {
-                'org.hamcrest.MatcherAssert.assertThat',
-                'org.hamcrest.Matchers.*',
-                'org.hamcrest.CoreMatchers.*',
-                'org.junit.jupiter.api.Assertions.*',
-                'java.util.Objects.requireNonNull',
-                'java.util.Objects.requireNonNullElse',
-                'org.mockito.Mockito.*'
-              },
-              importOrder = {
-                'org.springframework',
-                'java.util',
-                'java',
-                'javax',
-                'com',
-                'org'
-              },
-              filteredTypes = {
-                'com.sun.*',
-                'io.micrometer.shaded.*',
-                'java.awt.*',
-                'jdk.*',
-                'sun.*',
-              },
-            },
-          },
-        }
-        if url ~= nil then
-          cfg['java.format.settings.url'] = url
-        end
-        if profile ~= nil then
-          cfg['java.format.settings.profile'] = profile
-        end
-        return cfg
-      end
-
-      local mk_config = function()
-        local root = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'})
-        local workspace = os.getenv('HOME') .. '/.local/share/eclipse/' .. vim.fn.fnamemodify(root, ':p:h:t')
-        ${lspSharedConfig}
-        return {
-          on_attach = on_attach,
-          capabilities = capabilities,
-          cmd = {
-            'java',
-            '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-            '-Dosgi.bundles.defaultStartLevel=4',
-            '-Declipse.product=org.eclipse.jdt.ls.core.product',
-            '-Dosgi.sharedConfiguration.area=${pkgs.jdt-language-server}/share/config',
-            '-Dosgi.sharedConfiguration.area.readOnly=true',
-            '-Dosgi.checkConfiguration=true',
-            '-Dosgi.configuration.c:ascaded=true',
-            '-Dlog.level=ALL',
-            '-XX:+UseG1GC',
-            '-XX:GCTimeRatio=4',
-            '-XX:AdaptiveSizePolicyWeight=90',
-            '-XX:MaxGCPauseMillis=200',
-            '-Dsun.zip.disableMemoryMapping=true',
-            '-Xms128m',
-            '-Xmx12G',
-            '-Xlog:disable',
-            '-javaagent:${pkgs.lombok}/share/java/lombok.jar',
-            '-jar',
-            vim.fn.glob('${pkgs.jdt-language-server}/share/java/plugins/org.eclipse.equinox.launcher_*.jar'),
-            '--add-modules=ALL-SYSTEM',
-            '--add-opens',
-            'java.base/java.util=ALL-UNNAMED',
-            '--add-opens',
-            'java.base/java.lang=ALL-UNNAMED',
-            '-data',
-            workspace,
-          },
-          root_dir = root,
-          settings = make_settings(),
-          init_options = {
-            bundles = {},
-          },
-          flags = {
-            debounce_text_changes = 150,
-            allow_incremental_sync = true,
-            -- server_side_fuzzy_completion = true,
-          },
-          handlers = {
-            ['client/registerCapability'] = function(_, _, _, _)
-              return {
-                result = nil,
-                error = nil,
-              }
-            end
-          },
-        }
-      end
-      jdtls.start_or_attach(mk_config())
-
-      local group_name = 'jdtls_lsp'
-      vim.api.nvim_create_augroup(group_name, { clear = true, })
-      vim.api.nvim_create_autocmd({ 'FileType' }, {
+      local jdtls = require("jdtls")
+      local root = require("jdtls.setup").find_root({".git", "mvnw", "gradlew"})
+      local workspace = os.getenv("HOME") .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(root, ":p:h:t")
+      local runtimes = {
+        {
+          name = "JavaSE-11",
+          path = "${pkgs.jdk11}/",
+        },
+        {
+          name = "JavaSE-17",
+          path = "${pkgs.jdk17}/",
+          default = true,
+        },
+      }
+      local config = {
+        on_attach = dofile("${./on_attach.lua}"),
+        capabilities = dofile("${./capabilities.lua}"),
+        cmd = {
+          "java",
+          "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+          "-Dosgi.bundles.defaultStartLevel=4",
+          "-Declipse.product=org.eclipse.jdt.ls.core.product",
+          "-Dosgi.sharedConfiguration.area=${pkgs.jdt-language-server}/share/config",
+          "-Dosgi.sharedConfiguration.area.readOnly=true",
+          "-Dosgi.checkConfiguration=true",
+          "-Dosgi.configuration.c:ascaded=true",
+          "-Dlog.level=NONE",
+          "-noverify",
+          "-XX:+UseG1GC",
+          "-XX:GCTimeRatio=4",
+          "-XX:AdaptiveSizePolicyWeight=90",
+          "-XX:MaxGCPauseMillis=200",
+          "-Dsun.zip.disableMemoryMapping=true",
+          "-Xms1G",
+          "-Xmx12G",
+          "-Xlog:disable",
+          "-javaagent:${pkgs.lombok}/share/java/lombok.jar",
+          "-jar",
+          vim.fn.glob("${pkgs.jdt-language-server}/share/java/plugins/org.eclipse.equinox.launcher_*.jar"),
+          "--add-modules=ALL-SYSTEM",
+          "--add-opens java.base/java.util=ALL-UNNAMED",
+          "--add-opens java.base/java.lang=ALL-UNNAMED",
+          "-data",
+          workspace,
+        },
+        root_dir = root,
+        settings = dofile("${./jdt_settings.lua}")(runtimes),
+        init_options = {
+          bundles = {},
+        },
+        flags = {
+          debounce_text_changes = 500,
+          allow_incremental_sync = false,
+        },
+        handlers = {
+          ["client/registerCapability"] = function(_, _, _, _)
+            return {
+              result = nil,
+              error = nil,
+            }
+          end,
+        },
+      }
+      jdtls.start_or_attach(config)
+      vim.api.nvim_create_augroup("jdtls_lsp", { clear = true, })
+      vim.api.nvim_create_autocmd({ "FileType" }, {
         group = group_name,
-        pattern = {'java'},
+        pattern = {"java"},
         callback = function()
-          jdtls.start_or_attach(mk_config())
+          jdtls.start_or_attach(config)
         end,
       })
     '';
@@ -239,20 +144,20 @@ in with pkgs.vimPlugins; [
       taplo-cli
     ]);
     config = ''
-      ${lspSharedConfig}
-
-      local lspconfig = require('lspconfig')
-      local util = require 'lspconfig.util'
+      local lspconfig = require("lspconfig")
+      local util = require("lspconfig.util")
+      local on_attach = dofile("${./on_attach.lua}")
+      local capabilities = dofile("./capabilities.lua")
 
       vim.diagnostic.config {
         severity_sort = true
       }
 
       local signs = {
-        { name = 'DiagnosticSignError', text = '' },
-        { name = 'DiagnosticSignWarn', text = '' },
-        { name = 'DiagnosticSignHint', text = '' },
-        { name = 'DiagnosticSignInfo', text = '' },
+        { name = "DiagnosticSignError", text = "" },
+        { name = "DiagnosticSignWarn", text = "" },
+        { name = "DiagnosticSignHint", text = "" },
+        { name = "DiagnosticSignInfo", text = "" },
       }
 
       for _, sign in ipairs(signs) do
@@ -356,7 +261,7 @@ in with pkgs.vimPlugins; [
       lspconfig.eslint.setup{
         on_attach = on_attach,
         capabilities = capabilities,
-        cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server', '--stdio' },
+        cmd = { "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server", "--stdio" },
       }
     '';
     delay = true;

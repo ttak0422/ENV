@@ -8,8 +8,8 @@
       sbt
       google-java-format
     ];
-    file = { ".jdk/openjdk".source = pkgs.jdk; };
-    sessionVariables = { JAVA_HOME = "$HOME/.jdk/openjdk"; };
+    file = { ".java/jdk".source = pkgs.jdk17; };
+    sessionVariables = { JAVA_HOME = "$HOME/.java/jdk"; };
   };
 }
 

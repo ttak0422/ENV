@@ -1,5 +1,5 @@
--- require lspsaga, nvim-cmp(lsp), virtual-types-nvim, inlayHint
-local on_attach = function(client, bufnr)
+-- require lspsaga, virtual-types-nvim, inlayHint
+return function(client, bufnr)
   local opts = { noremap = true, silent = true }
   vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
   vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
@@ -53,5 +53,3 @@ local on_attach = function(client, bufnr)
     )
   end
 end
-
--- local capabilities = require("cmp_nvim_lsp").default_capabilities()

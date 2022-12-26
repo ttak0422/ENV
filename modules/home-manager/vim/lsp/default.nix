@@ -147,7 +147,7 @@ in with pkgs.vimPlugins; [
       local lspconfig = require("lspconfig")
       local util = require("lspconfig.util")
       local on_attach = dofile("${./on_attach.lua}")
-      local capabilities = dofile("./capabilities.lua")
+      local capabilities = dofile("${./capabilities.lua}")
 
       vim.diagnostic.config {
         severity_sort = true

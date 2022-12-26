@@ -11,11 +11,6 @@ let
 
   extraPackages = with pkgs; [ neovim-remote ];
 
-  extraConfig = ''
-    ${fileContents ./vim/nvim.vim}
-    ${fileContents ./vim/util.vim}
-  '';
-
   editorconfigTemplate = pkgs.writeText "editorconfig" ''
     root = true
 
@@ -30,6 +25,10 @@ let
   '';
 
   extraConfigLua = ''
+    vim.cmd[[
+      ${fileContents ./vim/nvim.vim}
+      ${fileContents ./vim/util.vim}
+    ]]
     vim.g.loaded_2html_plugin=true
     vim.g.loaded_gzip=true
     vim.g.loaded_tar=true
@@ -126,6 +125,7 @@ let
     {
       plugin = vim-poslist;
       optional = false;
+      enable = false;
       config = ''
         vim.cmd[[
           nmap <Leader>gh <Plug>(poslist-prev-buf)
@@ -144,7 +144,7 @@ let
       plugin = skkeleton;
       depends = [{
         plugin = denops-vim;
-        extraPackages = with pkgs.pkgs-stable; [ deno ];
+        extraPackages = with pkgs; [ deno ];
       }];
       dependsAfter = [ skkeleton_indicator-nvim ];
       startup = ''
@@ -282,6 +282,7 @@ let
       events = [ "CmdlineEnter" ];
       config = readFile ./lua/wilder-nvim_config.lua;
       extraPackages = with pkgs; [ fd ];
+      enable = false;
     }
     {
       plugin = mkdir-nvim;
@@ -468,52 +469,97 @@ let
         config = readFile ./lua/luasnip_config.lua;
       }
       {
-        plugin = nvim-cmp;
-        dependsAfter = [
+        plugin = pum-vim;
+        config = ''
+          vim.cmd[[
+            ${readFile ./vim/pum.vim}
+          ]]
+        '';
+      }
+      {
+        plugin = vim-vsnip-integ;
+        depends = [{
+          plugin = vim-vsnip;
+          config = ''
+            vim.cmd[[
+              ${readFile ./vim/vsnip.vim}
+            ]]
+          '';
+        }];
+      }
+      {
+        plugin = ddc-vim;
+        depends = [
           {
-            plugin = lspkind-nvim;
-            config = readFile ./lua/lspkind_config.lua;
+            plugin = ddc-ui-pum;
+            depends = [ pum-vim ];
           }
-          {
-            plugin = cmp-vsnip;
-            depends = [ vim-vsnip ];
-            enable = false;
-          }
-          nvim-autopairs
-          nvim-treesitter
-          cmp-path
-          cmp-buffer
-          cmp-calc
-          cmp-treesitter
-          cmp-nvim-lsp
-          cmp-nvim-lua
-          {
-            plugin = cmp_luasnip;
-            depends = [ luasnip ];
-          }
-          cmp-nvim-lsp-signature-help
-          # cmp-cmdline
-          # cmp-cmdline-history
-          # cmp-nvim-lsp-document-symbol
+          denops-vim
+          ddc-source-around
+          ddc-source-nvim-lsp
+          ddc-source-file
+          ddc-matcher_head
+          ddc-sorter_rank
+          ddc-buffer
+          ddc-fuzzy
+          denops-signature_help
+          denops-popup-preview-vim
+          vim-vsnip-integ
         ];
         config = ''
           vim.cmd[[
-            silent source ${cmp-path}/after/plugin/cmp_path.lua
-            silent source ${cmp-buffer}/after/plugin/cmp_buffer.lua
-            silent source ${cmp-calc}/after/plugin/cmp_calc.lua
-            silent source ${cmp-treesitter}/after/plugin/cmp_treesitter.lua
-            silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua
-            silent source ${cmp_luasnip}/after/plugin/cmp_luasnip.lua
-            silent source ${cmp-nvim-lua}/after/plugin/cmp_nvim_lua.lua
-            silent source ${cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua
-            " silent source ${cmp-cmdline}/after/plugin/cmp_cmdline.lua
-            " silent source ${cmp-cmdline-history}/after/plugin/cmp_cmdline_history.lua
-            " silent source ${cmp-nvim-lsp-document-symbol}/after/plugin/cmp_nvim_lsp_document_symbol.lua
+            ${readFile ./vim/ddc.vim}
           ]]
-
-        '' + (readFile ./lua/nvim-cmp_config.lua);
+        '';
         delay = true;
       }
+      # {
+      #   plugin = nvim-cmp;
+      #   dependsAfter = [
+      #     {
+      #       plugin = lspkind-nvim;
+      #       config = readFile ./lua/lspkind_config.lua;
+      #     }
+      #     {
+      #       plugin = cmp-vsnip;
+      #       depends = [ vim-vsnip ];
+      #       enable = false;
+      #     }
+      #     nvim-autopairs
+      #     nvim-treesitter
+      #     cmp-path
+      #     cmp-buffer
+      #     cmp-calc
+      #     cmp-treesitter
+      #     cmp-nvim-lsp
+      #     cmp-nvim-lua
+      #     {
+      #       plugin = cmp_luasnip;
+      #       depends = [ luasnip ];
+      #     }
+      #     cmp-nvim-lsp-signature-help
+      #     # cmp-cmdline
+      #     # cmp-cmdline-history
+      #     # cmp-nvim-lsp-document-symbol
+      #   ];
+      #   config = ''
+      #     vim.cmd[[
+      #       silent source ${cmp-path}/after/plugin/cmp_path.lua
+      #       silent source ${cmp-buffer}/after/plugin/cmp_buffer.lua
+      #       silent source ${cmp-calc}/after/plugin/cmp_calc.lua
+      #       silent source ${cmp-treesitter}/after/plugin/cmp_treesitter.lua
+      #       silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua
+      #       silent source ${cmp_luasnip}/after/plugin/cmp_luasnip.lua
+      #       silent source ${cmp-nvim-lua}/after/plugin/cmp_nvim_lua.lua
+      #       silent source ${cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua
+      #       " silent source ${cmp-cmdline}/after/plugin/cmp_cmdline.lua
+      #       " silent source ${cmp-cmdline-history}/after/plugin/cmp_cmdline_history.lua
+      #       " silent source ${cmp-nvim-lsp-document-symbol}/after/plugin/cmp_nvim_lsp_document_symbol.lua
+      #     ]]
+
+      #   '' + (readFile ./lua/nvim-cmp_config.lua);
+      #   delay = true;
+      # }
       {
         plugin = lspsaga-nvim;
         depends = [ nvim-lspconfig ];
@@ -632,12 +678,12 @@ let
         config = readFile ./lua/registers_config.lua;
         delay = true;
       }
-      {
-        plugin = nvim-autopairs;
-        depends = [ nvim-treesitter ];
-        config = readFile ./lua/nvim-autopairs_config.lua;
-        events = [ "InsertEnter" ];
-      }
+      # {
+      #   plugin = nvim-autopairs;
+      #   depends = [ nvim-treesitter ];
+      #   config = readFile ./lua/nvim-autopairs_config.lua;
+      #   events = [ "InsertEnter" ];
+      # }
     ];
   movement = with pkgs.vimPlugins; [
     {
@@ -839,7 +885,7 @@ let
   ];
 in {
   programs.rokka-nvim = {
-    inherit extraConfig extraConfigLua extraPackages;
+    inherit extraConfigLua extraPackages;
     compileInitFile = true;
     # logLevel = "debug";
     enable = true;

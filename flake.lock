@@ -501,6 +501,22 @@
         "type": "github"
       }
     },
+    "ddc-converter_remove_overlap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669264829,
+        "narHash": "sha256-IgEDtxlUcCCGTC+Jr6m3gAlyu3xDYi65WDg3CjIV1c0=",
+        "owner": "Shougo",
+        "repo": "ddc-converter_remove_overlap",
+        "rev": "5af0aa467a432304b6e54e071d41173bc0fc3ef7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddc-converter_remove_overlap",
+        "type": "github"
+      }
+    },
     "ddc-fuzzy": {
       "flake": false,
       "locked": {
@@ -645,6 +661,38 @@
         "type": "github"
       }
     },
+    "ddc-source-nvim-lsp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669265481,
+        "narHash": "sha256-dfX9qSTogDpyc03XakFzAlyEwAIQJcCYWhGoLa1OczA=",
+        "owner": "Shougo",
+        "repo": "ddc-source-nvim-lsp",
+        "rev": "1795bfdbf0879054f3ca9f5ab7025ba68e0338c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddc-source-nvim-lsp",
+        "type": "github"
+      }
+    },
+    "ddc-ui-pum": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669523629,
+        "narHash": "sha256-gQ3Yhn7k+HWn18fS7DsIOh6ksc9cEw0BlASfYMGapoI=",
+        "owner": "Shougo",
+        "repo": "ddc-ui-pum",
+        "rev": "82c646416d8653988e56b27e68256f01d02f7b1c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddc-ui-pum",
+        "type": "github"
+      }
+    },
     "ddc-vim": {
       "flake": false,
       "locked": {
@@ -658,6 +706,38 @@
       "original": {
         "owner": "Shougo",
         "repo": "ddc.vim",
+        "type": "github"
+      }
+    },
+    "denops-popup-preview-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1671426408,
+        "narHash": "sha256-CWfHpORAQ5DMjOGeab4kJ/Dj8zKpVNnE56KZJ1R3S8g=",
+        "owner": "matsui54",
+        "repo": "denops-popup-preview.vim",
+        "rev": "a9256d4df6e8d92d2ce72b35d839c934ad9f403f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "matsui54",
+        "repo": "denops-popup-preview.vim",
+        "type": "github"
+      }
+    },
+    "denops-signature_help": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1671426487,
+        "narHash": "sha256-de+IHwmtZdcmlHjRGelEwlsMMnm5FmsEgkbrIaELi5E=",
+        "owner": "matsui54",
+        "repo": "denops-signature_help",
+        "rev": "9f95d0134a6568d77555add380818609efc46008",
+        "type": "github"
+      },
+      "original": {
+        "owner": "matsui54",
+        "repo": "denops-signature_help",
         "type": "github"
       }
     },
@@ -2566,6 +2646,22 @@
         "type": "github"
       }
     },
+    "pum-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1671703512,
+        "narHash": "sha256-rAmUxSH/YfDtKB5dsSsEuO5XiZyq+o7/u16dkrG6QD8=",
+        "owner": "Shougo",
+        "repo": "pum.vim",
+        "rev": "578824a4af342c897150cf42c4a0b8a250ae11fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "pum.vim",
+        "type": "github"
+      }
+    },
     "qfheight-nvim": {
       "flake": false,
       "locked": {
@@ -3315,6 +3411,7 @@
         "comfortable_motion_scroll_up_key": "comfortable_motion_scroll_up_key",
         "confirm-quit-nvim": "confirm-quit-nvim",
         "ddc-buffer": "ddc-buffer",
+        "ddc-converter_remove_overlap": "ddc-converter_remove_overlap",
         "ddc-fuzzy": "ddc-fuzzy",
         "ddc-matcher_head": "ddc-matcher_head",
         "ddc-path": "ddc-path",
@@ -3324,7 +3421,11 @@
         "ddc-source-file": "ddc-source-file",
         "ddc-source-line": "ddc-source-line",
         "ddc-source-nextword": "ddc-source-nextword",
+        "ddc-source-nvim-lsp": "ddc-source-nvim-lsp",
+        "ddc-ui-pum": "ddc-ui-pum",
         "ddc-vim": "ddc-vim",
+        "denops-popup-preview-vim": "denops-popup-preview-vim",
+        "denops-signature_help": "denops-signature_help",
         "denops-vim": "denops-vim",
         "diffview-nvim": "diffview-nvim",
         "dps-dial-vim": "dps-dial-vim",
@@ -3395,6 +3496,7 @@
         "plenary-nvim": "plenary-nvim",
         "pretty-fold-nvim": "pretty-fold-nvim",
         "project-nvim": "project-nvim",
+        "pum-vim": "pum-vim",
         "qfheight-nvim": "qfheight-nvim",
         "quick-scope": "quick-scope",
         "range-highlight-nvim": "range-highlight-nvim",
@@ -3437,6 +3539,7 @@
         "vim-sonictemplate": "vim-sonictemplate",
         "vim-translator": "vim-translator",
         "vim-vsnip": "vim-vsnip",
+        "vim-vsnip-integ": "vim-vsnip-integ",
         "vimdoc-ja": "vimdoc-ja",
         "virtual-types-nvim": "virtual-types-nvim",
         "which-key-nvim": "which-key-nvim",
@@ -3447,11 +3550,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1671962763,
-        "narHash": "sha256-nKHuv7I3fh+YFxsIgZHDTahapQImKy7WugTPhI3mDkc=",
+        "lastModified": 1672034793,
+        "narHash": "sha256-IQysSlSnaPxRgf0ScyqrDiLxakKnrFe54twm6msrj7Q=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "e0c50cfeaeeab53a5eae7a3eff282054c1345e94",
+        "rev": "38088113589b2f42e2d894237ae452b2cbca5b8f",
         "type": "github"
       },
       "original": {
@@ -3537,6 +3640,22 @@
       "original": {
         "owner": "hrsh7th",
         "repo": "vim-vsnip",
+        "type": "github"
+      }
+    },
+    "vim-vsnip-integ": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667959948,
+        "narHash": "sha256-5C4srw/D6AfZxvexybACPCQXkt+Kme2FK9Y62libRQE=",
+        "owner": "hrsh7th",
+        "repo": "vim-vsnip-integ",
+        "rev": "1cf89903f12777b90dd79eb4b3d7fbc0b9a254a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hrsh7th",
+        "repo": "vim-vsnip-integ",
         "type": "github"
       }
     },

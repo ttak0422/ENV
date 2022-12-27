@@ -62,7 +62,7 @@ in with pkgs.vimPlugins; [
         on_attach = dofile("${./on_attach.lua}"),
         capabilities = dofile("${./capabilities.lua}"),
         cmd = {
-          "java",
+          "${pkgs.jdk17}/bin/java",
           "-Declipse.application=org.eclipse.jdt.ls.core.id1",
           "-Dosgi.bundles.defaultStartLevel=4",
           "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -71,7 +71,6 @@ in with pkgs.vimPlugins; [
           "-Dosgi.checkConfiguration=true",
           "-Dosgi.configuration.c:ascaded=true",
           "-Dlog.level=NONE",
-          "-noverify",
           "-XX:+UseG1GC",
           "-XX:GCTimeRatio=4",
           "-XX:AdaptiveSizePolicyWeight=90",

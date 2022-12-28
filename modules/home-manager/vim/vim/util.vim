@@ -80,4 +80,5 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
 nnoremap * *N
 nnoremap # #N
 
-set completeopt=menuone,noinsert
+" set completeopt=menuone,noinsert
+set isk+=-

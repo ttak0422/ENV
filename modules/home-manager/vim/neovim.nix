@@ -140,33 +140,56 @@ let
   ];
 
   input = with pkgs.vimPlugins; [
+    #
+    # https://github.com/4513ECHO/dotfiles/blob/3c815b972b20033fd83ab943ac632e3845c97bd9/config/nvim/dein/settings/skkeleton.vim
     {
       plugin = skkeleton;
-      depends = [{
-        plugin = denops-vim;
-        extraPackages = with pkgs; [ deno ];
-      }];
+      depends = [ denops-vim ddc-vim ];
       dependsAfter = [ skkeleton_indicator-nvim ];
-      startup = ''
-        vim.cmd([[
-          function! s:skkeleton_init() abort
-            call skkeleton#config({
-              \ 'globalJisyo': '${pkgs.skk-dicts}/share/SKK-JISYO.L',
-              \ 'globalJisyoEncoding': 'utf-8',
-              \ 'useSkkServer': v:true,
-              \ 'skkServerHost': '127.0.0.1',
-              \ 'skkServerPort': 1178,
-              \ 'skkServerReqEnc': 'euc-jp',
-              \ 'skkServerResEnc': 'euc-jp',
-              \ })
-          endfunction
-          augroup skkeleton-initialize-pre
-            autocmd!
-            autocmd User skkeleton-initialize-pre call s:skkeleton_init()
-          augroup END
-        ]])
-      '';
-      config = readFile ./lua/skkeleton_config.lua
+      config = ''
+                vim.cmd([[
+                  call skkeleton#config({
+                    \ 'globalJisyo': '${pkgs.skk-dicts}/share/SKK-JISYO.L',
+                    \ 'globalJisyoEncoding': 'utf-8',
+                    \ 'useSkkServer': v:true,
+                    \ 'skkServerHost': '127.0.0.1',
+                    \ 'skkServerPort': 1178,
+                    \ 'skkServerReqEnc': 'euc-jp',
+                    \ 'skkServerResEnc': 'euc-jp',
+                    \ })
+                  " depends ddc.vim
+
+        " function! s:skkeleton_pre() abort
+        "   let b:_ddc_skkeleton_prev_buffer_config = ddc#custom#get_buffer()
+        "   "
+        "   call ddc#custom#patch_buffer({'sources': ['skkeleton']})
+        "   echo 'pre'
+        " endfunction
+        "
+        " function! s:skkeleton_post() abort
+        "   echo 'post'
+        "   " if exists('b:_ddc_skkeleton_prev_buffer_config')
+        "   "   call ddc#custom#set_buffer(b:_ddc_skkeleton_prev_buffer_config)
+        "   "   unlet b:_ddc_skkeleton_prev_buffer_config
+        "   " endif
+        " endfunction
+
+        " function s:skkeleton_enable_pre_unix() abort
+        "   silent !echo -ne '\e]12;\#FFA500\a'
+        " endfunction
+        "
+        " function s:skkeleton_disable_post_unix() abort
+        "   silent !echo -ne '\e]12;\#FFFFFF\a'
+        " endfunction
+
+        " autocmd User skkeleton-enable-pre call s:skkeleton_pre()
+        " autocmd User skkeleton-disable-pre call s:skkeleton_post()
+        " if !has('gui_running') && has('unix')
+        "   autocmd User skkeleton-enable-pre call <SID>skkeleton_enable_pre_unix()
+        "   autocmd User skkeleton-disable-post call <SID>skkeleton_disable_post_unix()
+        " endif
+                ]])
+      '' + readFile ./lua/skkeleton_config.lua
         + readFile ./lua/skkeleton_indicator_config.lua;
       delay = true;
     }
@@ -282,7 +305,6 @@ let
       events = [ "CmdlineEnter" ];
       config = readFile ./lua/wilder-nvim_config.lua;
       extraPackages = with pkgs; [ fd ];
-      enable = false;
     }
     {
       plugin = mkdir-nvim;
@@ -469,15 +491,12 @@ let
         config = readFile ./lua/luasnip_config.lua;
       }
       {
-        plugin = pum-vim;
+        plugin = vim-vsnip-integ;
         config = ''
           vim.cmd[[
-            ${readFile ./vim/pum.vim}
+            ${readFile ./vim/vim-vsnip-integ.vim}
           ]]
         '';
-      }
-      {
-        plugin = vim-vsnip-integ;
         depends = [{
           plugin = vim-vsnip;
           config = ''
@@ -494,6 +513,7 @@ let
             plugin = ddc-ui-pum;
             depends = [ pum-vim ];
           }
+          ddc-ui-native
           denops-vim
           ddc-source-around
           ddc-source-nvim-lsp
@@ -504,7 +524,9 @@ let
           ddc-fuzzy
           denops-signature_help
           denops-popup-preview-vim
-          vim-vsnip-integ
+          ddc-source-cmdline
+          ddc-source-cmdline-history
+          neco-vim
         ];
         config = ''
           vim.cmd[[
@@ -559,13 +581,11 @@ let
 
       #   '' + (readFile ./lua/nvim-cmp_config.lua);
       #   delay = true;
+      #   enable = false;
       # }
       {
         plugin = lspsaga-nvim;
         depends = [ nvim-lspconfig ];
-        # config = ''
-        #   require 'lspsaga'.init_lsp_saga {}
-        # '';
         config = readFile ./lua/lspsaga-nvim.lua;
 
         commands = [ "Lspsaga" ];
@@ -678,12 +698,15 @@ let
         config = readFile ./lua/registers_config.lua;
         delay = true;
       }
-      # {
-      #   plugin = nvim-autopairs;
-      #   depends = [ nvim-treesitter ];
-      #   config = readFile ./lua/nvim-autopairs_config.lua;
-      #   events = [ "InsertEnter" ];
-      # }
+      {
+        plugin = lexima-vim;
+        config = ''
+          vim.cmd[[
+            ${readFile ./vim/lexima.vim}
+          ]]
+        '';
+        # delay = true;
+      }
     ];
   movement = with pkgs.vimPlugins; [
     {
@@ -883,6 +906,21 @@ let
       commands = [ "ToggleTerm" ];
     }
   ];
+  util = with pkgs.vimPlugins; [
+    {
+      plugin = denops-vim;
+      extraPackages = with pkgs; [ deno ];
+    }
+    {
+      plugin = pum-vim;
+      depends = [ lexima-vim vim-vsnip-integ ];
+      config = ''
+        vim.cmd[[
+          ${readFile ./vim/pum.vim}
+        ]]
+      '';
+    }
+  ];
 in {
   programs.rokka-nvim = {
     inherit extraConfigLua extraPackages;
@@ -890,7 +928,8 @@ in {
     # logLevel = "debug";
     enable = true;
     plugins = startup ++ input ++ custom ++ statusline ++ commandline
-      ++ language ++ view ++ code ++ lsp ++ template ++ movement ++ tool;
+      ++ language ++ view ++ code ++ lsp ++ template ++ movement ++ tool
+      ++ util;
     withNodeJs = true;
     withPython3 = true;
   };

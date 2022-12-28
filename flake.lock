@@ -613,6 +613,22 @@
         "type": "github"
       }
     },
+    "ddc-source-cmdline-history": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669265154,
+        "narHash": "sha256-DgD93Qvi3PS9fsmG1A4/mXcap23ydGZgD9KH79C68SQ=",
+        "owner": "Shougo",
+        "repo": "ddc-source-cmdline-history",
+        "rev": "82c1f1aa195247e24b656ad4ece64a3d0e514b70",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddc-source-cmdline-history",
+        "type": "github"
+      }
+    },
     "ddc-source-file": {
       "flake": false,
       "locked": {
@@ -674,6 +690,22 @@
       "original": {
         "owner": "Shougo",
         "repo": "ddc-source-nvim-lsp",
+        "type": "github"
+      }
+    },
+    "ddc-ui-native": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669438573,
+        "narHash": "sha256-kIDqdp3g5tbEbWK7998pKCUkxTbnC3Jny9Xj+VNQX1M=",
+        "owner": "Shougo",
+        "repo": "ddc-ui-native",
+        "rev": "5596deff1993969b0af43ff8b31da8ff08d4c47a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddc-ui-native",
         "type": "github"
       }
     },
@@ -1629,6 +1661,22 @@
       "original": {
         "owner": "jghauser",
         "repo": "mkdir.nvim",
+        "type": "github"
+      }
+    },
+    "neco-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669265028,
+        "narHash": "sha256-WMa949J5p419ZZLL8Zirc7i9pTI05x7ucjp6cbTmg6A=",
+        "owner": "Shougo",
+        "repo": "neco-vim",
+        "rev": "7fb5b63881a25c3d5a8321f8dae21737a1b01634",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "neco-vim",
         "type": "github"
       }
     },
@@ -3418,10 +3466,12 @@
         "ddc-sorter_rank": "ddc-sorter_rank",
         "ddc-source-around": "ddc-source-around",
         "ddc-source-cmdline": "ddc-source-cmdline",
+        "ddc-source-cmdline-history": "ddc-source-cmdline-history",
         "ddc-source-file": "ddc-source-file",
         "ddc-source-line": "ddc-source-line",
         "ddc-source-nextword": "ddc-source-nextword",
         "ddc-source-nvim-lsp": "ddc-source-nvim-lsp",
+        "ddc-ui-native": "ddc-ui-native",
         "ddc-ui-pum": "ddc-ui-pum",
         "ddc-vim": "ddc-vim",
         "denops-popup-preview-vim": "denops-popup-preview-vim",
@@ -3458,6 +3508,7 @@
         "luasnip": "luasnip",
         "mdeval-nvim": "mdeval-nvim",
         "mkdir-nvim": "mkdir-nvim",
+        "neco-vim": "neco-vim",
         "neofsharp-vim": "neofsharp-vim",
         "neogen": "neogen",
         "neogit": "neogit",
@@ -3550,11 +3601,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1672034793,
-        "narHash": "sha256-IQysSlSnaPxRgf0ScyqrDiLxakKnrFe54twm6msrj7Q=",
+        "lastModified": 1672119436,
+        "narHash": "sha256-f8TKvta/BZVKqZ+7hYWnMSIITwrmL/Fdiywgp7RJX18=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "38088113589b2f42e2d894237ae452b2cbca5b8f",
+        "rev": "82270e9bb1758cd1ded56fe752d1300a412ed04a",
         "type": "github"
       },
       "original": {

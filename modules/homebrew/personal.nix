@@ -2,12 +2,13 @@
   imports = [ ./prelude.nix ];
   homebrew = {
     taps = [
+      "d12frosted/emacs-plus"
       "homebrew/cask"
       "homebrew/cask-drivers"
       "homebrew/cask-fonts"
+      "homebrew/cask-fonts"
       "homebrew/core"
       "koekeishiya/formulae"
-      "d12frosted/emacs-plus"
     ];
     brews = [ "lunchy" "qemu" "svn" "emacs-plus@29" ];
     casks = [
@@ -23,6 +24,7 @@
       "font-hack-nerd-font"
       "font-hackgen-nerd"
       "font-jetbrains-mono-nerd-font"
+      "font-plemol-jp-nfj"
       "font-roboto"
       "font-roboto-mono"
       "font-roboto-mono-nerd-font"

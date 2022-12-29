@@ -35,6 +35,7 @@ let s:sourceOptions.buffer = {
 let s:sourceOptions.skkeleton = {
       \ 'mark': 'SKK',
       \ 'matchers': ['skkeleton'],
+      \ 'isVolatile': v:true,
       \ }
 let s:sourceOptions['nvim-lsp'] = {
       \ 'mark': 'LSP',
@@ -42,12 +43,17 @@ let s:sourceOptions['nvim-lsp'] = {
       \ 'isVolatile': v:true,
       \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \ }
+let s:sourceOptions.necovim = {
+      \ 'mark': 'VIM',
+      \ 'isVolatile': v:true,
+      \ }
 let s:sourceOptions.cmdline = {
       \ 'mark': 'cmdline',
       \ 'isVolatile': v:true,
       \ }
 let s:sourceOptions['cmdline-history'] = {
       \ 'mark': 'history',
+      \ 'isVolatile': v:true,
       \ }
 
 let s:sourceParams = {}
@@ -57,7 +63,7 @@ let s:filterParams = {}
 let s:patch_global = {}
 let s:patch_global.ui = 'pum'
 " let s:patch_global.ui = 'native'
-let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineEnter', 'CmdlineChanged' ]
+let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged' ]
 let s:patch_global.backspaceCompletion = v:true
 let s:patch_global.sources = s:sources
 let s:patch_global.sourceOptions = s:sourceOptions
@@ -70,51 +76,49 @@ call ddc#enable()
 call signature_help#enable()
 call popup_preview#enable()
 
-" function! CommandlinePost() abort
-"   cunmap <Tab>
-"   cunmap <S-Tab>
-"   cunmap <C-e>
-"   cunmap <CR>
-"
-"   if exists('b:prev_buffer_config')
-"     call ddc#custom#set_buffer(b:prev_buffer_config)
-"     unlet b:prev_buffer_config
-"   else
-"     call ddc#custom#set_buffer({})
-"   endif
-" endfunction
-"
-" function! CommandlinePre() abort
-"   cnoremap <expr> <Tab>
-"         \ pum#visible() ? '<Cmd>call pum#map#insert_relative(+1)<CR>' :
-"         \ ddc#map#manual_complete()
-"   cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-"   cnoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
-"   cnoremap <silent><expr> <CR> CR()
-"
-"   if !exists('b:prev_buffer_config')
-"     let b:prev_buffer_config = ddc#custom#get_buffer()
-"   endif
-"   call ddc#custom#patch_buffer('sources', [
-"         \ 'cmdline',
-"         \ 'cmdline-history',
-"         \ 'around'
-"         \ ])
-"
-"   autocmd User DDCCmdlineLeave ++once call CommandlinePost()
-"   autocmd InsertEnter <buffer> ++once call CommandlinePost()
-"
-"   call ddc#enable_cmdline_completion()
-" endfunction
-
-" depends pum.vim
-" nnoremap : <Cmd>call CommandlinePre()<CR>:
-
+nnoremap : <Cmd>call CommandlinePre()<CR>:
+nnoremap / <Cmd>call CommandlinePre()<CR>/
+nnoremap ? <Cmd>call CommandlinePre()<CR>?
 
 function! CommandlinePre() abort
-  echo "DEBUG"
+  cnoremap <Tab>   <Cmd>call pum#map#insert_relative(+1)<CR>
+  cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+  cnoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
+  cnoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+  cnoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+  cnoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+  if !exists('b:prev_buffer_config')
+    let b:prev_buffer_config = ddc#custom#get_buffer()
+  endif
+  call ddc#custom#patch_buffer('sourceOptions', {
+        \ '_': {
+        \   'minAutoCompleteLength': 0,
+        \ }})
+  call ddc#custom#patch_buffer('cmdlineSources', {
+        \ ':': ['necovim', 'cmdline-history', 'cmdline', 'around'],
+        \ '/': ['around', 'buffer'],
+        \ '?': ['around', 'buffer'],
+        \ })
+
+  autocmd User DDCCmdlineLeave ++once call CommandlinePost()
+  autocmd InsertEnter <buffer> ++once call CommandlinePost()
+  call ddc#enable_cmdline_completion()
 endfunction
 
-" autocmd User PumCompleteDone call vsnip_integ#on_complete_done(g:pum#completed_item)
+function! CommandlinePost() abort
+  silent! cunmap <Tab>
+  silent! cunmap <S-Tab>
+  silent! cunmap <C-n>
+  silent! cunmap <C-p>
+  silent! cunmap <C-y>
+  silent! cunmap <C-e>
+  if exists('b:prev_buffer_config')
+    call ddc#custom#set_buffer(b:prev_buffer_config)
+    unlet b:prev_buffer_config
+  else
+    call ddc#custom#set_buffer({})
+  endif
+endfunction
+
 autocmd User PumCompleteDone call CommandlinePre()
 

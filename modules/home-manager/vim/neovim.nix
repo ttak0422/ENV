@@ -147,48 +147,17 @@ let
       depends = [ denops-vim ddc-vim ];
       dependsAfter = [ skkeleton_indicator-nvim ];
       config = ''
-                vim.cmd([[
-                  call skkeleton#config({
-                    \ 'globalJisyo': '${pkgs.skk-dicts}/share/SKK-JISYO.L',
-                    \ 'globalJisyoEncoding': 'utf-8',
-                    \ 'useSkkServer': v:true,
-                    \ 'skkServerHost': '127.0.0.1',
-                    \ 'skkServerPort': 1178,
-                    \ 'skkServerReqEnc': 'euc-jp',
-                    \ 'skkServerResEnc': 'euc-jp',
-                    \ })
-                  " depends ddc.vim
-
-        " function! s:skkeleton_pre() abort
-        "   let b:_ddc_skkeleton_prev_buffer_config = ddc#custom#get_buffer()
-        "   "
-        "   call ddc#custom#patch_buffer({'sources': ['skkeleton']})
-        "   echo 'pre'
-        " endfunction
-        "
-        " function! s:skkeleton_post() abort
-        "   echo 'post'
-        "   " if exists('b:_ddc_skkeleton_prev_buffer_config')
-        "   "   call ddc#custom#set_buffer(b:_ddc_skkeleton_prev_buffer_config)
-        "   "   unlet b:_ddc_skkeleton_prev_buffer_config
-        "   " endif
-        " endfunction
-
-        " function s:skkeleton_enable_pre_unix() abort
-        "   silent !echo -ne '\e]12;\#FFA500\a'
-        " endfunction
-        "
-        " function s:skkeleton_disable_post_unix() abort
-        "   silent !echo -ne '\e]12;\#FFFFFF\a'
-        " endfunction
-
-        " autocmd User skkeleton-enable-pre call s:skkeleton_pre()
-        " autocmd User skkeleton-disable-pre call s:skkeleton_post()
-        " if !has('gui_running') && has('unix')
-        "   autocmd User skkeleton-enable-pre call <SID>skkeleton_enable_pre_unix()
-        "   autocmd User skkeleton-disable-post call <SID>skkeleton_disable_post_unix()
-        " endif
-                ]])
+        vim.cmd([[
+          call skkeleton#config({
+            \ 'globalJisyo': '${pkgs.skk-dicts}/share/SKK-JISYO.L',
+            \ 'globalJisyoEncoding': 'utf-8',
+            \ 'useSkkServer': v:true,
+            \ 'skkServerHost': '127.0.0.1',
+            \ 'skkServerPort': 1178,
+            \ 'skkServerReqEnc': 'euc-jp',
+            \ 'skkServerResEnc': 'euc-jp',
+            \ })
+        ]])
       '' + readFile ./lua/skkeleton_config.lua
         + readFile ./lua/skkeleton_indicator_config.lua;
       delay = true;
@@ -305,6 +274,7 @@ let
       events = [ "CmdlineEnter" ];
       config = readFile ./lua/wilder-nvim_config.lua;
       extraPackages = with pkgs; [ fd ];
+      enable = false;
     }
     {
       plugin = mkdir-nvim;

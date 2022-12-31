@@ -39,6 +39,7 @@ in with pkgs.vimPlugins; [
     plugin = vim-illuminate;
     config = readFile ./vim-illuminate.lua;
   }
+  # java
   {
     plugin = nvim-jdtls;
     depends = lspSharedDepends ++ [ ];
@@ -138,16 +139,11 @@ in with pkgs.vimPlugins; [
       deno
       nodePackages.bash-language-server
       nodePackages.pyright
-      nodePackages.typescript-language-server
+      nodePackages.typescript
       nodePackages.yaml-language-server
       taplo-cli
     ]);
     config = ''
-      local lspconfig = require("lspconfig")
-      local util = require("lspconfig.util")
-      local on_attach = dofile("${./on_attach.lua}")
-      local capabilities = dofile("${./capabilities.lua}")
-
       vim.diagnostic.config {
         severity_sort = true
       }
@@ -163,105 +159,22 @@ in with pkgs.vimPlugins; [
         vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
       end
 
-      -- lua
-      lspconfig.sumneko_lua.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-
-      -- nix
-      lspconfig.rnix.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-
-      -- bash
-      lspconfig.bashls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-
-      -- fsharp
-      -- `dotnet tool install --global fsautocomplete`
-      lspconfig.fsautocomplete.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-
-      local node_root_dir = util.root_pattern('package.json', 'node_modules')
-      local is_node_repo = node_root_dir('.') ~= nil
-
-      if not is_node_repo then
-        -- deno
-        vim.g.markdown_fenced_languages = {'ts=typescript'}
-        lspconfig.denols.setup {
-          on_attach = on_attach,
-          capabilities = capabilities,
+      dofile("${./lspconfig.lua}")({
+        lspconfig = require("lspconfig"),
+        util = require("lspconfig.util"),
+        on_attach = dofile("${./on_attach.lua}"),
+        capabilities = dofile("${./capabilities.lua}"),
+        eslint_cmd = {
+          "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server"
+          "--stdio"
         }
-      else
-        -- node
-        lspconfig.tsserver.setup {
-          on_attach = on_attach,
-          capabilities = capabilities,
+        tsserver_cmd = {
+          "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server",
+          "--stdio",
+          "--tsserver-path",
+          "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/",
         }
-      end
-
-      -- python
-      lspconfig.pyright.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-
-      -- ruby
-      lspconfig.solargraph.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-
-      -- toml
-      lspconfig.taplo.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-
-      -- rust
-      lspconfig.rust_analyzer.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-
-      -- go
-      lspconfig.gopls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-          gopls = {
-            analyses = {
-              unusedparams = true,
-            },
-          },
-          staticcheck = true,
-        },
-      }
-
-      -- dart
-      lspconfig.dartls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-
-      -- yaml
-      lspconfig.yamlls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-
-      -- eslint
-      lspconfig.eslint.setup{
-        on_attach = on_attach,
-        capabilities = capabilities,
-        cmd = { "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server", "--stdio" },
-      }
+      })
     '';
     delay = true;
   }

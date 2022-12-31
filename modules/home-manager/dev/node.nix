@@ -1,4 +1,3 @@
 { config, pkgs, lib, ... }: {
-  home.packages = with pkgs; [ nodejs nodePackages.npm yarn ];
+  home.packages = with pkgs; [ nodePackages.npm nodejs yarn ];
 }
-

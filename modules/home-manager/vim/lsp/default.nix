@@ -1,12 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  inherit (builtins) concatStringsSep map fetchTarball readFile;
-  inherit (lib.strings) fileContents;
-  inherit (lib.lists) singleton;
-  inherit (pkgs) fetchFromGitHub writeText;
-  inherit (pkgs.stdenv) mkDerivation;
-  inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
+  inherit (builtins) readFile;
   lspSharedDepends = with pkgs.vimPlugins; [
     fidget-nvim
     nvim-cmp
@@ -17,7 +12,7 @@ let
     actions-preview-nvim
     vim-illuminate
   ];
-  lspSharedExtraPackages = with pkgs; [ ];
+  lspSharedExtraPackages = [ ];
 in with pkgs.vimPlugins; [
   {
     plugin = actions-preview-nvim;
@@ -121,26 +116,21 @@ in with pkgs.vimPlugins; [
   }
   {
     plugin = nvim-lspconfig;
-    depends = lspSharedDepends ++ (with pkgs; [ ]);
+    depends = lspSharedDepends ++ [ ];
     extraPackages = lspSharedExtraPackages ++ (with pkgs; [
+      dart
+      deno
+      google-java-format
       gopls
+      nodePackages.bash-language-server
+      nodePackages.pyright
+      nodePackages.typescript
+      nodePackages.vscode-langservers-extracted
+      nodePackages.yaml-language-server
       rnix-lsp
       rubyPackages.solargraph
       rust-analyzer
       sumneko-lua-language-server
-      # stylua
-      # nodePackages.prettier
-      nodePackages.vscode-langservers-extracted
-      # statix
-      # nixfmt
-      google-java-format
-      dart
-    ]) ++ (with pkgs.pkgs-stable; [
-      deno
-      nodePackages.bash-language-server
-      nodePackages.pyright
-      nodePackages.typescript
-      nodePackages.yaml-language-server
       taplo-cli
     ]);
     config = ''

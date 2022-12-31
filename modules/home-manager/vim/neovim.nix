@@ -45,7 +45,7 @@ let
     vim.env.GIT_EDITOR=nvrcmd
 
     vim.g.neovide_cursor_vfx_mode='pixiedust'
-    vim.opt.guifont='JetBrainsMono Nerd Font'
+    vim.opt.guifont='PlemolJP35 Console NFJ'
 
     vim.api.nvim_create_augroup('extraConfig',{})
     vim.api.nvim_create_autocmd('BufNewFile',{

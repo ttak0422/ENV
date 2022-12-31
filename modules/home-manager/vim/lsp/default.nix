@@ -114,6 +114,25 @@ in with pkgs.vimPlugins; [
     '';
     fileTypes = [ "java" ];
   }
+  # haskell
+  # {
+  #   plugin = haskell-tools-nvim;
+  #   depends = lspSharedDepends ++ (with pkgs; [ plenary-nvim nvim-lspconfig ]);
+  #   extraPackages = lspSharedExtraPackages ++ (with pkgs; [
+  #     haskellPackages.fourmolu
+  #     haskellPackages.haskell-language-server
+  #   ]);
+  #   config = ''
+  #     local ht = require('haskell-tools')
+  #     ht.setup {
+  #       -- hls = {
+  #       --   on_attach = dofile("${./on_attach.lua}"),
+  #       --   capabilities = dofile("${./capabilities.lua}"),
+  #       -- },
+  #     }
+  #   '';
+  #   fileTypes = [ "haskell" ];
+  # }
   {
     plugin = nvim-lspconfig;
     depends = lspSharedDepends ++ [ ];
@@ -122,12 +141,12 @@ in with pkgs.vimPlugins; [
       deno
       google-java-format
       gopls
+      nil
       nodePackages.bash-language-server
       nodePackages.pyright
       nodePackages.typescript
       nodePackages.vscode-langservers-extracted
       nodePackages.yaml-language-server
-      rnix-lsp
       rubyPackages.solargraph
       rust-analyzer
       sumneko-lua-language-server

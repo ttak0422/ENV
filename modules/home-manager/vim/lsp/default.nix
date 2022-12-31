@@ -117,9 +117,9 @@ in with pkgs.vimPlugins; [
   {
     plugin = haskell-tools-nvim;
     depends = lspSharedDepends ++ (with pkgs; [ plenary-nvim nvim-lspconfig ]);
-    extraPackages = lspSharedExtraPackages ++ (with pkgs; [
+    extraPackages = lspSharedExtraPackages ++ (with pkgs.pkgs-stable; [
       haskellPackages.fourmolu
-      haskellPackages.haskell-language-server
+      haskell-language-server
     ]);
     config = ''
       dofile("${./haskell.lua}")({

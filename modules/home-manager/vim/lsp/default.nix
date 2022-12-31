@@ -4,7 +4,6 @@ let
   inherit (builtins) readFile;
   lspSharedDepends = with pkgs.vimPlugins; [
     fidget-nvim
-    nvim-cmp
     lspsaga-nvim
     # virtual-types-nvim
     lsp-inlayhints-nvim
@@ -115,24 +114,21 @@ in with pkgs.vimPlugins; [
     fileTypes = [ "java" ];
   }
   # haskell
-  # {
-  #   plugin = haskell-tools-nvim;
-  #   depends = lspSharedDepends ++ (with pkgs; [ plenary-nvim nvim-lspconfig ]);
-  #   extraPackages = lspSharedExtraPackages ++ (with pkgs; [
-  #     haskellPackages.fourmolu
-  #     haskellPackages.haskell-language-server
-  #   ]);
-  #   config = ''
-  #     local ht = require('haskell-tools')
-  #     ht.setup {
-  #       -- hls = {
-  #       --   on_attach = dofile("${./on_attach.lua}"),
-  #       --   capabilities = dofile("${./capabilities.lua}"),
-  #       -- },
-  #     }
-  #   '';
-  #   fileTypes = [ "haskell" ];
-  # }
+  {
+    plugin = haskell-tools-nvim;
+    depends = lspSharedDepends ++ (with pkgs; [ plenary-nvim nvim-lspconfig ]);
+    extraPackages = lspSharedExtraPackages ++ (with pkgs; [
+      haskellPackages.fourmolu
+      haskellPackages.haskell-language-server
+    ]);
+    config = ''
+      dofile("${./haskell.lua}")({
+        on_attach = dofile("${./on_attach.lua}"),
+        capabilities = dofile("${./capabilities.lua}"),
+      })
+    '';
+    fileTypes = [ "haskell" ];
+  }
   {
     plugin = nvim-lspconfig;
     depends = lspSharedDepends ++ [ ];

@@ -1,2 +1,3 @@
-{ config, pkgs, lib, ... }: { home.packages = with pkgs; [ ghc ormolu stack ]; }
-
+{ config, pkgs, lib, ... }: {
+  home.packages = with pkgs; [ ghc ormolu stack cabal-install ];
+}

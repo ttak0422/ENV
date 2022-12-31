@@ -174,9 +174,9 @@ in with pkgs.vimPlugins; [
         on_attach = dofile("${./on_attach.lua}"),
         capabilities = dofile("${./capabilities.lua}"),
         eslint_cmd = {
-          "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server"
-          "--stdio"
-        }
+          "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server",
+          "--stdio",
+        },
         tsserver_cmd = {
           "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server",
           "--stdio",

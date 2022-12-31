@@ -6,35 +6,28 @@ let
   fontFamily = "JetBrainsMono Nerd Font";
   backgroundOpacity = 0.9;
   config = ''
-    # ayu-mirage (neovim-ayuに寄せる)
     colors:
       primary:
-        background: '#1F2430'
-        foreground: '#CBCCC6'
-      cursor:
-        text: CellBackground
-        cursor: '#528bff'
-      selection:
-        text: CellForeground
-        background: '#707A8C'
+        background: '0xfafafa'
+        foreground: '0x5b6672'
       normal:
-        black: '#1F2430'
-        red: '#F28779'
-        green: '#BAE67E'
-        yellow: '#FFCC66'
-        blue: '#5CCFE6'
-        magenta: '#D4BFFF'
-        cyan: '#95E6CB'
-        white: '#CBCCC6'
+        black: '0x000000'
+        red: '0xf2590b'
+        green: '0x76cc00'
+        yellow: '0xf29717'
+        blue: '0x41a5d9'
+        magenta: '0x9965cc'
+        cyan: '0x4dbf98'
+        white: '0xc7c7c7'
       bright:
-        8black: '#607080'
-        9red: '#FF3333'
-        0green: '#BAE67E'
-        1yellow: '#FFCC66'
-        2blue: '#5CCFE6'
-        3magenta: '#D4BFFF'
-        4cyan: '#95E6CB'
-        5white: '#5C6773'
+        black: '0x676767'
+        red: '0xd6646a'
+        green: '0xa3d900'
+        yellow: '0xe7c446'
+        blue: '0x6871ff'
+        magenta: '0xa37acc'
+        cyan: '0x56d9ad'
+        white: '0xfeffff'
     env:
       TERM: screen-256color
     window:

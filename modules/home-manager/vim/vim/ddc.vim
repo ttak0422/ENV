@@ -83,8 +83,6 @@ nnoremap ? <Cmd>call CommandlinePre()<CR>?
 function! CommandlinePre() abort
   cnoremap <Tab>   <Cmd>call pum#map#insert_relative(+1)<CR>
   cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-  cnoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
-  cnoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
   cnoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
   cnoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
   if !exists('b:prev_buffer_config')
@@ -108,8 +106,6 @@ endfunction
 function! CommandlinePost() abort
   silent! cunmap <Tab>
   silent! cunmap <S-Tab>
-  silent! cunmap <C-n>
-  silent! cunmap <C-p>
   silent! cunmap <C-y>
   silent! cunmap <C-e>
   if exists('b:prev_buffer_config')

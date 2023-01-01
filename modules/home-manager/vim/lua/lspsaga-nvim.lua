@@ -20,11 +20,10 @@ saga.init_lsp_saga({
   },
   code_action_lightbulb = {
     enable = true,
-    enable_in_insert = true,
+    enable_in_insert = false,
     cache_code_action = true,
     sign = false,
     update_time = 300,
-    sign_priority = 0,
     virtual_text = true,
   },
   finder_request_timeout = 30000,

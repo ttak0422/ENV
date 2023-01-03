@@ -2270,6 +2270,22 @@
         "type": "github"
       }
     },
+    "nvim-dap-go": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1672368941,
+        "narHash": "sha256-HFqWZffrwIoDThkbwq7ya0vlN8iPkqWXWtjlk3ayh3c=",
+        "owner": "leoluz",
+        "repo": "nvim-dap-go",
+        "rev": "8f10f347b3332d1f783a209813bf9b61f517256f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leoluz",
+        "repo": "nvim-dap-go",
+        "type": "github"
+      }
+    },
     "nvim-dap-ui": {
       "flake": false,
       "locked": {
@@ -2574,6 +2590,22 @@
         "type": "github"
       }
     },
+    "onedarkpro-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1672587109,
+        "narHash": "sha256-D8GEXZAKyoZVBFPPdWDGYw8EYIydElFcg6OmrPG37XY=",
+        "owner": "olimorris",
+        "repo": "onedarkpro.nvim",
+        "rev": "e3369ba112e6d9dd0dc99bc006e76c33bf035522",
+        "type": "github"
+      },
+      "original": {
+        "owner": "olimorris",
+        "repo": "onedarkpro.nvim",
+        "type": "github"
+      }
+    },
     "org": {
       "flake": false,
       "locked": {
@@ -2651,6 +2683,22 @@
       "original": {
         "owner": "nvim-orgmode",
         "repo": "orgmode",
+        "type": "github"
+      }
+    },
+    "persisted-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1671737597,
+        "narHash": "sha256-Wlf/aLFDyz5HLyYALqtPpM3l3BTo4fOHlE88dG+3zdg=",
+        "owner": "olimorris",
+        "repo": "persisted.nvim",
+        "rev": "558fc4b9f48e16008782240521cb72455d93b835",
+        "type": "github"
+      },
+      "original": {
+        "owner": "olimorris",
+        "repo": "persisted.nvim",
         "type": "github"
       }
     },
@@ -3116,6 +3164,22 @@
         "type": "github"
       }
     },
+    "telescope-dap-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669979517,
+        "narHash": "sha256-9T7O02ieM/If07bSbGcJQFD8oWv2Pg5S+uv2BcardTY=",
+        "owner": "nvim-telescope",
+        "repo": "telescope-dap.nvim",
+        "rev": "313d2ea12ae59a1ca51b62bf01fc941a983d9c9c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-telescope",
+        "repo": "telescope-dap.nvim",
+        "type": "github"
+      }
+    },
     "telescope-file-browser-nvim": {
       "flake": false,
       "locked": {
@@ -3177,6 +3241,22 @@
       "original": {
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
+        "type": "github"
+      }
+    },
+    "telescope-smart-history-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1671132354,
+        "narHash": "sha256-riBl0vSkRtM9Gtw/FNSKodSmqgGUpDnH7d5w+uU4ReQ=",
+        "owner": "nvim-telescope",
+        "repo": "telescope-smart-history.nvim",
+        "rev": "81a4cceaa54d65d5f7c7c26178ee63b634d3e26d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-telescope",
+        "repo": "telescope-smart-history.nvim",
         "type": "github"
       }
     },
@@ -3613,6 +3693,7 @@
         "nvim-colorizer-lua": "nvim-colorizer-lua",
         "nvim-config-local": "nvim-config-local",
         "nvim-dap": "nvim-dap",
+        "nvim-dap-go": "nvim-dap-go",
         "nvim-dap-ui": "nvim-dap-ui",
         "nvim-dap-virtual-text": "nvim-dap-virtual-text",
         "nvim-docs-view": "nvim-docs-view",
@@ -3631,8 +3712,10 @@
         "nvim-ts-rainbow": "nvim-ts-rainbow",
         "nvim-web-devicons": "nvim-web-devicons",
         "nvim_context_vt": "nvim_context_vt",
+        "onedarkpro-nvim": "onedarkpro-nvim",
         "org-bullets-nvim": "org-bullets-nvim",
         "orgmode": "orgmode",
+        "persisted-nvim": "persisted-nvim",
         "plenary-nvim": "plenary-nvim",
         "pretty-fold-nvim": "pretty-fold-nvim",
         "project-nvim": "project-nvim",
@@ -3652,10 +3735,12 @@
         "stickybuf-nvim": "stickybuf-nvim",
         "symbols-outline-nvim": "symbols-outline-nvim",
         "telescope-command-palette-nvim": "telescope-command-palette-nvim",
+        "telescope-dap-nvim": "telescope-dap-nvim",
         "telescope-file-browser-nvim": "telescope-file-browser-nvim",
         "telescope-frecency-nvim": "telescope-frecency-nvim",
         "telescope-live-grep-args-nvim": "telescope-live-grep-args-nvim",
         "telescope-nvim": "telescope-nvim",
+        "telescope-smart-history-nvim": "telescope-smart-history-nvim",
         "telescope-sonictemplate-nvim": "telescope-sonictemplate-nvim",
         "telescope-ui-select-nvim": "telescope-ui-select-nvim",
         "telescope-undo-nvim": "telescope-undo-nvim",
@@ -3691,11 +3776,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1672321329,
-        "narHash": "sha256-q6tuqIQ3SdT+bgUeg+BuVcXNtzUVD358JZNL2AJd0Cc=",
+        "lastModified": 1672757580,
+        "narHash": "sha256-N5ePiIDNGPG8jQiKOJSMw7JQE537Wk4goX5UTc0sYN0=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "da11dda4b6114d93fd1275ac6f211f4bf98ef4dd",
+        "rev": "f783f3b90a4b3551fb6db699ed1f0f1e93bd0a77",
         "type": "github"
       },
       "original": {

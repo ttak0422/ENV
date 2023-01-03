@@ -65,9 +65,12 @@ in {
       source <(kubectl completion zsh)
       export NEOVIDE_FRAMELESS=true
       export NEOVIDE_FRAME=buttonless
-      export DOTNET_ROOT=$(dirname $(realpath $(which dotnet)))
       export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
-      export PATH=$HOME/.dotnet/tools:$HOME/.local/bin:$PATH
+      export DOTNET_ROOT=$(dirname $(realpath $(which dotnet)))
+      export GOPATH=$HOME/go
+      export PATH=$HOME/.dotnet/tools:$PATH
+      export PATH=$HOME/.local/bin:$PATH
+      export PATH=$GOPATH/bin:$PATH
       if [ -f /opt/homebrew/bin/brew ]; then
         export PATH=/opt/homebrew/bin:$PATH
       fi

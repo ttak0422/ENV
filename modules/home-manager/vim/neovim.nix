@@ -144,8 +144,7 @@ let
     # https://github.com/4513ECHO/dotfiles/blob/3c815b972b20033fd83ab943ac632e3845c97bd9/config/nvim/dein/settings/skkeleton.vim
     {
       plugin = skkeleton;
-      depends = [ denops-vim ddc-vim ];
-      dependsAfter = [ skkeleton_indicator-nvim ];
+      depends = [ denops-vim ddc-vim skkeleton_indicator-nvim ];
       config = ''
         vim.cmd([[
           call skkeleton#config({
@@ -402,6 +401,7 @@ let
   ];
 
   lsp = callPackage ./lsp { };
+  dap = callPackage ./dap { };
   template = callPackage ./template { };
 
   code = with pkgs.vimPlugins;
@@ -898,7 +898,7 @@ in {
     # logLevel = "debug";
     enable = true;
     plugins = startup ++ input ++ custom ++ statusline ++ commandline
-      ++ language ++ view ++ code ++ lsp ++ template ++ movement ++ tool
+      ++ language ++ view ++ code ++ lsp ++ dap ++ template ++ movement ++ tool
       ++ util;
     withNodeJs = true;
     withPython3 = true;

@@ -50,7 +50,8 @@ wk.register({
       C = { "<cmd>Telescope command_palette<cr>", "find command history" },
       t = { "<cmd>Telescope sonictemplate templates theme=ivy<cr>", "find templates" },
       h = { "<cmd>Legendary<cr>", "find command palette" },
-      F = { '<cmd>lua require("spectre").open()<cr>', "find and replace with dark power" },
+      F = { "<cmd>lua require('spectre').open()<cr>", "find and replace with dark power" },
+      u = { "lua require('telescope').extensions.undo.undo()", "find undo tree" },
     },
 
     -- lsp

@@ -412,6 +412,7 @@ let
           require('tint').setup()
         '';
         events = [ "WinNew" ];
+        enable = false;
         comment = "フォーカスしていないPaneを暗く";
       }
       {

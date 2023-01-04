@@ -1,6 +1,7 @@
 let s:sources = [
       \ 'nvim-lsp',
       \ 'around',
+      \ 'tmux',
       \ 'buffer',
       \ 'file',
       \ ]
@@ -11,6 +12,7 @@ let s:sourceOptions._ = {
       \ 'matchers': ['matcher_fuzzy'],
       \ 'sorters': ['sorter_fuzzy'],
       \ 'converters': [
+      \   'converter_truncate',
       \   'converter_fuzzy',
       \ ],
       \ 'maxItems': 15,
@@ -43,6 +45,10 @@ let s:sourceOptions['nvim-lsp'] = {
       \ 'isVolatile': v:true,
       \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \ }
+let s:sourceOptions.tmux = {
+      \ 'mark': 'TMX',
+      \ 'isVolatile': v:true,
+      \ }
 let s:sourceOptions.necovim = {
       \ 'mark': 'VIM',
       \ 'isVolatile': v:true,
@@ -57,6 +63,11 @@ let s:sourceOptions['cmdline-history'] = {
       \ }
 
 let s:sourceParams = {}
+let s:sourceParams.tmux = {
+      \ 'currentWinOnly': v:true,
+      \ 'excludeCurrentPane': v:true,
+      \ 'kindFormat': '#{pane_current_command}',
+      \ }
 
 let s:filterParams = {}
 

@@ -467,6 +467,8 @@ let
           ddc-source-cmdline
           ddc-source-cmdline-history
           neco-vim
+          ddc-tmux
+          ddc-converter_truncate
         ];
         config = ''
           vim.cmd[[

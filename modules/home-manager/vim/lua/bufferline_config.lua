@@ -12,6 +12,5 @@ require("bufferline").setup({
         text_align = "center",
       },
     },
-    highlights = require("catppuccin.groups.integrations.bufferline").get(),
   },
 })

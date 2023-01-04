@@ -2,6 +2,7 @@ local keymaps = {}
 local commands = {
   { ":UpdateRemotePlugins", description = "[REQUIRE] every time a remote plugin is installed, updated, or deleted" },
   { ":write | edit | TSBufEnable highlight", description = "reload file" },
+  { ":so $VIMRUNTIME/syntax/hitest.vim", description = "enumerate highlight" },
 }
 local functions = {}
 local autocmds = {}

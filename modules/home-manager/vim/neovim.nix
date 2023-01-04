@@ -66,6 +66,7 @@ let
         require("lsp-colors").setup({})
       '';
       optional = false;
+      enable = false;
     }
     {
       plugin = vim-sensible;
@@ -264,6 +265,7 @@ let
       plugin = catppuccin-nvim;
       config = readFile ./lua/catppuccin.lua;
       modules = [ "catppuccin" "catppuccin.groups.integrations.bufferline" ];
+      enable = false;
     }
     {
       plugin = nvim-scrollview;

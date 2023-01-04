@@ -23,6 +23,11 @@ dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
 
+require("nvim-dap-virtual-text").setup({
+  commented = true,
+  highlight_changed_variables = false,
+  all_frames = true,
+})
 require("dap-go").setup({
   dap_configurations = {
     {

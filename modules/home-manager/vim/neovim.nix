@@ -41,6 +41,14 @@ let
       optional = false;
     }
     {
+      plugin = onedarkpro-nvim;
+      config = ''
+        vim.cmd("colorscheme onedark")
+      '';
+      optional = false;
+      delay = true;
+    }
+    {
       plugin = serenade;
       startup = "vim.cmd([[colorscheme serenade]])";
       optional = false;

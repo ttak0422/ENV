@@ -164,6 +164,12 @@ let
     #   commands = [ "SearchBoxIncSearch" ];
     # }
     {
+      plugin = persisted-nvim;
+      depends = [ telescope-nvim ];
+      config = readFile ./lua/persisted-nvim.lua;
+      delay = true;
+    }
+    {
       plugin = vim-asterisk;
       config = ''
         vim.cmd[[

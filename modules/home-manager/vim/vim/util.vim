@@ -72,9 +72,5 @@ augroup END
 " %%で%:h<Tab>
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
 
-" 移動を打ち消し
-nnoremap * *N
-nnoremap # #N
-
 " set completeopt=menuone,noinsert
 set isk+=-

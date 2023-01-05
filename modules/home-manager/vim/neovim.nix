@@ -164,6 +164,15 @@ let
     #   commands = [ "SearchBoxIncSearch" ];
     # }
     {
+      plugin = vim-asterisk;
+      config = ''
+        vim.cmd[[
+          ${readFile ./vim/asterisk.vim}
+        ]]
+      '';
+      events = [ "CmdlineEnter" ];
+    }
+    {
       plugin = colorful-winsep-nvim;
       events = [ "WinNew" ];
       config = readFile ./lua/colorful-winsep-nvim.lua;

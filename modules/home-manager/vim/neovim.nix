@@ -123,6 +123,8 @@ let
             \ 'skkServerPort': 1178,
             \ 'skkServerReqEnc': 'euc-jp',
             \ 'skkServerResEnc': 'euc-jp',
+            \ 'markerHenkan': '',
+            \ 'markerHenkanSelect': '',
             \ })
         ]])
       '' + readFile ./lua/skkeleton_config.lua

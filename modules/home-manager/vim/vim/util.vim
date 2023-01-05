@@ -2,10 +2,6 @@ let mapleader="\<Space>"
 
 set helplang=ja
 
-" カーソル可視化
-set cursorline
-set cursorcolumn
-
 " mouse有効化
 set mouse=a
 

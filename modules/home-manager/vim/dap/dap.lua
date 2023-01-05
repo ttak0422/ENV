@@ -42,3 +42,10 @@ require("dap-go").setup({
     port = "${port}",
   },
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "dap-repl",
+  callback = function(args)
+    vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
+  end,
+})

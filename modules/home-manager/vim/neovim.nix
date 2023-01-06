@@ -41,12 +41,18 @@ let
       optional = false;
     }
     {
+      plugin = themer-lua;
+      config = readFile ./lua/themer.lua;
+      delay = true;
+    }
+    {
       plugin = onedarkpro-nvim;
       config = ''
         vim.cmd("colorscheme onedark")
       '';
       optional = false;
       delay = true;
+      enable = false;
     }
     {
       plugin = serenade;

@@ -15,7 +15,7 @@ let s:sourceOptions._ = {
       \   'converter_truncate',
       \   'converter_fuzzy',
       \ ],
-      \ 'maxItems': 15,
+      \ 'maxItems': 18,
       \ }
 let s:sourceOptions.around = {
       \ 'mark': 'A',
@@ -66,6 +66,7 @@ let s:sourceParams.tmux = {
       \ 'currentWinOnly': v:true,
       \ 'excludeCurrentPane': v:true,
       \ 'kindFormat': '#{pane_current_command}',
+      \ 'maxItems': 5,
       \ }
 
 let s:filterParams = {}

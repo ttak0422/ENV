@@ -32,7 +32,6 @@ let s:sourceOptions.file = {
       \ }
 let s:sourceOptions.buffer = {
       \ 'mark': 'B',
-      \ 'isVolatile': v:true,
       \ }
 let s:sourceOptions.skkeleton = {
       \ 'mark': 'SKK',

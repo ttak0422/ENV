@@ -40,6 +40,8 @@ let
     success_symbol = "[](bold green)"
     error_symbol = "[](bold red)"
     vicmd_symbol = "[](bold green)"
+    [golang]
+    symbol = " "
   '';
 in {
   home.packages = with pkgs; [ ];

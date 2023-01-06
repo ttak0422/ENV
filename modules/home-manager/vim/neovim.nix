@@ -24,11 +24,11 @@ let
     charset = utf-8
   '';
 
+  extraConfig = ''
+    ${fileContents ./vim/nvim.vim}
+    ${fileContents ./vim/util.vim}
+  '';
   extraConfigLua = ''
-    vim.cmd[[
-      ${fileContents ./vim/nvim.vim}
-      ${fileContents ./vim/util.vim}
-    ]]
     dofile("${./lua/neovim.lua}")({
       editor_config = "${editorconfigTemplate}",
     })
@@ -889,7 +889,7 @@ let
   ];
 in {
   programs.rokka-nvim = {
-    inherit extraConfigLua extraPackages;
+    inherit extraConfig extraConfigLua extraPackages;
     compileInitFile = true;
     # logLevel = "debug";
     enable = true;

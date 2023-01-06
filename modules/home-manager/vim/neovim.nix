@@ -329,6 +329,7 @@ let
       config = readFile ./lua/incline_config.lua;
       delay = true;
       comment = "ペインにファイル名を表示";
+      enable = false;
     }
     {
       plugin = nvim-transparent;

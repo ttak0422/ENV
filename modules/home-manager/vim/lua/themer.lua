@@ -1,5 +1,5 @@
 require("themer").setup({
-  colorscheme = "ayu_mirage",
+  colorscheme = "github_dark",
   styles = {
     ["function"] = { style = "italic" },
     functionbuiltin = { style = "italic" },

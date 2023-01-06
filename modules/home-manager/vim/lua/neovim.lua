@@ -1,14 +1,5 @@
 return function(opt)
   local editor_config = opt.editor_config
-  vim.g.loaded_2html_plugin = true
-  vim.g.loaded_gzip = true
-  vim.g.loaded_tar = true
-  vim.g.loaded_tarPlugin = true
-  vim.g.loaded_zip = true
-  vim.g.loaded_zipPlugin = true
-  vim.g.loaded_vimball = true
-  vim.g.loaded_vimballPlugin = true
-
   vim.opt.cmdheight = 1
 
   local nvrcmd = "nvr --remote-wait"

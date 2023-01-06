@@ -36,14 +36,30 @@ let
 
   startup = with pkgs.vimPlugins; [
     {
+      plugin = vim-sensible;
+      optional = false;
+      comment = "必須設定群";
+    }
+    {
       plugin = nvim-config-local;
       config = readFile ./lua/nvim-config-local.lua;
       optional = false;
     }
     {
-      plugin = themer-lua;
-      config = readFile ./lua/themer.lua;
-      delay = true;
+      plugin = alpha-nvim;
+      config = readFile ./lua/alpha-nvim_config.lua;
+      optional = false;
+      comment = "splashscreen";
+    }
+    {
+      plugin = editorconfig-nvim;
+      optional = false;
+    }
+    {
+      plugin = which-key-nvim;
+      config = readFile ./lua/which-key-nvim_config.lua;
+      optional = false;
+      comment = "whichkey";
     }
     {
       plugin = onedarkpro-nvim;
@@ -55,46 +71,9 @@ let
       enable = false;
     }
     {
-      plugin = serenade;
-      startup = "vim.cmd([[colorscheme serenade]])";
-      optional = false;
-      enable = false;
-    }
-    {
       plugin = nightfox-nvim;
       startup = "vim.cmd([[colorscheme nightfox]])";
-      optional = false;
       enable = false;
-    }
-    {
-      plugin = lsp-colors-nvim;
-      config = ''
-        require("lsp-colors").setup({})
-      '';
-      optional = false;
-      enable = false;
-    }
-    {
-      plugin = vim-sensible;
-      optional = false;
-      comment = "必須設定群";
-    }
-    {
-      plugin = alpha-nvim;
-      config = readFile ./lua/alpha-nvim_config.lua;
-      optional = false;
-      comment = "splashscreen";
-    }
-    {
-      plugin = which-key-nvim;
-      config = readFile ./lua/which-key-nvim_config.lua;
-      optional = false;
-      comment = "whichkey";
-    }
-    {
-      plugin = vimdoc-ja;
-      optional = false;
-      startup = "vim.cmd[[set helplang=ja,en]]";
     }
     {
       plugin = vim-poslist;
@@ -106,10 +85,6 @@ let
           nmap <Leader>gl <Plug>(poslist-next-buf)
         ]]
       '';
-    }
-    {
-      plugin = editorconfig-nvim;
-      optional = false;
     }
   ];
 
@@ -171,6 +146,10 @@ let
     #   depends = [ nui-nvim ];
     #   commands = [ "SearchBoxIncSearch" ];
     # }
+    {
+      plugin = vim-matchup;
+      delay = true;
+    }
     {
       plugin = persisted-nvim;
       depends = [ telescope-nvim ];
@@ -284,6 +263,22 @@ let
   ];
 
   view = with pkgs.vimPlugins; [
+    {
+      plugin = themer-lua;
+      config = readFile ./lua/themer.lua;
+    }
+    {
+      plugin = serenade;
+      config = "vim.cmd([[colorscheme serenade]])";
+      delay = true;
+    }
+    {
+      plugin = lsp-colors-nvim;
+      config = ''
+        require("lsp-colors").setup({})
+      '';
+      delay = true;
+    }
     {
       plugin = catppuccin-nvim;
       config = readFile ./lua/catppuccin.lua;
@@ -630,7 +625,6 @@ let
         startup = ''
           vim.g.oscyank_term = 'default'
         '';
-        optional = false;
       }
       {
         plugin = dressing-nvim;
@@ -748,6 +742,11 @@ let
   ];
 
   tool = with pkgs.vimPlugins; [
+    {
+      plugin = vimdoc-ja;
+      config = "vim.cmd[[set helplang=ja,en]]";
+      delay = true;
+    }
     {
       plugin = winresizer;
       delay = true;

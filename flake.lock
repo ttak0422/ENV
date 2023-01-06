@@ -517,6 +517,22 @@
         "type": "github"
       }
     },
+    "ddc-converter_truncate": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1672552605,
+        "narHash": "sha256-JxnIXPUJSQUpay6It78yZenMaLggwikF/CwvpJ51hCk=",
+        "owner": "matsui54",
+        "repo": "ddc-converter_truncate",
+        "rev": "93ad514806ee8b00df2fce025258f3356bdf58c7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "matsui54",
+        "repo": "ddc-converter_truncate",
+        "type": "github"
+      }
+    },
     "ddc-fuzzy": {
       "flake": false,
       "locked": {
@@ -690,6 +706,22 @@
       "original": {
         "owner": "Shougo",
         "repo": "ddc-source-nvim-lsp",
+        "type": "github"
+      }
+    },
+    "ddc-tmux": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667367761,
+        "narHash": "sha256-4aQ1FdTA57uLK7Q0+a7Y2gpmShAF7D00R3zSVu97Wa0=",
+        "owner": "delphinus",
+        "repo": "ddc-tmux",
+        "rev": "e498d4fd284116eab1280a16a16633ed1617c3d0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "delphinus",
+        "repo": "ddc-tmux",
         "type": "github"
       }
     },
@@ -2925,11 +2957,11 @@
         "pre-commit-hooks": "pre-commit-hooks_2"
       },
       "locked": {
-        "lastModified": 1672312840,
-        "narHash": "sha256-8ntmr/OgLIe3ti0cmVoBUazGbw0kkWz/JJfybN/9WuE=",
+        "lastModified": 1672991561,
+        "narHash": "sha256-70SeDOAqpj6dNmb6VYx/XPnTBCn+COrWh39pQ9U6zgY=",
         "owner": "ttak0422",
         "repo": "rokka-nvim",
-        "rev": "8a6b31bd14c2973a9125c96c8e3786c9223d3cb5",
+        "rev": "9ba9271f6782c0b706d923b64f2144aebf79881e",
         "type": "github"
       },
       "original": {
@@ -3308,6 +3340,22 @@
         "type": "github"
       }
     },
+    "themer-lua": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1668049317,
+        "narHash": "sha256-zP1iIchkOSxvowKXuqw3v0+WNxaGLy9dWus38FpZuMg=",
+        "owner": "ThemerCorp",
+        "repo": "themer.lua",
+        "rev": "ec1e098eb81b8fe33befa40ddfd78b98fc6455d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ThemerCorp",
+        "repo": "themer.lua",
+        "type": "github"
+      }
+    },
     "tig-explorer-vim": {
       "flake": false,
       "locked": {
@@ -3628,6 +3676,7 @@
         "confirm-quit-nvim": "confirm-quit-nvim",
         "ddc-buffer": "ddc-buffer",
         "ddc-converter_remove_overlap": "ddc-converter_remove_overlap",
+        "ddc-converter_truncate": "ddc-converter_truncate",
         "ddc-fuzzy": "ddc-fuzzy",
         "ddc-matcher_head": "ddc-matcher_head",
         "ddc-path": "ddc-path",
@@ -3639,6 +3688,7 @@
         "ddc-source-line": "ddc-source-line",
         "ddc-source-nextword": "ddc-source-nextword",
         "ddc-source-nvim-lsp": "ddc-source-nvim-lsp",
+        "ddc-tmux": "ddc-tmux",
         "ddc-ui-native": "ddc-ui-native",
         "ddc-ui-pum": "ddc-ui-pum",
         "ddc-vim": "ddc-vim",
@@ -3744,6 +3794,7 @@
         "telescope-sonictemplate-nvim": "telescope-sonictemplate-nvim",
         "telescope-ui-select-nvim": "telescope-ui-select-nvim",
         "telescope-undo-nvim": "telescope-undo-nvim",
+        "themer-lua": "themer-lua",
         "tig-explorer-vim": "tig-explorer-vim",
         "tint-nvim": "tint-nvim",
         "todo-comments-nvim": "todo-comments-nvim",
@@ -3776,11 +3827,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1672757580,
-        "narHash": "sha256-N5ePiIDNGPG8jQiKOJSMw7JQE537Wk4goX5UTc0sYN0=",
+        "lastModified": 1672972858,
+        "narHash": "sha256-+tIZk2HVCYVw+gbg8qdeXuO4Dxudxb3YOAvMWQI9YY0=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "f783f3b90a4b3551fb6db699ed1f0f1e93bd0a77",
+        "rev": "ed3fd04cf6c1fd929c6e9d5073af1cd65361cdbe",
         "type": "github"
       },
       "original": {

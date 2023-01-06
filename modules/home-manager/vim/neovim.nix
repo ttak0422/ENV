@@ -675,6 +675,7 @@ let
         plenary-nvim
         telescope-file-browser-nvim
         telescope-ui-select-nvim
+        telescope-undo-nvim
         {
           plugin = telescope-live-grep-args-nvim;
           extraPackages = [ pkgs.ripgrep ];

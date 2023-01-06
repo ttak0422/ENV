@@ -15,6 +15,9 @@ telescope.setup({
         ["n"] = {},
       },
     },
+    undo = {
+      use_delta = false, -- wip
+    },
     live_grep_args = {
       auto_quoting = true,
       mappings = { -- extend mappings
@@ -34,3 +37,4 @@ telescope.load_extension("projects")
 telescope.load_extension("file_browser")
 telescope.load_extension("sonictemplate")
 telescope.load_extension("ui-select")
+telescope.load_extension("undo")

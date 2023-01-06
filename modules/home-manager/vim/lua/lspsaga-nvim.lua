@@ -22,9 +22,9 @@ saga.init_lsp_saga({
     enable = true,
     enable_in_insert = false,
     cache_code_action = true,
-    sign = false,
+    sign = true,
     update_time = 300,
-    virtual_text = true,
+    virtual_text = false,
   },
   finder_request_timeout = 30000,
   finder_action_keys = {

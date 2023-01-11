@@ -16,6 +16,7 @@ let s:sourceOptions._ = {
       \   'converter_fuzzy',
       \ ],
       \ 'maxItems': 18,
+      \ 'forceCompletionPattern': '\S+',
       \ }
 let s:sourceOptions.around = {
       \ 'mark': 'A',

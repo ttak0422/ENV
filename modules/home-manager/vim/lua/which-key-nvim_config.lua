@@ -1,6 +1,6 @@
 function _OpenTig()
   vim.cmd([[
-    execute 'term tig'
+    execute 'new term://tig'
     setlocal bufhidden=delete
     setlocal noswapfile
     setlocal nobuflisted

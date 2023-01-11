@@ -12,7 +12,7 @@ set hidden
 set noshowmode
 set termguicolors
 set isk+=-
-" set completeopt=menuone,noinsert
+set completeopt=menuone
 
 " tabキーでspaceを入力する
 set expandtab

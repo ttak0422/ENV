@@ -291,6 +291,13 @@ let
       delay = true;
     }
     {
+      plugin = nvim-scrollbar;
+      config = readFile ./lua/nvim-scrollbar.lua;
+      depends = [ gitsigns-nvim ];
+      enable = false;
+      delay = true;
+    }
+    {
       plugin = nvim-notify;
       config = readFile ./lua/nvim-notify.lua;
       delay = true;

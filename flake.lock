@@ -1389,11 +1389,11 @@
     "github-nvim-theme": {
       "flake": false,
       "locked": {
-        "lastModified": 1672911067,
-        "narHash": "sha256-WdNxnPOeqbsjBj1/LR4AL1gzPkqXUCHuuWd9Q7gEgcY=",
+        "lastModified": 1673175379,
+        "narHash": "sha256-jgZ5YQeEvNbcc3AtZthQyherxaeEXbbfSQAjq9vtzoo=",
         "owner": "projekt0n",
         "repo": "github-nvim-theme",
-        "rev": "602d38a48eaada5d507ea3f0ea6cef12f0a6026d",
+        "rev": "8dcfe1f69c1863650260fb2a9cf6cdf9d065515c",
         "type": "github"
       },
       "original": {
@@ -2459,6 +2459,22 @@
       "original": {
         "owner": "rcarriga",
         "repo": "nvim-notify",
+        "type": "github"
+      }
+    },
+    "nvim-scrollbar": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1672809382,
+        "narHash": "sha256-HjKnylvfJyvFTcadPbj7gn1poFNqP9dXeeKDXGbog18=",
+        "owner": "petertriho",
+        "repo": "nvim-scrollbar",
+        "rev": "6e704cdeb7114385b4b19f9dc4b8f0c442019edc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "petertriho",
+        "repo": "nvim-scrollbar",
         "type": "github"
       }
     },
@@ -3785,6 +3801,7 @@
         "nvim-lint": "nvim-lint",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-notify": "nvim-notify",
+        "nvim-scrollbar": "nvim-scrollbar",
         "nvim-scrollview": "nvim-scrollview",
         "nvim-spectre": "nvim-spectre",
         "nvim-surround": "nvim-surround",
@@ -3862,11 +3879,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1673171630,
-        "narHash": "sha256-sOY/LhgII/fHZgi6zEGj0mAL9JSfklBm0wr2iUbAgtQ=",
+        "lastModified": 1673541028,
+        "narHash": "sha256-6uXFN1U/Vs5GYWTbFHbILmUKi52r2LKxC5IN9o8rIF0=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "20a1d5f907e4ced37402e78b51ad1c4ea4b0f64d",
+        "rev": "687f3289455180fdd24fe8c78b8a5f01b592befe",
         "type": "github"
       },
       "original": {

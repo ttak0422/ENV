@@ -31,6 +31,9 @@ return function(runtimes)
         "org.junit.jupiter.params.provider.Arguments.arguments",
         "org.mockito.Mockito.*",
       },
+      ["java.trace.server"] = "off",
+      ["java.autobuild.enabled"] = true,
+      ["java.errors.incompleteClasspath.severity"] = "warning",
       ["java.completion.importOrder"] = {
         "#",
         "java",

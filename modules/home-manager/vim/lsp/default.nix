@@ -65,6 +65,7 @@ in with pkgs.vimPlugins; [
           "-Dosgi.sharedConfiguration.area.readOnly=true",
           "-Dosgi.checkConfiguration=true",
           "-Dosgi.configuration.c:ascaded=true",
+          "-Dlog.protocol=true",
           "-Dlog.level=NONE",
           "-XX:+UseG1GC",
           "-XX:GCTimeRatio=4",

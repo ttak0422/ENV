@@ -15,17 +15,14 @@ let s:sourceOptions._ = {
       \   'converter_truncate',
       \   'converter_fuzzy',
       \ ],
-      \ 'maxItems': 18,
       \ 'forceCompletionPattern': '\S+',
       \ }
 let s:sourceOptions.around = {
       \ 'mark': 'A',
-      \ 'isVolatile': v:true,
       \ 'maxItems': 5,
       \ }
 let s:sourceOptions.file = {
       \ 'mark': 'F',
-      \ 'isVolatile': v:true,
       \ 'forceCompletionPattern': '\S/\S*',
       \ 'trailingSlash': v:true,
       \ 'projAsRoot': v:true,
@@ -37,29 +34,23 @@ let s:sourceOptions.buffer = {
 let s:sourceOptions.skkeleton = {
       \ 'mark': 'SKK',
       \ 'matchers': ['skkeleton'],
-      \ 'isVolatile': v:true,
       \ }
 let s:sourceOptions['nvim-lsp'] = {
       \ 'mark': 'LSP',
       \ 'dup': 'keep',
-      \ 'isVolatile': v:true,
       \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \ }
 let s:sourceOptions.tmux = {
       \ 'mark': 'TMX',
-      \ 'isVolatile': v:true,
       \ }
 let s:sourceOptions.necovim = {
       \ 'mark': 'VIM',
-      \ 'isVolatile': v:true,
       \ }
 let s:sourceOptions.cmdline = {
       \ 'mark': 'cmdline',
-      \ 'isVolatile': v:true,
       \ }
 let s:sourceOptions['cmdline-history'] = {
       \ 'mark': 'history',
-      \ 'isVolatile': v:true,
       \ }
 
 let s:sourceParams = {}
@@ -103,6 +94,7 @@ function! CommandlinePre() abort
   call ddc#custom#patch_buffer('sourceOptions', {
         \ '_': {
         \   'minAutoCompleteLength': 0,
+        \   'maxItems': 15,
         \ }})
   call ddc#custom#patch_buffer('cmdlineSources', {
         \ ':': ['necovim', 'cmdline-history', 'cmdline', 'around'],

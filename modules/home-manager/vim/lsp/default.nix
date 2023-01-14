@@ -66,7 +66,7 @@ in with pkgs.vimPlugins; [
           "-Dosgi.checkConfiguration=true",
           "-Dosgi.configuration.c:ascaded=true",
           "-Dlog.protocol=true",
-          "-Dlog.level=NONE",
+          "-Dlog.level=OFF",
           "-XX:+UseG1GC",
           "-XX:GCTimeRatio=4",
           "-XX:AdaptiveSizePolicyWeight=90",
@@ -153,6 +153,7 @@ in with pkgs.vimPlugins; [
       vim.diagnostic.config {
         severity_sort = true
       }
+      vim.lsp.set_log_level("off")
 
       local signs = {
         { name = "DiagnosticSignError", text = "" },

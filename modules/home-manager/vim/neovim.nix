@@ -268,7 +268,8 @@ let
     {
       plugin = serenade;
       config = "vim.cmd([[colorscheme serenade]])";
-      delay = true;
+      # delay = true;
+      optional = false;
     }
     {
       plugin = lsp-colors-nvim;

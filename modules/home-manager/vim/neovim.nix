@@ -1,12 +1,10 @@
 { config, pkgs, lib, nix-filter, ... }:
 
 let
-  inherit (builtins) concatStringsSep map fetchTarball readFile;
+  inherit (builtins) readFile;
   inherit (lib.strings) fileContents;
-  inherit (lib.lists) singleton;
-  inherit (pkgs) fetchFromGitHub writeText callPackage;
-  inherit (pkgs.stdenv) mkDerivation;
-  inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
+  inherit (pkgs) callPackage;
+  myPlugins = callPackage ./my-plugins.nix { };
   external = callPackage ./external.nix { };
 
   extraPackages = with pkgs; [ neovim-remote ];
@@ -425,8 +423,7 @@ let
         events = [ "CmdlineEnter" ];
       }
       {
-        plugin = nvim-dd;
-        enable = false;
+        plugin = myPlugins.nvim-dd;
         config = ''
           require('dd').setup({
             timeout = 1000

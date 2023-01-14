@@ -1,5 +1,6 @@
 " depends lexima-vim, vim-vsnip-integ.
 call pum#set_option({
+      \ 'max_height': 12,
       \ 'scrollbar_char': '█',
       \ })
 set wildoptions+=pum

@@ -495,6 +495,7 @@ let
           neco-vim
           ddc-tmux
           ddc-converter_truncate
+          ddc-converter_remove_overlap
         ];
         config = ''
           vim.cmd[[

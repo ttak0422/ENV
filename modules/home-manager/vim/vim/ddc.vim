@@ -10,8 +10,11 @@ let s:sourceOptions = {}
 let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
       \ 'matchers': ['matcher_fuzzy'],
-      \ 'sorters': ['sorter_fuzzy'],
+      \ 'sorters': [
+      \   'sorter_fuzzy'
+      \ ],
       \ 'converters': [
+      \   'converter_remove_overlap',
       \   'converter_truncate',
       \   'converter_fuzzy',
       \ ],
@@ -32,19 +35,19 @@ let s:sourceOptions.buffer = {
       \ 'mark': 'B',
       \ }
 let s:sourceOptions.skkeleton = {
-      \ 'mark': 'SKK',
+      \ 'mark': 'S',
       \ 'matchers': ['skkeleton'],
       \ }
 let s:sourceOptions['nvim-lsp'] = {
-      \ 'mark': 'LSP',
+      \ 'mark': 'L',
       \ 'dup': 'keep',
       \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \ }
 let s:sourceOptions.tmux = {
-      \ 'mark': 'TMX',
+      \ 'mark': 'T',
       \ }
 let s:sourceOptions.necovim = {
-      \ 'mark': 'VIM',
+      \ 'mark': 'V',
       \ }
 let s:sourceOptions.cmdline = {
       \ 'mark': 'cmdline',

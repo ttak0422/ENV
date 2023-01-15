@@ -134,7 +134,7 @@ function! CommandlinePre() abort
         \   'maxItems': 15,
         \ }})
   call ddc#custom#patch_buffer('cmdlineSources', {
-        \ ':': ['necovim', 'cmdline-history', 'cmdline', 'around'],
+        \ ':': ['necovim', 'cmdline', 'cmdline-history','around'],
         \ '/': ['around', 'buffer'],
         \ '?': ['around', 'buffer'],
         \ })

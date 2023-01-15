@@ -2,15 +2,20 @@ return function(opt)
   local jdtls = require("jdtls")
   local root = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" })
   local workspace = os.getenv("HOME") .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(root, ":p:h:t")
+
   local config = {
-    on_attach = opt.on_attach,
+    on_attach = function(client, bufnr)
+      opt.on_attach(client, bufnr)
+      jdtls.setup_dap({ hotcodereplace = "auto" })
+      require("jdtls.setup").add_commands()
+      require("jdtls.dap").setup_dap_main_class_configs()
+    end,
     capabilities = opt.capabilities,
     cmd = {
       opt.java_bin,
       "-Declipse.application=org.eclipse.jdt.ls.core.id1",
       "-Dosgi.bundles.defaultStartLevel=4",
       "-Declipse.product=org.eclipse.jdt.ls.core.product",
-      --"-Dosgi.sharedConfiguration.area=${pkgs.jdt-language-server}/share/config",
       "-Dosgi.sharedConfiguration.area=" .. opt.jdtls_config,
       "-Dosgi.sharedConfiguration.area.readOnly=true",
       "-Dosgi.checkConfiguration=true",
@@ -25,10 +30,8 @@ return function(opt)
       "-Xms1G",
       "-Xmx12G",
       "-Xlog:disable",
-      -- "-javaagent:${pkgs.lombok}/share/java/lombok.jar",
       "-javaagent:" .. opt.lombok_jar,
       "-jar",
-      -- vim.fn.glob("${pkgs.jdt-language-server}/share/java/plugins/org.eclipse.equinox.launcher_*.jar"),
       opt.jdtls_jar,
       "--add-modules=ALL-SYSTEM",
       "--add-opens java.base/java.util=ALL-UNNAMED",
@@ -56,7 +59,9 @@ return function(opt)
       end,
     },
   }
+
   jdtls.start_or_attach(config)
+
   vim.api.nvim_create_augroup("jdtls_lsp", { clear = true })
   vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "java" },

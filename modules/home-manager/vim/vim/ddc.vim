@@ -123,5 +123,3 @@ function! CommandlinePost() abort
   endif
 endfunction
 
-autocmd User PumCompleteDone call CommandlinePre()
-

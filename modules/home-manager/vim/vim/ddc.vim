@@ -9,7 +9,9 @@ let s:sources = [
 let s:sourceOptions = {}
 let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
-      \ 'matchers': ['matcher_fuzzy'],
+      \ 'matchers': [
+      \   'matcher_fuzzy'
+      \ ],
       \ 'sorters': [
       \   'sorter_fuzzy'
       \ ],
@@ -96,7 +98,7 @@ function! CommandlinePre() abort
   endif
   call ddc#custom#patch_buffer('sourceOptions', {
         \ '_': {
-        \   'minAutoCompleteLength': 0,
+        \   'minAutoCompleteLength': 2,
         \   'maxItems': 15,
         \ }})
   call ddc#custom#patch_buffer('cmdlineSources', {

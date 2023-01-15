@@ -32,6 +32,8 @@ let g:did_indent_on=1
 let g:did_load_ftplugin=1
 let g:loaded_rrhelper=1
 
+set splitkeep=screen
+
 augroup NvimTerm
   autocmd!
   autocmd WinEnter * if &buftype ==# 'terminal' | startinsert | endif

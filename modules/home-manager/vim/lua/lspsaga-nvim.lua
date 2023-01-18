@@ -18,7 +18,7 @@ saga.init_lsp_saga({
     auto_refresh = true,
   },
   code_action_lightbulb = {
-    enable = true,
+    enable = false,
     enable_in_insert = false,
     cache_code_action = true,
     sign = true,

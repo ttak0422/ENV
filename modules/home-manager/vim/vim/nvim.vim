@@ -48,4 +48,4 @@ augroup GrepCmd
   autocmd QuickFixCmdPost    l* nested lopen
 augroup END
 
-au TermClose * call feedkeys("i")
+" au TermClose * call feedkeys("i")

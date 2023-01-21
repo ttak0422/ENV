@@ -32,6 +32,22 @@
         "type": "github"
       }
     },
+    "Ionide-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669318446,
+        "narHash": "sha256-dbOutPgG+o9NGUtpYxla80B0XByvV5oig+5zqAQcOMI=",
+        "owner": "ionide",
+        "repo": "Ionide-vim",
+        "rev": "a66845162ae4c2ad06d76e003c0aab235aac2ede",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ionide",
+        "repo": "Ionide-vim",
+        "type": "github"
+      }
+    },
     "Shade-nvim": {
       "flake": false,
       "locked": {
@@ -1389,11 +1405,11 @@
     "github-nvim-theme": {
       "flake": false,
       "locked": {
-        "lastModified": 1673175379,
-        "narHash": "sha256-jgZ5YQeEvNbcc3AtZthQyherxaeEXbbfSQAjq9vtzoo=",
+        "lastModified": 1674280993,
+        "narHash": "sha256-9//7g2LMqOBqvcvaRRRXIfOvA+g5uljwb3qKvXA7r34=",
         "owner": "projekt0n",
         "repo": "github-nvim-theme",
-        "rev": "8dcfe1f69c1863650260fb2a9cf6cdf9d065515c",
+        "rev": "a93fc4cd3c16b91cf29a1387015e6e925c416efb",
         "type": "github"
       },
       "original": {
@@ -2465,11 +2481,11 @@
     "nvim-scrollbar": {
       "flake": false,
       "locked": {
-        "lastModified": 1672809382,
-        "narHash": "sha256-HjKnylvfJyvFTcadPbj7gn1poFNqP9dXeeKDXGbog18=",
+        "lastModified": 1673562030,
+        "narHash": "sha256-OnVOmYhWMWH7a382DAIPEzJmz/J0BHniey7twyl500Q=",
         "owner": "petertriho",
         "repo": "nvim-scrollbar",
-        "rev": "6e704cdeb7114385b4b19f9dc4b8f0c442019edc",
+        "rev": "6a2065fbcd032075a06d2ab54508b69842bc4496",
         "type": "github"
       },
       "original": {
@@ -3695,6 +3711,7 @@
       "inputs": {
         "AbbrevMan-nvim": "AbbrevMan-nvim",
         "Comment-nvim": "Comment-nvim",
+        "Ionide-vim": "Ionide-vim",
         "Shade-nvim": "Shade-nvim",
         "actions-preview-nvim": "actions-preview-nvim",
         "aerial-nvim": "aerial-nvim",
@@ -3879,11 +3896,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1673541028,
-        "narHash": "sha256-6uXFN1U/Vs5GYWTbFHbILmUKi52r2LKxC5IN9o8rIF0=",
+        "lastModified": 1674304484,
+        "narHash": "sha256-suY048oysYKfC+OkbVbbCQ23lWLCDlFAHPbWItAuhx4=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "687f3289455180fdd24fe8c78b8a5f01b592befe",
+        "rev": "b2b9f16d0198c1b32896acf35e3ef8231fdbb082",
         "type": "github"
       },
       "original": {

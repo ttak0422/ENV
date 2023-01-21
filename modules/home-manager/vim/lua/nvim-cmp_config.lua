@@ -1,5 +1,3 @@
-vim.opt.completeopt = "menu,menuone,noselect"
-
 local ELLIPSIS_CHAR = "…"
 local MAX_LABEL_WIDTH = 30
 local MIN_LABEL_WIDTH = 30

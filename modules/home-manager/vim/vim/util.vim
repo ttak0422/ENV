@@ -12,7 +12,7 @@ set hidden
 set noshowmode
 set termguicolors
 set isk+=-
-set completeopt=menuone
+set completeopt=menu,menuone,noselect
 set ttyfast
 set lazyredraw
 

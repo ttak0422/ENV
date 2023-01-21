@@ -1594,6 +1594,22 @@
         "type": "github"
       }
     },
+    "hover-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673524285,
+        "narHash": "sha256-Qkf7rgM3EGiYxbw54nuSxyGRHYvsDf0/2YBvGkhANW0=",
+        "owner": "lewis6991",
+        "repo": "hover.nvim",
+        "rev": "3ff39c31ca6ea2a64e3a8c65dfe63aa3f5ea117b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lewis6991",
+        "repo": "hover.nvim",
+        "type": "github"
+      }
+    },
     "incline-nvim": {
       "flake": false,
       "locked": {
@@ -3781,6 +3797,7 @@
         "haskell-tools-nvim": "haskell-tools-nvim",
         "headlines-nvim": "headlines-nvim",
         "hop-nvim": "hop-nvim",
+        "hover-nvim": "hover-nvim",
         "incline-nvim": "incline-nvim",
         "indent-blankline-nvim": "indent-blankline-nvim",
         "legendary-nvim": "legendary-nvim",
@@ -3896,11 +3913,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1674304484,
-        "narHash": "sha256-suY048oysYKfC+OkbVbbCQ23lWLCDlFAHPbWItAuhx4=",
+        "lastModified": 1674309658,
+        "narHash": "sha256-M0puaOGP9Hs8NlwaPi3UinxNRVNtgOkmEDd7HfI2e1E=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "b2b9f16d0198c1b32896acf35e3ef8231fdbb082",
+        "rev": "02af97b78482abb630058d00598b6383eb37337c",
         "type": "github"
       },
       "original": {

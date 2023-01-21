@@ -38,12 +38,7 @@ return function(opt)
     capabilities = capabilities,
   })
 
-  -- fsharp
-  -- `dotnet tool install --global fsautocomplete`
-  lspconfig.fsautocomplete.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-  })
+  -- fsharp (use ionide-vim)
 
   local node_root_dir = util.root_pattern("package.json", "node_modules")
   local is_node_repo = node_root_dir(".") ~= nil

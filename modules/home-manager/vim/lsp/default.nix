@@ -95,6 +95,29 @@ in with pkgs.vimPlugins; [
     '';
     fileTypes = [ "haskell" ];
   }
+  # fsharp
+  {
+    plugin = Ionide-vim;
+    depends = lspSharedDepends ++ [ nvim-lspconfig ];
+    # extraPackages = WIP...
+    # [WIP] dotnet
+    # dotnet tool install -g fsautocomplete
+    # dotnet tool install -g dotnet-fsharplint
+    # dotnet tool install --global fantomas-tool
+    startup = ''
+      vim.cmd([[
+        let g:fsharp#lsp_auto_setup = 0
+        let g:fsharp#fsautocomplete_command =[ 'fsautocomplete' ]
+      ]])
+    '';
+    config = ''
+      dofile("${./ionide.lua}")({
+        on_attach = dofile("${./on_attach.lua}"),
+        capabilities = dofile("${./capabilities.lua}"),
+      })
+    '';
+    delay = true;
+  }
   {
     plugin = nvim-lspconfig;
     depends = lspSharedDepends ++ [ ];

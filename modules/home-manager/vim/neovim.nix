@@ -256,6 +256,7 @@ let
     }
     {
       plugin = neofsharp-vim;
+      enable = false;
       fileTypes = [ "fs" "fsx" "fsi" "fsproj" ];
     }
   ];

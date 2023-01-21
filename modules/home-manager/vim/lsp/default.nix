@@ -10,6 +10,8 @@ let
     telescope-nvim
     actions-preview-nvim
     vim-illuminate
+    hover-nvim
+    # glow-hover-nvim
   ];
   lspSharedExtraPackages = [ ];
 in with pkgs.vimPlugins; [
@@ -32,6 +34,20 @@ in with pkgs.vimPlugins; [
   {
     plugin = vim-illuminate;
     config = readFile ./vim-illuminate.lua;
+  }
+  {
+    plugin = hover-nvim;
+    config = readFile ./hover-nvim.lua;
+  }
+  {
+    plugin = glow-hover-nvim;
+    config = ''
+      require'glow-hover'.setup {
+        max_width = 80,
+        padding = 1,
+        glow_path = 'glow'
+      }
+    '';
   }
   # java
   {

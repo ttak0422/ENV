@@ -1,4 +1,4 @@
--- require lspsaga, virtual-types-nvim, inlayHint
+-- require lspsaga, virtual-types-nvim, inlayHint, hover.nvim
 return function(client, bufnr)
   local opts = { noremap = true, silent = true }
   vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
@@ -17,7 +17,9 @@ return function(client, bufnr)
 
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+  -- vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+  vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
+  vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
   -- vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', bufopts)
   -- vim.keymap.set('n', 'K', '<cmd>DocsViewToggle<CR>', bufopts)
   vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)

@@ -1,7 +1,13 @@
 local wezterm = require("wezterm")
 
+local my_color = wezterm.color.get_builtin_schemes()["Ayu Mirage"]
+my_color.background = "#2a2f33"
+
 return {
-  color_scheme = "Ayu Mirage",
+  color_schemes = {
+    ["My Color"] = my_color,
+  },
+  color_scheme = "My Color",
   font = wezterm.font("PlemolJP35 Console NFJ", { weight = "Medium", stretch = "Normal", style = "Normal" }),
   keys = {
     { key = "-", mods = "CMD|SHIFT", action = wezterm.action.IncreaseFontSize },

@@ -131,7 +131,7 @@ function! CommandlinePre() abort
   call ddc#custom#patch_buffer('sourceOptions', {
         \ '_': {
         \   'minAutoCompleteLength': 2,
-        \   'maxItems': 15,
+        \   'maxItems': 8,
         \ }})
   call ddc#custom#patch_buffer('cmdlineSources', {
         \ ':': ['necovim', 'cmdline', 'cmdline-history','around'],

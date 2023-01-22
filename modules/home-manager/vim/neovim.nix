@@ -34,6 +34,15 @@ let
 
   startup = with pkgs.vimPlugins; [
     {
+      plugin = impatient-nvim;
+      config = ''
+        require('impatient')
+        require'impatient'.enable_profile()
+      '';
+      optional = false;
+      enable = false;
+    }
+    {
       plugin = vim-sensible;
       optional = false;
       comment = "必須設定群";
@@ -47,6 +56,7 @@ let
       plugin = alpha-nvim;
       config = readFile ./lua/alpha-nvim_config.lua;
       optional = false;
+      enable = false;
       comment = "splashscreen";
     }
     {
@@ -267,12 +277,6 @@ let
       config = readFile ./lua/themer.lua;
     }
     {
-      plugin = serenade;
-      config = "vim.cmd([[colorscheme serenade]])";
-      # delay = true;
-      optional = false;
-    }
-    {
       plugin = lsp-colors-nvim;
       config = ''
         require("lsp-colors").setup({})
@@ -340,21 +344,20 @@ let
           enable = true,
         })
       '';
-      commands =
-        [ "TransparentEnable" "TransparentDisable" "TransparentToggle" ];
+      # commands = [ "TransparentEnable" "TransparentDisable" "TransparentToggle" ];
+    }
+    {
+      plugin = serenade;
+      config = "vim.cmd([[colorscheme serenade]])";
+      depends = [ nvim-transparent ];
+      delay = true;
+      # optional = false;
     }
     {
       plugin = headlines-nvim;
       config = readFile ./lua/headlines_config.lua;
       fileTypes = [ "markdown" "rmd" "vimwiki" "orgmode" ];
       enable = false;
-    }
-    {
-      plugin = stabilize-nvim;
-      config = ''
-        require'stabilize'.setup()
-      '';
-      delay = true;
     }
     {
       plugin = indent-blankline-nvim;
@@ -552,20 +555,6 @@ let
       #   enable = false;
       # }
       {
-        plugin = lspsaga-nvim;
-        depends = [ nvim-lspconfig ];
-        config = readFile ./lua/lspsaga-nvim.lua;
-
-        commands = [ "Lspsaga" ];
-        delay = true;
-      }
-      {
-        plugin = formatter-nvim;
-        config = readFile ./lua/formatter-nvim.lua;
-        commands = [ "Format" ];
-        extraPackages = with pkgs; [ stylua google-java-format nixfmt ];
-      }
-      {
         plugin = nvim-lint;
         config = ''
           local lint = require("lint")
@@ -589,12 +578,6 @@ let
         '';
         extraPackages = [ pkgs.checkstyle ];
         fileTypes = [ "java" ];
-      }
-      {
-        plugin = neogen;
-        depends = [ nvim-treesitter luasnip ];
-        config = readFile ./lua/neogen.lua;
-        commands = [ "Neogen" ];
       }
       {
         plugin = todo-comments-nvim;

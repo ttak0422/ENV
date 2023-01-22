@@ -16,6 +16,24 @@ let
   lspSharedExtraPackages = [ ];
 in with pkgs.vimPlugins; [
   {
+    plugin = neogen;
+    depends = [ nvim-treesitter luasnip ];
+    config = readFile ./neogen.lua;
+    commands = [ "Neogen" ];
+  }
+  {
+    plugin = lspsaga-nvim;
+    depends = [ nvim-lspconfig ];
+    config = readFile ./lspsaga-nvim.lua;
+    commands = [ "Lspsaga" ];
+  }
+  {
+    plugin = formatter-nvim;
+    config = readFile ./formatter-nvim.lua;
+    commands = [ "Format" ];
+    extraPackages = with pkgs; [ stylua google-java-format nixfmt ];
+  }
+  {
     plugin = actions-preview-nvim;
     config = readFile ./actions-preview-nvim.lua;
   }

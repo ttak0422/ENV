@@ -4,6 +4,7 @@ function _OpenTig()
     setlocal bufhidden=delete
     setlocal noswapfile
     setlocal nobuflisted
+    startinsert
   ]])
 end
 

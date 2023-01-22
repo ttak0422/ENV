@@ -53,6 +53,5 @@ augroup util
   " https://vim-jp.org/vim-users-jp/2011/03/12/Hack-206.html
   autocmd WinEnter * checktime
   autocmd FileType qf set nobuflisted
-  autocmd TermOpen * startinsert
 augroup END
 

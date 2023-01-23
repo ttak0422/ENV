@@ -677,6 +677,11 @@ let
         {
           plugin = telescope-sonictemplate-nvim;
           depends = [ vim-sonictemplate ];
+          startup = ''
+            vim.g.sonictemplate_key = 0
+            vim.g.sonictemplate_intelligent_key = 0
+            vim.g.sonictemplate_postfix_key = 0
+          '';
         }
       ];
       config = readFile ./lua/telescope-nvim_config.lua;

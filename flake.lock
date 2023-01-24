@@ -3913,11 +3913,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1674309658,
+        "lastModified": 1674573526,
         "narHash": "sha256-M0puaOGP9Hs8NlwaPi3UinxNRVNtgOkmEDd7HfI2e1E=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "02af97b78482abb630058d00598b6383eb37337c",
+        "rev": "a73fdb31567e506537aaac2cce3f3659121d12aa",
         "type": "github"
       },
       "original": {

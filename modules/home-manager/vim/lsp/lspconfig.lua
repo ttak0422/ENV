@@ -59,6 +59,12 @@ return function(opt)
     })
   end
 
+  -- csharp (use csharp_ls)
+  lspconfig.csharp_ls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+
   -- python
   lspconfig.pyright.setup({
     on_attach = on_attach,

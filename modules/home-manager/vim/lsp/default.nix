@@ -139,6 +139,8 @@ in with pkgs.vimPlugins; [
   {
     plugin = nvim-lspconfig;
     depends = lspSharedDepends ++ [ ];
+    # [WIP] dotnet
+    # dotnet tool install --global csharp-ls
     extraPackages = lspSharedExtraPackages ++ (with pkgs; [
       dart
       deno
@@ -186,7 +188,7 @@ in with pkgs.vimPlugins; [
           "--stdio",
           "--tsserver-path",
           "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/",
-        }
+        },
       })
     '';
     delay = true;

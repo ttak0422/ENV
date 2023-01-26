@@ -44,6 +44,7 @@ let s:sourceOptions['nvim-lsp'] = {
       \ 'mark': 'L',
       \ 'dup': 'keep',
       \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+      \ 'maxItems': 50,
       \ }
 let s:sourceOptions.tmux = {
       \ 'mark': 'T',
@@ -92,7 +93,6 @@ let s:sourceParams.tmux = {
       \ 'currentWinOnly': v:true,
       \ 'excludeCurrentPane': v:true,
       \ 'kindFormat': '#{pane_current_command}',
-      \ 'maxItems': 5,
       \ }
 
 let s:filterParams = {}

@@ -103,7 +103,8 @@ let s:filterParams.converter_truncate = {
 let s:patch_global = {}
 let s:patch_global.ui = 'pum'
 " let s:patch_global.ui = 'native'
-let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged' ]
+" let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged' ]
+let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP' ]
 let s:patch_global.backspaceCompletion = v:true
 let s:patch_global.sources = s:sources
 let s:patch_global.sourceOptions = s:sourceOptions
@@ -116,44 +117,43 @@ call ddc#enable()
 call signature_help#enable()
 call popup_preview#enable()
 
-nnoremap : <Cmd>call CommandlinePre()<CR>:
-nnoremap / <Cmd>call CommandlinePre()<CR>/
-nnoremap ? <Cmd>call CommandlinePre()<CR>?
-
-function! CommandlinePre() abort
-  cnoremap <Tab>   <Cmd>call pum#map#insert_relative(+1)<CR>
-  cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-  cnoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
-  cnoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
-  if !exists('b:prev_buffer_config')
-    let b:prev_buffer_config = ddc#custom#get_buffer()
-  endif
-  call ddc#custom#patch_buffer('sourceOptions', {
-        \ '_': {
-        \   'minAutoCompleteLength': 2,
-        \   'maxItems': 8,
-        \ }})
-  call ddc#custom#patch_buffer('cmdlineSources', {
-        \ ':': ['necovim', 'cmdline', 'cmdline-history','around'],
-        \ '/': ['around', 'buffer'],
-        \ '?': ['around', 'buffer'],
-        \ })
-
-  autocmd User DDCCmdlineLeave ++once call CommandlinePost()
-  autocmd InsertEnter <buffer> ++once call CommandlinePost()
-  call ddc#enable_cmdline_completion()
-endfunction
-
-function! CommandlinePost() abort
-  silent! cunmap <Tab>
-  silent! cunmap <S-Tab>
-  silent! cunmap <C-y>
-  silent! cunmap <C-e>
-  if exists('b:prev_buffer_config')
-    call ddc#custom#set_buffer(b:prev_buffer_config)
-    unlet b:prev_buffer_config
-  else
-    call ddc#custom#set_buffer({})
-  endif
-endfunction
-
+" nnoremap : <Cmd>call CommandlinePre()<CR>:
+" nnoremap / <Cmd>call CommandlinePre()<CR>/
+" nnoremap ? <Cmd>call CommandlinePre()<CR>?
+"
+" function! CommandlinePre() abort
+"   cnoremap <Tab>   <Cmd>call pum#map#insert_relative(+1)<CR>
+"   cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+"   cnoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+"   cnoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+"   if !exists('b:prev_buffer_config')
+"     let b:prev_buffer_config = ddc#custom#get_buffer()
+"   endif
+"   call ddc#custom#patch_buffer('sourceOptions', {
+"         \ '_': {
+"         \   'minAutoCompleteLength': 0,
+"         \ }})
+"   call ddc#custom#patch_buffer('cmdlineSources', {
+"         \ ':': ['necovim', 'cmdline', 'cmdline-history','around'],
+"         \ '/': ['around', 'buffer'],
+"         \ '?': ['around', 'buffer'],
+"         \ })
+"
+"   autocmd User DDCCmdlineLeave ++once call CommandlinePost()
+"   autocmd InsertEnter <buffer> ++once call CommandlinePost()
+"   call ddc#enable_cmdline_completion()
+" endfunction
+"
+" function! CommandlinePost() abort
+"   silent! cunmap <Tab>
+"   silent! cunmap <S-Tab>
+"   silent! cunmap <C-y>
+"   silent! cunmap <C-e>
+"   if exists('b:prev_buffer_config')
+"     call ddc#custom#set_buffer(b:prev_buffer_config)
+"     unlet b:prev_buffer_config
+"   else
+"     call ddc#custom#set_buffer({})
+"   endif
+" endfunction
+"

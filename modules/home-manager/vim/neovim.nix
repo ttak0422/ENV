@@ -251,7 +251,6 @@ let
       events = [ "CmdlineEnter" ];
       config = readFile ./lua/wilder-nvim_config.lua;
       extraPackages = with pkgs; [ fd ];
-      enable = false;
     }
     {
       plugin = mkdir-nvim;

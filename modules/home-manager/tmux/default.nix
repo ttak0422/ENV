@@ -9,8 +9,10 @@ let
   resizeAmount = 5;
   normalSimbol = "‹:)";
   activeSimbol = "‹:)~";
-  lBracketSimbol = "\\ue0b6";
-  rBracketSimbol = "\\ue0b4";
+  # lBracketSimbol = "\\ue0b6";
+  # rBracketSimbol = "\\ue0b4";
+  lBracketSimbol = "";
+  rBracketSimbol = "";
   zoomSimbol = "";
 
   scripts = let
@@ -153,7 +155,7 @@ let
   paneborder = ''
     set -g pane-active-border-style ""
     set -g pane-border-style ""
-    set -g pane-border-format "#{?pane_active,${lBracketSimbol}#[reverse]#{?window_zoomed_flag,${zoomSimbol},} #S / #W / #T - (#(${scripts.TMUX_LOA}/bin/TMUX_LOA) #{?client_prefix,${activeSimbol},${normalSimbol}} #[default]${rBracketSimbol},}"
+    set -g pane-border-format "#{?pane_active,${lBracketSimbol}#[reverse]#{?window_zoomed_flag, ${zoomSimbol},} #S / #W / #T - (#(${scripts.TMUX_LOA}/bin/TMUX_LOA) #{?client_prefix,${activeSimbol},${normalSimbol}} #[default]${rBracketSimbol},}"
     set -g pane-border-status top
   '';
 

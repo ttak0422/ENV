@@ -1,9 +1,7 @@
 let s:sources = [
       \ 'nvim-lsp',
       \ 'around',
-      \ 'tmux',
       \ 'buffer',
-      \ 'file',
       \ ]
 
 let s:sourceOptions = {}
@@ -35,6 +33,8 @@ let s:sourceOptions.file = {
       \ }
 let s:sourceOptions.buffer = {
       \ 'mark': 'B',
+      \ 'maxItems': 5,
+      \ 'minAutoCompleteLength': 5,
       \ }
 let s:sourceOptions.skkeleton = {
       \ 'mark': 'S',
@@ -116,6 +116,9 @@ call ddc#custom#patch_global(s:patch_global)
 call ddc#enable()
 call signature_help#enable()
 call popup_preview#enable()
+
+inoremap <silent><expr> <C-x><C-f> ddc#map#manual_complete('file')
+inoremap <silent><expr> <C-x><C-t> ddc#map#manual_complete('tmux')
 
 " nnoremap : <Cmd>call CommandlinePre()<CR>:
 " nnoremap / <Cmd>call CommandlinePre()<CR>/

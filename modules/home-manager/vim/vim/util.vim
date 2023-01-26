@@ -11,7 +11,7 @@ set hlsearch
 set hidden
 set noshowmode
 set termguicolors
-set pumblend=10
+" set pumblend=10
 set isk+=-
 set completeopt=menu,menuone,noselect
 set ttyfast

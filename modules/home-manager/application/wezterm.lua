@@ -8,6 +8,8 @@ return {
     ["My Color"] = my_color,
   },
   color_scheme = "My Color",
+  window_background_opacity = 0.96,
+  text_background_opacity = 0.5,
   font = wezterm.font("PlemolJP35 Console NFJ", { weight = "Medium", stretch = "Normal", style = "Normal" }),
   keys = {
     { key = "-", mods = "CMD|SHIFT", action = wezterm.action.IncreaseFontSize },

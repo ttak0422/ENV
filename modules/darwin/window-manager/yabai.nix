@@ -28,6 +28,7 @@ with lib; {
       yabai -m rule --add app='AnyConnect' manage=off
       yabai -m rule --add app='Alacritty' manage=off
       yabai -m rule --add app='システム環境設定' manage=off
+      yabai -m rule --add app='WezTerm' manage=off
       yabai -m rule --add app=Emacs manage=on
       yabai -m space --gap abs:12
       yabai -m config mouse_modifier               alt

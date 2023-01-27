@@ -497,6 +497,7 @@ let
           ddc-tmux
           ddc-converter_truncate
           ddc-converter_remove_overlap
+          ddc-matcher_length
         ];
         config = ''
           vim.cmd[[

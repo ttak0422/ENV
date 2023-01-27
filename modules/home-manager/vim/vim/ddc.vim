@@ -1,17 +1,17 @@
 let s:sources = [
       \ 'nvim-lsp',
       \ 'around',
-      \ 'buffer',
       \ ]
 
 let s:sourceOptions = {}
 let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
       \ 'matchers': [
-      \   'matcher_fuzzy'
+      \   'matcher_fuzzy',
+      \   'matcher_head',
       \ ],
       \ 'sorters': [
-      \   'sorter_fuzzy'
+      \   'sorter_fuzzy',
       \ ],
       \ 'converters': [
       \   'converter_remove_overlap',
@@ -19,6 +19,7 @@ let s:sourceOptions._ = {
       \   'converter_fuzzy',
       \ ],
       \ 'forceCompletionPattern': '\S+',
+      \ 'dup': 'ignore',
       \ }
 let s:sourceOptions.around = {
       \ 'mark': 'A',
@@ -33,8 +34,6 @@ let s:sourceOptions.file = {
       \ }
 let s:sourceOptions.buffer = {
       \ 'mark': 'B',
-      \ 'maxItems': 5,
-      \ 'minAutoCompleteLength': 5,
       \ }
 let s:sourceOptions.skkeleton = {
       \ 'mark': 'S',
@@ -119,6 +118,7 @@ call popup_preview#enable()
 
 inoremap <silent><expr> <C-x><C-f> ddc#map#manual_complete('file')
 inoremap <silent><expr> <C-x><C-t> ddc#map#manual_complete('tmux')
+inoremap <silent><expr> <C-x><C-b> ddc#map#manual_complete('buffer')
 
 " nnoremap : <Cmd>call CommandlinePre()<CR>:
 " nnoremap / <Cmd>call CommandlinePre()<CR>/

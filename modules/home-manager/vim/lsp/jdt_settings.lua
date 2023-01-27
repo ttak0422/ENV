@@ -38,6 +38,7 @@ return function(runtimes)
         "#",
         "java",
         "javax",
+        "jakarta",
         "org",
         "com",
       },

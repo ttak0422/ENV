@@ -32,5 +32,8 @@ require("formatter").setup({
     go = {
       require("formatter.filetypes.go").gofmt,
     },
+    typescript = {
+      require("formatter.filetypes.typescript").denofmt,
+    },
   },
 })

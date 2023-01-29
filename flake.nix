@@ -44,6 +44,11 @@
       inputs = { flake-utils.follows = "flake-utils"; };
     };
     nix-filter.url = "github:numtide/nix-filter";
+    jol = {
+      url =
+        "https://repo.maven.apache.org/maven2/org/openjdk/jol/jol-cli/0.16/jol-cli-0.16-full.jar";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils
@@ -71,7 +76,17 @@
           inputs.nix-filter.overlays.default
           # inputs.emacs-overlay.overlay
           # inputs.emacs.overlay
-        ] ++ (with inputs; [ ]);
+          (final: prev: {
+            vimPlugins = prev.vimPlugins // {
+              # ddc-sorter_length = prev.vimUtils.buildVimPluginFrom2Nix {
+              #   pname = "ddc-sorter_itemsize";
+              #   version = "local";
+              #   src = inputs.ddc-sorter_itemsize;
+              # };
+            };
+            javaPackages = prev.javaPackages // { jol = inputs.jol; };
+          })
+        ];
       };
 
       mkHomeManagerConfig =

@@ -613,6 +613,22 @@
         "type": "github"
       }
     },
+    "ddc-sorter_itemsize": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1674916678,
+        "narHash": "sha256-SpXIcRPGaOyTgishlMHdcnlXehmAHHydF+3WzhGYLFw=",
+        "owner": "ttak0422",
+        "repo": "ddc-sorter_itemsize",
+        "rev": "a43e133ffce74bc3657561f6a67a74fca2637a44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ttak0422",
+        "repo": "ddc-sorter_itemsize",
+        "type": "github"
+      }
+    },
     "ddc-sorter_rank": {
       "flake": false,
       "locked": {
@@ -1672,6 +1688,18 @@
         "owner": "lukas-reineke",
         "repo": "indent-blankline.nvim",
         "type": "github"
+      }
+    },
+    "jol": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-4+r9dT+TPdn47wqaFQC9iYad8iD6pHLNnOi4AUzOEUQ=",
+        "type": "file",
+        "url": "https://repo.maven.apache.org/maven2/org/openjdk/jol/jol-cli/0.16/jol-cli-0.16-full.jar"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://repo.maven.apache.org/maven2/org/openjdk/jol/jol-cli/0.16/jol-cli-0.16-full.jar"
       }
     },
     "legendary-nvim": {
@@ -3074,6 +3102,7 @@
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
+        "jol": "jol",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-doom-emacs": "nix-doom-emacs",
         "nix-filter": "nix-filter",
@@ -3794,6 +3823,7 @@
         "ddc-matcher_head": "ddc-matcher_head",
         "ddc-matcher_length": "ddc-matcher_length",
         "ddc-path": "ddc-path",
+        "ddc-sorter_itemsize": "ddc-sorter_itemsize",
         "ddc-sorter_rank": "ddc-sorter_rank",
         "ddc-source-around": "ddc-source-around",
         "ddc-source-cmdline": "ddc-source-cmdline",
@@ -3947,11 +3977,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1674835460,
-        "narHash": "sha256-rhlgWApbHMRQhw+E2ovT/MS2DC0eoN6fevyWsuBk/fk=",
+        "lastModified": 1674923412,
+        "narHash": "sha256-93AMgZtgiIjpQNUIdJ2+8tNuEE9VR+PsItShDMxOt3I=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "0c58dbbe921d5927d1272d5e3ebf6025dd7bcdb0",
+        "rev": "e32fb6795d194d7b3bdb3e52e6a6f7d7e6775547",
         "type": "github"
       },
       "original": {

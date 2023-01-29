@@ -637,6 +637,11 @@ let
         '';
       }
       {
+        plugin = vim-buffer-history;
+        commands = [ "BufferHistoryBack" "BufferHistoryForward" ];
+        delay = true;
+      }
+      {
         plugin = nvim-colorizer-lua;
         config = ''
           require 'colorizer'.setup()

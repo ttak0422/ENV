@@ -72,6 +72,9 @@ wk.register({
     Q = { "<cmd>BufDel!<cr>", "close buffer force" },
     G = { "<cmd>lua _OpenTig()<cr>", "tig" },
     T = { "<cmd>tabnew<cr>", "tabnew" },
+    h = { "<cmd>BufferHistoryBack<cr>", "move local buffer" },
+    l = { "<cmd>BufferHistoryForward<cr>", "move local buffer" },
+    b = { "<cmd>BufferHistoryList<cr>", "show local buffer" },
   },
 })
 

@@ -11,6 +11,7 @@ let s:sourceOptions._ = {
       \   'matcher_head',
       \ ],
       \ 'sorters': [
+      \   'sorter_itemsize',
       \   'sorter_fuzzy',
       \ ],
       \ 'converters': [
@@ -40,7 +41,6 @@ let s:sourceOptions.skkeleton = {
       \ 'matchers': ['skkeleton'],
       \ }
 let s:sourceOptions['nvim-lsp'] = {
-      \ 'mark': 'L',
       \ 'dup': 'keep',
       \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \ 'maxItems': 50,
@@ -102,8 +102,7 @@ let s:filterParams.converter_truncate = {
 let s:patch_global = {}
 let s:patch_global.ui = 'pum'
 " let s:patch_global.ui = 'native'
-" let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged' ]
-let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP' ]
+let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged' ]
 let s:patch_global.backspaceCompletion = v:true
 let s:patch_global.sources = s:sources
 let s:patch_global.sourceOptions = s:sourceOptions

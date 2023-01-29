@@ -7,7 +7,8 @@ return function(opt)
   vim.env.GIT_EDITOR = nvrcmd
 
   vim.g.neovide_cursor_vfx_mode = "pixiedust"
-  vim.opt.guifont = "PlemolJP35 Console NFJ"
+  vim.g.neovide_transparency = 0.8
+  vim.opt.guifont = "PlemolJP35 Console NFJ:h20"
 
   vim.api.nvim_create_augroup("extraConfig", {})
   vim.api.nvim_create_autocmd("BufNewFile", {

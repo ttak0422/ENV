@@ -8,7 +8,6 @@ let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
       \ 'matchers': [
       \   'matcher_fuzzy',
-      \   'matcher_head',
       \ ],
       \ 'sorters': [
       \   'sorter_itemsize',

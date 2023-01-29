@@ -3,6 +3,13 @@ return function(opt)
   local root = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" })
   local workspace = os.getenv("HOME") .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(root, ":p:h:t")
 
+  local bundles = {
+    opt.java_debug_jar,
+  }
+  vim.list_extend(bundles, vim.split(opt.java_test_jar, "\n"))
+
+  jdtls.jol_path = opt.jol_jar
+
   local config = {
     on_attach = function(client, bufnr)
       opt.on_attach(client, bufnr)
@@ -38,13 +45,11 @@ return function(opt)
     root_dir = root,
     settings = opt.jdtls_settings,
     init_options = {
-      bundles = {
-        opt.java_debug_jar,
-      },
+      bundles = bundles,
     },
     flags = {
-      debounce_text_changes = 500,
-      allow_incremental_sync = false,
+      debounce_text_changes = 100,
+      allow_incremental_sync = true,
     },
     handlers = {
       ["client/registerCapability"] = function(_, _, _, _)
@@ -65,4 +70,6 @@ return function(opt)
       jdtls.start_or_attach(config)
     end,
   })
+  vim.api.nvim_create_user_command("JdtTestClass", "lua require('jdtls').test_class()", {})
+  vim.api.nvim_create_user_command("JdtTestNearestMethod", "lua require('jdtls').test_nearest_method()", {})
 end

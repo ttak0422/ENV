@@ -92,7 +92,9 @@ in with pkgs.vimPlugins; [
         lombok_jar = "${pkgs.lombok}/share/java/lombok.jar",
         jdtls_jar = vim.fn.glob("${pkgs.jdt-language-server}/share/java/plugins/org.eclipse.equinox.launcher_*.jar"),
         jdtls_settings = dofile("${./jdt_settings.lua}")(runtimes),
-        java_debug_jar = vim.fn.glob("${pkgs.vscode-extensions.vscjava.vscode-java-debug}/share/vscode/extensions/vscjava.vscode-java-debug/server/com.microsoft.java.debug.plugin-*.jar"),
+        java_debug_jar = vim.fn.glob("${pkgs.vscode-extensions.vscjava.vscode-java-debug}/share/vscode/extensions/vscjava.vscode-java-debug/server/com.microsoft.java.debug.plugin-*.jar", 1),
+        java_test_jar = vim.fn.glob("${pkgs.vscode-extensions.vscjava.vscode-java-test}/share/vscode/extensions/vscjava.vscode-java-test/server/*.jar", 1),
+        jol_jar = "${pkgs.javaPackages.jol}",
       })
     '';
     fileTypes = [ "java" ];

@@ -95,6 +95,7 @@ let s:sourceParams.tmux = {
 
 let s:filterParams = {}
 let s:filterParams.converter_truncate = {
+      \ 'maxAbbrWidth': 60,
       \ 'maxKindWidth': 5,
       \ }
 
@@ -102,6 +103,7 @@ let s:patch_global = {}
 let s:patch_global.ui = 'pum'
 " let s:patch_global.ui = 'native'
 let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged' ]
+let s:patch_global.autoCompleteDelay = 100
 let s:patch_global.backspaceCompletion = v:true
 let s:patch_global.sources = s:sources
 let s:patch_global.sourceOptions = s:sourceOptions

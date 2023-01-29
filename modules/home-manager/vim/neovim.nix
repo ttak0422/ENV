@@ -487,6 +487,7 @@ let
           ddc-source-file
           ddc-matcher_head
           ddc-sorter_rank
+          ddc-sorter_itemsize
           ddc-buffer
           ddc-fuzzy
           denops-signature_help

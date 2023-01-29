@@ -3971,17 +3971,18 @@
         "virtual-types-nvim": "virtual-types-nvim",
         "which-key-nvim": "which-key-nvim",
         "wilder-nvim": "wilder-nvim",
+        "winbarbar-nvim": "winbarbar-nvim",
         "windline-nvim": "windline-nvim",
         "winresizer": "winresizer",
         "zen-mode-nvim": "zen-mode-nvim",
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1674923412,
-        "narHash": "sha256-93AMgZtgiIjpQNUIdJ2+8tNuEE9VR+PsItShDMxOt3I=",
+        "lastModified": 1674971271,
+        "narHash": "sha256-b70v4e+5rF9LBf9khNi7SuRKsSNmwa4T27Mw6Eon73k=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "e32fb6795d194d7b3bdb3e52e6a6f7d7e6775547",
+        "rev": "11177d2e9f1ea29d0c36b0e5e64b6a2487044167",
         "type": "github"
       },
       "original": {
@@ -4163,6 +4164,22 @@
       "original": {
         "owner": "gelguy",
         "repo": "wilder.nvim",
+        "type": "github"
+      }
+    },
+    "winbarbar-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1668444206,
+        "narHash": "sha256-/A6XrPq9wt3WcMEPAPUXekmu6yJi0cpfcHtgeEQWCqs=",
+        "owner": "mrjones2014",
+        "repo": "winbarbar.nvim",
+        "rev": "5af49447ebd3d1825e912c1b3980aa253d734e0f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrjones2014",
+        "repo": "winbarbar.nvim",
         "type": "github"
       }
     },

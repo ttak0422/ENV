@@ -870,7 +870,7 @@ let
     {
       plugin = toggleterm-nvim;
       config = readFile ./lua/toggleterm_config.lua;
-      commands = [ "ToggleTerm" ];
+      commands = [ "ToggleTerm" "ToggleTig" ];
     }
   ];
   util = with pkgs.vimPlugins; [

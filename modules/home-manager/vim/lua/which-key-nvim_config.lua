@@ -1,13 +1,3 @@
-function _OpenTig()
-  vim.cmd([[
-    execute 'new term://tig'
-    setlocal bufhidden=delete
-    setlocal noswapfile
-    setlocal nobuflisted
-    startinsert
-  ]])
-end
-
 local wk = require("which-key")
 
 wk.setup()
@@ -70,7 +60,7 @@ wk.register({
     -- other
     q = { "<cmd>BufDel<cr>", "close buffer" },
     Q = { "<cmd>BufDel!<cr>", "close buffer force" },
-    G = { "<cmd>lua _OpenTig()<cr>", "tig" },
+    G = { "<cmd>ToggleTig<cr>", "tig" },
     T = { "<cmd>tabnew<cr>", "tabnew" },
     h = { "<cmd>BufferHistoryBack<cr>", "move local buffer" },
     l = { "<cmd>BufferHistoryForward<cr>", "move local buffer" },

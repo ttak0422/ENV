@@ -38,5 +38,5 @@ augroup Nvim
   autocmd!
   autocmd QuickFixCmdPost [^l]* nested lua require("toolwindow").open_window("quickfix", {stay_after_open = true})
   autocmd QuickFixCmdPost    l* nested lopen
-  autocmd TermClose * if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
+  " autocmd TermClose * if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
 augroup END

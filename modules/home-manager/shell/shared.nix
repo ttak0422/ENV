@@ -9,6 +9,7 @@
     "cat" = "bat";
     "ls" = "exa";
     "tree" = "exa -T";
+    "nvimdiff" = "nvim -d old new";
   };
   abbrevs = {
     static = { "n" = "nvim"; };

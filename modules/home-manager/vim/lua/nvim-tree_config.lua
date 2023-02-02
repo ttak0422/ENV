@@ -5,7 +5,7 @@ require("nvim-tree").setup({
     width = 35,
     side = "left",
     hide_root_folder = true,
-    adaptive_size = true,
+    -- adaptive_size = true,
     mappings = {
       custom_only = true,
       list = {
@@ -28,5 +28,8 @@ require("nvim-tree").setup({
   },
   filters = {
     dotfiles = false,
+  },
+  git = {
+    ignore = false,
   },
 })

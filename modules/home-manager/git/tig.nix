@@ -13,11 +13,13 @@ let
 
     bind main R !git rebase -i %(commit)
     bind diff R !git rebase -i %(commit)
+
     bind status C >git commit
+    bind status e >nvr -l %(file)
   '';
 in {
   home = {
-    packages = with pkgs; [ pkgs.tig ];
+    packages = with pkgs; [ tig ];
     file.".tigrc".text = tigrc;
   };
 }

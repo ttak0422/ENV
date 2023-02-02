@@ -4,7 +4,7 @@ require("toggleterm").setup({
 })
 
 local term = require("toggleterm.terminal").Terminal
-local tig = term:new({ cmd = "tig", hidden = true, direction = "float" })
+local tig = term:new({ cmd = "tig", hidden = true, direction = "float", count = 2 })
 
 vim.api.nvim_create_user_command("ToggleTig", function()
   tig:toggle()

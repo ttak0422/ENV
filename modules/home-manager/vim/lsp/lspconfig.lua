@@ -115,6 +115,18 @@ return function(opt)
     capabilities = capabilities,
   })
 
+  -- html
+  lspconfig.html.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+
+  -- css, scss, less
+  lspconfig.cssls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+
   -- eslint
   lspconfig.eslint.setup({
     on_attach = on_attach,

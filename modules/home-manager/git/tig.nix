@@ -12,7 +12,9 @@ let
     set diff-view   = line-number:yes,interval=1 text:yes,commit-title-overflow=no
 
     bind main R !git rebase -i %(commit)
+
     bind diff R !git rebase -i %(commit)
+    bind diff e >nvr -l %(file)
 
     bind status C >git commit
     bind status e >nvr -l %(file)

@@ -195,17 +195,28 @@ let
       commands = [ "ZoomWinTabToggle" ];
       enable = false;
     }
+    # {
+    #   plugin = pretty-fold-nvim;
+    #   # depends = [ fold-preview-nvim ];
+    #   startup = ''
+    #     -- default
+    #     vim.opt.foldmethod = 'indent'
+    #     vim.opt.foldlevel = 20
+    #   '';
+    #   config = readFile ./lua/pretty-fold-nvim.lua;
+    #   delay = true;
+    #   comment = "折り畳み強化";
+    #   enable = false;
+    # }
     {
-      plugin = pretty-fold-nvim;
-      # depends = [ fold-preview-nvim ];
-      startup = ''
-        -- default
-        vim.opt.foldmethod = 'indent'
-        vim.opt.foldlevel = 20
-      '';
-      config = readFile ./lua/pretty-fold-nvim.lua;
+      plugin = statuscol-nvim;
+      config = readFile ./lua/statuscol.lua;
+    }
+    {
+      plugin = nvim-ufo;
+      depends = [ nvim-treesitter promise-async statuscol-nvim ];
+      config = readFile ./lua/nvim-ufo.lua;
       delay = true;
-      comment = "折り畳み強化";
     }
     {
       plugin = nvim-bqf;

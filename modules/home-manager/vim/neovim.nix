@@ -7,7 +7,7 @@ let
   myPlugins = callPackage ./my-plugins.nix { };
   external = callPackage ./external.nix { };
 
-  extraPackages = with pkgs; [ neovim-remote ];
+  extraPackages = with pkgs; [ ];
 
   editorconfigTemplate = pkgs.writeText "editorconfig" ''
     root = true
@@ -888,6 +888,7 @@ let
     }
   ];
 in {
+  home.packages = with pkgs; [ neovim-remote ];
   programs.rokka-nvim = {
     inherit extraConfig extraConfigLua extraPackages;
     compileInitFile = true;

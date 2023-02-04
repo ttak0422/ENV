@@ -97,8 +97,12 @@ let
   ];
 
   input = with pkgs.vimPlugins; [
-    #
-    # https://github.com/4513ECHO/dotfiles/blob/3c815b972b20033fd83ab943ac632e3845c97bd9/config/nvim/dein/settings/skkeleton.vim
+    {
+      plugin = tabout-nvim;
+      config = readFile ./lua/tabout.lua;
+      depends = [ nvim-treesitter ];
+      events = [ "InsertEnter" ];
+    }
     {
       plugin = skkeleton;
       depends = [ denops-vim ddc-vim skkeleton_indicator-nvim ];

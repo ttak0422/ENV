@@ -140,6 +140,11 @@ let
   ];
 
   custom = with pkgs.vimPlugins; [
+    {
+      plugin = open-nvim;
+      config = readFile ./lua/open.lua;
+      modules = [ "open" ];
+    }
     # {
     #   plugin = fine-cmdline-nvim;
     #   depends = [ nui-nvim ];

@@ -651,10 +651,20 @@ let
           }
         '';
       }
+      # {
+      #   plugin = vim-buffer-history;
+      #   commands = [ "BufferHistoryBack" "BufferHistoryForward" ];
+      #   delay = true;
+      # }
       {
-        plugin = vim-buffer-history;
-        commands = [ "BufferHistoryBack" "BufferHistoryForward" ];
-        delay = true;
+        plugin = cybu-nvim;
+        depends = [ nvim-web-devicons plenary-nvim ];
+        config = ''
+          dofile("${./lua/cybu.lua}")({
+            exclude_ft = dofile("${./exclude_ft.lua}"),
+          })
+        '';
+        modules = [ "cybu" ];
       }
       {
         plugin = nvim-colorizer-lua;

@@ -62,9 +62,6 @@ wk.register({
     Q = { "<cmd>BufDel!<cr>", "close buffer force" },
     G = { "<cmd>ToggleTig<cr>", "tig" },
     T = { "<cmd>tabnew<cr>", "tabnew" },
-    h = { "<cmd>BufferHistoryBack<cr>", "move local buffer" },
-    l = { "<cmd>BufferHistoryForward<cr>", "move local buffer" },
-    b = { "<cmd>BufferHistoryList<cr>", "show local buffer" },
   },
 })
 
@@ -94,6 +91,10 @@ wk.register({
 wk.register({
   -- ["<Tab>"] = { [[@=(foldlevel('.')?'za':"\<Tab>")<CR>]], "toggle fold" },
   ["<C-t>"] = { "<cmd>ToggleTerm<cr>", "toggle terminal" },
+  ["<C-h>"] = { '<cmd>lua require("cybu").cycle("prev")<cr>', "move prev buf" },
+  ["<C-l>"] = { '<cmd>lua require("cybu").cycle("next")<cr>', "move next buf" },
+  ["<C-k>"] = { '<cmd>lua require("cybu").cycle("prev", "last_used")<cr>', "move prev last used buf" },
+  ["<C-j>"] = { '<cmd>lua require("cybu").cycle("next", "last_used")<cr>', "move next last used buf" },
   --["<C-t>"] = {
   --  "<cmd>lua require('toolwindow').open_window('term', nil)<cr>",
   --  "toggle terminal",

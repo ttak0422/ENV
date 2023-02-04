@@ -27,8 +27,6 @@ return function(opt)
   })
 
   local opts = { noremap = true, silent = true }
-  vim.keymap.set("n", "<C-h>", "<cmd>bprev<cr>", opts)
-  vim.keymap.set("n", "<C-l>", "<cmd>bnext<cr>", opts)
   vim.keymap.set("n", "<C-q>", "<cmd>bd<cr>", opts)
   vim.keymap.set("n", "<esc><esc>", "<cmd>nohl<cr>", opts)
   vim.keymap.set("n", "j", "gj", opts)

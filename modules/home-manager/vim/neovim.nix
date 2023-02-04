@@ -760,6 +760,11 @@ let
 
   tool = with pkgs.vimPlugins; [
     {
+      plugin = nomodoro;
+      config = readFile ./lua/nomodoro.lua;
+      commands = [ "NomoWork" ];
+    }
+    {
       plugin = vimdoc-ja;
       config = "vim.cmd[[set helplang=ja,en]]";
       delay = true;

@@ -13,7 +13,7 @@ set noshowmode
 set termguicolors
 " set pumblend=10
 set isk+=-
-set completeopt=menu,menuone,noselect
+set completeopt=menu,menuone,noinsert
 set ttyfast
 set lazyredraw
 

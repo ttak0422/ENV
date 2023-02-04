@@ -98,10 +98,21 @@ let
 
   input = with pkgs.vimPlugins; [
     {
+      plugin = leap-nvim;
+      config = readFile ./lua/leap.lua;
+      events = [ "InsertEnter" ];
+    }
+    {
+      plugin = flit-nvim;
+      config = readFile ./lua/flit.lua;
+      depends = [ leap-nvim ];
+      events = [ "InsertEnter" ];
+    }
+    {
       plugin = tabout-nvim;
       config = readFile ./lua/tabout.lua;
       depends = [ nvim-treesitter ];
-      events = [ "InsertEnter" ];
+      events = [ "CursorMoved" ];
     }
     {
       plugin = skkeleton;
@@ -731,13 +742,13 @@ let
         require'hop'.setup()
       '';
     }
-    {
-      plugin = quick-scope;
-      startup = ''
-        vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
-      '';
-      events = [ "CursorMoved" ];
-    }
+    # {
+    #   plugin = quick-scope;
+    #   startup = ''
+    #     vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
+    #   '';
+    #   events = [ "CursorMoved" ];
+    # }
     {
       plugin = flare-nvim;
       config = readFile ./lua/flare_config.lua;

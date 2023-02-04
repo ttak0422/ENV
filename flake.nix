@@ -18,7 +18,12 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      # https://github.com/nix-community/neovim-nightly-overlay/issues/164
+      inputs.nixpkgs.url =
+        "github:nixos/nixpkgs?rev=fad51abd42ca17a60fc1d4cb9382e2d79ae31836";
+    };
     # rokka-nvim = {
     #   url = "path:/Users/ttak0422/ghq/github.com/ttak0422/rokka-nvim";
     #   inputs.nixpkgs.follows = "nixpkgs";

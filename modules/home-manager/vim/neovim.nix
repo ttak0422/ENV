@@ -749,10 +749,20 @@ let
     #   '';
     #   events = [ "CursorMoved" ];
     # }
+    # {
+    #   plugin = flare-nvim;
+    #   config = readFile ./lua/flare_config.lua;
+    #   events = [ "InsertEnter" ];
+    # }
     {
-      plugin = flare-nvim;
-      config = readFile ./lua/flare_config.lua;
-      events = [ "InsertEnter" ];
+      plugin = SmoothCursor-nvim;
+      config = ''
+        dofile("${./lua/SmoothCursor.lua}")({
+          exclude_ft = dofile("${./exclude_ft.lua}"),
+        })
+      '';
+      #config = readFile ./lua/SmoothCursor.lua;
+      events = [ "CursorMoved" ];
     }
     {
       plugin = chowcho-nvim;

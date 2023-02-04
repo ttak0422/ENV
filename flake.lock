@@ -80,6 +80,22 @@
         "type": "github"
       }
     },
+    "SmoothCursor-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1674569180,
+        "narHash": "sha256-5WQUqgG23tXBJKYYID+WFoXT9vhOjE8tlyyZqkAbTLk=",
+        "owner": "gen740",
+        "repo": "SmoothCursor.nvim",
+        "rev": "79f02173317a76ab406d182ac89b20b59f5e34fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gen740",
+        "repo": "SmoothCursor.nvim",
+        "type": "github"
+      }
+    },
     "actions-preview-nvim": {
       "flake": false,
       "locked": {
@@ -4063,6 +4079,7 @@
         "Ionide-vim": "Ionide-vim",
         "NeoZoom-lua": "NeoZoom-lua",
         "Shade-nvim": "Shade-nvim",
+        "SmoothCursor-nvim": "SmoothCursor-nvim",
         "actions-preview-nvim": "actions-preview-nvim",
         "aerial-nvim": "aerial-nvim",
         "alpha-nvim": "alpha-nvim",
@@ -4267,11 +4284,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1675504482,
-        "narHash": "sha256-u4OzeCJqcLb+22cuyzN5113xcZh8geD5xt+ig/dGLSQ=",
+        "lastModified": 1675530480,
+        "narHash": "sha256-xcSlvxt6GZMvYdAOaBZykKOEYIlFXAy2OrH9BNkMIVQ=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "9ed06d1b63b300c35f9155a2f5b06f95035717b1",
+        "rev": "46e2f63659099508a312dbcb3fdea0f51f61b5c5",
         "type": "github"
       },
       "original": {

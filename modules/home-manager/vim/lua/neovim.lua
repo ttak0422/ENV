@@ -1,6 +1,6 @@
 return function(opt)
   local editor_config = opt.editor_config
-  vim.opt.cmdheight = 1
+  vim.opt.cmdheight = 0
 
   local nvrcmd = "nvr --remote-wait"
   vim.env.VISUAL = nvrcmd

@@ -39,9 +39,7 @@ in with pkgs.vimPlugins; [
   }
   {
     plugin = fidget-nvim;
-    config = ''
-      require'fidget'.setup{}
-    '';
+    config = readFile ./fidget.lua;
   }
   {
     plugin = lsp-inlayhints-nvim;

@@ -352,7 +352,7 @@ let
     {
       plugin = aerial-nvim;
       config = readFile ./lua/aerial-nvim.lua;
-      commands = [ "AerialToggle" ];
+      commands = [ "ToggleOutline" ];
     }
     {
       plugin = symbols-outline-nvim;

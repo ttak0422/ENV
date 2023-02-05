@@ -16,3 +16,7 @@ require("aerial").setup({
     end,
   },
 })
+
+vim.api.nvim_create_user_command("ToggleOutline", function()
+  require("aerial").toggle({ focus = false, direction = "float" })
+end, {})

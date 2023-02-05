@@ -24,7 +24,7 @@ wk.register({
         "toggle diagnostics (workspace)",
       },
       m = { "<cmd>Glow<cr>", "toggle markdown" },
-      o = { "<cmd>AerialToggle float<cr>", "toggle outline" },
+      o = { "<cmd>ToggleOutline<cr>", "toggle outline" },
       O = { "<cmd>SidebarNvimToggle<cr>", "toggle outline" },
       q = { "<cmd>lua require('toolwindow').close()<cr>", "toggle toolwindows" },
     },

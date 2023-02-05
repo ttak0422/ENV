@@ -28,9 +28,6 @@ let s:sourceOptions.around = {
 let s:sourceOptions.file = {
       \ 'mark': 'F',
       \ 'forceCompletionPattern': '\S/\S*',
-      \ 'trailingSlash': v:true,
-      \ 'projAsRoot': v:true,
-      \ 'bufAsRoot': v:true,
       \ }
 let s:sourceOptions.buffer = {
       \ 'mark': 'B',
@@ -91,6 +88,11 @@ let s:sourceParams.tmux = {
       \ 'currentWinOnly': v:true,
       \ 'excludeCurrentPane': v:true,
       \ 'kindFormat': '#{pane_current_command}',
+      \ }
+let s:sourceParams.file = {
+      \ 'trailingSlash': v:true,
+      \ 'projAsRoot': v:true,
+      \ 'bufAsRoot': v:true,
       \ }
 
 let s:filterParams = {}

@@ -23,9 +23,10 @@ in with pkgs.vimPlugins; [
   }
   {
     plugin = lspsaga-nvim;
-    depends = [ nvim-lspconfig ];
+    depends = [ nvim-web-devicons ];
     config = readFile ./lspsaga-nvim.lua;
     commands = [ "Lspsaga" ];
+    modules = [ "lspsaga.diagnostic" ];
   }
   {
     plugin = formatter-nvim;
@@ -51,10 +52,10 @@ in with pkgs.vimPlugins; [
     plugin = vim-illuminate;
     config = readFile ./vim-illuminate.lua;
   }
-  {
-    plugin = hover-nvim;
-    config = readFile ./hover-nvim.lua;
-  }
+  # {
+  #   plugin = hover-nvim;
+  #   config = readFile ./hover-nvim.lua;
+  # }
   {
     plugin = glow-hover-nvim;
     config = ''

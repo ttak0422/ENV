@@ -871,10 +871,15 @@ let
       config = readFile ./lua/zen-mode_config.lua;
       commands = [ "ZenMode" ];
     }
+    # {
+    #   plugin = true-zen;
+    #   config = readFile ./lua/true-zen.lua;
+    #   commands = [ "TZFocus" ];
+    # }
     {
-      plugin = true-zen;
-      config = readFile ./lua/true-zen.lua;
-      commands = [ "TZFocus" ];
+      plugin = NeoZoom-lua;
+      config = readFile ./lua/NeoZoom.lua;
+      commands = [ "NeoZoomToggle" ];
     }
     {
       plugin = twilight-nvim;

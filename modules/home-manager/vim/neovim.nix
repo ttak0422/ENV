@@ -256,18 +256,12 @@ let
   statusline = with pkgs.vimPlugins; [
     {
       plugin = lualine-nvim;
-      startup = ''
-        vim.opt.laststatus = 3
-      '';
       config = readFile ./lua/lualine_config.lua;
       delay = true;
       enable = false;
     }
     {
       plugin = windline-nvim;
-      startup = ''
-        vim.opt.laststatus = 3
-      '';
       delay = true;
       config = ''
         require('wlsample.vscode')

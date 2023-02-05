@@ -377,7 +377,15 @@ let
     }
     {
       plugin = serenade;
-      config = "vim.cmd([[colorscheme serenade]])";
+      config = ''
+        vim.cmd([[
+          colorscheme serenade
+          hi DiagnosticError guifg=#d76e6e
+          hi DiagnosticWarn  guifg=#e5a46b
+          hi DiagnosticInfo  guifg=#82abbc
+          hi DiagnosticHint  guifg=#9aa1a8
+        ]])
+      '';
       depends = [ nvim-transparent ];
       delay = true;
       # optional = false;

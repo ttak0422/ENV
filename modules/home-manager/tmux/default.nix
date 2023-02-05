@@ -155,7 +155,7 @@ let
   paneborder = ''
     set -g pane-active-border-style ""
     set -g pane-border-style ""
-    set -g pane-border-format "#{?pane_active,${lBracketSimbol}#[reverse]#{?window_zoomed_flag, ${zoomSimbol},} #S | #W | #{pane_current_path} #{?client_prefix,${activeSimbol},${normalSimbol}} #[default]${rBracketSimbol},}"
+    set -g pane-border-format "#{?pane_active,${lBracketSimbol}#{?window_zoomed_flag, ${zoomSimbol},} #S | #W | #{pane_current_path} #{?client_prefix,${activeSimbol},${normalSimbol}} #[default]${rBracketSimbol},}"
     set -g pane-border-status top
   '';
 

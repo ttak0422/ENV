@@ -1,1 +1,1 @@
-require'headlines'.setup{}
+require("headlines").setup({})

@@ -2,8 +2,7 @@ local function setup_vim_opt()
   vim.opt.termguicolors = true
 end
 
-local function setup_vim_env()
-end
+local function setup_vim_env() end
 
 local function init()
   setup_vim_opt()

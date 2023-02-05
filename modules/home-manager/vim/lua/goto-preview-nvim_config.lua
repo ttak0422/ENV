@@ -1,3 +1,3 @@
-require'goto-preview'.setup {
-  border = {'╭', '─' ,'╮', '│', '╯', '─', '╰', '│'},
-}
+require("goto-preview").setup({
+  border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+})

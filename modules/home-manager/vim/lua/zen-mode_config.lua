@@ -1,12 +1,12 @@
-require 'zen-mode'.setup {
+require("zen-mode").setup({
   window = {
     backdrop = 0.90,
-    width = .85,
+    width = 0.85,
     options = {
-      signcolumn = 'no',
-      number = false;
-      relativenumber = false;
-      cursorline = true;
+      signcolumn = "no",
+      number = false,
+      relativenumber = false,
+      cursorline = true,
     },
   },
   plugins = {
@@ -23,4 +23,4 @@ require 'zen-mode'.setup {
       font = "+2",
     },
   },
-}
+})

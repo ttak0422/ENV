@@ -1,1 +1,1 @@
-require'mdeval'.setup{}
+require("mdeval").setup({})

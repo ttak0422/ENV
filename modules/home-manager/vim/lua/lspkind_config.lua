@@ -1,3 +1,3 @@
-require'lspkind'.init{
-  preset = 'default',
-}
+require("lspkind").init({
+  preset = "default",
+})

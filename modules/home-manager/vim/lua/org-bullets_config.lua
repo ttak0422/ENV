@@ -1,11 +1,11 @@
-require 'org-bullets'.setup {
+require("org-bullets").setup({
   concealcursor = false,
   symbols = {
-    headlines = { '◉', '○', '✸', '✿' },
+    headlines = { "◉", "○", "✸", "✿" },
     checkboxes = {
-      cancelled = { '', 'OrgCancelled' },
-      done = { '✓', 'OrgDone' },
-      todo = { '˟', 'OrgTODO' },
+      cancelled = { "", "OrgCancelled" },
+      done = { "✓", "OrgDone" },
+      todo = { "˟", "OrgTODO" },
     },
-  }
-}
+  },
+})

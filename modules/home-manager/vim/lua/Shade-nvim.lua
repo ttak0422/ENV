@@ -1,3 +1,3 @@
-require 'shade'.setup({
+require("shade").setup({
   overlay_opacity = 50,
 })

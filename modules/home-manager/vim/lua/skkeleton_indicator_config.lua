@@ -1,5 +1,5 @@
 require("skkeleton_indicator").setup({
-	ignoreFt = {
-		"TelescopePrompt",
-	},
+  ignoreFt = {
+    "TelescopePrompt",
+  },
 })

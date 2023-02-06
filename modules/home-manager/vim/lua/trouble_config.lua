@@ -1,5 +1,11 @@
 require("trouble").setup({
-  use_diagnostic_signs = true,
+  signs = {
+    error = "",
+    warning = "",
+    hint = "",
+    information = "",
+    other = "﫠",
+  },
   auto_fold = false,
   auto_preview = false,
 })

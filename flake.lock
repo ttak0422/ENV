@@ -2410,6 +2410,22 @@
         "type": "github"
       }
     },
+    "noice-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1675023568,
+        "narHash": "sha256-5C05en9c6tZW3/vNjgCfFQFRFq5U0NKg/LK5EeUHc1o=",
+        "owner": "folke",
+        "repo": "noice.nvim",
+        "rev": "34f7cf628666c6eb0c93fbe8a0490e977ac78b7b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "noice.nvim",
+        "type": "github"
+      }
+    },
     "nomodoro": {
       "flake": false,
       "locked": {
@@ -4179,6 +4195,7 @@
         "neoscroll-nvim": "neoscroll-nvim",
         "nightfox-nvim": "nightfox-nvim",
         "nixpkgs": "nixpkgs_8",
+        "noice-nvim": "noice-nvim",
         "nomodoro": "nomodoro",
         "nui-nvim": "nui-nvim",
         "null-ls-nvim": "null-ls-nvim",
@@ -4284,11 +4301,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1675578871,
-        "narHash": "sha256-PMWMRLar5LWDdkswRNbcoL+v8hqc6N4LsZGfeIyswoU=",
+        "lastModified": 1675690154,
+        "narHash": "sha256-NJdHAEDHaCv3oWsuLTzWeM8hMKHkRJmj9sa6EbaNbV4=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "c20c26756ac870ccba0bd7380d3cd9c15650dd37",
+        "rev": "0ba76bca2ae8009797f440e1c466c114b7938ae2",
         "type": "github"
       },
       "original": {

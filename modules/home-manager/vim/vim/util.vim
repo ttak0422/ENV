@@ -15,7 +15,7 @@ set termguicolors
 set isk+=-
 set completeopt=menu,menuone,noinsert
 set ttyfast
-set lazyredraw
+" set lazyredraw
 
 " tabキーでspaceを入力する
 set expandtab

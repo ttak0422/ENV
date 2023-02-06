@@ -156,6 +156,16 @@ let
 
   custom = with pkgs.vimPlugins; [
     {
+      plugin = noice-nvim;
+      config = ''
+        dofile("${./lua/noice.lua}")({
+          exclude_ft = dofile("${./exclude_ft.lua}"),
+        })
+      '';
+      depends = [ nui-nvim nvim-notify ];
+      delay = true;
+    }
+    {
       plugin = open-nvim;
       config = readFile ./lua/open.lua;
       modules = [ "open" ];

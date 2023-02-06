@@ -118,9 +118,9 @@ call ddc#enable()
 call signature_help#enable()
 call popup_preview#enable()
 
-inoremap <silent><expr> <C-x><C-f> ddc#map#manual_complete('file')
-inoremap <silent><expr> <C-x><C-t> ddc#map#manual_complete('tmux')
-inoremap <silent><expr> <C-x><C-b> ddc#map#manual_complete('buffer')
+inoremap <silent> <C-x><C-f> <Cmd>call ddc#map#manual_complete(#{ sources: ['file'] })<CR>
+inoremap <silent> <C-x><C-t> <Cmd>call ddc#map#manual_complete(#{ sources: ['tmux'] })<CR>
+inoremap <silent> <C-x><C-b> <Cmd>call ddc#map#manual_complete(#{ sources: ['buffer'] })<CR>
 
 " nnoremap : <Cmd>call CommandlinePre()<CR>:
 " nnoremap / <Cmd>call CommandlinePre()<CR>/

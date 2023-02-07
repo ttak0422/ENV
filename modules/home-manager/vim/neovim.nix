@@ -307,6 +307,15 @@ let
 
   view = with pkgs.vimPlugins; [
     {
+      plugin = winbar-nvim;
+      config = ''
+        dofile("${./lua/winbar.lua}")({
+          exclude_ft = dofile("${./exclude_ft.lua}"),
+        })
+      '';
+      delay = true;
+    }
+    {
       plugin = themer-lua;
       config = readFile ./lua/themer.lua;
     }

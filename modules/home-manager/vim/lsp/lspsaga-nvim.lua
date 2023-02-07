@@ -61,6 +61,7 @@ require("lspsaga").setup({
     border_follow = false,
   },
   symbol_in_winbar = {
+    enable = false,
     separator = "  ",
     respect_root = true,
     color_mode = false,

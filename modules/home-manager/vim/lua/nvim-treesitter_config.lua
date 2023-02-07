@@ -60,7 +60,6 @@ require("nvim-treesitter.configs").setup({
     enable = true,
     ignore_install = { "c" },
     disable = { "c", "org" },
-    additional_vim_regex_highlighting = { "org" },
   },
   rainbow = {
     enable = true,

@@ -2413,11 +2413,11 @@
     "noice-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1675718224,
-        "narHash": "sha256-P75zlqmJwEFBzLLZrPkoGDXt1L6Gzxg8OgyTcChZobs=",
+        "lastModified": 1675803750,
+        "narHash": "sha256-mLOoYjlJawgkNGhkXYc/otpLXkjKHpLbMsYu4j0qwFQ=",
         "owner": "folke",
         "repo": "noice.nvim",
-        "rev": "a83b5fb9e24ecb220fa1255a9b7957dcd7b22783",
+        "rev": "d8a1f3056ad713b5d471048f8d029264828e22c0",
         "type": "github"
       },
       "original": {
@@ -4302,11 +4302,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1675787146,
-        "narHash": "sha256-Z/NG61zVQ3QPo+9+gP5Pw1Y3GdOM35AzRgjiCfYglUw=",
+        "lastModified": 1675866919,
+        "narHash": "sha256-wNcCuYqMJje39x0n3iDogntw8MfxoxmenP7N0WQ2OJs=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "e4947edd251cab931c33fa3fbf0b9933bbff11b2",
+        "rev": "740a172b115be39a2ea9e837bed0afca0cf7ee74",
         "type": "github"
       },
       "original": {

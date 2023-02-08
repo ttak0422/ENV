@@ -469,14 +469,14 @@ let
         extraPackages = with pkgs; [ tree-sitter ];
         commands = [ "TSBufEnable" ];
       }
-      {
-        plugin = range-highlight-nvim;
-        depends = [ cmd-parser-nvim ];
-        config = ''
-          require('range-highlight').setup{}
-        '';
-        events = [ "CmdlineEnter" ];
-      }
+      # {
+      #   plugin = range-highlight-nvim;
+      #   depends = [ cmd-parser-nvim ];
+      #   config = ''
+      #     require('range-highlight').setup{}
+      #   '';
+      #   events = [ "CmdlineEnter" ];
+      # }
       {
         plugin = myPlugins.nvim-dd;
         config = ''

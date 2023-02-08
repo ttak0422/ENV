@@ -77,6 +77,9 @@ return function(opt)
         enabled = false,
       },
     },
+    messages = {
+      enabled = false,
+    },
     markdown = {
       hover = {
         ["|(%S-)|"] = vim.cmd.help,

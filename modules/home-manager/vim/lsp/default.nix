@@ -3,7 +3,7 @@
 let
   inherit (builtins) readFile;
   lspSharedDepends = with pkgs.vimPlugins; [
-    # fidget-nvim
+    fidget-nvim
     lspsaga-nvim
     # virtual-types-nvim
     lsp-inlayhints-nvim
@@ -39,10 +39,10 @@ in with pkgs.vimPlugins; [
     plugin = actions-preview-nvim;
     config = readFile ./actions-preview-nvim.lua;
   }
-  # {
-  #   plugin = fidget-nvim;
-  #   config = readFile ./fidget.lua;
-  # }
+  {
+    plugin = fidget-nvim;
+    config = readFile ./fidget.lua;
+  }
   {
     plugin = lsp-inlayhints-nvim;
     config = ''

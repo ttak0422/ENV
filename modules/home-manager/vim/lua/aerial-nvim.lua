@@ -4,14 +4,16 @@ require("aerial").setup({
     update_delay = 1000,
   },
   layout = {
+    min_width = 20,
     placement = "edge",
+    default_direction = "float",
   },
   float = {
     relative = "win",
     override = function(conf, source_winid)
-      conf.anchor = "NE"
-      conf.col = vim.fn.winwidth(source_winid)
-      conf.row = 0
+      conf.anchor = "SE"
+      conf.col = vim.fn.winwidth(source_winid) - 3
+      conf.row = vim.fn.winheight(source_winid) - 0
       return conf
     end,
   },

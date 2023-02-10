@@ -409,7 +409,8 @@ let
         ]])
       '';
       depends = [ nvim-transparent ];
-      optional = false;
+      delay = true;
+      # optional = false;
     }
     {
       plugin = headlines-nvim;
@@ -445,7 +446,6 @@ let
           '';
         }
       ];
-      delay = true;
       config = readFile ./lua/bufferline_config.lua;
     }
     {

@@ -91,15 +91,15 @@ let
     # zoom
     bind z resize-pane -Z
 
-    # session: create
-    bind C-n command-prompt -I "" "new -s '%%'"
+    # session: create and fill empty title
+    bind C-n command-prompt -I "" "new -s '%%'"\; select-pane -T ""
     # session: choose
     bind s choose-session
     # session: rename
     bind S command-prompt -I "#S" "rename-session '%%'"
 
-    # window: create
-    bind c new-window
+    # window: create and fill empty title
+    bind c new-window\; select-pane -T ""
     # window: close
     bind X confirm-before -p "kill-window #W? (y/n)" kill-window
     # window: choose

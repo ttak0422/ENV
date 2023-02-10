@@ -58,6 +58,7 @@ return function(opt)
           error = nil,
         }
       end,
+      ["language/status"] = function() end,
     },
   }
 

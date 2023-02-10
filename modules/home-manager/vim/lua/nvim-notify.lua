@@ -2,7 +2,7 @@ local notify = require("notify")
 
 notify.setup({
   timeout = 3000,
-  top_down = false,
+  top_down = true,
   stages = "fade",
   background_colour = "#000000",
 })

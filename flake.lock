@@ -3366,6 +3366,7 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "pre-commit-hooks": "pre-commit-hooks",
         "rokka-nvim": "rokka-nvim",
+        "tmux-pomodoro-plus": "tmux-pomodoro-plus",
         "vim-plugins-overlay": "vim-plugins-overlay"
       }
     },
@@ -3814,6 +3815,22 @@
       "original": {
         "owner": "levouh",
         "repo": "tint.nvim",
+        "type": "github"
+      }
+    },
+    "tmux-pomodoro-plus": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1675801822,
+        "narHash": "sha256-yJiONC0GY9fbGL+fcONK/CC1sr6srfsne2biFAP+Qis=",
+        "owner": "olimorris",
+        "repo": "tmux-pomodoro-plus",
+        "rev": "808638f3002679873b9ce3169c84b5b158731d22",
+        "type": "github"
+      },
+      "original": {
+        "owner": "olimorris",
+        "repo": "tmux-pomodoro-plus",
         "type": "github"
       }
     },

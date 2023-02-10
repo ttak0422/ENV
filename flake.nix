@@ -54,6 +54,10 @@
         "https://repo.maven.apache.org/maven2/org/openjdk/jol/jol-cli/0.16/jol-cli-0.16-full.jar";
       flake = false;
     };
+    tmux-pomodoro-plus = {
+      url = "github:olimorris/tmux-pomodoro-plus";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils
@@ -88,6 +92,14 @@
               #   version = "local";
               #   src = inputs.ddc-sorter_itemsize;
               # };
+            };
+            tmuxPlugins = prev.tmuxPlugins // {
+              tmux-pomodoro-plus = prev.tmuxPlugins.mkTmuxPlugin {
+                pluginName = "tmux-pomodoro-plus";
+                rtpFilePath = "pomodoro.tmux";
+                version = "local";
+                src = inputs.tmux-pomodoro-plus;
+              };
             };
             javaPackages = prev.javaPackages // { jol = inputs.jol; };
           })

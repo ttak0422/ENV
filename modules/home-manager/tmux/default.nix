@@ -12,6 +12,7 @@ let
   darkBgColor = "#3F464B";
   darkFgColor = "#9AA1A8";
   lightFgColor = "#2A2F33";
+  leftStatusColor = "#61AFEF";
   centerStatusColor = "#82ABBC";
 
   scripts = let
@@ -30,6 +31,10 @@ let
       '';
       TMUX_USER = ''
         echo " $USER"
+      '';
+      TMUX_POMODORO = ''
+        STATUS=`${pkgs.tmuxPlugins.tmux-pomodoro-plus}/share/tmux-plugins/tmux-pomodoro-plus/scripts/pomodoro.sh`
+        if [ -z $STATUS ]; then echo " pomodoro"; else echo $STATUS; fi
       '';
       TMUX_LOA = ''
         uptime | awk -F "[:,]"  '{printf "%s %s %s\n",$(NF - 2),$(NF - 1), $NF}'
@@ -53,6 +58,7 @@ let
     better-mouse-mode
     copycat
     urlview
+    tmux-pomodoro-plus
   ];
 
   prelude = ''
@@ -131,12 +137,24 @@ let
     bind -r J resize-pane -D ${toString resizeAmount}
     bind -r K resize-pane -U ${toString resizeAmount}
     bind -r L resize-pane -R ${toString resizeAmount}
+
+    # pomodoro (hack)
+    bind p run-shell "${pkgs.tmuxPlugins.tmux-pomodoro-plus}/share/tmux-plugins/tmux-pomodoro-plus/scripts/pomodoro.sh toggle"
   '';
 
   zoom = "#{?window_zoomed_flag,${zoomInSimbol},${zoomOutSimbol}}";
   active = " #{?client_prefix,${activeSimbol},}";
 
   statusline = ''
+    # pomodoro
+    set -g @pomodoro_start 'p'
+    set -g @pomodoro_on "#[fg=$text_red] "
+    set -g @pomodoro_complete "#[fg=$text_green] "
+    set -g @pomodoro_granularity 'on'
+    set -g status-interval 1
+    set -g @pomodoro_notifications 'on'
+    set -g @pomodoro_sound 'on'
+
     # set -g status off
 
     set -g status on
@@ -144,13 +162,13 @@ let
     set -g status-left-length 40
     set -g status-right-length 80
     # set-option -g status-interval ${toString statusInterval}
-    set-option -g status-left " #(${scripts.TMUX_SESSION_NAME}/bin/TMUX_SESSION_NAME) "
+    set-option -g status-left "#[bg=${leftStatusColor},fg=${lightFgColor},bold] #(${scripts.TMUX_SESSION_NAME}/bin/TMUX_SESSION_NAME) "
 
     set-option -g status-justify "centre"
     set-window-option -g window-status-format "#[default] #W #[default]"
     set-window-option -g window-status-current-format "#[bg=${centerStatusColor},fg=${lightFgColor},bold] #W #[default]"
 
-    set -g status-right " #(${scripts.TMUX_USER}/bin/TMUX_USER) "
+    set -g status-right "#(${scripts.TMUX_POMODORO}/bin/TMUX_POMODORO) | #(${scripts.TMUX_USER}/bin/TMUX_USER) "
 
     set -g status-bg '${darkBgColor}'
     set -g status-fg '${darkFgColor}'

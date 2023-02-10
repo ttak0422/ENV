@@ -4,22 +4,33 @@ let
   inherit (pkgs) writeScriptBin;
   inherit (lib) mapAttrsToList;
 
-  defaultShell = "${pkgs.zsh}/bin/zsh";
   statusInterval = 60;
   resizeAmount = 5;
-  normalSimbol = "";
   activeSimbol = "";
-  # lBracketSimbol = "\\ue0b6";
-  # rBracketSimbol = "\\ue0b4";
-  lBracketSimbol = "";
-  rBracketSimbol = "";
-  zoomSimbol = "";
+  zoomOutSimbol = "";
+  zoomInSimbol = "";
+  darkBgColor = "#3F464B";
+  darkFgColor = "#9AA1A8";
+  lightFgColor = "#2A2F33";
+  centerStatusColor = "#82ABBC";
 
   scripts = let
     shebang = ''
       #!${pkgs.bash}/bin/bash
     '';
     scriptDefinitions = {
+      TMUX_SESSION_NAME = ''
+        DEFAULT="DEFAULT"
+        NAME=$(tmux display-message -p "#S")
+        if [ $NAME == "0" ]; then echo $DEFAULT; else echo $NAME; fi
+      '';
+      TMUX_PANE_NAME = ''
+        NAME=$(tmux display-message -p "#T")
+        if [ -z $NAME ]; then echo $(pwd); else echo $NAME; fi
+      '';
+      TMUX_USER = ''
+        echo " $USER"
+      '';
       TMUX_LOA = ''
         uptime | awk -F "[:,]"  '{printf "%s %s %s\n",$(NF - 2),$(NF - 1), $NF}'
       '';
@@ -31,35 +42,9 @@ let
           echo 1;
         fi
       '';
-      TMUX_UPDATE_BORDER = ''
-        zoomed=''${1:-0}
-        num=`tmux list-panes | wc -l`;
-        if [[ 1 = $num || 1 = $zoomed ]]; then
-          tmux set pane-border-status off
-        else
-          tmux set pane-border-status top
-        fi
-      '';
-      TMUX_KILL_PANE_AND_UPDATE_BORDER = ''
-        tmux kill-pane
-        num=`tmux list-panes | wc -l`;
-        if [[ 1 = $num ]]; then
-          tmux set pane-border-status off
-        else
-          tmux set pane-border-status top
-        fi
-      '';
     };
   in mapAttrs (k: v: writeScriptBin k (shebang + v)) scriptDefinitions;
   scriptPackages = mapAttrsToList (k: v: v) scripts;
-
-  # 変更発生時向け
-  borderUpdate = ''
-    run-shell "${scripts.TMUX_UPDATE_BORDER}/bin/TMUX_UPDATE_BORDER #{window_zoomed_flag}"'';
-
-  # 変更発生時向け (pane削除対応版)
-  borderUpdate2 = ''
-    run-shell "${scripts.TMUX_KILL_PANE_AND_UPDATE_BORDER}/bin/TMUX_KILL_PANE_AND_UPDATE_BORDER"'';
 
   # plugins for tmux
   tmuxPlugins = with pkgs.tmuxPlugins; [
@@ -129,9 +114,9 @@ let
     bind -r , previous-window
     bind -r . next-window
 
-    # pane: split
-    bind | split-window -h -c '#{pane_current_path}'
-    bind - split-window -v -c '#{pane_current_path}'
+    # pane: split and fill empty title
+    bind | split-window -h -c '#{pane_current_path}'\; select-pane -T ""
+    bind - split-window -v -c '#{pane_current_path}'\; select-pane -T ""
     # pane: close
     bind x confirm-before -p "kill-pane #T? (y/n)" kill-pane
     # pane: rename
@@ -148,14 +133,33 @@ let
     bind -r L resize-pane -R ${toString resizeAmount}
   '';
 
+  zoom = "#{?window_zoomed_flag,${zoomInSimbol},${zoomOutSimbol}}";
+  active = " #{?client_prefix,${activeSimbol},}";
+
   statusline = ''
-    set -g status off
+    # set -g status off
+
+    set -g status on
+    set -g status-position bottom
+    set -g status-left-length 40
+    set -g status-right-length 80
+    # set-option -g status-interval ${toString statusInterval}
+    set-option -g status-left " #(${scripts.TMUX_SESSION_NAME}/bin/TMUX_SESSION_NAME) "
+
+    set-option -g status-justify "centre"
+    set-window-option -g window-status-format "#[default] #W #[default]"
+    set-window-option -g window-status-current-format "#[bg=${centerStatusColor},fg=${lightFgColor},bold] #W #[default]"
+
+    set -g status-right " #(${scripts.TMUX_USER}/bin/TMUX_USER) "
+
+    set -g status-bg '${darkBgColor}'
+    set -g status-fg '${darkFgColor}'
   '';
 
   paneborder = ''
     set -g pane-active-border-style ""
     set -g pane-border-style ""
-    set -g pane-border-format "#{?pane_active,${lBracketSimbol}#{?window_zoomed_flag, ${zoomSimbol},} #S | #W | #{pane_current_path} #{?client_prefix,${activeSimbol},${normalSimbol}} #[default]${rBracketSimbol},}"
+    set -g pane-border-format "#{?pane_active, ${zoom} #(${scripts.TMUX_PANE_NAME}/bin/TMUX_PANE_NAME)${active},}"
     set -g pane-border-status top
   '';
 
@@ -175,6 +179,9 @@ let
     ${statusline}
     ${paneborder}
     ${session}
+
+    # set pane title to empty
+    run 'tmux select-pane -T ""'
   '';
 in {
   home.packages = scriptPackages;
@@ -183,7 +190,7 @@ in {
     enable = true;
     plugins = tmuxPlugins;
     sensibleOnTop = true;
-    shortcut = "g";
+    shortcut = "b";
     keyMode = "vi";
     customPaneNavigationAndResize = false;
     newSession = true;

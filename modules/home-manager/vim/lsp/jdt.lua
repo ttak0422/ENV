@@ -52,12 +52,6 @@ return function(opt)
       allow_incremental_sync = true,
     },
     handlers = {
-      ["client/registerCapability"] = function(_, _, _, _)
-        return {
-          result = nil,
-          error = nil,
-        }
-      end,
       ["language/status"] = function() end,
     },
   }

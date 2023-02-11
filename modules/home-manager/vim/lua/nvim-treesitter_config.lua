@@ -35,6 +35,7 @@ require("nvim-treesitter.configs").setup({
     "lua",
     "make",
     "markdown",
+    "markdown_inline",
     "nix",
     "ocaml",
     "ocaml",
@@ -60,6 +61,7 @@ require("nvim-treesitter.configs").setup({
     enable = true,
     ignore_install = { "c" },
     disable = { "c", "org" },
+    additional_vim_regex_highlighting = { "markdown" },
   },
   rainbow = {
     enable = true,

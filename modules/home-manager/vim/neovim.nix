@@ -822,6 +822,22 @@ let
 
   tool = with pkgs.vimPlugins; [
     {
+      plugin = obsidian-nvim;
+      config = readFile ./lua/obsidian.lua;
+      commands = [
+        "ObsidianBacklinks"
+        "ObsidianToday"
+        "ObsidianYesterday"
+        "ObsidianOpen"
+        "ObsidianNew"
+        "ObsidianSearch"
+        "ObsidianQuickSwitch"
+        "ObsidianLink"
+        "ObsidianLinkNew"
+        "ObsidianFollowLink"
+      ];
+    }
+    {
       plugin = nomodoro;
       config = readFile ./lua/nomodoro.lua;
       commands = [ "NomoWork" ];

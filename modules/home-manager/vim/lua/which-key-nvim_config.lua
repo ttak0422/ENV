@@ -58,6 +58,22 @@ wk.register({
       t = { "<cmd>Neogen type<cr>", "comment (type)" },
     },
 
+    -- obsidian
+    ["o"] = {
+      o = { "<cmd>ObsidianFollowLink<cr>", "open link" },
+      O = { "<cmd>ObsidianOpen<cr>", "open link with app" },
+      r = { "<cmd>ObsidianBacklinks<cr>", "show backlist" },
+      t = { "<cmd>ObsidianToday<cr>", "open today diary" },
+      f = { "<cmd>ObsidianSearch<cr>", "search content" },
+      p = { "<cmd>ObsidianQuickSwitch<cr>", "search note" },
+      n = {
+        function()
+          vim.cmd("ObsidianNew " .. vim.fn.input("name: "))
+        end,
+        "create note",
+      },
+    },
+
     -- other
     q = { "<cmd>BufDel<cr>", "close buffer" },
     Q = { "<cmd>BufDel!<cr>", "close buffer force" },

@@ -1,8 +1,8 @@
 require("obsidian").setup({
-  dir = "~/obsidian",
+  dir = "~/vault",
   notes_subdir = "notes",
   daily_notes = {
-    folder = "notes/dailies",
+    folder = "dailies",
   },
   completion = {
     nvim_cmp = false,

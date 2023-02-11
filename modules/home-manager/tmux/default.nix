@@ -10,10 +10,10 @@ let
   zoomOutSimbol = "";
   zoomInSimbol = "";
   darkBgColor = "#3F464B";
-  darkFgColor = "#9AA1A8";
+  darkFgColor = "DarkGrey";
+  darkFgColor2 = "White";
   lightFgColor = "#2A2F33";
   leftStatusColor = "#61AFEF";
-  centerStatusColor = "#82ABBC";
 
   scripts = let
     shebang = ''
@@ -165,8 +165,8 @@ let
     set-option -g status-left "#[bg=${leftStatusColor},fg=${lightFgColor},bold] #(${scripts.TMUX_SESSION_NAME}/bin/TMUX_SESSION_NAME) "
 
     set-option -g status-justify "centre"
-    set-window-option -g window-status-format "#[default] #W #[default]"
-    set-window-option -g window-status-current-format "#[bg=${centerStatusColor},fg=${lightFgColor},bold] #W #[default]"
+    set-window-option -g window-status-format "#[fg=${darkFgColor}] #W #[default]"
+    set-window-option -g window-status-current-format "#[fg=${darkFgColor2},bold] #W #[default]"
 
     set -g status-right "#(${scripts.TMUX_POMODORO}/bin/TMUX_POMODORO) | #(${scripts.TMUX_USER}/bin/TMUX_USER) "
 

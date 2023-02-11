@@ -4,6 +4,7 @@ let s:sources = [
       \ ]
 
 let s:sourceOptions = {}
+      " \ 'forceCompletionPattern': '\S+',
 let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
       \ 'matchers': [
@@ -18,12 +19,12 @@ let s:sourceOptions._ = {
       \   'converter_truncate',
       \   'converter_fuzzy',
       \ ],
-      \ 'forceCompletionPattern': '\S+',
       \ 'dup': 'ignore',
       \ }
 let s:sourceOptions.around = {
       \ 'mark': 'A',
       \ 'maxItems': 5,
+      \ 'minKeywordLength': 2,
       \ }
 let s:sourceOptions.file = {
       \ 'mark': 'F',

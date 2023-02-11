@@ -1,9 +1,9 @@
 local notify = require("notify")
 
 notify.setup({
-  timeout = 3000,
+  timeout = 1000,
   top_down = true,
-  stages = "fade",
+  stages = "static",
   background_colour = "#000000",
 })
 

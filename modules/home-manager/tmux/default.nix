@@ -27,7 +27,7 @@ let
       '';
       TMUX_PANE_NAME = ''
         NAME=$(tmux display-message -p "#T")
-        if [ -z $NAME ]; then echo $(pwd); else echo $NAME; fi
+        if [ -z $NAME ]; then echo $(tmux display-message -p "#{pane_current_path}"); else echo $NAME; fi
       '';
       TMUX_USER = ''
         echo " $USER"

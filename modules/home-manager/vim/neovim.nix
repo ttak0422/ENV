@@ -447,6 +447,7 @@ let
         }
       ];
       config = readFile ./lua/bufferline_config.lua;
+      delay = true;
     }
     {
       plugin = gitsigns-nvim;

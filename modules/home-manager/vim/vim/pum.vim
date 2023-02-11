@@ -16,7 +16,7 @@ inoremap <silent><expr> <C-p>   (pum#visible() ? '' : '<Cmd>call ddc#map#manual_
 inoremap <silent><expr> <C-e>   pum#visible() ? '<Cmd>call pum#map#cancel()<CR>'  : '<C-e>'
 
 autocmd User PumCompleteDone call vsnip_integ#on_complete_done(g:pum#completed_item)
-" inoremap <silent><expr> <CR>  pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : '<CR>'
+inoremap <silent><expr> <CR>  pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : '<CR>'
 inoremap <silent><expr> <C-y> pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : '<C-y>'
 " inoremap <silent><expr> <BS>    pum#visible() ? '<Cmd>call pum#map#cancel()<CR>'  : lexima#expand('<lt>BS>', 'i')
 " inoremap <silent><expr> <CR>    pum#visible() ? '<Cmd>call pum#map#confirm()<CR>' : lexima#expand('<lt>CR>', 'i')

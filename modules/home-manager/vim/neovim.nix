@@ -712,11 +712,8 @@ let
       }
       {
         plugin = nvim-colorizer-lua;
-        config = ''
-          require 'colorizer'.setup()
-        '';
-        enable = false;
-        delay = true;
+        config = readFile ./lua/nvim-colorizer.lua;
+        commands = [ "ColorizerToggle" ];
       }
       {
         plugin = registers-nvim;

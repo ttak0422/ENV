@@ -27,6 +27,7 @@ wk.register({
       o = { "<cmd>ToggleOutline<cr>", "toggle outline" },
       O = { "<cmd>SidebarNvimToggle<cr>", "toggle outline" },
       q = { "<cmd>lua require('toolwindow').close()<cr>", "toggle toolwindows" },
+      C = { "<cmd>ColorizerToggle<cr>", "toggle colorize" },
     },
 
     -- find

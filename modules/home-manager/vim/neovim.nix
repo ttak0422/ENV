@@ -307,6 +307,11 @@ let
 
   view = with pkgs.vimPlugins; [
     {
+      plugin = hologram-nvim;
+      config = readFile ./lua/hologram.lua;
+      commands = [ "EnableHologram" ];
+    }
+    {
       plugin = winbar-nvim;
       config = ''
         dofile("${./lua/winbar.lua}")({
@@ -1005,3 +1010,4 @@ in {
     withPython3 = true;
   };
 }
+

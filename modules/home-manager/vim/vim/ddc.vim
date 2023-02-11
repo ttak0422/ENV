@@ -4,10 +4,10 @@ let s:sources = [
       \ ]
 
 let s:sourceOptions = {}
-      " \ 'forceCompletionPattern': '\S+',
 let s:sourceOptions._ = {
       \ 'ignoreCase': v:true,
       \ 'matchers': [
+      \   'matcher_length',
       \   'matcher_fuzzy',
       \ ],
       \ 'sorters': [
@@ -20,11 +20,11 @@ let s:sourceOptions._ = {
       \   'converter_fuzzy',
       \ ],
       \ 'dup': 'ignore',
+      \ 'minKeywordLength': 2,
       \ }
 let s:sourceOptions.around = {
       \ 'mark': 'A',
       \ 'maxItems': 5,
-      \ 'minKeywordLength': 2,
       \ }
 let s:sourceOptions.file = {
       \ 'mark': 'F',

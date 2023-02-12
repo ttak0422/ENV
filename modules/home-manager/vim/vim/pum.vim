@@ -3,6 +3,7 @@ call pum#set_option(#{
       \ max_height: 12,
       \ min_width: 5,
       \ scrollbar_char: '█',
+      \ border: 'single',
       \ })
 set wildoptions+=pum
 

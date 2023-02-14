@@ -13,9 +13,9 @@ void {{_input_:testName}}(
 
 static Stream<Arguments> provider_{{_input_:testName}}() {
   return Stream.of(
-    arguments.of(
+    arguments(
     ),
-    arguments.of(
+    arguments(
     )
   );
 }

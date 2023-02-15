@@ -40,7 +40,6 @@ let s:sourceOptions.skkeleton = {
 let s:sourceOptions['nvim-lsp'] = {
       \ 'dup': 'keep',
       \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
-      \ 'maxItems': 50,
       \ }
 let s:sourceOptions.tmux = {
       \ 'mark': 'T',

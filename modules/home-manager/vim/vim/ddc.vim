@@ -71,7 +71,7 @@ let s:sourceParams['nvim-lsp'] = #{
       \    Unit: ' ',
       \    Value: ' ',
       \    Enum: ' ',
-      \    Keyword = ' ',
+      \    Keyword: ' ',
       \    Snippet: '﬌ ',
       \    Color: ' ',
       \    File: ' ',

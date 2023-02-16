@@ -78,7 +78,7 @@ return function(opt)
       },
     },
     messages = {
-      enabled = false,
+      enabled = true,
     },
     markdown = {
       hover = {

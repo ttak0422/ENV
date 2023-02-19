@@ -837,6 +837,22 @@
         "type": "github"
       }
     },
+    "ddc-source-nvim-obsidian": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676788886,
+        "narHash": "sha256-iCqTb+mHBmd1ibNlQ8/hNXWrqTkPGVUkmx7JnTlDwAI=",
+        "owner": "ttak0422",
+        "repo": "ddc-source-nvim-obsidian",
+        "rev": "5c3b9cce877123acca85ed5619b98c7f23a9cce2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ttak0422",
+        "repo": "ddc-source-nvim-obsidian",
+        "type": "github"
+      }
+    },
     "ddc-tmux": {
       "flake": false,
       "locked": {
@@ -3868,6 +3884,22 @@
         "type": "github"
       }
     },
+    "tmux-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1675408095,
+        "narHash": "sha256-3INipQwfV5ohDR7zAKmaRMwzww9sVYt0MfpN8vTIa44=",
+        "owner": "aserowy",
+        "repo": "tmux.nvim",
+        "rev": "feafcf8f48c49c720ee64e745648d69d42cb9c5a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aserowy",
+        "repo": "tmux.nvim",
+        "type": "github"
+      }
+    },
     "tmux-pomodoro-plus": {
       "flake": false,
       "locked": {
@@ -4208,6 +4240,7 @@
         "ddc-source-line": "ddc-source-line",
         "ddc-source-nextword": "ddc-source-nextword",
         "ddc-source-nvim-lsp": "ddc-source-nvim-lsp",
+        "ddc-source-nvim-obsidian": "ddc-source-nvim-obsidian",
         "ddc-tmux": "ddc-tmux",
         "ddc-treesitter": "ddc-treesitter",
         "ddc-ui-native": "ddc-ui-native",
@@ -4338,6 +4371,7 @@
         "themer-lua": "themer-lua",
         "tig-explorer-vim": "tig-explorer-vim",
         "tint-nvim": "tint-nvim",
+        "tmux-nvim": "tmux-nvim",
         "todo-comments-nvim": "todo-comments-nvim",
         "toggleterm-nvim": "toggleterm-nvim",
         "toolwindow-nvim": "toolwindow-nvim",
@@ -4372,11 +4406,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1676110926,
-        "narHash": "sha256-2z/M20QjeFQCmJ18T2S5qSCxd+5IBz7bvazcZfWD7rc=",
+        "lastModified": 1676802476,
+        "narHash": "sha256-Xhdn1f5169QlFdw05xld/NSY/CR78+CcamGW+RLXG/o=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "fb2d8ae8a5a3e2ea9a07d7a216f58788fbfbe31f",
+        "rev": "56b07e3b047672ab703530d80225c87a6a5a2c2b",
         "type": "github"
       },
       "original": {

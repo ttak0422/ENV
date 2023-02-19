@@ -122,6 +122,19 @@ inoremap <silent> <C-x><C-f> <Cmd>call ddc#map#manual_complete(#{ sources: ['fil
 inoremap <silent> <C-x><C-t> <Cmd>call ddc#map#manual_complete(#{ sources: ['tmux'] })<CR>
 inoremap <silent> <C-x><C-b> <Cmd>call ddc#map#manual_complete(#{ sources: ['buffer'] })<CR>
 
+function! Obsidian() abort
+        call ddc#custom#patch_buffer('sources', ['nvim-obsidian', 'around'])
+        call ddc#custom#patch_buffer('sourceOptions', #{
+              \ nvim-obsidian: #{
+              \   mark: '',
+              \ }})
+        call ddc#custom#patch_buffer('sourceParams', #{
+              \ nvim-obsidian: #{
+              \   dir: '~/vault',
+              \ }})
+endfunction
+
+autocmd BufRead,BufNewFile ~/vault/**/*.md call Obsidian()
 " nnoremap : <Cmd>call CommandlinePre()<CR>:
 " nnoremap / <Cmd>call CommandlinePre()<CR>/
 " nnoremap ? <Cmd>call CommandlinePre()<CR>?

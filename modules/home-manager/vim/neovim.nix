@@ -564,11 +564,15 @@ let
           ddc-converter_truncate
           ddc-converter_remove_overlap
           ddc-matcher_length
+          {
+            plugin = ddc-source-nvim-obsidian;
+            depends = [ obsidian-nvim ];
+          }
         ];
         config = ''
-          vim.cmd[[
+          vim.cmd([[
             ${readFile ./vim/ddc.vim}
-          ]]
+          ]])
         '';
         delay = true;
       }
@@ -828,7 +832,12 @@ let
   tool = with pkgs.vimPlugins; [
     {
       plugin = obsidian-nvim;
-      config = readFile ./lua/obsidian.lua;
+      config = readFile ./lua/obsidian.lua + ''
+        vim.cmd([[
+          silent source ${obsidian-nvim}/after/syntax/markdown.vim
+          autocmd BufRead,BufNewFile ~/vault/**/*.md setl conceallevel=2
+        ]])
+      '';
       commands = [
         "ObsidianBacklinks"
         "ObsidianToday"

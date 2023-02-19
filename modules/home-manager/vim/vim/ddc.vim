@@ -134,7 +134,7 @@ function! Obsidian() abort
               \ }})
 endfunction
 
-autocmd BufRead,BufNewFile ~/vault/**/*.md call Obsidian()
+autocmd BufRead,BufNewFile **/vault/**/*.md call Obsidian()
 " nnoremap : <Cmd>call CommandlinePre()<CR>:
 " nnoremap / <Cmd>call CommandlinePre()<CR>/
 " nnoremap ? <Cmd>call CommandlinePre()<CR>?

@@ -87,7 +87,7 @@
           # inputs.emacs.overlay
           (final: prev: {
             vimPlugins = prev.vimPlugins // {
-              # ddc-sorter_length = prev.vimUtils.buildVimPluginFrom2Nix {
+              # ddc-sorter_itemsize = prev.vimUtils.buildVimPluginFrom2Nix {
               #   pname = "ddc-sorter_itemsize";
               #   version = "local";
               #   src = inputs.ddc-sorter_itemsize;

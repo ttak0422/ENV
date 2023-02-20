@@ -100,7 +100,9 @@ let s:filterParams.converter_truncate = {
       \ 'maxAbbrWidth': 60,
       \ 'maxKindWidth': 5,
       \ }
-
+let s:filterParams.sorter_itemsize = {
+      \ 'sameWordOnly': v:true,
+      \ }
 let s:patch_global = {}
 let s:patch_global.ui = 'pum'
 " let s:patch_global.ui = 'native'

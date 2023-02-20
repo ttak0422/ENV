@@ -696,11 +696,11 @@
     "ddc-sorter_itemsize": {
       "flake": false,
       "locked": {
-        "lastModified": 1674916678,
-        "narHash": "sha256-SpXIcRPGaOyTgishlMHdcnlXehmAHHydF+3WzhGYLFw=",
+        "lastModified": 1676908696,
+        "narHash": "sha256-nyhQX8qHPM1hacTgLuvN3cGwIDS3QBwQ8xuqQcsdJrw=",
         "owner": "ttak0422",
         "repo": "ddc-sorter_itemsize",
-        "rev": "a43e133ffce74bc3657561f6a67a74fca2637a44",
+        "rev": "b9c5100bfda79eacc48da5823c43a459935ef2e9",
         "type": "github"
       },
       "original": {
@@ -4391,6 +4391,7 @@
         "vim-sensible": "vim-sensible",
         "vim-sonictemplate": "vim-sonictemplate",
         "vim-startuptime": "vim-startuptime",
+        "vim-table-mode": "vim-table-mode",
         "vim-translator": "vim-translator",
         "vim-vsnip": "vim-vsnip",
         "vim-vsnip-integ": "vim-vsnip-integ",
@@ -4406,11 +4407,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1676802476,
-        "narHash": "sha256-Xhdn1f5169QlFdw05xld/NSY/CR78+CcamGW+RLXG/o=",
+        "lastModified": 1676908752,
+        "narHash": "sha256-CeOFmSa3e8e1R2MVO/BCwtgHtNkpm56U7mK6D4c/+Nw=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "56b07e3b047672ab703530d80225c87a6a5a2c2b",
+        "rev": "1e6eec87b887df3d54bae83d5e7e17bc6253bd03",
         "type": "github"
       },
       "original": {
@@ -4480,6 +4481,22 @@
       "original": {
         "owner": "dstein64",
         "repo": "vim-startuptime",
+        "type": "github"
+      }
+    },
+    "vim-table-mode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1666260542,
+        "narHash": "sha256-upjy6O1v7Sev5KwPvlia/bvAKDdH0a7eauQTOCCa+F8=",
+        "owner": "dhruvasagar",
+        "repo": "vim-table-mode",
+        "rev": "9555a3e6e5bcf285ec181b7fc983eea90500feb4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dhruvasagar",
+        "repo": "vim-table-mode",
         "type": "github"
       }
     },

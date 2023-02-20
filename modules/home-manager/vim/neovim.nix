@@ -833,10 +833,16 @@ let
     {
       plugin = obsidian-nvim;
       config = readFile ./lua/obsidian.lua + ''
-        vim.cmd([[
-          silent source ${obsidian-nvim}/after/syntax/markdown.vim
-          autocmd BufRead,BufNewFile **/vault/**/*.md setl conceallevel=2
-        ]])
+        vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+          pattern = {"**/vault/*.md"},
+          callback = function()
+            vim.cmd([[
+              setl conceallevel=2
+              setl nowrap
+            ]])
+          end,
+        })
+        vim.cmd([[silent source ${obsidian-nvim}/after/syntax/markdown.vim]])
       '';
       commands = [
         "ObsidianBacklinks"

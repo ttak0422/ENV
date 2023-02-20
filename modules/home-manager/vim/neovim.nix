@@ -835,7 +835,7 @@ let
       config = readFile ./lua/obsidian.lua + ''
         vim.cmd([[
           silent source ${obsidian-nvim}/after/syntax/markdown.vim
-          autocmd BufRead,BufNewFile ~/vault/**/*.md setl conceallevel=2
+          autocmd BufRead,BufNewFile **/vault/**/*.md setl conceallevel=2
         ]])
       '';
       commands = [

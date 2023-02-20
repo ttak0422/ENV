@@ -48,7 +48,7 @@ return function(opt)
       bundles = bundles,
     },
     flags = {
-      debounce_text_changes = 100,
+      -- debounce_text_changes = 100,
       allow_incremental_sync = true,
     },
     handlers = {

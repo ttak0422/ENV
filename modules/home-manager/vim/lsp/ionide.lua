@@ -4,7 +4,7 @@ return function(opt)
     on_attach = opt.on_attach,
     capabilities = opt.capabilities,
     flags = {
-      debounce_text_changes = 150,
+      -- debounce_text_changes = 150,
     },
   })
 end

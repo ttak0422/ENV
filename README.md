@@ -6,6 +6,10 @@
 </a>
 <img alt="license" src="https://img.shields.io/github/license/ttak0422/ENV">
 </p>
+
+<img width="1800" alt="image" src="https://user-images.githubusercontent.com/15827817/220372689-fb0e4c6c-639c-4ed8-ab10-4a40b590dc1e.png">
+
+
 </div>
 
 ## Setup

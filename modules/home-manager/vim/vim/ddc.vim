@@ -53,6 +53,12 @@ let s:sourceOptions.cmdline = {
 let s:sourceOptions['cmdline-history'] = {
       \ 'mark': 'history',
       \ }
+let s:sourceOptions['nvim-obsidian'] = #{
+      \   mark: ' ',
+      \ }
+let s:sourceOptions['nvim-obsidian-new'] = #{
+      \   mark: ' +',
+      \ }
 
 let s:sourceParams = {}
 let s:sourceParams['nvim-lsp'] = #{
@@ -94,6 +100,12 @@ let s:sourceParams.file = {
       \ 'projAsRoot': v:true,
       \ 'bufAsRoot': v:true,
       \ }
+let s:sourceParams['nvim-obsidian'] = #{
+      \   dir: '~/vault',
+      \ }
+let s:sourceParams['nvim-obsidian-new'] = #{
+      \   dir: '~/vault',
+      \ }
 
 let s:filterParams = {}
 let s:filterParams.converter_truncate = {
@@ -103,6 +115,7 @@ let s:filterParams.converter_truncate = {
 let s:filterParams.sorter_itemsize = {
       \ 'sameWordOnly': v:true,
       \ }
+
 let s:patch_global = {}
 let s:patch_global.ui = 'pum'
 " let s:patch_global.ui = 'native'
@@ -125,18 +138,11 @@ inoremap <silent> <C-x><C-t> <Cmd>call ddc#map#manual_complete(#{ sources: ['tmu
 inoremap <silent> <C-x><C-b> <Cmd>call ddc#map#manual_complete(#{ sources: ['buffer'] })<CR>
 
 function! Obsidian() abort
-        call ddc#custom#patch_buffer('sources', ['nvim-obsidian', 'around'])
-        call ddc#custom#patch_buffer('sourceOptions', #{
-              \ nvim-obsidian: #{
-              \   mark: '',
-              \ }})
-        call ddc#custom#patch_buffer('sourceParams', #{
-              \ nvim-obsidian: #{
-              \   dir: '~/vault',
-              \ }})
+        call ddc#custom#patch_buffer('sources', ['nvim-obsidian', 'around', 'nvim-obsidian-new'])
 endfunction
 
 autocmd BufRead,BufNewFile **/vault/**/*.md call Obsidian()
+autocmd BufRead,BufNewFile **/vault/*.md call Obsidian()
 " nnoremap : <Cmd>call CommandlinePre()<CR>:
 " nnoremap / <Cmd>call CommandlinePre()<CR>/
 " nnoremap ? <Cmd>call CommandlinePre()<CR>?

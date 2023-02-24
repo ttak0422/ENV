@@ -840,11 +840,11 @@
     "ddc-source-nvim-obsidian": {
       "flake": false,
       "locked": {
-        "lastModified": 1676788886,
-        "narHash": "sha256-iCqTb+mHBmd1ibNlQ8/hNXWrqTkPGVUkmx7JnTlDwAI=",
+        "lastModified": 1677122764,
+        "narHash": "sha256-pE6yokPKlXtnr7gg9G5trDQV0g2j6XaIt0CqfdSlOgg=",
         "owner": "ttak0422",
         "repo": "ddc-source-nvim-obsidian",
-        "rev": "5c3b9cce877123acca85ed5619b98c7f23a9cce2",
+        "rev": "1315736ec4c24f433265c0494a76dc62edb20980",
         "type": "github"
       },
       "original": {
@@ -4407,11 +4407,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1676908752,
-        "narHash": "sha256-CeOFmSa3e8e1R2MVO/BCwtgHtNkpm56U7mK6D4c/+Nw=",
+        "lastModified": 1677123094,
+        "narHash": "sha256-gcOR8eepTRx+kHWnXVVPojD731x0lnUqVZ7zhVlBax0=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "1e6eec87b887df3d54bae83d5e7e17bc6253bd03",
+        "rev": "efea4987e587eeeb83d627576cc61e606d9ef080",
         "type": "github"
       },
       "original": {

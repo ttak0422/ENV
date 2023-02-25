@@ -4188,6 +4188,22 @@
         "type": "github"
       }
     },
+    "typescript-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1647986972,
+        "narHash": "sha256-lMyHngGl9JEqdFr8Puf8NV23krCKaLBatUapKQW6DIs=",
+        "owner": "leafgarland",
+        "repo": "typescript-vim",
+        "rev": "52f3ca3474d51f5021696ffb7297d989e49121ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leafgarland",
+        "repo": "typescript-vim",
+        "type": "github"
+      }
+    },
     "utils": {
       "locked": {
         "lastModified": 1667395993,
@@ -4280,6 +4296,22 @@
       "original": {
         "owner": "dhruvasagar",
         "repo": "vim-buffer-history",
+        "type": "github"
+      }
+    },
+    "vim-html-template-literals": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1622688387,
+        "narHash": "sha256-8Vnl4bTMlyb9Op5px1vdpcn/KBXoB19GfYwBU5NfM9M=",
+        "owner": "jonsmithers",
+        "repo": "vim-html-template-literals",
+        "rev": "e6f3f8ffaae9c2f9deea2bbb596b64468041616c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jonsmithers",
+        "repo": "vim-html-template-literals",
         "type": "github"
       }
     },
@@ -4548,11 +4580,13 @@
         "trouble-nvim": "trouble-nvim",
         "true-zen": "true-zen",
         "twilight-nvim": "twilight-nvim",
+        "typescript-vim": "typescript-vim",
         "venn-nvim": "venn-nvim",
         "vim-altercmd": "vim-altercmd",
         "vim-asterisk": "vim-asterisk",
         "vim-better-whitespace": "vim-better-whitespace",
         "vim-buffer-history": "vim-buffer-history",
+        "vim-html-template-literals": "vim-html-template-literals",
         "vim-illuminate": "vim-illuminate",
         "vim-matchup": "vim-matchup",
         "vim-nix": "vim-nix",
@@ -4577,11 +4611,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1677306720,
-        "narHash": "sha256-gSPqnlWxPeWt8W/zlTuKCrVxVxN0oCeadHscL1zOD7s=",
+        "lastModified": 1677328520,
+        "narHash": "sha256-n1nXLKT5GxeD69iHn6NO5rQVgj0L3DqVVZN9OKWKdG0=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "f4ee9f9826a98a173dccaa99b7a74a99b4e36165",
+        "rev": "fb554a08a60639c5b3becbbe713c54f42cc371a8",
         "type": "github"
       },
       "original": {

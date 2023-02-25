@@ -46,10 +46,6 @@ wk.register({
       F = { "<cmd>lua require('spectre').open()<cr>", "find and replace with dark power" },
     },
 
-    -- lsp
-    ca = { "<cmd>Lspsaga code_action<cr>", "code action" },
-    rn = { "<cmd>Lspsaga rename<cr>", "rename" },
-
     -- comment
     ["n"] = {
       name = "comment",

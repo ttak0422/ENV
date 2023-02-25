@@ -1,4 +1,4 @@
--- require lspsaga, virtual-types-nvim, inlayHint, hover.nvim
+-- require virtual-types-nvim, inlayHint, hover.nvim
 return function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   local diagnostic_wrn_opts = { severity = { min = vim.diagnostic.severity.WARN }, float = false }
@@ -20,14 +20,13 @@ return function(client, bufnr)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
   vim.keymap.set("n", "gv", "<cmd>vsplit<cr>gd", bufopts)
   vim.keymap.set("n", "gs", "<cmd>split<cr>gd", bufopts)
-  vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", bufopts)
+  -- vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", bufopts)
 
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
   -- vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-  -- vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
+  vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
   -- vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
-  vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", bufopts)
   -- vim.keymap.set('n', 'K', '<cmd>DocsViewToggle<CR>', bufopts)
   -- vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set("n", "<leader>K", vim.lsp.buf.signature_help, bufopts)
@@ -39,18 +38,16 @@ return function(client, bufnr)
   -- end, bufopts)
 
   vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-  -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set("n", "rn", "<cmd>Lspsaga rename<CR>", bufopts)
+  vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
 
   vim.keymap.set("n", "<space>ca", require("actions-preview").code_actions, bufopts)
-  -- vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', bufopts)
   -- vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
 
   -- if client.supports_method('textDocument/codeLens') then
   --   require('virtualtypes').on_attach(client, bufnr)
   -- end
   if client.supports_method("textDocument/inlayHint") then
-    require("lsp-inlayhints").on_attach(client, bufnr)
+    require("lsp-inlayhints").on_attach(client, bufnr, false)
   end
   if client.supports_method("textDocument/formatting") then
     vim.keymap.set("n", "<leader>F", "<cmd>Format<cr>", bufopts)

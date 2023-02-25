@@ -4,13 +4,13 @@ let
   inherit (builtins) readFile;
   lspSharedDepends = with pkgs.vimPlugins; [
     fidget-nvim
-    lspsaga-nvim
+    # lspsaga-nvim
     # virtual-types-nvim
     lsp-inlayhints-nvim
     telescope-nvim
     actions-preview-nvim
     vim-illuminate
-    # hover-nvim
+    hover-nvim
     # glow-hover-nvim
     noice-nvim
   ];
@@ -22,13 +22,13 @@ in with pkgs.vimPlugins; [
     config = readFile ./neogen.lua;
     commands = [ "Neogen" ];
   }
-  {
-    plugin = lspsaga-nvim;
-    depends = [ nvim-web-devicons ];
-    config = readFile ./lspsaga-nvim.lua;
-    commands = [ "Lspsaga" ];
-    modules = [ "lspsaga.diagnostic" ];
-  }
+  # {
+  #   plugin = lspsaga-nvim;
+  #   depends = [ nvim-web-devicons ];
+  #   config = readFile ./lspsaga-nvim.lua;
+  #   commands = [ "Lspsaga" ];
+  #   modules = [ "lspsaga.diagnostic" ];
+  # }
   {
     plugin = formatter-nvim;
     config = readFile ./formatter-nvim.lua;
@@ -53,10 +53,10 @@ in with pkgs.vimPlugins; [
     plugin = vim-illuminate;
     config = readFile ./vim-illuminate.lua;
   }
-  # {
-  #   plugin = hover-nvim;
-  #   config = readFile ./hover-nvim.lua;
-  # }
+  {
+    plugin = hover-nvim;
+    config = readFile ./hover-nvim.lua;
+  }
   {
     plugin = glow-hover-nvim;
     config = ''

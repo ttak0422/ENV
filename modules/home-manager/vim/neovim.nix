@@ -34,15 +34,6 @@ let
 
   startup = with pkgs.vimPlugins; [
     {
-      plugin = impatient-nvim;
-      config = ''
-        require('impatient')
-        require'impatient'.enable_profile()
-      '';
-      optional = false;
-      enable = false;
-    }
-    {
       plugin = vim-sensible;
       optional = false;
       comment = "必須設定群";

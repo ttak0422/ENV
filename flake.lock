@@ -840,6 +840,19 @@
     "ddc-source-nvim-obsidian": {
       "flake": false,
       "locked": {
+        "lastModified": 1677293204,
+        "narHash": "sha256-Ef+AnmRQqv/chH8RalWxorUfRy8beqgfcTi63XAYyEo=",
+        "path": "/Users/ttak0422/ghq/github.com/ttak0422/ddc-source-nvim-obsidian/",
+        "type": "path"
+      },
+      "original": {
+        "path": "/Users/ttak0422/ghq/github.com/ttak0422/ddc-source-nvim-obsidian/",
+        "type": "path"
+      }
+    },
+    "ddc-source-nvim-obsidian_2": {
+      "flake": false,
+      "locked": {
         "lastModified": 1677122764,
         "narHash": "sha256-pE6yokPKlXtnr7gg9G5trDQV0g2j6XaIt0CqfdSlOgg=",
         "owner": "ttak0422",
@@ -930,6 +943,166 @@
       "original": {
         "owner": "Shougo",
         "repo": "ddc.vim",
+        "type": "github"
+      }
+    },
+    "ddu-commands-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673311246,
+        "narHash": "sha256-v9A0wbCB0WqlczeBT1vcySdbDxR7S33uSKcoWRR7Aek=",
+        "owner": "Shougo",
+        "repo": "ddu-commands.vim",
+        "rev": "dd9a6eb738518ed9eee791ef24f683e54c84bf04",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddu-commands.vim",
+        "type": "github"
+      }
+    },
+    "ddu-kind-file": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676459161,
+        "narHash": "sha256-O2+G1VALBOWr82AbqlS0r878EDCn3Dosje7be+9yZek=",
+        "owner": "Shougo",
+        "repo": "ddu-kind-file",
+        "rev": "02f7e047886e501ec13e038148b25cf5cbd4d3e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddu-kind-file",
+        "type": "github"
+      }
+    },
+    "ddu-source-buffer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1671202968,
+        "narHash": "sha256-soUfrWsIkx8ECmE90E8vXwwvtipl6UMQHSC6P2Aww34=",
+        "owner": "shun",
+        "repo": "ddu-source-buffer",
+        "rev": "feb15531ae08ec39eb162b3e6dcdb78ce77f6668",
+        "type": "github"
+      },
+      "original": {
+        "owner": "shun",
+        "repo": "ddu-source-buffer",
+        "type": "github"
+      }
+    },
+    "ddu-source-file": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673499929,
+        "narHash": "sha256-fZ+7emU3vLM79D/WQextBh672kSgqtDUSm9ZppEr0aQ=",
+        "owner": "Shougo",
+        "repo": "ddu-source-file",
+        "rev": "875ad668b8cb76d80b7cf927106fed28ca9c697c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddu-source-file",
+        "type": "github"
+      }
+    },
+    "ddu-source-file_rec": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676941138,
+        "narHash": "sha256-CVXGuecTDeVaP5jPlzKfBE7IcIHJ3720i0RNn0GzzN0=",
+        "owner": "Shougo",
+        "repo": "ddu-source-file_rec",
+        "rev": "51983ef1657a4d691098a4bbe0b3b9459bc09203",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddu-source-file_rec",
+        "type": "github"
+      }
+    },
+    "ddu-source-rg": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1674218708,
+        "narHash": "sha256-Xmhnw55FTa+WnKidqKdPrtQtSPNC5zCTHx0YqJ+yptU=",
+        "owner": "shun",
+        "repo": "ddu-source-rg",
+        "rev": "1d3a6ea685f74038ba60f635e9973c2afad63f5c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "shun",
+        "repo": "ddu-source-rg",
+        "type": "github"
+      }
+    },
+    "ddu-ui-ff": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1677117227,
+        "narHash": "sha256-5qA38w2yJvcRqq1egaD81S/TJFTt9G0tVht3j4AZLMs=",
+        "owner": "Shougo",
+        "repo": "ddu-ui-ff",
+        "rev": "6e8dac96b323efe7712e408fed8e8837cf92b538",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddu-ui-ff",
+        "type": "github"
+      }
+    },
+    "ddu-ui-filer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676525325,
+        "narHash": "sha256-3mNAzhgKlsQ0atD1jVfsgiv4OQWTkbxIzfGsB/qS9JA=",
+        "owner": "Shougo",
+        "repo": "ddu-ui-filer",
+        "rev": "a2d27e852c9151dc113b55ac5d41ec0a831274de",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddu-ui-filer",
+        "type": "github"
+      }
+    },
+    "ddu-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676952280,
+        "narHash": "sha256-K1f9fANJwDmy93hdpC/AMHx5bMf9wr5+My0myzzvLKQ=",
+        "owner": "Shougo",
+        "repo": "ddu.vim",
+        "rev": "898d53d195bcb1093ade2bd60ce082ecd71eb54c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shougo",
+        "repo": "ddu.vim",
+        "type": "github"
+      }
+    },
+    "ddu-vim-ui-select": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673177831,
+        "narHash": "sha256-7lHk1Oo1xALj+Yh0s9fJONoeP2z/lFt0nuIopzhs//c=",
+        "owner": "matsui54",
+        "repo": "ddu-vim-ui-select",
+        "rev": "513611aaf5714d5cc84045d79031dd298d7791a9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "matsui54",
+        "repo": "ddu-vim-ui-select",
         "type": "github"
       }
     },
@@ -3419,6 +3592,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "ddc-source-nvim-obsidian": "ddc-source-nvim-obsidian",
         "emacs": "emacs",
         "emacs-overlay": "emacs-overlay",
         "flake-compat": "flake-compat",
@@ -4240,12 +4414,22 @@
         "ddc-source-line": "ddc-source-line",
         "ddc-source-nextword": "ddc-source-nextword",
         "ddc-source-nvim-lsp": "ddc-source-nvim-lsp",
-        "ddc-source-nvim-obsidian": "ddc-source-nvim-obsidian",
+        "ddc-source-nvim-obsidian": "ddc-source-nvim-obsidian_2",
         "ddc-tmux": "ddc-tmux",
         "ddc-treesitter": "ddc-treesitter",
         "ddc-ui-native": "ddc-ui-native",
         "ddc-ui-pum": "ddc-ui-pum",
         "ddc-vim": "ddc-vim",
+        "ddu-commands-vim": "ddu-commands-vim",
+        "ddu-kind-file": "ddu-kind-file",
+        "ddu-source-buffer": "ddu-source-buffer",
+        "ddu-source-file": "ddu-source-file",
+        "ddu-source-file_rec": "ddu-source-file_rec",
+        "ddu-source-rg": "ddu-source-rg",
+        "ddu-ui-ff": "ddu-ui-ff",
+        "ddu-ui-filer": "ddu-ui-filer",
+        "ddu-vim": "ddu-vim",
+        "ddu-vim-ui-select": "ddu-vim-ui-select",
         "denops-popup-preview-vim": "denops-popup-preview-vim",
         "denops-signature_help": "denops-signature_help",
         "denops-vim": "denops-vim",
@@ -4407,11 +4591,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1677123094,
-        "narHash": "sha256-gcOR8eepTRx+kHWnXVVPojD731x0lnUqVZ7zhVlBax0=",
+        "lastModified": 1677253783,
+        "narHash": "sha256-NQLKl3/B3CF1TC2gaRNUZSDS2IywbIczEE4UCY2Ka2c=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "efea4987e587eeeb83d627576cc61e606d9ef080",
+        "rev": "c3696d12b0ff83ff69535cca2297dfe78fa85c7f",
         "type": "github"
       },
       "original": {

@@ -1,10 +1,9 @@
 " depends lexima-vim, vim-vsnip-integ.
 call pum#set_option(#{
-      \ max_height: 12,
-      \ min_width: 5,
       \ scrollbar_char: '█',
       \ border: 'single',
       \ padding: v:true,
+      \ item_orders: ["kind", "abbr", "menu"],
       \ })
 set wildoptions+=pum
 

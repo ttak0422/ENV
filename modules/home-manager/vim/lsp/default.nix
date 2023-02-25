@@ -156,7 +156,7 @@ in with pkgs.vimPlugins; [
       nodePackages.yaml-language-server
       rubyPackages.solargraph
       rust-analyzer
-      sumneko-lua-language-server
+      lua-language-server
       taplo-cli
     ]);
     config = ''

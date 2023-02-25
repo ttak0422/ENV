@@ -108,13 +108,8 @@ let s:sourceParams['nvim-obsidian-new'] = #{
       \ }
 
 let s:filterParams = {}
-let s:filterParams.converter_truncate = {
-      \ 'maxAbbrWidth': 60,
-      \ 'maxKindWidth': 5,
-      \ }
-let s:filterParams.sorter_itemsize = {
-      \ 'sameWordOnly': v:true,
-      \ }
+let s:filterParams.converter_truncate = { 'maxAbbrWidth': 60, 'maxKindWidth': 5, 'maxMenuWidth': 40 }
+let s:filterParams.sorter_itemsize = { 'sameWordOnly': v:true }
 
 let s:patch_global = {}
 let s:patch_global.ui = 'pum'
@@ -126,8 +121,11 @@ let s:patch_global.sources = s:sources
 let s:patch_global.sourceOptions = s:sourceOptions
 let s:patch_global.sourceParams = s:sourceParams
 let s:patch_global.filterParams = s:filterParams
-
 call ddc#custom#patch_global(s:patch_global)
+
+call ddc#custom#patch_filetype(['java'], 'filterParams', #{
+      \ converter_truncate: { 'maxAbbrWidth': 60, 'maxKindWidth': 5, 'maxMenuWidth': 0 },
+      \ })
 
 call ddc#enable()
 call signature_help#enable()

@@ -12,6 +12,7 @@ set hidden
 set noshowmode
 set termguicolors
 " set pumblend=10
+set pumheight=10
 set isk+=-
 set completeopt=menu,menuone,noinsert
 set ttyfast

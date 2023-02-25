@@ -11,7 +11,6 @@ in with pkgs.vimPlugins; [{
   });
   startup = ''
     vim.g.sonictemplate_vim_template_dir = '${templates}'
-    vim.g.sonictemplate_postfix_key = '<c-t>'
   '';
   commands = [ "Template" ];
   delay = true;

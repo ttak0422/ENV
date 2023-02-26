@@ -8,7 +8,7 @@ return function(opt)
 
   vim.g.neovide_cursor_vfx_mode = "pixiedust"
   vim.g.neovide_transparency = 0.8
-  vim.opt.guifont = "PlemolJP35 Console NFJ:h20"
+  vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h16:b"
 
   vim.api.nvim_create_augroup("extraConfig", {})
   vim.api.nvim_create_autocmd("BufNewFile", {

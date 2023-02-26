@@ -238,6 +238,7 @@ let
     }
     {
       plugin = nvim-bqf;
+      config = readFile ./lua/nvim-bqf.lua;
       fileTypes = [ "qf" ];
       events = [ "QuickFixCmdPre" ];
       delay = true;

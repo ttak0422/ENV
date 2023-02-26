@@ -131,6 +131,9 @@ call ddc#custom#patch_filetype(['java'], 'filterParams', #{
 
 call ddc#enable()
 call signature_help#enable()
+let g:popup_preview_config = #{
+      \ border: v:false,
+      \ }
 call popup_preview#enable()
 
 inoremap <silent> <C-x><C-f> <Cmd>call ddc#map#manual_complete(#{ sources: ['file'] })<CR>

@@ -1,6 +1,6 @@
 " depends lexima-vim, vim-vsnip-integ.
 call pum#set_option(#{
-      \ scrollbar_char: '▊',
+      \ scrollbar_char: '',
       \ padding: v:true,
       \ item_orders: ["kind", "abbr", "menu"],
       \ })

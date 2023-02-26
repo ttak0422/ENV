@@ -818,6 +818,11 @@ let
 
   tool = with pkgs.vimPlugins; [
     {
+      plugin = vim-fontzoom;
+      config = readFile ./lua/fontzoom.lua;
+      commands = [ "Fontzoom" ];
+    }
+    {
       plugin = obsidian-nvim;
       config = readFile ./lua/obsidian.lua + ''
         vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {

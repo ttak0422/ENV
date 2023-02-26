@@ -62,8 +62,11 @@ let
   ];
 
   prelude = ''
-    set-option -g default-terminal screen-256color
-    set-option -ga terminal-overrides ',xterm-256color:Tc'
+    set -g default-terminal "tmux"
+    set -g default-terminal "screen-256color"
+    set -as terminal-features ",gnome*:RGB"
+    set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+    set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
     # mouse
     set-option -g mouse on

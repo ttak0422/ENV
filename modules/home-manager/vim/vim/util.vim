@@ -56,3 +56,14 @@ augroup util
   autocmd FileType qf set nobuflisted
 augroup END
 
+" for wezterm
+" https://wezfurlong.org/wezterm/faq.html#how-do-i-enable-undercurl-curly-underlines
+" tempfile=$(mktemp) \
+"   && curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo \
+"   && tic -x -o ~/.terminfo $tempfile \
+"   && rm $tempfile
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
+hi SpellBad guisp=red gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
+hi SpellCap guisp=yellow gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=undercurl
+

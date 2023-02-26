@@ -28,8 +28,8 @@ let
         magenta: '0xa37acc'
         cyan: '0x56d9ad'
         white: '0xfeffff'
-    env:
-      TERM: screen-256color
+    # env:
+    #   TERM: screen-256color
     window:
       decorations: ${if pkgs.stdenv.isLinux then "none" else "buttonless"}
       padding:

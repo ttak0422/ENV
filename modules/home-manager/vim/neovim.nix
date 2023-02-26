@@ -47,7 +47,6 @@ let
       plugin = alpha-nvim;
       config = readFile ./lua/alpha-nvim_config.lua;
       optional = false;
-      enable = false;
       comment = "splashscreen";
     }
     {

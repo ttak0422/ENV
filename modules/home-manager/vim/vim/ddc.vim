@@ -65,7 +65,7 @@ let s:sourceParams['nvim-lsp'] = #{
       \    Function: 'λ ',
       \    Constructor: ' ',
       \    Field: 'ﰠ ',
-      \    Variable: '𝒙 ',
+      \    Variable: ' ',
       \    Class: ' ',
       \    Interface: ' ',
       \    Module: ' ',

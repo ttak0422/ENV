@@ -65,8 +65,6 @@ let
         vim.cmd("colorscheme onedark")
       '';
       optional = false;
-      delay = true;
-      enable = false;
     }
     {
       plugin = nightfox-nvim;
@@ -383,30 +381,29 @@ let
       '';
       # commands = [ "TransparentEnable" "TransparentDisable" "TransparentToggle" ];
     }
-    {
-      plugin = serenade;
-      config = ''
-        vim.cmd([[
-          colorscheme serenade
-          hi DiagnosticError guifg=#d76e6e
-          hi DiagnosticWarn  guifg=#e5a46b
-          hi DiagnosticInfo  guifg=#82abbc
-          hi DiagnosticHint  guifg=#9aa1a8
-          hi NotifyERRORBorder guifg=#d76e6e
-          hi NotifyWARNBorder  guifg=#e5a46b
-          hi NotifyINFOBorder  guifg=#82abbc
-          hi NotifyERRORIcon guifg=#d76e6e
-          hi NotifyWARNIcon  guifg=#e5a46b
-          hi NotifyINFOIcon  guifg=#82abbc
-          hi NotifyERRORTitle  guifg=#d76e6e
-          hi NotifyWARNTitle guifg=#e5a46b
-          hi NotifyINFOTitle guifg=#82abbc
-        ]])
-      '';
-      depends = [ nvim-transparent ];
-      delay = true;
-      # optional = false;
-    }
+    # {
+    #   plugin = serenade;
+    #   config = ''
+    #     vim.cmd([[
+    #       colorscheme serenade
+    #       hi DiagnosticError guifg=#d76e6e
+    #       hi DiagnosticWarn  guifg=#e5a46b
+    #       hi DiagnosticInfo  guifg=#82abbc
+    #       hi DiagnosticHint  guifg=#9aa1a8
+    #       hi NotifyERRORBorder guifg=#d76e6e
+    #       hi NotifyWARNBorder  guifg=#e5a46b
+    #       hi NotifyINFOBorder  guifg=#82abbc
+    #       hi NotifyERRORIcon guifg=#d76e6e
+    #       hi NotifyWARNIcon  guifg=#e5a46b
+    #       hi NotifyINFOIcon  guifg=#82abbc
+    #       hi NotifyERRORTitle  guifg=#d76e6e
+    #       hi NotifyWARNTitle guifg=#e5a46b
+    #       hi NotifyINFOTitle guifg=#82abbc
+    #     ]])
+    #   '';
+    #   depends = [ nvim-transparent ];
+    #   delay = true;
+    # }
     {
       plugin = headlines-nvim;
       config = readFile ./lua/headlines_config.lua;

@@ -46,6 +46,12 @@ wk.register({
       F = { "<cmd>lua require('spectre').open()<cr>", "find and replace with dark power" },
     },
 
+    -- find (ddu)
+    ["u"] = {
+      p = { "<cmd>Ddu file_rec<cr>", "find contents" },
+      b = { "<cmd>Ddu buffer<cr>", "find contents" },
+    },
+
     -- comment
     ["n"] = {
       name = "comment",

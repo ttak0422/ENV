@@ -13,5 +13,7 @@ return {
   "dapui_scopes",
   "dapui_console",
   "dap-repl",
+  "ddu-ff",
+  "ddu-ff-filter",
   "",
 }

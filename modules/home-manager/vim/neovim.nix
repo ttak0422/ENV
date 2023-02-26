@@ -62,7 +62,7 @@ let
     {
       plugin = onedarkpro-nvim;
       config = ''
-        vim.cmd("colorscheme onedark")
+        vim.cmd("colorscheme onedark_vivid")
       '';
       optional = false;
     }
@@ -454,280 +454,291 @@ let
   dap = callPackage ./dap { };
   template = callPackage ./template { };
 
-  code = with pkgs.vimPlugins;
-
-    [
-      {
-        plugin = nvim-docs-view;
-        enable = false;
-        config = readFile ./lua/nvim-docs-view.lua;
-        commands = [ "DocsViewToggle" ];
-      }
-      {
-        plugin = nvim-treesitter;
-        dependsAfter = [ nvim-ts-rainbow nvim-ts-autotag ];
-        delay = true;
-        config = readFile ./lua/nvim-treesitter_config.lua;
-        extraPackages = with pkgs; [ tree-sitter ];
-        commands = [ "TSBufEnable" ];
-      }
-      # {
-      #   plugin = range-highlight-nvim;
-      #   depends = [ cmd-parser-nvim ];
-      #   config = ''
-      #     require('range-highlight').setup{}
-      #   '';
-      #   events = [ "CmdlineEnter" ];
-      # }
-      {
-        plugin = myPlugins.nvim-dd;
-        config = ''
-          require('dd').setup({
-            timeout = 1000
-          })
-        '';
-        delay = true;
-        comment = "diagnostics throttle";
-      }
-      {
-        plugin = Shade-nvim;
-        config = readFile ./lua/Shade-nvim.lua;
-        events = [ "WinNew" ];
-        enable = false;
-        comment = "フォーカスしていないPaneを暗く";
-      }
-      {
-        plugin = tint-nvim;
-        config = ''
-          require('tint').setup()
-        '';
-        events = [ "WinNew" ];
-        enable = false;
-        comment = "フォーカスしていないPaneを暗く";
-      }
-      {
-        plugin = luasnip;
-        depends = [ friendly-snippets ];
-        config = readFile ./lua/luasnip_config.lua;
-      }
-      {
-        plugin = vim-vsnip-integ;
-        config = ''
-          vim.cmd[[
-            ${readFile ./vim/vim-vsnip-integ.vim}
-          ]]
-        '';
-        depends = [{
-          plugin = vim-vsnip;
-          config = ''
-            vim.cmd[[
-              ${readFile ./vim/vsnip.vim}
-            ]]
-          '';
-        }];
-      }
-      {
-        plugin = ddc-vim;
-        depends = [
-          {
-            plugin = ddc-ui-pum;
-            depends = [ pum-vim ];
-          }
-          ddc-ui-native
-          denops-vim
-          ddc-source-around
-          ddc-source-nvim-lsp
-          ddc-source-file
-          ddc-matcher_head
-          ddc-sorter_rank
-          ddc-sorter_itemsize
-          ddc-buffer
-          ddc-fuzzy
-          denops-signature_help
-          denops-popup-preview-vim
-          ddc-source-cmdline
-          ddc-source-cmdline-history
-          neco-vim
-          ddc-tmux
-          ddc-converter_truncate
-          ddc-converter_remove_overlap
-          ddc-matcher_length
-          {
-            plugin = ddc-source-nvim-obsidian;
-            depends = [ obsidian-nvim ];
-          }
-        ];
-        config = ''
-          vim.cmd([[
-            ${readFile ./vim/ddc.vim}
-          ]])
-        '';
-        delay = true;
-      }
-      # {
-      #   plugin = nvim-cmp;
-      #   dependsAfter = [
-      #     {
-      #       plugin = lspkind-nvim;
-      #       config = readFile ./lua/lspkind_config.lua;
-      #     }
-      #     {
-      #       plugin = cmp-vsnip;
-      #       depends = [ vim-vsnip ];
-      #       enable = false;
-      #     }
-      #     nvim-autopairs
-      #     nvim-treesitter
-      #     cmp-path
-      #     cmp-buffer
-      #     cmp-calc
-      #     cmp-treesitter
-      #     cmp-nvim-lsp
-      #     cmp-nvim-lua
-      #     {
-      #       plugin = cmp_luasnip;
-      #       depends = [ luasnip ];
-      #     }
-      #     cmp-nvim-lsp-signature-help
-      #     # cmp-cmdline
-      #     # cmp-cmdline-history
-      #     # cmp-nvim-lsp-document-symbol
-      #   ];
-      #   config = ''
-      #     vim.cmd[[
-      #       silent source ${cmp-path}/after/plugin/cmp_path.lua
-      #       silent source ${cmp-buffer}/after/plugin/cmp_buffer.lua
-      #       silent source ${cmp-calc}/after/plugin/cmp_calc.lua
-      #       silent source ${cmp-treesitter}/after/plugin/cmp_treesitter.lua
-      #       silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua
-      #       silent source ${cmp_luasnip}/after/plugin/cmp_luasnip.lua
-      #       silent source ${cmp-nvim-lua}/after/plugin/cmp_nvim_lua.lua
-      #       silent source ${cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua
-      #       " silent source ${cmp-cmdline}/after/plugin/cmp_cmdline.lua
-      #       " silent source ${cmp-cmdline-history}/after/plugin/cmp_cmdline_history.lua
-      #       " silent source ${cmp-nvim-lsp-document-symbol}/after/plugin/cmp_nvim_lsp_document_symbol.lua
-      #     ]]
-
-      #   '' + (readFile ./lua/nvim-cmp_config.lua);
-      #   delay = true;
-      #   enable = false;
-      # }
-      {
-        plugin = nvim-lint;
-        config = ''
-          local lint = require("lint")
-          local local_config = vim.g.checkstyle_config_file
-          if local_config ~= nil then
-            lint.linters.checkstyle.config_file = local_config
-          else
-            lint.linters.checkstyle.config_file = '${
-              pkgs.writeText "checkstyle.xml"
-              (readFile ./../../../configs/google_checks.xml)
-            }'
-          end
-          lint.linters_by_ft = {
-            java = { "checkstyle" },
-          }
-          vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-            callback = function()
-              require("lint").try_lint()
-            end,
-          })
-        '';
-        extraPackages = [ pkgs.checkstyle ];
-        fileTypes = [ "java" ];
-      }
-      {
-        plugin = todo-comments-nvim;
-        depends = [ plenary-nvim trouble-nvim ];
-        commands =
-          [ "TodoQuickFix" "TodoLocList" "TodoTrouble" "TodoTelescope" ];
-        config = ''
-          require'todo-comments'.setup {}
-        '';
-        delay = true;
-      }
-      {
-        plugin = trouble-nvim;
-        depends = [ nvim-web-devicons ];
-        commands = [ "TroubleToggle" ];
-        config = readFile ./lua/trouble_config.lua;
-      }
-      {
-        plugin = spaceless-nvim;
-        config = ''
-          require'spaceless'.setup()
-        '';
-        delay = true;
-        enable = false;
-      }
-      {
-        plugin = nvim_context_vt;
-        depends = [ nvim-treesitter ];
-        delay = true;
-        config = readFile ./lua/nvim_context_vt_config.lua;
-      }
-      {
-        plugin = vim-oscyank;
-        commands = [ "OSCYank" ];
-        startup = ''
-          vim.g.oscyank_term = 'default'
-        '';
-      }
-      {
-        plugin = dressing-nvim;
-        config = readFile ./lua/dressiong-nvim.lua;
-      }
-      {
-        plugin = legendary-nvim;
-        depends = [ telescope-nvim ];
-        commands = [ "Legendary" ];
-        config = readFile ./lua/legendary-nvim.lua;
-      }
-      {
-        plugin = nvim-bufdel;
-        commands = [ "BufDel" "BufDel!" ];
-        config = ''
-          require'bufdel'.setup {
-            quit = false,
-          }
-        '';
-      }
-      # {
-      #   plugin = vim-buffer-history;
-      #   commands = [ "BufferHistoryBack" "BufferHistoryForward" ];
-      #   delay = true;
-      # }
-      {
-        plugin = cybu-nvim;
-        depends = [ nvim-web-devicons plenary-nvim ];
-        config = ''
-          dofile("${./lua/cybu.lua}")({
-            exclude_ft = dofile("${./exclude_ft.lua}"),
-          })
-        '';
-        modules = [ "cybu" ];
-      }
-      {
-        plugin = nvim-colorizer-lua;
-        config = readFile ./lua/nvim-colorizer.lua;
-        commands = [ "ColorizerToggle" ];
-      }
-      {
-        plugin = registers-nvim;
-        config = readFile ./lua/registers_config.lua;
-        delay = true;
-      }
-      {
-        plugin = lexima-vim;
+  code = with pkgs.vimPlugins; [
+    {
+      plugin = nvim-docs-view;
+      enable = false;
+      config = readFile ./lua/nvim-docs-view.lua;
+      commands = [ "DocsViewToggle" ];
+    }
+    {
+      plugin = nvim-treesitter;
+      dependsAfter = [ nvim-ts-rainbow nvim-ts-autotag ];
+      delay = true;
+      config = readFile ./lua/nvim-treesitter_config.lua;
+      extraPackages = with pkgs; [ tree-sitter ];
+      commands = [ "TSBufEnable" ];
+    }
+    # {
+    #   plugin = range-highlight-nvim;
+    #   depends = [ cmd-parser-nvim ];
+    #   config = ''
+    #     require('range-highlight').setup{}
+    #   '';
+    #   events = [ "CmdlineEnter" ];
+    # }
+    {
+      plugin = myPlugins.nvim-dd;
+      config = ''
+        require('dd').setup({
+          timeout = 1000
+        })
+      '';
+      delay = true;
+      comment = "diagnostics throttle";
+    }
+    {
+      plugin = Shade-nvim;
+      config = readFile ./lua/Shade-nvim.lua;
+      events = [ "WinNew" ];
+      enable = false;
+      comment = "フォーカスしていないPaneを暗く";
+    }
+    {
+      plugin = tint-nvim;
+      config = ''
+        require('tint').setup()
+      '';
+      events = [ "WinNew" ];
+      enable = false;
+      comment = "フォーカスしていないPaneを暗く";
+    }
+    {
+      plugin = luasnip;
+      depends = [ friendly-snippets ];
+      config = readFile ./lua/luasnip_config.lua;
+    }
+    {
+      plugin = vim-vsnip-integ;
+      config = ''
+        vim.cmd[[
+          ${readFile ./vim/vim-vsnip-integ.vim}
+        ]]
+      '';
+      depends = [{
+        plugin = vim-vsnip;
         config = ''
           vim.cmd[[
-            ${readFile ./vim/lexima.vim}
+            ${readFile ./vim/vsnip.vim}
           ]]
         '';
-        # delay = true;
-      }
-    ];
+      }];
+    }
+    {
+      plugin = ddc-vim;
+      depends = [
+        denops-vim
+        {
+          plugin = ddc-ui-pum;
+          depends = [ pum-vim ];
+        }
+        ddc-ui-native
+        ddc-source-around
+        ddc-source-nvim-lsp
+        ddc-source-file
+        ddc-matcher_head
+        ddc-sorter_rank
+        ddc-sorter_itemsize
+        ddc-buffer
+        ddc-fuzzy
+        denops-signature_help
+        denops-popup-preview-vim
+        ddc-source-cmdline
+        ddc-source-cmdline-history
+        neco-vim
+        ddc-tmux
+        ddc-converter_truncate
+        ddc-converter_remove_overlap
+        ddc-matcher_length
+        {
+          plugin = ddc-source-nvim-obsidian;
+          depends = [ obsidian-nvim ];
+        }
+      ];
+      config = "vim.cmd([[${readFile ./vim/ddc.vim}]])";
+      delay = true;
+    }
+    {
+      plugin = ddu-vim;
+      depends = [
+        denops-vim
+        ddu-ui-ff
+        ddu-source-buffer
+        ddu-source-file
+        ddu-source-file_rec
+        ddu-filter-matcher_substring
+        ddu-kind-file
+        ddu-commands-vim
+        ddu-column-filename
+      ];
+      config = "vim.cmd([[${readFile ./vim/ddu.vim}]])";
+      commands = [ "Ddu" ];
+      # fileTypes = [ "ddu-ff" "ddu-ff-filter" ];
+      delay = true;
+    }
+    # {
+    #   plugin = nvim-cmp;
+    #   dependsAfter = [
+    #     {
+    #       plugin = lspkind-nvim;
+    #       config = readFile ./lua/lspkind_config.lua;
+    #     }
+    #     {
+    #       plugin = cmp-vsnip;
+    #       depends = [ vim-vsnip ];
+    #       enable = false;
+    #     }
+    #     nvim-autopairs
+    #     nvim-treesitter
+    #     cmp-path
+    #     cmp-buffer
+    #     cmp-calc
+    #     cmp-treesitter
+    #     cmp-nvim-lsp
+    #     cmp-nvim-lua
+    #     {
+    #       plugin = cmp_luasnip;
+    #       depends = [ luasnip ];
+    #     }
+    #     cmp-nvim-lsp-signature-help
+    #     # cmp-cmdline
+    #     # cmp-cmdline-history
+    #     # cmp-nvim-lsp-document-symbol
+    #   ];
+    #   config = ''
+    #     vim.cmd[[
+    #       silent source ${cmp-path}/after/plugin/cmp_path.lua
+    #       silent source ${cmp-buffer}/after/plugin/cmp_buffer.lua
+    #       silent source ${cmp-calc}/after/plugin/cmp_calc.lua
+    #       silent source ${cmp-treesitter}/after/plugin/cmp_treesitter.lua
+    #       silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua
+    #       silent source ${cmp_luasnip}/after/plugin/cmp_luasnip.lua
+    #       silent source ${cmp-nvim-lua}/after/plugin/cmp_nvim_lua.lua
+    #       silent source ${cmp-nvim-lsp-signature-help}/after/plugin/cmp_nvim_lsp_signature_help.lua
+    #       " silent source ${cmp-cmdline}/after/plugin/cmp_cmdline.lua
+    #       " silent source ${cmp-cmdline-history}/after/plugin/cmp_cmdline_history.lua
+    #       " silent source ${cmp-nvim-lsp-document-symbol}/after/plugin/cmp_nvim_lsp_document_symbol.lua
+    #     ]]
+
+    #   '' + (readFile ./lua/nvim-cmp_config.lua);
+    #   delay = true;
+    #   enable = false;
+    # }
+    {
+      plugin = nvim-lint;
+      config = ''
+        local lint = require("lint")
+        local local_config = vim.g.checkstyle_config_file
+        if local_config ~= nil then
+          lint.linters.checkstyle.config_file = local_config
+        else
+          lint.linters.checkstyle.config_file = '${
+            pkgs.writeText "checkstyle.xml"
+            (readFile ./../../../configs/google_checks.xml)
+          }'
+        end
+        lint.linters_by_ft = {
+          java = { "checkstyle" },
+        }
+        vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+          callback = function()
+            require("lint").try_lint()
+          end,
+        })
+      '';
+      extraPackages = [ pkgs.checkstyle ];
+      fileTypes = [ "java" ];
+    }
+    {
+      plugin = todo-comments-nvim;
+      depends = [ plenary-nvim trouble-nvim ];
+      commands = [ "TodoQuickFix" "TodoLocList" "TodoTrouble" "TodoTelescope" ];
+      config = ''
+        require'todo-comments'.setup {}
+      '';
+      delay = true;
+    }
+    {
+      plugin = trouble-nvim;
+      depends = [ nvim-web-devicons ];
+      commands = [ "TroubleToggle" ];
+      config = readFile ./lua/trouble_config.lua;
+    }
+    {
+      plugin = spaceless-nvim;
+      config = ''
+        require'spaceless'.setup()
+      '';
+      delay = true;
+      enable = false;
+    }
+    {
+      plugin = nvim_context_vt;
+      depends = [ nvim-treesitter ];
+      delay = true;
+      config = readFile ./lua/nvim_context_vt_config.lua;
+    }
+    {
+      plugin = vim-oscyank;
+      commands = [ "OSCYank" ];
+      startup = ''
+        vim.g.oscyank_term = 'default'
+      '';
+    }
+    {
+      plugin = dressing-nvim;
+      config = readFile ./lua/dressiong-nvim.lua;
+    }
+    {
+      plugin = legendary-nvim;
+      depends = [ telescope-nvim ];
+      commands = [ "Legendary" ];
+      config = readFile ./lua/legendary-nvim.lua;
+    }
+    {
+      plugin = nvim-bufdel;
+      commands = [ "BufDel" "BufDel!" ];
+      config = ''
+        require'bufdel'.setup {
+          quit = false,
+        }
+      '';
+    }
+    # {
+    #   plugin = vim-buffer-history;
+    #   commands = [ "BufferHistoryBack" "BufferHistoryForward" ];
+    #   delay = true;
+    # }
+    {
+      plugin = cybu-nvim;
+      depends = [ nvim-web-devicons plenary-nvim ];
+      config = ''
+        dofile("${./lua/cybu.lua}")({
+          exclude_ft = dofile("${./exclude_ft.lua}"),
+        })
+      '';
+      modules = [ "cybu" ];
+    }
+    {
+      plugin = nvim-colorizer-lua;
+      config = readFile ./lua/nvim-colorizer.lua;
+      commands = [ "ColorizerToggle" ];
+    }
+    {
+      plugin = registers-nvim;
+      config = readFile ./lua/registers_config.lua;
+      delay = true;
+    }
+    {
+      plugin = lexima-vim;
+      config = ''
+        vim.cmd[[
+          ${readFile ./vim/lexima.vim}
+        ]]
+      '';
+      # delay = true;
+    }
+  ];
   movement = with pkgs.vimPlugins; [
     {
       plugin = telescope-nvim;
@@ -1018,4 +1029,3 @@ in {
     withPython3 = true;
   };
 }
-

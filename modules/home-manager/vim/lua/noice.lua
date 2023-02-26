@@ -98,5 +98,8 @@ return function(opt)
       excluded_filetypes = opt.exclude_ft,
     },
     throttle = 1000 / 30,
+    health = {
+      checker = false, -- for goneovim
+    },
   })
 end

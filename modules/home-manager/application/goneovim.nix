@@ -5,7 +5,7 @@ let
     [Editor]
     IgnoreSaveConfirmationWithCloseButton = true
     BorderlessWindow = true
-    # HideTitlebar = true
+    HideTitlebar = true
     # Transparent = 0.9
     WindowGeometryBasedOnFontmetrics = true
 

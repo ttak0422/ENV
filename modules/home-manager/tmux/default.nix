@@ -62,8 +62,8 @@ let
   ];
 
   prelude = ''
-    set -g default-terminal "tmux-256color"
-    set -ag terminal-overrides ",xterm-256color:RGB"
+    set-option -g default-terminal 'screen-256color'
+    set-option -ga terminal-overrides ',xterm-256color:Tc'
     set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
     set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 

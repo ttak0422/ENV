@@ -72,7 +72,8 @@ in with pkgs.vimPlugins; [
     plugin = nvim-jdtls;
     depends = lspSharedDepends ++ [ nvim-dap ];
     extraPackages = lspSharedExtraPackages;
-    config = ''
+    config = let jdtLsp = pkgs.pkgs-stable.jdt-language-server;
+    in ''
       local runtimes = {
         {
           name = "JavaSE-11",
@@ -88,9 +89,9 @@ in with pkgs.vimPlugins; [
         on_attach = dofile("${./on_attach.lua}"),
         capabilities = dofile("${./capabilities.lua}"),
         java_bin = "${pkgs.jdk17}/bin/java",
-        jdtls_config = "${pkgs.jdt-language-server}/share/config",
+        jdtls_config = "${jdtLsp}/share/config",
         lombok_jar = "${pkgs.lombok}/share/java/lombok.jar",
-        jdtls_jar = vim.fn.glob("${pkgs.jdt-language-server}/share/java/plugins/org.eclipse.equinox.launcher_*.jar"),
+        jdtls_jar = vim.fn.glob("${jdtLsp}/share/java/plugins/org.eclipse.equinox.launcher_*.jar"),
         jdtls_settings = dofile("${./jdt_settings.lua}")(runtimes),
         java_debug_jar = vim.fn.glob("${pkgs.vscode-extensions.vscjava.vscode-java-debug}/share/vscode/extensions/vscjava.vscode-java-debug/server/com.microsoft.java.debug.plugin-*.jar", 1),
         java_test_jar = vim.fn.glob("${pkgs.vscode-extensions.vscjava.vscode-java-test}/share/vscode/extensions/vscjava.vscode-java-test/server/*.jar", 1),

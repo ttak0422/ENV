@@ -22,9 +22,11 @@ $ nix --experimental-features 'nix-command flakes' build .#darwinConfigurations.
 
 # switch (first time only)
 $ ./result/sw/bin/darwin-rebuild switch --flake .#darwinM1
-
 # switch
 $ darwin-rebuild switch --flake .#darwinM1
+
+# switch (if contains submodules)
+# darwin-rebuild switch --flake '.?submodules=true#darwinM1'
 ```
 
 <img alt="nix" src="https://builtwithnix.org/badge.svg">

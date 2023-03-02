@@ -189,9 +189,8 @@ in with pkgs.vimPlugins; [
         tsserver_cmd = {
           "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server",
           "--stdio",
-          "--tsserver-path",
-          "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/",
         },
+        tsserver_path ="${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/",
       })
     '';
     delay = true;

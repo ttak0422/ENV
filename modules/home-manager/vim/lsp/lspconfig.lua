@@ -5,6 +5,7 @@ return function(opt)
   local capabilities = opt.capabilities
   local eslint_cmd = opt.eslint_cmd
   local tsserver_cmd = opt.tsserver_cmd
+  local tsserver_path = opt.tsserver_path
 
   -- lua
   lspconfig.lua_ls.setup({
@@ -72,6 +73,12 @@ return function(opt)
       on_attach = on_attach,
       capabilities = capabilities,
       cmd = tsserver_cmd,
+      iniy_options = {
+        hostInfo = "neovim",
+        tsserver = {
+          path = tsserver_path,
+        },
+      },
     })
   end
 

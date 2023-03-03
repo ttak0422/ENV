@@ -55,32 +55,26 @@ return function(opt)
     capabilities = capabilities,
   })
 
-  -- fsharp (use ionide-vim)
+  -- deno
+  lspconfig.denols.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    root_dir = util.root_pattern("deno.json", "deno.jsonc"),
+  })
 
-  local node_root_dir = util.root_pattern("package.json", "node_modules")
-  local is_node_repo = node_root_dir(".") ~= nil
-
-  if not is_node_repo then
-    -- deno
-    vim.g.markdown_fenced_languages = { "ts=typescript" }
-    lspconfig.denols.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-    })
-  else
-    -- node
-    lspconfig.tsserver.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      cmd = tsserver_cmd,
-      iniy_options = {
-        hostInfo = "neovim",
-        tsserver = {
-          path = tsserver_path,
-        },
+  -- node
+  lspconfig.tsserver.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = tsserver_cmd,
+    root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
+    iniy_options = {
+      hostInfo = "neovim",
+      tsserver = {
+        path = tsserver_path,
       },
-    })
-  end
+    },
+  })
 
   -- csharp (use csharp_ls)
   lspconfig.csharp_ls.setup({

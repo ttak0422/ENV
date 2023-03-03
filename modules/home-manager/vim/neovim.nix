@@ -7,7 +7,7 @@ let
   myPlugins = callPackage ./my-plugins.nix { };
   external = callPackage ./external.nix { };
 
-  extraPackages = with pkgs; [ ];
+  extraPackages = [ ];
 
   editorconfigTemplate = pkgs.writeText "editorconfig" ''
     root = true
@@ -30,6 +30,7 @@ let
     dofile("${./lua/neovim.lua}")({
       editor_config = "${editorconfigTemplate}",
     })
+    vim.g.markdown_fenced_languages = { "ts=typescript" }
   '';
 
   startup = with pkgs.vimPlugins; [

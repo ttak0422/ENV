@@ -64,11 +64,11 @@ let
       :config)
   '';
 in {
-  programs.doom-emacs = {
-    enable = false;
-    doomPrivateDir = ./doom.d;
-    emacsPackage = pkgs.emacs;
-  };
+  # programs.doom-emacs = {
+  #   enable = false;
+  #   doomPrivateDir = ./doom.d;
+  #   emacsPackage = pkgs.emacs;
+  # };
 
   programs.emacs = { enable = false; };
 

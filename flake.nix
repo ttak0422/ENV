@@ -2,7 +2,7 @@
   description = "my ENV.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.11-darwin";
     darwin = {
       url = "github:LnL7/nix-darwin/master";
@@ -38,12 +38,12 @@
       };
     };
     # emacs for mac
-    emacs.url = "github:cmacrae/emacs";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    nix-doom-emacs = {
-      url = "github:nix-community/nix-doom-emacs";
-      inputs.emacs-overlay.follows = "emacs-overlay";
-    };
+    # emacs.url = "github:cmacrae/emacs";
+    # emacs-overlay.url = "github:nix-community/emacs-overlay";
+    # nix-doom-emacs = {
+    #   url = "github:nix-community/nix-doom-emacs";
+    #   inputs.emacs-overlay.follows = "emacs-overlay";
+    # };
     vim-plugins-overlay.url = "github:ttak0422/vim-plugins-overlay";
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
@@ -117,7 +117,7 @@
           imports = [
             userHmConfig
             inputs.rokka-nvim.hmModule
-            inputs.nix-doom-emacs.hmModule
+            # inputs.nix-doom-emacs.hmModule
           ];
           home = { stateVersion = "22.11"; };
         };
@@ -158,7 +158,7 @@
 
       overlays = {
         pkgs-unstable = final: prev: {
-          pkgs-master = import inputs.nixpkgs {
+          pkgs-unstable = import inputs.nixpkgs-unstable {
             inherit (prev.stdenv) system;
             inherit (nixpkgsConfig) config;
           };

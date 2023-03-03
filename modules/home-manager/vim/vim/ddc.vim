@@ -21,7 +21,7 @@ let s:sourceOptions._ = {
       \ }
 let s:sourceOptions.around = {
       \ 'mark': 'A',
-      \ 'maxItems': 5,
+      \ 'maxItems': 50,
       \ }
 let s:sourceOptions.file = {
       \ 'mark': 'F',
@@ -85,7 +85,8 @@ let s:sourceParams['nvim-lsp'] = #{
       \    Event: ' ',
       \    Operator: ' ',
       \    TypeParameter: ' ',
-      \ }
+      \   },
+      \   maxSize: 800,
       \ }
 let s:sourceParams.tmux = {
       \ 'currentWinOnly': v:true,

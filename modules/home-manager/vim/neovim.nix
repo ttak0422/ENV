@@ -555,6 +555,7 @@ let
           plugin = ddc-source-nvim-obsidian;
           depends = [ obsidian-nvim ];
         }
+        nvim-treesitter
       ];
       config = "vim.cmd([[${readFile ./vim/ddc.vim}]])";
       delay = true;

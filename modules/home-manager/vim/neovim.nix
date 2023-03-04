@@ -297,6 +297,11 @@ let
 
   view = with pkgs.vimPlugins; [
     {
+      plugin = qfheight-nvim;
+      config = readFile ./lua/qfheight.lua;
+      fileTypes = [ "qf" ];
+    }
+    {
       plugin = hologram-nvim;
       config = readFile ./lua/hologram.lua;
       commands = [ "EnableHologram" ];

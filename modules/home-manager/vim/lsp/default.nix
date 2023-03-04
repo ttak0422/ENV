@@ -72,7 +72,7 @@ in with pkgs.vimPlugins; [
     plugin = nvim-jdtls;
     depends = lspSharedDepends ++ [ nvim-dap ];
     extraPackages = lspSharedExtraPackages;
-    config = let jdtLsp = pkgs.pkgs-stable.jdt-language-server;
+    config = let jdtLsp = pkgs.jdt-language-server;
     in ''
       local runtimes = {
         {

@@ -1,7 +1,8 @@
 return function(opt)
   local jdtls = require("jdtls")
   local root = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" })
-  local workspace = os.getenv("HOME") .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(root, ":p:h:t")
+  local full_path = vim.fn.fnamemodify(root, ":p:h"):gsub("/", "_")
+  local workspace = os.getenv("HOME") .. "/.local/share/eclipse/" .. full_path
 
   local bundles = {
     opt.java_debug_jar,

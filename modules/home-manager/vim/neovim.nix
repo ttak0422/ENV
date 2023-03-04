@@ -580,6 +580,41 @@ let
     }
     # {
     #   plugin = nvim-cmp;
+    #   depends = [ cmp-nvim-lsp ];
+    #   config = ''
+    #     local cmp = require("cmp")
+    #     cmp.setup({
+    #       mapping = cmp.mapping.preset.insert({
+    #         ["<C-d>"] = cmp.mapping.scroll_docs(-2),
+    #         ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    #         ["<S-Space>"] = cmp.mapping.complete(),
+    #         ["<C-e>"] = cmp.mapping.close(),
+    #         ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    #         ["<Tab>"] = cmp.mapping(function(fallback)
+    #           if cmp.visible() then
+    #             cmp.select_next_item()
+    #           else
+    #             fallback()
+    #           end
+    #         end, { "i", "s" }),
+    #         ["<S-Tab>"] = cmp.mapping(function(fallback)
+    #           if cmp.visible() then
+    #             cmp.select_prev_item()
+    #           else
+    #             fallback()
+    #           end
+    #         end, { "i", "s" }),
+    #       }),
+    #       sources = cmp.config.sources({
+    #         { name = "nvim_lsp", priority = 10 },
+    #       }),
+    #     })
+    #     vim.cmd([[silent source ${cmp-nvim-lsp}/after/plugin/cmp_nvim_lsp.lua]])
+    #   '';
+    #   delay = true;
+    # }
+    # {
+    #   plugin = nvim-cmp;
     #   dependsAfter = [
     #     {
     #       plugin = lspkind-nvim;

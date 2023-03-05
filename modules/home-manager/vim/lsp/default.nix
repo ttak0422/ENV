@@ -31,9 +31,15 @@ in with pkgs.vimPlugins; [
   # }
   {
     plugin = formatter-nvim;
+    depends = [ nvim-lspconfig ];
     config = readFile ./formatter-nvim.lua;
     commands = [ "Format" ];
-    extraPackages = with pkgs; [ stylua google-java-format nixfmt ];
+    extraPackages = with pkgs; [
+      stylua
+      google-java-format
+      nixfmt
+      nodePackages.prettier
+    ];
   }
   {
     plugin = actions-preview-nvim;

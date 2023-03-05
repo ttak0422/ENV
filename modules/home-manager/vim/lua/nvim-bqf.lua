@@ -1,4 +1,3 @@
--- https://github.com/kevinhwang91/nvim-bqf#customize-quickfix-window-easter-egg
 local fn = vim.fn
 
 function _G.qftf(info)
@@ -10,35 +9,48 @@ function _G.qftf(info)
   else
     items = fn.getloclist(info.winid, { id = info.id, items = 0 }).items
   end
-  local limit = 31
-  local fnameFmt1, fnameFmt2 = "%-" .. limit .. "s", "…%." .. (limit - 1) .. "s"
-  local validFmt = "%s │%5d:%-3d│%s %s"
+  local fname_limit = 30
+  local fname_path_limit = 70
+  local fname_fmt_1, fname_fmt_2 = "%-" .. fname_limit .. "s", "…%." .. (fname_limit - 1) .. "s"
+  local fmt = "%s │ %s" -- fname_path │ text
   for i = info.start_idx, info.end_idx do
     local e = items[i]
+    local line
     local fname = ""
-    local str
+    local path = ""
     if e.valid == 1 then
       if e.bufnr > 0 then
-        fname = fn.bufname(e.bufnr)
-        if fname == "" then
+        local bufname = fn.bufname(e.bufnr)
+        if bufname == "" then
           fname = "[No Name]"
+          path = "([buf])"
         else
-          fname = fname:gsub("^" .. vim.env.HOME, "~")
+          fname = fn.fnamemodify(bufname, ":t")
+          path = fn.fnamemodify(bufname, ":h"):gsub("^" .. vim.env.HOME, "~")
         end
-        if #fname <= limit then
-          fname = fnameFmt1:format(fname)
+
+        local path_limit = 0
+        -- format fname
+        if #fname <= fname_limit then
+          fname = fname
+          path_limit = fname_path_limit - #fname
         else
-          fname = fnameFmt2:format(fname:sub(1 - limit))
+          fname = fname_fmt_2:format(fname:sub(1 - fname_limit))
+          path_limit = fname_path_limit - #fname + 2
+        end
+
+        -- format path
+        if #path <= path_limit then
+          path = string.format("%" .. path_limit .. "s", path)
+        else
+          path = string.format("…%." .. (path_limit - 1) .. "s", path:sub(1 - path_limit))
         end
       end
-      local lnum = e.lnum > 99999 and -1 or e.lnum
-      local col = e.col > 999 and -1 or e.col
-      local qtype = e.type == "" and "" or " " .. e.type:sub(1, 1):upper()
-      str = validFmt:format(fname, lnum, col, qtype, e.text)
+      line = fmt:format(fname .. "    " .. path, e.text)
     else
-      str = e.text
+      line = e.text
     end
-    table.insert(ret, str)
+    table.insert(ret, line)
   end
   return ret
 end

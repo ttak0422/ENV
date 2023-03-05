@@ -59,7 +59,8 @@ return function(opt)
   lspconfig.denols.setup({
     on_attach = on_attach,
     capabilities = capabilities,
-    root_dir = util.root_pattern("deno.json", "deno.jsonc"),
+    root_dir = util.root_pattern("deno.json", "deno.jsonc", "denops"),
+    single_file_support = false,
   })
 
   -- node
@@ -67,13 +68,15 @@ return function(opt)
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = tsserver_cmd,
-    root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
+    root_dir = util.root_pattern("package.json"),
     iniy_options = {
       hostInfo = "neovim",
+      maxTsServerMemory = 8192,
       tsserver = {
         path = tsserver_path,
       },
     },
+    single_file_support = false,
   })
 
   -- csharp (use csharp_ls)

@@ -469,11 +469,17 @@ let
     }
     {
       plugin = nvim-treesitter;
-      dependsAfter = [ nvim-ts-rainbow nvim-ts-autotag ];
+      dependsAfter = [ nvim-ts-rainbow ];
       delay = true;
       config = readFile ./lua/nvim-treesitter_config.lua;
       extraPackages = with pkgs; [ tree-sitter ];
       commands = [ "TSBufEnable" ];
+    }
+    {
+      plugin = nvim-ts-autotag;
+      depends = [ nvim-treesitter ];
+      config = readFile ./lua/nvim-ts-autotag.lua;
+      fileTypes = [ "javascript" "typescript" "jsx" "tsx" "vue" "html" ];
     }
     # {
     #   plugin = range-highlight-nvim;

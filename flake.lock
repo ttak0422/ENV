@@ -1539,6 +1539,38 @@
         "type": "github"
       }
     },
+    "gin-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676868681,
+        "narHash": "sha256-zwoqqdQfZeJ/HRbhdg+w/MwEbERdDee16yuHbGacr+A=",
+        "owner": "lambdalisue",
+        "repo": "gin.vim",
+        "rev": "d142d20b1b78a4198a0f1d6914947d909b49f16f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lambdalisue",
+        "repo": "gin.vim",
+        "type": "github"
+      }
+    },
+    "gin-vim_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676868681,
+        "narHash": "sha256-zwoqqdQfZeJ/HRbhdg+w/MwEbERdDee16yuHbGacr+A=",
+        "owner": "lambdalisue",
+        "repo": "gin.vim",
+        "rev": "d142d20b1b78a4198a0f1d6914947d909b49f16f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lambdalisue",
+        "repo": "gin.vim",
+        "type": "github"
+      }
+    },
     "git-conflict-nvim": {
       "flake": false,
       "locked": {
@@ -1675,6 +1707,22 @@
       "original": {
         "owner": "rmagatti",
         "repo": "goto-preview",
+        "type": "github"
+      }
+    },
+    "guise-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1647351644,
+        "narHash": "sha256-srtcPjG+TPgHvqdIXPg3n99Rwtck/N1a+EzURcXKscw=",
+        "owner": "lambdalisue",
+        "repo": "guise.vim",
+        "rev": "1759cc936583490af76c36e0a25546329b2b9921",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lambdalisue",
+        "repo": "guise.vim",
         "type": "github"
       }
     },
@@ -1837,6 +1885,22 @@
       "original": {
         "type": "file",
         "url": "https://repo.maven.apache.org/maven2/org/openjdk/jol/jol-cli/0.16/jol-cli-0.16-full.jar"
+      }
+    },
+    "kensaku-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1677207422,
+        "narHash": "sha256-lRq/PLdRn1RjAWrN8BX4U/EWmelof7pBWIOAP0uJc44=",
+        "owner": "lambdalisue",
+        "repo": "kensaku.vim",
+        "rev": "e7b83689ba4c0c21496190d8d0e11e90ad806e98",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lambdalisue",
+        "repo": "kensaku.vim",
+        "type": "github"
       }
     },
     "leap-ast-nvim": {
@@ -3211,6 +3275,7 @@
         "darwin": "darwin",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
+        "gin-vim": "gin-vim",
         "home-manager": "home-manager",
         "jol": "jol",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
@@ -4066,12 +4131,14 @@
         "formatter-nvim": "formatter-nvim",
         "friendly-snippets": "friendly-snippets",
         "fzy-lua-native": "fzy-lua-native",
+        "gin-vim": "gin-vim_2",
         "git-conflict-nvim": "git-conflict-nvim",
         "github-nvim-theme": "github-nvim-theme",
         "gitsigns-nvim": "gitsigns-nvim",
         "glow-hover-nvim": "glow-hover-nvim",
         "glow-nvim": "glow-nvim",
         "goto-preview": "goto-preview",
+        "guise-vim": "guise-vim",
         "haskell-tools-nvim": "haskell-tools-nvim",
         "headlines-nvim": "headlines-nvim",
         "hologram-nvim": "hologram-nvim",
@@ -4080,6 +4147,7 @@
         "image_preview-nvim": "image_preview-nvim",
         "incline-nvim": "incline-nvim",
         "indent-blankline-nvim": "indent-blankline-nvim",
+        "kensaku-vim": "kensaku-vim",
         "leap-ast-nvim": "leap-ast-nvim",
         "leap-nvim": "leap-nvim",
         "leap-spooky-nvim": "leap-spooky-nvim",
@@ -4214,11 +4282,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1677688203,
-        "narHash": "sha256-LX7DVzDP3Nbf0YCZRWGWIwP+DM6hvYWHtRO9IeeCJF4=",
+        "lastModified": 1678207857,
+        "narHash": "sha256-wzIwispTVxPWph9hzdcYT47qKo8TgPL4mqTmeUIHZ7c=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "1482f5f043565f1cf41989aa4c92faa38fac39f2",
+        "rev": "4d9e1d4e0e18f30f9d7750c55c8a597c9ad5d764",
         "type": "github"
       },
       "original": {

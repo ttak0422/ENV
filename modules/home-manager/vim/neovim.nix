@@ -878,6 +878,12 @@ let
 
   tool = with pkgs.vimPlugins; [
     {
+      plugin = gin-vim;
+      depends = [ denops-vim ];
+      config = readFile ./vim/gin.vim;
+      delay = true;
+    }
+    {
       plugin = vim-fontzoom;
       config = readFile ./lua/fontzoom.lua;
       commands = [ "Fontzoom" ];

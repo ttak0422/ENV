@@ -37,6 +37,10 @@
         nix-filter.follows = "nix-filter";
       };
     };
+    gin-vim = {
+      url = "github:lambdalisue/gin.vim";
+      flake = false;
+    };
     # emacs for mac
     # emacs.url = "github:cmacrae/emacs";
     # emacs-overlay.url = "github:nix-community/emacs-overlay";
@@ -88,6 +92,16 @@
           # inputs.emacs.overlay
           (final: prev: {
             vimPlugins = prev.vimPlugins // {
+              gin-vim = prev.vimUtils.buildVimPluginFrom2Nix {
+                src = inputs.gin-vim;
+                pname = "gin-vim";
+                version = "latest";
+                dontPatchShebangs = true;
+                postInstall = ''
+                  substituteInPlace $out/denops/gin/proxy/editor.ts --replace "/usr/bin/env" "${prev.coreutils}/bin/env"
+                  substituteInPlace $out/denops/gin/proxy/askpass.ts --replace "/usr/bin/env" "${prev.coreutils}/bin/env"
+                '';
+              };
               # ddc-sorter_itemsize = prev.vimUtils.buildVimPluginFrom2Nix {
               #   pname = "ddc-sorter_itemsize";
               #   version = "local";

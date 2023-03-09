@@ -37,10 +37,6 @@
         nix-filter.follows = "nix-filter";
       };
     };
-    gin-vim = {
-      url = "github:lambdalisue/gin.vim";
-      flake = false;
-    };
     # emacs for mac
     # emacs.url = "github:cmacrae/emacs";
     # emacs-overlay.url = "github:nix-community/emacs-overlay";
@@ -49,6 +45,7 @@
     #   inputs.emacs-overlay.follows = "emacs-overlay";
     # };
     vim-plugins-overlay.url = "github:ttak0422/vim-plugins-overlay";
+    # vim-plugins-overlay.url = "path:/Users/ttak0422/ghq/github.com/ttak0422/vim-plugins-overlay";
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs = { flake-utils.follows = "flake-utils"; };
@@ -92,16 +89,6 @@
           # inputs.emacs.overlay
           (final: prev: {
             vimPlugins = prev.vimPlugins // {
-              gin-vim = prev.vimUtils.buildVimPluginFrom2Nix {
-                src = inputs.gin-vim;
-                pname = "gin-vim";
-                version = "latest";
-                dontPatchShebangs = true;
-                postInstall = ''
-                  substituteInPlace $out/denops/gin/proxy/editor.ts --replace "/usr/bin/env" "${prev.coreutils}/bin/env"
-                  substituteInPlace $out/denops/gin/proxy/askpass.ts --replace "/usr/bin/env" "${prev.coreutils}/bin/env"
-                '';
-              };
               # ddc-sorter_itemsize = prev.vimUtils.buildVimPluginFrom2Nix {
               #   pname = "ddc-sorter_itemsize";
               #   version = "local";
@@ -255,7 +242,7 @@
           };
         };
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [ ];
+          buildInputs = [ ];
           inherit (self.checks.${system}.pre-commit-check) shellHook;
         };
       });

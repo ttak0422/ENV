@@ -5,8 +5,8 @@ wk.register({
   ["<leader>"] = {
     -- easy motion
     ["<leader>"] = { "<cmd>HopChar1<cr>", "hop to char" },
-    j = { "<cmd>HopLineAC<cr>", "hop to under line" },
-    k = { "<cmd>HopLineBC<cr>", "hop to upper line" },
+    -- j = { "<cmd>HopLineAC<cr>", "hop to under line" },
+    -- k = { "<cmd>HopLineBC<cr>", "hop to upper line" },
     S = { "<cmd>HopChar2<cr>", "hop to chars" },
 
     -- toggle
@@ -81,6 +81,8 @@ wk.register({
     Q = { "<cmd>BufDel!<cr>", "close buffer force" },
     G = { "<cmd>ToggleTig<cr>", "tig" },
     T = { "<cmd>tabnew<cr>", "tabnew" },
+    j = { "<cmd>SplitjoinJoin<cr>", "to oneline" },
+    s = { "<cmd>SplitjoinSplit<cr>", "to multiline" },
   },
 })
 

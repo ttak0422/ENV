@@ -145,6 +145,12 @@ let
 
   custom = with pkgs.vimPlugins; [
     {
+      plugin = numb-nvim;
+      config = readFile ./lua/numb.lua;
+      events = [ "CmdlineEnter" ];
+      comment = "peeks lines of the buffer in non-obtrusive way";
+    }
+    {
       plugin = noice-nvim;
       config = ''
         dofile("${./lua/noice.lua}")({
@@ -461,6 +467,13 @@ let
   template = callPackage ./template { };
 
   code = with pkgs.vimPlugins; [
+    {
+      plugin = splitjoin-vim;
+      config = readFile ./lua/splitjoin.lua;
+      commands = [ "SplitjoinJoin" "SplitjoinSplit" ];
+      events = [ "VimEnter" ];
+      comment = "Switch between single-line and multiline forms of code";
+    }
     {
       plugin = nvim-docs-view;
       enable = false;

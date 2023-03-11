@@ -104,10 +104,10 @@ return function(opt)
   })
 
   -- rust
-  lspconfig.rust_analyzer.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-  })
+  -- lspconfig.rust_analyzer.setup({
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  -- })
 
   -- go
   lspconfig.gopls.setup({

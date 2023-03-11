@@ -122,6 +122,19 @@ in with pkgs.vimPlugins; [
     '';
     fileTypes = [ "haskell" ];
   }
+  # rust
+  {
+    plugin = rust-tools-nvim;
+    depends = [ nvim-lspconfig plenary-nvim nvim-dap ];
+    config = ''
+      dofile("${./rust-tools.lua}")({
+        on_attach = dofile("${./on_attach.lua}"),
+        capabilities = dofile("${./capabilities.lua}"),
+      })
+      vim.cmd([[LspStart]])
+    '';
+    fileTypes = [ "rust" ];
+  }
   # fsharp
   {
     plugin = Ionide-vim;

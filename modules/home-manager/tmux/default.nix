@@ -62,10 +62,12 @@ let
   ];
 
   prelude = ''
-    set-option -g default-terminal 'screen-256color'
-    set-option -ga terminal-overrides ',xterm-256color:Tc'
-    set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
-    set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+    set-option -g default-terminal 'xterm-256color'
+    set-option -ga terminal-overrides ',$TERM:Tc'
+    set -as terminal-overrides ',*:sitm=\E[3m' # Italics support for older ncurses
+    set -as terminal-overrides ',*:smxx=\E[9m' # Strikeout
+    set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
+    set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours
 
     # mouse
     set-option -g mouse on

@@ -7,6 +7,7 @@
     ./prelude.nix
     ./shell
     ./tmux
+    ./zellij
     ./tool
     ./vim
     ./virtualization

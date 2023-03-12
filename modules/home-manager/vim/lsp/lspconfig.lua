@@ -69,7 +69,7 @@ return function(opt)
     capabilities = capabilities,
     cmd = tsserver_cmd,
     root_dir = util.root_pattern("package.json"),
-    iniy_options = {
+    init_options = {
       hostInfo = "neovim",
       maxTsServerMemory = 8192,
       tsserver = {

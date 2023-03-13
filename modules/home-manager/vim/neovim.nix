@@ -392,7 +392,8 @@ let
           enable = true,
         })
       '';
-      # commands = [ "TransparentEnable" "TransparentDisable" "TransparentToggle" ];
+      commands =
+        [ "TransparentEnable" "TransparentDisable" "TransparentToggle" ];
     }
     # {
     #   plugin = serenade;

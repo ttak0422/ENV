@@ -1887,6 +1887,22 @@
         "url": "https://repo.maven.apache.org/maven2/org/openjdk/jol/jol-cli/0.16/jol-cli-0.16-full.jar"
       }
     },
+    "kanagawa-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1678668337,
+        "narHash": "sha256-W3GdDlgizbgwF6fGRUC4GZKbubpex3ggXmPGPomn0zw=",
+        "owner": "rebelot",
+        "repo": "kanagawa.nvim",
+        "rev": "99d9f72122e92ba816c86e10ce8e97c555be99ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rebelot",
+        "repo": "kanagawa.nvim",
+        "type": "github"
+      }
+    },
     "kensaku-vim": {
       "flake": false,
       "locked": {
@@ -4211,6 +4227,7 @@
         "image_preview-nvim": "image_preview-nvim",
         "incline-nvim": "incline-nvim",
         "indent-blankline-nvim": "indent-blankline-nvim",
+        "kanagawa-nvim": "kanagawa-nvim",
         "kensaku-vim": "kensaku-vim",
         "leap-ast-nvim": "leap-ast-nvim",
         "leap-nvim": "leap-nvim",
@@ -4350,11 +4367,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1678511373,
-        "narHash": "sha256-tSNnqLMlKYE7MBHhg62gPY4L0aFwTFsYLqQzRd0yljc=",
+        "lastModified": 1678889107,
+        "narHash": "sha256-cE1/hc5Mvvpti7CQdS7A9+FIrHGD5S20IkqgQcDyfUU=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "a4321d270e74a8a11b95069ab843fedcdc739d3f",
+        "rev": "48d8c484086456dcfb3d21659d777f80e129ec38",
         "type": "github"
       },
       "original": {

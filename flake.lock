@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "ChatGPT-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1678801636,
+        "narHash": "sha256-wvO4lNMb+1AxyzwQ7InfG3QeRcoz4Mhc7JYpdWU38+s=",
+        "owner": "jackMort",
+        "repo": "ChatGPT.nvim",
+        "rev": "3008b38171b3137448fe33c5edc1bba2641bfcad",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jackMort",
+        "repo": "ChatGPT.nvim",
+        "type": "github"
+      }
+    },
     "Comment-nvim": {
       "flake": false,
       "locked": {
@@ -1890,11 +1906,11 @@
     "kanagawa-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1678668337,
-        "narHash": "sha256-W3GdDlgizbgwF6fGRUC4GZKbubpex3ggXmPGPomn0zw=",
+        "lastModified": 1678950738,
+        "narHash": "sha256-j2tCI2Q2NBLBOIYfAwwV66elQArmSwUMahp9vxOFsKE=",
         "owner": "rebelot",
         "repo": "kanagawa.nvim",
-        "rev": "99d9f72122e92ba816c86e10ce8e97c555be99ba",
+        "rev": "d8800c36a7f3bcec953288926b00381c028ed97f",
         "type": "github"
       },
       "original": {
@@ -3098,6 +3114,22 @@
         "type": "github"
       }
     },
+    "pommodoro-clock": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1674464526,
+        "narHash": "sha256-4AGs/gFItFINUArJ/iuj02jaVYSOuGH+yy/+pESs2W4=",
+        "owner": "jackMort",
+        "repo": "pommodoro-clock.nvim",
+        "rev": "eb7a59109c82917ba1c386f730ecdb9ef778b8a5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jackMort",
+        "repo": "pommodoro-clock.nvim",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -4122,6 +4154,7 @@
     "vim-plugins-overlay": {
       "inputs": {
         "AbbrevMan-nvim": "AbbrevMan-nvim",
+        "ChatGPT-nvim": "ChatGPT-nvim",
         "Comment-nvim": "Comment-nvim",
         "Ionide-vim": "Ionide-vim",
         "NeoZoom-lua": "NeoZoom-lua",
@@ -4291,6 +4324,7 @@
         "orgmode": "orgmode",
         "persisted-nvim": "persisted-nvim",
         "plenary-nvim": "plenary-nvim",
+        "pommodoro-clock": "pommodoro-clock",
         "pretty-fold-nvim": "pretty-fold-nvim",
         "project-nvim": "project-nvim",
         "promise-async": "promise-async",
@@ -4367,11 +4401,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1678889107,
-        "narHash": "sha256-cE1/hc5Mvvpti7CQdS7A9+FIrHGD5S20IkqgQcDyfUU=",
+        "lastModified": 1679061161,
+        "narHash": "sha256-ljbWeFNQfZRMAZaGXp8EmQcHiU9wBC4M1RMThiSZ2rU=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "48d8c484086456dcfb3d21659d777f80e129ec38",
+        "rev": "32c6fbe2f7a4be32be333f01b0be97fea3ca419f",
         "type": "github"
       },
       "original": {

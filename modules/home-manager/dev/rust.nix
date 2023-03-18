@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
   home = {
-    packages = with pkgs; [ rustup ];
+    packages = with pkgs; [ rustup evcxr ];
     file = {
       ".cargo/config".text = ''
         [target.x86_64-apple-darwin]

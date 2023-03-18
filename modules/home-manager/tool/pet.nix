@@ -40,6 +40,11 @@ let
       tag = [ "nix" ];
       command = "nix-prefetch-git --url '<Repository>'";
     }
+    {
+      description = "rust repl";
+      tag = [ "rust" ];
+      command = "evcxr";
+    }
   ];
 in {
   home = {

@@ -4,6 +4,18 @@ require("formatter").setup({
   logging = true,
   log_level = vim.log.levels.WARN,
   filetype = {
+    html = {
+      require("formatter.filetypes.html").tidy,
+    },
+    json = {
+      require("formatter.filetypes.json").fixjson,
+    },
+    toml = {
+      require("formatter.filetypes.toml").taplo,
+    },
+    sh = {
+      require("formatter.filetypes.sh").shfmt,
+    },
     lua = {
       require("formatter.filetypes.lua").stylua,
     },
@@ -31,6 +43,9 @@ require("formatter").setup({
     },
     go = {
       require("formatter.filetypes.go").gofmt,
+    },
+    rust = {
+      require("formatter.filetypes.rust").rustfmt,
     },
     typescript = {
       function()

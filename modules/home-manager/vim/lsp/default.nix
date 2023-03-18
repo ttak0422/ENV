@@ -35,10 +35,15 @@ in with pkgs.vimPlugins; [
     config = readFile ./formatter-nvim.lua;
     commands = [ "Format" ];
     extraPackages = with pkgs; [
+      html-tidy
       stylua
       google-java-format
       nixfmt
+      rustfmt
+      taplo
+      shfmt
       nodePackages.prettier
+      nodePackages.fixjson
     ];
   }
   {

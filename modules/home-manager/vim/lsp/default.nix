@@ -44,6 +44,7 @@ in with pkgs.vimPlugins; [
       shfmt
       nodePackages.prettier
       nodePackages.fixjson
+      yapf
     ];
   }
   {

@@ -251,6 +251,11 @@ let
   ];
   code = with pkgs.vimPlugins; [
     {
+      plugin = nvim-autopairs;
+      config = readFile ./autopairs.lua;
+      events = [ "InsertEnter" ];
+    }
+    {
       plugin = glance-nvim;
       config = readFile ./glance.lua;
       commands = [ "Glance" ];

@@ -1,38 +1,44 @@
+local map = vim.keymap.set
 -- require hover, lsp-inlayhints, actions-preview
 return function(client, bufnr)
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  local function desc(d)
+    return { noremap = true, silent = true, buffer = bufnr, desc = d }
+  end
+
   local diagnostic_wrn_opts = { severity = { min = vim.diagnostic.severity.WARN }, float = false }
   local diagnostic_err_opts = { severity = vim.diagnostic.severity.ERROR, float = false }
 
   -- motion
-  vim.keymap.set("n", "[d", function()
+  map("n", "[d", function()
     vim.diagnostic.goto_prev(diagnostic_wrn_opts)
-  end, bufopts)
-  vim.keymap.set("n", "]d", function()
+  end, desc("prev diagnostic"))
+  map("n", "]d", function()
     vim.diagnostic.goto_next(diagnostic_wrn_opts)
-  end, bufopts)
-  vim.keymap.set("n", "[D", function()
+  end, desc("next diagnostic"))
+  map("n", "[D", function()
     vim.diagnostic.goto_prev(diagnostic_err_opts)
-  end, bufopts)
-  vim.keymap.set("n", "]D", function()
+  end, desc("prev diagnostic (err)"))
+  map("n", "]D", function()
     vim.diagnostic.goto_next(diagnostic_err_opts)
-  end, bufopts)
+  end, desc("next diagnostic (err)"))
 
   -- jump
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+  map("n", "gd", vim.lsp.buf.definition, desc("go to definition"))
+  map("n", "gi", vim.lsp.buf.implementation, desc("go to impl"))
+  map("n", "gr", vim.lsp.buf.references, desc("go to references"))
+  map("n", "gD", "<cmd>Glance definitions<cr>", desc("go to definition"))
+  map("n", "gI", "<cmd>Glance implementations<cr>", desc("go to impl"))
+  map("n", "gR", "<cmd>Glance references<cr>", desc("go to references"))
 
   -- action
-  vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
-  vim.keymap.set("n", "<leader>K", vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-  vim.keymap.set("n", "<leader>ca", require("actions-preview").code_actions, bufopts)
+  map("n", "K", require("hover").hover, desc("show doc"))
+  map("n", "<leader>K", vim.lsp.buf.signature_help, desc("show signature"))
+  map("n", "<leader>D", vim.lsp.buf.type_definition, desc("show type"))
+  map("n", "<leader>rn", vim.lsp.buf.rename, desc("rename"))
+  map("n", "<leader>ca", require("actions-preview").code_actions, desc("code action"))
   -- WIP f/F motion
   -- if client.supports_method("textDocument/formatting") then
-  --   vim.keymap.set("n", "<leader>F", "<cmd>Format<cr>", bufopts)
+  --   map("n", "<leader>F", "<cmd>Format<cr>", bufopts)
   -- end
 
   -- info

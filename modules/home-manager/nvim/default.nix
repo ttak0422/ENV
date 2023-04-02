@@ -251,6 +251,11 @@ let
   ];
   code = with pkgs.vimPlugins; [
     {
+      plugin = glance-nvim;
+      config = readFile ./glance.lua;
+      commands = [ "Glance" ];
+    }
+    {
       plugin = goto-preview;
       config = readFile ./goto-preview.lua;
       modules = [ "goto-preview" ];

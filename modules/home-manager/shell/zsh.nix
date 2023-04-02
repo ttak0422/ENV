@@ -44,7 +44,6 @@ let
     symbol = " "
   '';
 in {
-  home.packages = with pkgs; [ ];
   programs.zsh = {
     defaultKeymap = "viins";
     enableCompletion = true;
@@ -73,7 +72,6 @@ in {
       export PATH=$HOME/.dotnet/tools:$PATH
       export PATH=$HOME/.local/bin:$PATH
       export PATH=$GOPATH/bin:$PATH
-      # export TERM=wezterm
       if [ -f /opt/homebrew/bin/brew ]; then
         export PATH=/opt/homebrew/bin:$PATH
       fi

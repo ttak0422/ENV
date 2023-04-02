@@ -1,3 +1,1 @@
-{ config, pkgs, lib, ... }: {
-  imports = [ ./neovim.nix ./vim.nix ./ideavim.nix ];
-}
+{ config, pkgs, lib, ... }: { imports = [ ./vim.nix ./ideavim.nix ]; }

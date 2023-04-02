@@ -1,0 +1,1 @@
+require("jabs").setup({})

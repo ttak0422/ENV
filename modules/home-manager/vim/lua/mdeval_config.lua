@@ -1,1 +1,0 @@
-require("mdeval").setup({})

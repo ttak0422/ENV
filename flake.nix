@@ -37,6 +37,14 @@
         nix-filter.follows = "nix-filter";
       };
     };
+    oboro-nvim = {
+      url = "path:/Users/ttak0422/ghq/github.com/ttak0422/oboro-nvim";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        nix-filter.follows = "nix-filter";
+      };
+    };
     # emacs for mac
     # emacs.url = "github:cmacrae/emacs";
     # emacs-overlay.url = "github:nix-community/emacs-overlay";
@@ -63,7 +71,7 @@
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils
-    , pre-commit-hooks, ... }:
+    , pre-commit-hooks, oboro-nvim, ... }:
     let
       inherit (nixpkgs.lib) attrValues optionalAttrs;
       inherit (darwin.lib) darwinSystem;
@@ -114,18 +122,18 @@
       };
 
       mkHomeManagerConfig =
-        args@{ userHmConfig ? ./modules/home-manager/tiny.nix, ... }: {
+        args@{ userHmConfig ? ./modules/home-manager/tiny.nix, system, ... }: {
           imports = [
             userHmConfig
             inputs.rokka-nvim.hmModule
-            # inputs.nix-doom-emacs.hmModule
+            oboro-nvim.darwinModules.${system}.default
           ];
           home = { stateVersion = "22.11"; };
         };
 
       mkDarwinModules = args@{ user, host
         , userConfig ? ./modules/darwin/tiny.nix
-        , userHomebrewConfig ? ./modules/homebrew/tiny.nix, ... }: [
+        , userHomebrewConfig ? ./modules/homebrew/tiny.nix, system, ... }: [
           userConfig
           userHomebrewConfig
           home-manager.darwinModules.home-manager
@@ -142,9 +150,9 @@
           }
         ];
 
-      mkPersonalDarwinModules = { userName, host, specialArgs, ... }:
+      mkPersonalDarwinModules = { userName, host, specialArgs, system, ... }:
         mkDarwinModules {
-          inherit host specialArgs;
+          inherit host specialArgs system;
           user = userName;
           userConfig = ./modules/darwin/personal.nix;
           userHmConfig = ./modules/home-manager/personal.nix;
@@ -178,9 +186,16 @@
           system = "aarch64-darwin";
           specialArgs = { inherit inputs userName userEmail; };
           modules = mkPersonalDarwinModules {
-            inherit userName specialArgs;
+            inherit userName specialArgs system;
             host = "mbp";
-          } ++ [ ./modules/nix/prelude.nix ];
+          } ++ [
+            ./modules/nix/prelude.nix
+            # oboro-nvim.darwinModules.${system}.default
+            #inputs.oboro-nvim.darwinModules.default
+            # ({config, pkgs, ...}: {
+            #   imports = [ inputs.oboro-nvim.darwinModules.test ];
+            # })
+          ];
         in darwinSystem { inherit system modules specialArgs; };
 
         # x86_64-darwin
@@ -188,7 +203,7 @@
           system = "x86_64-darwin";
           specialArgs = { inherit inputs userName userEmail; };
           modules = mkPersonalDarwinModules {
-            inherit userName specialArgs;
+            inherit userName specialArgs system;
             host = "${userName}-intel";
           };
         in darwinSystem { inherit system specialArgs modules; };
@@ -201,7 +216,7 @@
             userEmail = workUserEmail;
           };
           modules = mkDarwinModules {
-            inherit userName specialArgs;
+            inherit userName specialArgs system;
             host = "${workUserName}";
             user = workUserName;
             userConfig = ./modules/darwin/work.nix;

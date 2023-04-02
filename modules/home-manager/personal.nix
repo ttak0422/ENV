@@ -9,7 +9,8 @@
     ./tmux
     ./zellij
     ./tool
-    ./vim
+    # ./vim
+    ./nvim
     ./virtualization
     ./window-manager
     ./utils/darwin.nix

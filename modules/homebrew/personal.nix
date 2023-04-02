@@ -2,7 +2,6 @@
   imports = [ ./prelude.nix ];
   homebrew = {
     taps = [
-      "d12frosted/emacs-plus"
       "homebrew/cask"
       "homebrew/cask-drivers"
       "homebrew/cask-fonts"
@@ -10,7 +9,7 @@
       "homebrew/core"
       "koekeishiya/formulae"
     ];
-    brews = [ "lunchy" "qemu" "svn" "emacs-plus@29" ];
+    brews = [ "lunchy" "qemu" "svn" ];
     casks = [
       "alacritty"
       "aquaskk"

@@ -6,6 +6,11 @@ telescope.setup({
     path_display = { "truncate" },
     prompt_prefix = " ",
     selection_caret = " ",
+    mappings = {
+      i = {
+        ["<C-j>"] = { "<Plug>(skkeleton-enable)", type = "command" },
+      },
+    },
   }),
   extensions = {
     live_grep_args = {

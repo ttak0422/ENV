@@ -3278,8 +3278,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1680436659,
-        "narHash": "sha256-YKjNWQiqlWeQ1bMi8wYNleANeiwsHLqspmweZc8gBu8=",
+        "lastModified": 1680447709,
+        "narHash": "sha256-EFpu7vwHkLQwqkUgUOLaf3Zwle+wEnrAmz3M5ALXwng=",
         "path": "/Users/ttak0422/ghq/github.com/ttak0422/oboro-nvim",
         "type": "path"
       },

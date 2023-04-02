@@ -142,6 +142,16 @@ let
   ];
   ui = with pkgs.vimPlugins; [
     {
+      plugin = winbar-nvim;
+      config = readFile ./winbar.lua;
+      lazy = true;
+    }
+    {
+      plugin = windline-nvim;
+      config = readFile ./windline.lua;
+      lazy = true;
+    }
+    {
       plugin = nvim-scrollbar;
       depends = [ gitsigns-nvim ];
       config = {

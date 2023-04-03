@@ -297,6 +297,7 @@ let
     {
       plugin = trouble-nvim;
       config = readFile ./trouble.lua;
+      modules = [ "trouble" ];
       commands = [ "TroubleToggle" ];
     }
     {

@@ -80,6 +80,16 @@ local normal_keymaps = {
   { "<leader>tb", "<cmd>NvimTreeToggle<cr>" },
   { "<leader>tm", "<cmd>MinimapToggle<cr>" },
   { "<leader>tq", "<cmd>lua require('qf').toggle('c')<cr>" },
+  {
+    "<leader>td",
+    "<cmd>lua require('toolwindow').open_window('trouble', {mode = 'document_diagnostics'})<cr>",
+    desc("toggle diagnostics (document)"),
+  },
+  {
+    "<leader>tD",
+    "<cmd>lua require('toolwindow').open_window('trouble', {mode = 'workspace_diagnostics'})<cr>",
+    desc("toggle diagnostics (workspace)"),
+  },
   -- finder
   { "<leader>ff", "<cmd>Telescope live_grep_args<cr>", desc("search by content") },
   { "<leader>fp", "<cmd>Telescope find_files<cr>", desc("search by file name") },

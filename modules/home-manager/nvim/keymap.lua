@@ -66,9 +66,14 @@ local normal_keymaps = {
     desc("git status"),
   },
   {
-    "<leader>gs",
+    "<leader>gl",
     "<cmd>GinLog<cr>",
     desc("git log"),
+  },
+  {
+    "<leader>G",
+    "<cmd>Neogit<cr>",
+    desc("open git tui"),
   },
   -- window
   { "<c-w>z", "<cmd>NeoZoomToggle<cr>" },

@@ -3278,14 +3278,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1680447709,
-        "narHash": "sha256-EFpu7vwHkLQwqkUgUOLaf3Zwle+wEnrAmz3M5ALXwng=",
-        "path": "/Users/ttak0422/ghq/github.com/ttak0422/oboro-nvim",
-        "type": "path"
+        "lastModified": 1680447834,
+        "narHash": "sha256-1fpmKUraLMMY1fRSvvRVZh746q8+lySC9Dgac8ErFv8=",
+        "owner": "ttak0422",
+        "repo": "oboro-nvim",
+        "rev": "c35deda7bfd960a8797c46dd71d9b2f67bf9d6c4",
+        "type": "github"
       },
       "original": {
-        "path": "/Users/ttak0422/ghq/github.com/ttak0422/oboro-nvim",
-        "type": "path"
+        "owner": "ttak0422",
+        "repo": "oboro-nvim",
+        "type": "github"
       }
     },
     "obsidian-nvim": {

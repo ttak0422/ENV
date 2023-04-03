@@ -2943,6 +2943,22 @@
         "type": "github"
       }
     },
+    "nvim-early-retirement": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680426550,
+        "narHash": "sha256-oWJcAghu+neUQwyx3F41ue/3Yo1LbDHpAXGhrO5JLmw=",
+        "owner": "chrisgrieser",
+        "repo": "nvim-early-retirement",
+        "rev": "d2a7c0d7394eb716ce9f14825768aa8a27a91e09",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chrisgrieser",
+        "repo": "nvim-early-retirement",
+        "type": "github"
+      }
+    },
     "nvim-fundo": {
       "flake": false,
       "locked": {
@@ -4714,6 +4730,7 @@
         "nvim-dap-ui": "nvim-dap-ui",
         "nvim-dap-virtual-text": "nvim-dap-virtual-text",
         "nvim-docs-view": "nvim-docs-view",
+        "nvim-early-retirement": "nvim-early-retirement",
         "nvim-fundo": "nvim-fundo",
         "nvim-hlslens": "nvim-hlslens",
         "nvim-jdtls": "nvim-jdtls",
@@ -4827,11 +4844,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1680412865,
-        "narHash": "sha256-yTByaZBsOq/4d/z+P1CEYJaH8KNppuveCOuxURCin/I=",
+        "lastModified": 1680537381,
+        "narHash": "sha256-vGDt0dH+UhIlMEPgcIjwAhJ3esrjlQ9CqBgAlEO/v/I=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "b5171e51724972dca17a84c0a51b9f7ca8b06ba5",
+        "rev": "37fb47efcee5f1a3b5bcca38575456f8c16881ae",
         "type": "github"
       },
       "original": {

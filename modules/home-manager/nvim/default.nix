@@ -449,6 +449,14 @@ let
   ];
   custom = with pkgs.vimPlugins; [
     {
+      plugin = nvim-early-retirement;
+      config = {
+        lang = "lua";
+        code = readFile ./nvim-early-retirement.lua;
+      };
+      lazy = true;
+    }
+    {
       plugin = open-nvim;
       config = readFile ./open.lua;
       modules = [ "open" ];

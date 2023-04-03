@@ -1444,6 +1444,22 @@
         "type": "github"
       }
     },
+    "error-lens-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680516239,
+        "narHash": "sha256-X9dZCIrb4NlMR+4QgVjIzSmlrHd9w0XqgaAqug6GAPs=",
+        "owner": "chikko80",
+        "repo": "error-lens.nvim",
+        "rev": "bf85136683d5842ea2fb811b990e6ccbe93426db",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chikko80",
+        "repo": "error-lens.nvim",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -4660,6 +4676,7 @@
         "dps-dial-vim": "dps-dial-vim",
         "dressing-nvim": "dressing-nvim",
         "editorconfig-nvim": "editorconfig-nvim",
+        "error-lens-nvim": "error-lens-nvim",
         "fidget-nvim": "fidget-nvim",
         "filetype-nvim": "filetype-nvim",
         "fine-cmdline-nvim": "fine-cmdline-nvim",
@@ -4844,11 +4861,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1680537381,
-        "narHash": "sha256-vGDt0dH+UhIlMEPgcIjwAhJ3esrjlQ9CqBgAlEO/v/I=",
+        "lastModified": 1680538391,
+        "narHash": "sha256-cJVmT6szLMEGrGOWDVvNf9z62GOEtDGES9llQ5YYZVE=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "37fb47efcee5f1a3b5bcca38575456f8c16881ae",
+        "rev": "a8d86688548466f343e29d784dd707cadcd56e48",
         "type": "github"
       },
       "original": {

@@ -143,7 +143,11 @@ let
   ui = with pkgs.vimPlugins; [
     {
       plugin = winbar-nvim;
-      config = readFile ./winbar.lua;
+      config = {
+        lang = "lua";
+        code = readFile ./winbar.lua;
+        args = { exclude_ft_path = ./shared/exclude_ft.lua; };
+      };
       lazy = true;
     }
     {

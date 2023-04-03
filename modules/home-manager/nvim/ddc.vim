@@ -59,34 +59,7 @@ let s:sourceOptions['nvim-obsidian-new'] = #{
 
 let s:sourceParams = {}
 let s:sourceParams['nvim-lsp'] = #{
-      \  kindLabels: #{
-      \    Text: '',
-      \    Method: '',
-      \    Function: 'λ',
-      \    Constructor: '',
-      \    Field: '',
-      \    Variable: ' ',
-      \    Class: '',
-      \    Interface: '',
-      \    Module: '',
-      \    Property: '',
-      \    Unit: '',
-      \    Value: '',
-      \    Enum: '',
-      \    Keyword: '',
-      \    Snippet: '﬌',
-      \    Color: '',
-      \    File: '',
-      \    Reference: '',
-      \    Folder: '',
-      \    EnumMember: '',
-      \    Constant: '',
-      \    Struct: 'פּ',
-      \    Event: '',
-      \    Operator: '',
-      \    TypeParameter: '',
-      \   },
-      \   maxItems: 800,
+      \   maxitems: 800,
       \ }
 let s:sourceParams.tmux = {
       \ 'currentWinOnly': v:true,
@@ -105,7 +78,7 @@ let s:sourceParams['nvim-obsidian-new'] = #{
       \ }
 
 let s:filterParams = {}
-let s:filterParams.converter_truncate = { 'maxAbbrWidth': 60, 'maxKindWidth': 5, 'maxMenuWidth': 40 }
+let s:filterParams.converter_truncate = { 'maxAbbrWidth': 60, 'maxKindWidth': 10, 'maxMenuWidth': 40 }
 
 let s:patch_global = {}
 let s:patch_global.ui = 'pum'
@@ -127,14 +100,14 @@ call ddc#custom#patch_filetype(['java'], 'sourceOptions', #{
       \   sorters: ['sorter_itemsize', 'sorter_fuzzy'],
       \ }})
 call ddc#custom#patch_filetype(['java'], 'filterParams', #{
-      \ converter_truncate: #{ maxAbbrWidth: 60, maxKindWidth: 5, maxMenuWidth: 0 },
+      \ converter_truncate: #{ maxAbbrWidth: 60, maxKindWidth: 10, maxMenuWidth: 0 },
       \ sorter_itemsize: #{ sameWordOnly: v:true },
       \ })
 
 call ddc#enable()
 call signature_help#enable()
 let g:popup_preview_config = #{
-      \ border: v:false,
+      \ maxWidth: 100,
       \ }
 call popup_preview#enable()
 

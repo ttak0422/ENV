@@ -256,8 +256,10 @@ let
   code = with pkgs.vimPlugins; [
     {
       plugin = nvim-autopairs;
+      depends = [ nvim-treesitter ];
       config = readFile ./autopairs.lua;
       events = [ "InsertEnter" ];
+      modules = [ "nvim-autopairs" ];
     }
     {
       plugin = glance-nvim;

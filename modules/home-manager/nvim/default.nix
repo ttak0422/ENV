@@ -155,16 +155,26 @@ let
       config = readFile ./windline.lua;
       lazy = true;
     }
+    # {
+    #   plugin = nvim-scrollbar;
+    #   depends = [ gitsigns-nvim ];
+    #   config = {
+    #     lang = "lua";
+    #     code = readFile ./scrollbar.lua;
+    #     args = {
+    #       exclude_ft_path = ./shared/exclude_ft.lua;
+    #       exclude_buf_ft_path = ./shared/exclude_buf_ft.lua;
+    #     };
+    #   };
+    #   events = [ "CursorMoved" ];
+    # }
     {
-      plugin = nvim-scrollbar;
+      plugin = satellite-nvim;
       depends = [ gitsigns-nvim ];
       config = {
         lang = "lua";
-        code = readFile ./scrollbar.lua;
-        args = {
-          exclude_ft_path = ./shared/exclude_ft.lua;
-          exclude_buf_ft_path = ./shared/exclude_buf_ft.lua;
-        };
+        code = readFile ./satellite.lua;
+        args = { exclude_ft_path = ./shared/exclude_ft.lua; };
       };
       events = [ "CursorMoved" ];
     }

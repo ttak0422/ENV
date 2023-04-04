@@ -19,6 +19,9 @@ local normal_keymaps = {
   { "[Q", "<cmd>cfirst<cr>" },
   { "]Q", "<cmd>clast<cr>" },
   -- { "<leader>g", "<cmd>JABSOpen<cr>" },
+  -- comment
+  { "<leader>nc", "<cmd>Neogen class<cr>", desc("class comment") },
+  { "<leader>nf", "<cmd>Neogen func<cr>", desc("fn comment") },
   -- motion
   {
     "gpd",
@@ -83,7 +86,7 @@ local normal_keymaps = {
   { "<leader>Q", "<cmd>BufDel!<cr>" },
   -- toggle
   { "<leader>tb", "<cmd>NvimTreeToggle<cr>" },
-  { "<leader>tm", "<cmd>MinimapToggle<cr>" },
+  -- { "<leader>tm", "<cmd>MinimapToggle<cr>" },
   { "<leader>tq", "<cmd>lua require('qf').toggle('c')<cr>" },
   {
     "<leader>td",

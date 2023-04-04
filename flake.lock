@@ -624,6 +624,22 @@
         "type": "github"
       }
     },
+    "coman-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667388540,
+        "narHash": "sha256-uaa4VHvSGYz24msTkce+6T/BDJY4jVvxX05HxCAHcnI=",
+        "owner": "glepnir",
+        "repo": "coman.nvim",
+        "rev": "8ff02ca8bd91403430c141b6e9ad86dee1a2c427",
+        "type": "github"
+      },
+      "original": {
+        "owner": "glepnir",
+        "repo": "coman.nvim",
+        "type": "github"
+      }
+    },
     "comfortable-motion-vim": {
       "flake": false,
       "locked": {
@@ -2991,6 +3007,22 @@
         "type": "github"
       }
     },
+    "nvim-genghis": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680595106,
+        "narHash": "sha256-pXkKbltXYFSIbTorsRzxkzSLijy7mbYS2NDUsioJF0U=",
+        "owner": "chrisgrieser",
+        "repo": "nvim-genghis",
+        "rev": "8ef32141529fdf50a4ecfe191d5a52d5d7c36c86",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chrisgrieser",
+        "repo": "nvim-genghis",
+        "type": "github"
+      }
+    },
     "nvim-hlslens": {
       "flake": false,
       "locked": {
@@ -3737,6 +3769,22 @@
       "original": {
         "owner": "simrat39",
         "repo": "rust-tools.nvim",
+        "type": "github"
+      }
+    },
+    "satellite-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680505279,
+        "narHash": "sha256-qslg0NfDz6tfoA57DIaj8Iy/hdbCFmBtbHabCXkhBMU=",
+        "owner": "lewis6991",
+        "repo": "satellite.nvim",
+        "rev": "d77b40a730f3036a3290d07bc32af7fc935cd031",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lewis6991",
+        "repo": "satellite.nvim",
         "type": "github"
       }
     },
@@ -4539,6 +4587,22 @@
         "type": "github"
       }
     },
+    "vim-markdown": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1677235033,
+        "narHash": "sha256-q4OE2tUoA0i6m3CbyzCYfjGsPNaTbU9/deM4DBu36GY=",
+        "owner": "preservim",
+        "repo": "vim-markdown",
+        "rev": "5d3d1b6cbdc4be0b4c6105c1ab1f769d76d3c68f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "preservim",
+        "repo": "vim-markdown",
+        "type": "github"
+      }
+    },
     "vim-matchup": {
       "flake": false,
       "locked": {
@@ -4628,6 +4692,7 @@
         "cmp_luasnip": "cmp_luasnip",
         "colorful-winsep-nvim": "colorful-winsep-nvim",
         "colortils-nvim": "colortils-nvim",
+        "coman-nvim": "coman-nvim",
         "comfortable-motion-vim": "comfortable-motion-vim",
         "comfortable_motion_scroll_up_key": "comfortable_motion_scroll_up_key",
         "confirm-quit-nvim": "confirm-quit-nvim",
@@ -4749,6 +4814,7 @@
         "nvim-docs-view": "nvim-docs-view",
         "nvim-early-retirement": "nvim-early-retirement",
         "nvim-fundo": "nvim-fundo",
+        "nvim-genghis": "nvim-genghis",
         "nvim-hlslens": "nvim-hlslens",
         "nvim-jdtls": "nvim-jdtls",
         "nvim-lint": "nvim-lint",
@@ -4788,6 +4854,7 @@
         "registers-nvim": "registers-nvim",
         "rest-nvim": "rest-nvim",
         "rust-rools-nvim": "rust-rools-nvim",
+        "satellite-nvim": "satellite-nvim",
         "scope-nvim": "scope-nvim",
         "searchbox-nvim": "searchbox-nvim",
         "serenade": "serenade",
@@ -4836,6 +4903,7 @@
         "vim-fontzoom": "vim-fontzoom",
         "vim-html-template-literals": "vim-html-template-literals",
         "vim-illuminate": "vim-illuminate",
+        "vim-markdown": "vim-markdown",
         "vim-matchup": "vim-matchup",
         "vim-nix": "vim-nix",
         "vim-oscyank": "vim-oscyank",
@@ -4861,11 +4929,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1680609196,
-        "narHash": "sha256-XW6mpbfW4hXs99EiqmTg1QF6WViStnw9LBeiZFZ1dUU=",
+        "lastModified": 1680622519,
+        "narHash": "sha256-IXvTGO9ISeN4Ooy8xXLjBTJwtPUTZ1l1qP7QXRgNZds=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "5922c1f56e3bbe620b4dff4082e0392fc390af5f",
+        "rev": "814a54374b56a429a63a5caf6b26746ce69c4c3f",
         "type": "github"
       },
       "original": {

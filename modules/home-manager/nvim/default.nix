@@ -142,6 +142,11 @@ let
   ];
   ui = with pkgs.vimPlugins; [
     {
+      plugin = nvim-notify;
+      config = readFile ./notify.lua;
+      lazy = true;
+    }
+    {
       plugin = winbar-nvim;
       config = {
         lang = "lua";
@@ -197,16 +202,16 @@ let
       };
       events = [ "CursorMoved" ];
     }
-    {
-      plugin = minimap-vim;
-      preConfig = {
-        lang = "lua";
-        code = readFile ./minimap-pre.lua;
-      };
-      config = readFile ./minimap.lua;
-      commands = [ "MinimapToggle" ];
-      extraPackages = [ pkgs.code-minimap ];
-    }
+    # {
+    #   plugin = minimap-vim;
+    #   preConfig = {
+    #     lang = "lua";
+    #     code = readFile ./minimap-pre.lua;
+    #   };
+    #   config = readFile ./minimap.lua;
+    #   commands = [ "MinimapToggle" ];
+    #   extraPackages = [ pkgs.code-minimap ];
+    # }
     {
       plugin = colorful-winsep-nvim;
       events = [ "WinNew" ];
@@ -265,6 +270,18 @@ let
     }
   ];
   code = with pkgs.vimPlugins; [
+    {
+      plugin = neogen;
+      depends = [ nvim-treesitter ];
+      config = readFile ./neogen.lua;
+      commands = [ "Neogen" ];
+    }
+    # {
+    #   plugin = coman-nvim;
+    #   depends = [ nvim-treesitter ];
+    #   config = readFile ./coman.lua;
+    #   commands = [ "ComComment" "ComAnnotation" ];
+    # }
     {
       plugin = nvim-autopairs;
       depends = [ nvim-treesitter ];
@@ -332,6 +349,10 @@ let
     {
       # Java
       plugin = nvim-jdtls;
+      depends = [{
+        plugin = vim-markdown;
+        preConfig = readFile ./vim-markdown-pre.lua;
+      }];
       dependBundles = [ "lsp" ];
       config = let jdtLsp = pkgs.jdt-language-server;
       in {
@@ -462,6 +483,17 @@ let
     }
   ];
   custom = with pkgs.vimPlugins; [
+    {
+      plugin = noice-nvim;
+      depends = [ nui-nvim nvim-treesitter nvim-notify ];
+      config = {
+        lang = "lua";
+        code = readFile ./noice.lua;
+        args = { exclude_ft_path = ./shared/exclude_ft.lua; };
+      };
+      lazy = true;
+
+    }
     {
       plugin = nvim-fundo;
       depends = [ promise-async ];

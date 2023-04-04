@@ -453,6 +453,14 @@ let
   ];
   custom = with pkgs.vimPlugins; [
     {
+      plugin = nvim-fundo;
+      depends = [ promise-async ];
+      config = readFile ./fundo.lua;
+      lazy = true;
+      # run
+      # require('fundo').install()
+    }
+    {
       plugin = nvim-early-retirement;
       config = {
         lang = "lua";

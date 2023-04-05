@@ -11,3 +11,4 @@ require("pommodoro-clock").setup({
 })
 vim.api.nvim_create_user_command("Pomodoro", "lua require('pommodoro-clock').start('focus')", {})
 vim.api.nvim_create_user_command("PomodoroBreak", "lua require('pommodoro-clock').start('break')", {})
+vim.api.nvim_create_user_command("PomodoroClose", "lua require('pommodoro-clock').close()", {})

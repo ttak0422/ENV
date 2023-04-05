@@ -735,13 +735,10 @@ let
       name = "dap";
       plugins = [
         nvim-dap
-        nvim-treesitter
-        nvim-dap-ui
         nvim-dap-go
-        nvim-treesitter
         nvim-dap-ui
         nvim-dap-virtual-text
-        nvim-dap-go
+        nvim-treesitter
       ];
       config = readFile ./dap.lua;
       modules = [ "dap" "dapui" ];

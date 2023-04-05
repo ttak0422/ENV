@@ -36,6 +36,11 @@ let
   # opt plugins.
   motion = with pkgs.vimPlugins; [
     {
+      plugin = chowcho-nvim;
+      config = readFile ./chowcho.lua;
+      modules = [ "chowcho" ];
+    }
+    {
       plugin = JABS-nvim;
       config = readFile ./JABS.lua;
       commands = [ "JABSOpen" ];
@@ -519,7 +524,6 @@ let
       plugin = qf-nvim;
       config = readFile ./qf.lua;
       filetypes = [ "qf" ];
-      modules = [ "qf" ];
       events = [ "QuickFixCmdPre" ];
       lazy = true;
     }

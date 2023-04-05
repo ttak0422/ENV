@@ -24,6 +24,11 @@ local normal_keymaps = {
   { "<leader>nf", "<cmd>Neogen func<cr>", desc("fn comment") },
   -- motion
   {
+    "<c-w><c-w>",
+    "<cmd>lua require('chowcho').run()<cr>",
+    desc("choose window"),
+  },
+  {
     "gpd",
     "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
     desc("preview definition"),
@@ -87,7 +92,7 @@ local normal_keymaps = {
   -- toggle
   { "<leader>tb", "<cmd>NvimTreeToggle<cr>" },
   -- { "<leader>tm", "<cmd>MinimapToggle<cr>" },
-  { "<leader>tq", "<cmd>lua require('qf').toggle('c')<cr>" },
+  { "<leader>tq", "<cmd>lua require('toolwindow').open_window('quickfix', nil)<cr>" },
   {
     "<leader>td",
     "<cmd>lua require('toolwindow').open_window('trouble', {mode = 'document_diagnostics'})<cr>",

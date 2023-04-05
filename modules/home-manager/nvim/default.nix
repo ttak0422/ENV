@@ -65,6 +65,12 @@ let
   ];
   tool = with pkgs.vimPlugins; [
     {
+      plugin = nvim-FeMaco-lua;
+      depends = [ nvim-treesitter ];
+      config = readFile ./femaco.lua;
+      commands = [ "FeMaco" ];
+    }
+    {
       plugin = smart-splits-nvim;
       config = readFile ./smart-splits.lua;
       depends = [{
@@ -233,15 +239,21 @@ let
       lazy = true;
     }
   ];
-  lang = with pkgs.vimPlugins; [{
-    plugin = vim-nix;
-    filetypes = [ "nix" ];
-  }
-  # {
-  #   plugin = neofsharp-vim;
-  #   filetypes = [ "fs" "fsx" "fsi" "fsproj" ];
-  # }
-    ];
+  lang = with pkgs.vimPlugins; [
+    {
+      plugin = vim-nix;
+      filetypes = [ "nix" ];
+    }
+    {
+      plugin = vim-markdown;
+      preConfig = readFile ./vim-markdown-pre.lua;
+      filetypes = [ "markdown" ];
+    }
+    # {
+    #   plugin = neofsharp-vim;
+    #   filetypes = [ "fs" "fsx" "fsi" "fsproj" ];
+    # }
+  ];
   git = with pkgs.vimPlugins; [
     {
       plugin = git-conflict-nvim;
@@ -354,10 +366,7 @@ let
     {
       # Java
       plugin = nvim-jdtls;
-      depends = [{
-        plugin = vim-markdown;
-        preConfig = readFile ./vim-markdown-pre.lua;
-      }];
+      depends = [ ];
       dependBundles = [ "lsp" ];
       config = let jdtLsp = pkgs.jdt-language-server;
       in {

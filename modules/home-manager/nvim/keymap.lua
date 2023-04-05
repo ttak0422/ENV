@@ -89,6 +89,7 @@ local normal_keymaps = {
   -- tools
   { "<leader>q", "<cmd>BufDel<cr>" },
   { "<leader>Q", "<cmd>BufDel!<cr>" },
+  { "<leader>E", "<cmd>FeMaco<cr>", desc("edit code block") },
   -- toggle
   { "<leader>tb", "<cmd>NvimTreeToggle<cr>" },
   -- { "<leader>tm", "<cmd>MinimapToggle<cr>" },

@@ -4,6 +4,30 @@ local key_opts = { noremap = true, silent = true }
 local function desc(d)
   return { noremap = true, silent = true, desc = d }
 end
+
+local function toggle_tool()
+  local is_open = false
+  local pre_id = nil
+  return function(id, mod, opt)
+    return function()
+      local t = require("toolwindow")
+      if pre_id ~= id then
+        t.open_window(mod, opt)
+        is_open = true
+      else
+        if is_open then
+          t.close()
+          is_open = false
+        else
+          t.open_window(mod, opt)
+          is_open = true
+        end
+      end
+      pre_id = id
+    end
+  end
+end
+local toggle = toggle_tool()
 local map = vim.keymap.set
 
 local normal_keymaps = {
@@ -92,17 +116,16 @@ local normal_keymaps = {
   { "<leader>E", "<cmd>FeMaco<cr>", desc("edit code block") },
   -- toggle
   { "<leader>tb", "<cmd>NvimTreeToggle<cr>" },
-  -- { "<leader>tm", "<cmd>MinimapToggle<cr>" },
-  { "<leader>tq", "<cmd>lua require('toolwindow').open_window('quickfix', nil)<cr>" },
+  { "<leader>tq", toggle(1, "quickfix", nil), desc("open quickfix") },
   {
     "<leader>td",
-    "<cmd>lua require('toolwindow').open_window('trouble', {mode = 'document_diagnostics'})<cr>",
-    desc("toggle diagnostics (document)"),
+    toggle(2, "trouble", { mode = "document_diagnostics" }),
+    desc("open diagnostics (document)"),
   },
   {
     "<leader>tD",
-    "<cmd>lua require('toolwindow').open_window('trouble', {mode = 'workspace_diagnostics'})<cr>",
-    desc("toggle diagnostics (workspace)"),
+    toggle(3, "trouble", { mode = "workspace_diagnostics" }),
+    desc("open diagnostics (workspace)"),
   },
   -- finder
   { "<leader>ff", "<cmd>Telescope live_grep_args<cr>", desc("search by content") },

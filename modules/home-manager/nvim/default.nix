@@ -498,6 +498,11 @@ let
   ];
   custom = with pkgs.vimPlugins; [
     {
+      plugin = nvim-spider;
+      config = readFile ./spider.lua;
+      modules = [ "spider" ];
+    }
+    {
       plugin = noice-nvim;
       depends = [ nui-nvim nvim-treesitter nvim-notify ];
       config = {

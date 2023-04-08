@@ -23,14 +23,14 @@ let
       plugin = stickybuf-nvim;
       startup = readFile ./stickybuf.lua;
     }
-    {
-      plugin = persisted-nvim;
-      startup = {
-        lang = "lua";
-        code = readFile ./persisted.lua;
-        args = { exclude_ft_path = ./shared/exclude_ft.lua; };
-      };
-    }
+    # {
+    #   plugin = persisted-nvim;
+    #   startup = {
+    #     lang = "lua";
+    #     code = readFile ./persisted.lua;
+    #     args = { exclude_ft_path = ./shared/exclude_ft.lua; };
+    #   };
+    # }
   ];
 
   # opt plugins.

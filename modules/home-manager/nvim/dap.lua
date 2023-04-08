@@ -43,12 +43,12 @@ require("dap-go").setup({
   },
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "dap-repl",
-  callback = function(args)
-    vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
-  end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "dap-repl",
+--   callback = function(args)
+--     vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
+--   end,
+-- })
 
 local map = vim.keymap.set
 local function desc(d)
@@ -60,7 +60,7 @@ map("n", "<F10>", dap.step_over, desc("[dap] step over"))
 map("n", "<F11>", dap.step_into, desc("[dap] step into"))
 map("n", "<F12>", dap.step_out, desc("[dap] step out"))
 map("n", "<leader>db", dap.toggle_breakpoint, desc("[dap] toggle breakpoint"))
-map("n", "<leader>dr", dap.repl.open, desc("[dap] open repl"))
+map("n", "<leader>dr", dap.repl.toggle, desc("[dap] open repl"))
 map("n", "<leader>dl", dap.run_last, desc("[dap] run last"))
 map("n", "<leader>dB", function()
   dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))

@@ -489,7 +489,7 @@ let
     {
       plugin = Comment-nvim;
       config = readFile ./comment.lua;
-      events = [ "InsertEnter" ];
+      events = [ "InsertEnter" "CursorMoved" ];
     }
     {
       plugin = denops-vim;

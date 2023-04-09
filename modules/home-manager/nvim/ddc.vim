@@ -1,6 +1,6 @@
 let s:sources = [
-      \ 'nvim-lsp',
       \ 'around',
+      \ 'nvim-lsp',
       \ ]
 
 let s:sourceOptions = {}
@@ -20,35 +20,40 @@ let s:sourceOptions._ = {
       \ 'minKeywordLength': 2,
       \ }
 let s:sourceOptions.around = {
-      \ 'mark': 'A',
+      \ 'mark': '[ARD]',
+      \ 'maxItems': 50,
+      \ }
+let s:sourceOptions.line= {
+      \ 'mark': '[LIN]',
       \ 'maxItems': 50,
       \ }
 let s:sourceOptions.file = {
-      \ 'mark': 'F',
+      \ 'mark': '[FIL]',
       \ 'forceCompletionPattern': '\S/\S*',
       \ }
 let s:sourceOptions.buffer = {
-      \ 'mark': 'B',
+      \ 'mark': '[BUF]',
       \ }
 let s:sourceOptions.skkeleton = {
-      \ 'mark': 'S',
+      \ 'mark': '[SKK]',
       \ 'matchers': ['skkeleton'],
       \ }
 let s:sourceOptions['nvim-lsp'] = {
+      \ 'mark': '[LSP]',
       \ 'dup': 'keep',
       \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \ }
 let s:sourceOptions.tmux = {
-      \ 'mark': 'T',
+      \ 'mark': '[TMX]',
       \ }
 let s:sourceOptions.necovim = {
-      \ 'mark': 'V',
+      \ 'mark': '[VIM]',
       \ }
 let s:sourceOptions.cmdline = {
-      \ 'mark': 'cmdline',
+      \ 'mark': '[CMD]',
       \ }
 let s:sourceOptions['cmdline-history'] = {
-      \ 'mark': 'history',
+      \ 'mark': '[HST]',
       \ }
 let s:sourceOptions['nvim-obsidian'] = #{
       \   mark: ' ',
@@ -82,9 +87,13 @@ let s:filterParams.converter_truncate = { 'maxAbbrWidth': 60, 'maxKindWidth': 10
 
 let s:patch_global = {}
 let s:patch_global.ui = 'pum'
-let s:patch_global.keywordPattern = '[a-zA-Z_]\w*'
+let s:patch_global.keywordPattern = '[0-9a-zA-Z_]\w*'
 " let s:patch_global.ui = 'native'
-let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP' ]
+let s:patch_global.autoCompleteEvents = [
+    \ 'InsertEnter', 'TextChangedI', 'TextChangedP',
+    \ 'CmdlineChanged',
+    \ ]
+
 " let s:patch_global.autoCompleteDelay = 100
 let s:patch_global.backspaceCompletion = v:true
 let s:patch_global.sources = s:sources
@@ -102,6 +111,10 @@ call ddc#custom#patch_filetype(['java'], 'sourceOptions', #{
 call ddc#custom#patch_filetype(['java'], 'filterParams', #{
       \ converter_truncate: #{ maxAbbrWidth: 60, maxKindWidth: 10, maxMenuWidth: 0 },
       \ sorter_itemsize: #{ sameWordOnly: v:true },
+      \ })
+" for Vim
+call ddc#custom#patch_filetype(['vim'], #{
+      \ sources: extend(['necovim'], s:sources),
       \ })
 
 call ddc#enable()
@@ -127,3 +140,36 @@ inoremap <expr> <C-k> vsnip#jumpable(+1) ? '<Plug>(vsnip-jump-next)' : ''
 snoremap <expr> <C-k> vsnip#jumpable(+1) ? '<Plug>(vsnip-jump-next)' : ''
 inoremap <expr> <C-l> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
 snoremap <expr> <C-l> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
+
+" cmdline
+call ddc#custom#patch_global('cmdlineSources', {
+      \ ':': [ 'necovim', 'cmdline-history', 'cmdline', 'around' ],
+      \ '@': [],
+      \ '>': [],
+      \ '/': [ 'line', 'around' ],
+      \ '?': [ 'line', 'around' ],
+      \ '-': [],
+      \ '=': [ 'input' ],
+      \ })
+function! CommandlinePre() abort
+  if !exists('b:prev_buffer_config')
+    let b:prev_buffer_config = ddc#custom#get_buffer()
+  endif
+
+  autocmd User DDCCmdlineLeave ++once call CommandlinePost()
+  autocmd InsertEnter <buffer> ++once call CommandlinePost()
+
+  call ddc#enable_cmdline_completion()
+endfunction
+function! CommandlinePost() abort
+  if exists('b:prev_buffer_config')
+    call ddc#custom#set_buffer(b:prev_buffer_config)
+    unlet b:prev_buffer_config
+  else
+    call ddc#custom#set_buffer({})
+  endif
+endfunction
+
+nnoremap : <Cmd>call CommandlinePre()<CR>:
+nnoremap ? <Cmd>call CommandlinePre()<CR>?
+nnoremap / <Cmd>call CommandlinePre()<CR>/

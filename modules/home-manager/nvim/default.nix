@@ -194,16 +194,16 @@ let
       };
       events = [ "CursorMoved" ];
     }
-    {
-      # MEMO:
-      #   - `UpdateRemotePlugins` required.
-      #   - withPython3 required.
-      plugin = wilder-nvim;
-      depends = [ fzy-lua-native ];
-      config = readFile ./wilder.lua;
-      events = [ "CmdlineEnter" ];
-      extraPackages = with pkgs; [ fd ];
-    }
+    # {
+    #   # MEMO:
+    #   #   - `UpdateRemotePlugins` required.
+    #   #   - withPython3 required.
+    #   plugin = wilder-nvim;
+    #   depends = [ fzy-lua-native ];
+    #   config = readFile ./wilder.lua;
+    #   events = [ "CmdlineEnter" ];
+    #   extraPackages = with pkgs; [ fd ];
+    # }
     {
       plugin = SmoothCursor-nvim;
       config = {
@@ -773,24 +773,27 @@ let
             };
           }];
         }
-        ddc-ui-native
-        ddc-source-around
-        ddc-source-nvim-lsp
-        ddc-source-file
-        ddc-matcher_head
-        ddc-sorter_rank
-        ddc-sorter_itemsize
         ddc-buffer
+        ddc-converter_remove_overlap
+        ddc-converter_truncate
         ddc-fuzzy
-        denops-signature_help
-        denops-popup-preview-vim
+        ddc-matcher_head
+        ddc-matcher_length
+        ddc-sorter_itemsize
+        ddc-sorter_rank
+        ddc-source-around
         ddc-source-cmdline
         ddc-source-cmdline-history
-        neco-vim
+        ddc-source-file
+        ddc-source-input
+        ddc-source-line
+        ddc-source-nvim-lsp
         ddc-tmux
-        ddc-converter_truncate
-        ddc-converter_remove_overlap
-        ddc-matcher_length
+        ddc-ui-native
+        denops-popup-preview-vim
+        denops-signature_help
+        neco-vim
+        # TODO lazy
         {
           plugin = ddc-source-nvim-obsidian;
           depends = [ obsidian-nvim ];
@@ -857,7 +860,6 @@ in {
     '';
     extraPackages = with pkgs; [ delta ];
     optPlugins = motion ++ tool ++ git ++ lang ++ code ++ ui ++ custom;
-    withPython3 = true;
     inherit startPlugins bundles;
   };
 }

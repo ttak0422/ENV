@@ -20,19 +20,19 @@ let s:sourceOptions._ = {
       \ 'minKeywordLength': 2,
       \ }
 let s:sourceOptions.around = {
-      \ 'mark': '[ARD]',
+      \ 'mark': '[AROUND]',
       \ 'maxItems': 50,
       \ }
 let s:sourceOptions.line= {
-      \ 'mark': '[LIN]',
+      \ 'mark': '[LINE]',
       \ 'maxItems': 50,
       \ }
 let s:sourceOptions.file = {
-      \ 'mark': '[FIL]',
+      \ 'mark': '[FILE]',
       \ 'forceCompletionPattern': '\S/\S*',
       \ }
 let s:sourceOptions.buffer = {
-      \ 'mark': '[BUF]',
+      \ 'mark': '[BUFF]',
       \ }
 let s:sourceOptions.skkeleton = {
       \ 'mark': '[SKK]',
@@ -44,7 +44,7 @@ let s:sourceOptions['nvim-lsp'] = {
       \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \ }
 let s:sourceOptions.tmux = {
-      \ 'mark': '[TMX]',
+      \ 'mark': '[TMUX]',
       \ }
 let s:sourceOptions.necovim = {
       \ 'mark': '[VIM]',
@@ -53,7 +53,7 @@ let s:sourceOptions.cmdline = {
       \ 'mark': '[CMD]',
       \ }
 let s:sourceOptions['cmdline-history'] = {
-      \ 'mark': '[HST]',
+      \ 'mark': '[HIST]',
       \ }
 let s:sourceOptions['nvim-obsidian'] = #{
       \   mark: ' ',
@@ -102,7 +102,6 @@ let s:patch_global.sourceParams = s:sourceParams
 let s:patch_global.filterParams = s:filterParams
 call ddc#custom#patch_global(s:patch_global)
 
-
 " for Java
 call ddc#custom#patch_filetype(['java'], 'sourceOptions', #{
       \ _: #{
@@ -143,11 +142,11 @@ snoremap <expr> <C-l> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
 
 " cmdline
 call ddc#custom#patch_global('cmdlineSources', {
-      \ ':': [ 'necovim', 'cmdline-history', 'cmdline', 'around' ],
+      \ ':': [ 'necovim', 'file', 'cmdline-history', 'cmdline', 'around' ],
       \ '@': [],
       \ '>': [],
-      \ '/': [ 'line', 'around' ],
-      \ '?': [ 'line', 'around' ],
+      \ '/': [ 'around', 'line' ],
+      \ '?': [ 'around', 'line' ],
       \ '-': [],
       \ '=': [ 'input' ],
       \ })

@@ -1,6 +1,6 @@
 " depends vim-vsnip-integ.
 call pum#set_option(#{
-      \ padding: v:true,
+      \ padding: v:false,
       \ item_orders: ["abbr", "kind", "menu"],
       \ scrollbar_char: '█',
       \ max_height: 20,

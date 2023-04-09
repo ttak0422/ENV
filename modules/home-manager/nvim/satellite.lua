@@ -1,6 +1,7 @@
 require("satellite").setup({
   urrent_only = false,
   winblend = 50,
+  zindex = 4,
   excluded_filetypes = dofile(args.exclude_ft_path),
   width = 2,
   handlers = {

@@ -12,7 +12,7 @@ let s:sourceOptions.grep = #{
       \ }
 
 let s:kindOptions = {}
-let s:kindOptions.file = #{ defaultAction: 'open' }
+let s:kindOptions.file = #{ defaultAction: 'open', delay: 100, }
 
 let s:sourceParams = {}
 let s:sourceParams.find = #{
@@ -22,10 +22,6 @@ let s:sourceParams.grep = #{
       \ args: [ '--column', '--no-heading' ],
       \ }
 
-function s:ddu_col() abort
-
-endfunction
-
 let s:uiParams = {}
 let s:uiParams.ff = #{
       \ startFilter: v:true,
@@ -33,8 +29,8 @@ let s:uiParams.ff = #{
       \ floatingBorder: 'single',
       \ prompt: '',
       \ autoAction: #{ name: 'preview' },
-      \ previewSplit: 'no',
-      \ ignoreEmpty: v:false,
+      \ previewSplit: 'horizontal',
+      \ ignoreEmpty: v:true,
       \ autoResize: v:false,
       \ }
 
@@ -55,6 +51,12 @@ let s:patch_global.filterParams = s:filterParams
 
 call ddu#custom#patch_global(s:patch_global)
 
+function! s:ddu_send_all_to_qf() abort
+  call ddu#ui#do_action('clearSelectAllItems')
+  call ddu#ui#do_action('toggleAllItems')
+  call ddu#ui#do_action('itemAction', #{ name: 'quickfix'})
+endfunction
+
 function! s:ddu_settings() abort
   setlocal cursorline
   nnoremap <buffer><silent> <CR>  <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
@@ -65,11 +67,14 @@ endfunction
 
 function! s:ddu_filter_settings() abort
   autocmd TextChangedI,TextChangedP <buffer> call ddu#ui#ff#_do_auto_action()
+  nnoremap <buffer><silent> <CR>  <Cmd>call ddu#ui#do_action('itemAction')<CR>
+  nnoremap <buffer><silent> q     <Cmd>call ddu#ui#do_action('leaveFilterWindow')<CR>
+  nnoremap <buffer><silent> <C-c> <Cmd>call ddu#ui#do_action('quit')<CR>
+
   inoremap <buffer><silent> <CR>  <Cmd>call ddu#ui#do_action('itemAction')<CR>
-  inoremap <buffer><silent> <C-q> <Cmd>call ddu#ui#ff#do_action('quickfix')<CR>
+  inoremap <buffer><silent> <C-q> <Cmd>call <SID>ddu_send_all_to_qf()<CR>
   inoremap <buffer><silent> <C-p> <Cmd>call ddu#ui#ff#execute("call cursor(line('.')-1,0)<Bar>redraw")<CR>
   inoremap <buffer><silent> <C-n> <Cmd>call ddu#ui#ff#execute("call cursor(line('.')+1,0)<Bar>redraw")<CR>
-  nnoremap <buffer><silent> q     <Cmd>call ddu#ui#do_action('quit')<CR>
   inoremap <buffer><silent> <C-c> <Cmd>call ddu#ui#do_action('quit')<CR>
 endfunction
 
@@ -89,6 +94,18 @@ endfunction
 function! s:ddu_find() abort
   call ddu#start(#{
       \ sources: [#{ name: 'find' }],
+      \ uiParams: #{
+      \   ff: #{
+      \     startFilter: v:true,
+      \     split: 'floating',
+      \     floatingBorder: 'single',
+      \     prompt: '',
+      \     autoAction: #{ name: 'preview' },
+      \     previewSplit: 'no',
+      \     ignoreEmpty: v:true,
+      \     autoResize: v:false,
+      \   },
+      \ },
       \ })
 endfunction
 

@@ -810,36 +810,37 @@ let
       };
       lazy = true;
     }
-    {
-      name = "ddu";
-      plugins = [
-        ddu-vim
-        ddu-ui-ff
-        # ddu-source-file
-        # ddu-source-file_rec
-        {
-          plugin = ddu-source-file_external;
-          extraPackages = [ pkgs.fd ];
-        }
-        {
-          plugin = ddu-source-rg;
-          # depends = [ kensaku-vim ];
-          extraPackages = [ pkgs.ripgrep ];
-        }
-        ddu-filter-converter_display_word
-        ddu-filter-matcher_substring
-        ddu-filter-fzf
-        ddu-kind-file
-      ];
-      depends = [ denops-vim ];
-      config = {
-        lang = "vim";
-        code = readFile ./ddu.vim;
-      };
-      # WIP
-      lazy = true;
-      commands = [ "DduFileRec" ];
-    }
+    # {
+    #   name = "ddu";
+    #   plugins = [
+    #     ddu-vim
+    #     ddu-ui-ff
+    #     ddu-source-file
+    #     ddu-source-file_rec
+    #     ddu-source-buffer
+    #     {
+    #       plugin = ddu-source-file_external;
+    #       extraPackages = [ pkgs.fd ];
+    #     }
+    #     {
+    #       plugin = ddu-source-rg;
+    #       depends = [ kensaku-vim ];
+    #       extraPackages = [ pkgs.ripgrep ];
+    #     }
+    #     ddu-filter-converter_display_word
+    #     ddu-filter-matcher_substring
+    #     ddu-filter-fzf
+    #     ddu-kind-file
+    #   ];
+    #   depends = [ denops-vim ];
+    #   config = {
+    #     lang = "vim";
+    #     code = readFile ./ddu.vim;
+    #   };
+    #   # WIP
+    #   lazy = true;
+    #   commands = [ ];
+    # }
   ];
 in {
   programs.oboro-nvim = {

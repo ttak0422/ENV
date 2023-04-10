@@ -91,7 +91,7 @@ let s:patch_global.keywordPattern = '[0-9a-zA-Z_]\w*'
 " let s:patch_global.ui = 'native'
 let s:patch_global.autoCompleteEvents = [
     \ 'InsertEnter', 'TextChangedI', 'TextChangedP',
-    \ 'CmdlineChanged',
+    \ 'CmdlineEnter', 'CmdlineChanged',
     \ ]
 
 " let s:patch_global.autoCompleteDelay = 100

@@ -159,9 +159,6 @@ for _, keymap in ipairs(normal_keymaps) do
   map("n", keymap[1], keymap[2], keymap[3] or key_opts)
 end
 
-local function map_spider(key)
-  map({ "n", "o", "x" }, key, "<cmd>lua require('spider').motion('" .. key .. "')<cr>")
-end
 for _, key in ipairs({ "w", "e", "b" }) do
-  map_spider(key)
+  map("n", key, "<cmd>lua require('spider').motion('" .. key .. "')<cr>")
 end

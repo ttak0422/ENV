@@ -130,6 +130,7 @@ local normal_keymaps = {
   -- finder
   { "<leader>ff", "<cmd>Telescope live_grep_args<cr>", desc("search by content") },
   { "<leader>fp", "<cmd>Telescope find_files<cr>", desc("search by file name") },
+  { "<leader>fP", "<cmd>Telescope projects<cr>", desc("search project") },
   { "<leader>fb", "<cmd>Telescope buffers<cr>", desc("search buffer") },
   { "<leader>fh", "<cmd>Legendary<cr>", desc("search buffer") },
   { "<leader>ft", "<cmd>Telescope sonictemplate templates<cr>", desc("search template") },

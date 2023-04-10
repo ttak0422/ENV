@@ -1,5 +1,5 @@
 require("early-retirement").setup({
-  retirementAgeMins = 25,
+  retirementAgeMins = 20,
   ignoredFiletypes = {},
   ignoreAltFile = true,
   ignoreUnsavedChangesBufs = true,

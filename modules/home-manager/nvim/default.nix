@@ -521,14 +521,14 @@ let
       # run
       # require('fundo').install()
     }
-    # {
-    #   plugin = nvim-early-retirement;
-    #   config = {
-    #     lang = "lua";
-    #     code = readFile ./nvim-early-retirement.lua;
-    #   };
-    #   lazy = true;
-    # }
+    {
+      plugin = nvim-early-retirement;
+      config = {
+        lang = "lua";
+        code = readFile ./nvim-early-retirement.lua;
+      };
+      lazy = true;
+    }
     {
       plugin = open-nvim;
       config = readFile ./open.lua;

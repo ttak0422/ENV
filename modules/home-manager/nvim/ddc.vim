@@ -131,8 +131,8 @@ inoremap <silent> <C-x><C-b> <Cmd>call ddc#map#manual_complete(#{ sources: ['buf
 function! s:obsidian() abort
   call ddc#custom#patch_buffer('sources', ['nvim-obsidian', 'around', 'nvim-obsidian-new'])
 endfunction
-autocmd BufRead,BufNewFile **/vault/**/*.md call s:obsidian()
-autocmd BufRead,BufNewFile **/vault/*.md call s:obsidian()
+autocmd BufEnter,BufNewFile **/vault/**/*.md call s:obsidian()
+autocmd BufEnter,BufNewFile **/vault/*.md call s:obsidian()
 
 " vsnip
 inoremap <expr> <C-k> vsnip#jumpable(+1) ? '<Plug>(vsnip-jump-next)' : ''

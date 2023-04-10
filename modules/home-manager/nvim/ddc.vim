@@ -1,6 +1,6 @@
 let s:sources = [
-      \ 'around',
       \ 'nvim-lsp',
+      \ 'around',
       \ ]
 
 let s:sourceOptions = {}

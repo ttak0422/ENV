@@ -2470,6 +2470,22 @@
         "type": "github"
       }
     },
+    "modicator-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1678794826,
+        "narHash": "sha256-tzcmm6aZx9KKCRsfAgkknbc73/6/1SusWXIkeOIkOH0=",
+        "owner": "mawkler",
+        "repo": "modicator.nvim",
+        "rev": "28042ea94db52e19d02eb97cfc7f792d8f61f37a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mawkler",
+        "repo": "modicator.nvim",
+        "type": "github"
+      }
+    },
     "neco-vim": {
       "flake": false,
       "locked": {
@@ -4888,6 +4904,7 @@
         "mdeval-nvim": "mdeval-nvim",
         "minimap-vim": "minimap-vim",
         "mkdir-nvim": "mkdir-nvim",
+        "modicator-nvim": "modicator-nvim",
         "neco-vim": "neco-vim",
         "neofsharp-vim": "neofsharp-vim",
         "neogen": "neogen",
@@ -5031,11 +5048,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1681026713,
-        "narHash": "sha256-nZ3FJw0gDIo49wNJRJ35Q0vz068nHFItUY+kX8MaJw4=",
+        "lastModified": 1681316514,
+        "narHash": "sha256-nhORyfd1ImdXMdrlM25u7bMkvZ8hwMOneS9CBH/87LU=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "e930d15b4f9f372524d7d68cddb1e5fca789f46c",
+        "rev": "05a3f05f10d345d23612fdb249bb3357b64689e8",
         "type": "github"
       },
       "original": {

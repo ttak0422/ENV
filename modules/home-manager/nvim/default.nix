@@ -498,6 +498,10 @@ let
   ];
   custom = with pkgs.vimPlugins; [
     {
+      plugin = modicator-nvim;
+      config = readFile ./modicator.lua;
+    }
+    {
       plugin = nvim-spider;
       config = readFile ./spider.lua;
       modules = [ "spider" ];

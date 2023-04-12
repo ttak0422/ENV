@@ -42,10 +42,9 @@ return function(client, bufnr)
   map("n", "<leader>D", vim.lsp.buf.type_definition, desc("show type"))
   map("n", "<leader>rn", vim.lsp.buf.rename, desc("rename"))
   map("n", "<leader>ca", require("actions-preview").code_actions, desc("code action"))
-  -- WIP f/F motion
-  -- if client.supports_method("textDocument/formatting") then
-  --   map("n", "<leader>F", "<cmd>Format<cr>", bufopts)
-  -- end
+  if client.supports_method("textDocument/formatting") then
+    map("n", "<leader>cf", "<cmd>Format<cr>", desc("format"))
+  end
 
   -- info
   if client.supports_method("textDocument/inlayHint") then

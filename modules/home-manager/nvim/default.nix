@@ -2,6 +2,7 @@
 let
   inherit (builtins) readFile;
   inherit (pkgs) stdenv nix-filter;
+
   startPlugins = with pkgs.vimPlugins; [
     vim-sensible
     vim-poslist
@@ -362,6 +363,24 @@ let
       plugin = nvim-treesitter;
       config = readFile ./treesitter.lua;
       extraPackages = [ pkgs.tree-sitter ];
+    }
+    {
+      plugin = nvim-lint;
+      config = {
+        lang = "lua";
+        code = readFile ./lint.lua;
+        args = {
+          checkstyle_config_file_path = ./../../../configs/google_checks.xml;
+        };
+      };
+      extraPackages = with pkgs; [
+        checkstyle
+        luajitPackages.luacheck
+        python310Packages.flake8
+        statix
+      ];
+
+      lazy = true;
     }
     {
       # Java

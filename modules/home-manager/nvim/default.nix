@@ -66,6 +66,14 @@ let
   ];
   tool = with pkgs.vimPlugins; [
     {
+      plugin = toggleterm-nvim;
+      config = {
+        lang = "lua";
+        code = readFile ./toggleterm.lua;
+      };
+      commands = [ "TermToggle" "TigTermToggle" ];
+    }
+    {
       plugin = nvim-FeMaco-lua;
       depends = [ nvim-treesitter ];
       config = readFile ./femaco.lua;
@@ -102,6 +110,12 @@ let
     #   config = readFile ./hologram.lua;
     #   filetypes = [ "markdown" ];
     # }
+    {
+      plugin = pets-nvim;
+      depends = [ hologram-nvim nui-nvim ];
+      config = readFile ./pets.lua;
+      commands = [ "PetsNew" ];
+    }
     {
       # regex search panel.
       plugin = nvim-spectre;
@@ -516,6 +530,11 @@ let
     }
   ];
   custom = with pkgs.vimPlugins; [
+    {
+      plugin = safe-close-window-nvim;
+      config = readFile ./safe-close-window.lua;
+      commands = [ "SafeCloseWindow" ];
+    }
     {
       plugin = modicator-nvim;
       config = readFile ./modicator.lua;

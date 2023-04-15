@@ -42,6 +42,8 @@ local normal_keymaps = {
   { "]q", "<cmd>lua require('qf').below('c')<cr>" },
   { "[Q", "<cmd>cfirst<cr>" },
   { "]Q", "<cmd>clast<cr>" },
+  { "<c-w>q", "<cmd>SafeCloseWindow<cr>" },
+  { "<c-w><c-q>", "<cmd>SafeCloseWindow<cr>" },
   -- { "<leader>g", "<cmd>JABSOpen<cr>" },
   -- comment
   { "<leader>nc", "<cmd>Neogen class<cr>", desc("class comment") },
@@ -162,3 +164,9 @@ end
 for _, key in ipairs({ "w", "e", "b" }) do
   map("n", key, "<cmd>lua require('spider').motion('" .. key .. "')<cr>")
 end
+
+-- toggle term
+for i = 0, 9 do
+  map("n", "<leader>t" .. i, "<cmd>TermToggle " .. i .. "<cr>", desc("toggle terminal " .. i))
+end
+map("n", "<leader>tg", "<cmd>TigTermToggle<cr>", desc("toggle tig terminal "))

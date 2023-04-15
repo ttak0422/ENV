@@ -12,7 +12,7 @@ return {
   -- text_background_opacity = 0.5,
   font = wezterm.font("PlemolJP35 Console NFJ", { weight = "Medium", stretch = "Normal", style = "Normal" }),
   keys = {
-    { key = "-", mods = "CMD|SHIFT", action = wezterm.action.IncreaseFontSize },
+    { key = "=", mods = "CTRL", action = wezterm.action.IncreaseFontSize },
   },
   window_padding = {
     left = 5,

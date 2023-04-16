@@ -37,6 +37,11 @@ let
   # opt plugins.
   motion = with pkgs.vimPlugins; [
     {
+      plugin = reacher-nvim;
+      config = readFile ./reacher.lua;
+      modules = [ "reacher" ];
+    }
+    {
       plugin = chowcho-nvim;
       config = readFile ./chowcho.lua;
       modules = [ "chowcho" ];

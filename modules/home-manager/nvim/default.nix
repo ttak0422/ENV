@@ -173,6 +173,12 @@ let
   ];
   ui = with pkgs.vimPlugins; [
     {
+      plugin = nvim-treesitter-context;
+      depends = [ nvim-treesitter ];
+      config = readFile ./treesitter-context.lua;
+      events = [ "CursorMoved" ];
+    }
+    {
       plugin = nvim-notify;
       config = readFile ./notify.lua;
       lazy = true;

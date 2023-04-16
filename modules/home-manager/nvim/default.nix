@@ -531,6 +531,11 @@ let
   ];
   custom = with pkgs.vimPlugins; [
     {
+      plugin = waitevent-nvim;
+      config = readFile ./waitevent.lua;
+      lazy = true;
+    }
+    {
       plugin = safe-close-window-nvim;
       config = readFile ./safe-close-window.lua;
       commands = [ "SafeCloseWindow" ];

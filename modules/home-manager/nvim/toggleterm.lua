@@ -6,12 +6,7 @@ require("toggleterm").setup({
       return vim.o.columns * 0.4
     end
   end,
-  winbar = {
-    enabled = true,
-    name_formatter = function(term)
-      return term.name
-    end,
-  },
+  shade_terminals = false,
 })
 
 local Terminal = require("toggleterm.terminal").Terminal

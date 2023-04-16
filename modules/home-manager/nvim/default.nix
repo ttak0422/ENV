@@ -343,6 +343,7 @@ let
       commands = [ "Legendary" ];
     }
     {
+      # ys, ds, cs, ...
       plugin = nvim-surround;
       config = readFile ./surround.lua;
       events = [ "InsertEnter" ];

@@ -390,6 +390,17 @@ let
       config = readFile ./treesitter.lua;
       extraPackages = [ pkgs.tree-sitter ];
     }
+    # {
+    #   plugin = nvim-treesitter-refactor;
+    #   depends = [ nvim-treesitter ];
+    #   config = readFile ./treesitter-refactor.lua;
+    #   lazy = true;
+    # }
+    {
+      plugin = nvim-treesitter-textobjects;
+      config = readFile ./treesitter-textobjects.lua;
+      lazy = true;
+    }
     {
       plugin = nvim-lint;
       config = {

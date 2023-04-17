@@ -78,11 +78,13 @@ lspconfig.tsserver.setup({
   capabilities = capabilities,
   cmd = tsserver_cmd,
   root_dir = util.root_pattern("package.json"),
-  init_argsions = {
+  init_options = {
     hostInfo = "neovim",
     maxTsServerMemory = 8192,
     tsserver = {
       path = tsserver_path,
+      includeCompletionsWithSnippetText = true,
+      includeCompletionsForImportStatements = true,
     },
   },
   single_file_support = false,

@@ -38,6 +38,7 @@ return function(client, bufnr)
 
   -- action
   map("n", "K", require("hover").hover, desc("show doc"))
+  -- map("n", "K", require("pretty_hover").hover, desc("show doc"))
   map("n", "<leader>K", vim.lsp.buf.signature_help, desc("show signature"))
   map("n", "<leader>D", vim.lsp.buf.type_definition, desc("show type"))
   map("n", "<leader>rn", vim.lsp.buf.rename, desc("rename"))

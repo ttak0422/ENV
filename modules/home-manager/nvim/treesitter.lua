@@ -63,11 +63,11 @@ require("nvim-treesitter.configs").setup({
     disable = { "c", "org" },
     additional_vim_regex_highlighting = { "markdown" },
   },
-  rainbow = {
-    enable = true,
-    extended_mode = true,
-    max_file_lines = nil,
-  },
+  -- rainbow = {
+  --   enable = true,
+  --   extended_mode = true,
+  --   max_file_lines = nil,
+  -- },
   -- refactor = {
   --   navigation = {
   --     enable = true,

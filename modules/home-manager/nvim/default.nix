@@ -397,7 +397,14 @@ let
     #   lazy = true;
     # }
     {
+      plugin = nvim-ts-rainbow2;
+      depends = [ nvim-treesitter ];
+      config = readFile ./ts-rainbow2.lua;
+      lazy = true;
+    }
+    {
       plugin = nvim-treesitter-textobjects;
+      depends = [ nvim-treesitter ];
       config = readFile ./treesitter-textobjects.lua;
       lazy = true;
     }
@@ -807,6 +814,10 @@ let
           plugin = hover-nvim;
           config = readFile ./hover.lua;
         }
+        # {
+        #   plugin = pretty_hover;
+        #   config = readFile ./pretty-hover.lua;
+        # }
         noice-nvim
       ];
       depends = [{

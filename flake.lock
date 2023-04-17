@@ -3471,6 +3471,22 @@
         "type": "github"
       }
     },
+    "nvim-ts-rainbow2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1681480179,
+        "narHash": "sha256-SpIG5yEq1qnVpQAu0TPx6kwhWOeEAFm6n6QrYgMeV9A=",
+        "owner": "HiPhish",
+        "repo": "nvim-ts-rainbow2",
+        "rev": "7f814b9d6e4ef6f1f5b09526ba16b75125173480",
+        "type": "github"
+      },
+      "original": {
+        "owner": "HiPhish",
+        "repo": "nvim-ts-rainbow2",
+        "type": "github"
+      }
+    },
     "nvim-ufo": {
       "flake": false,
       "locked": {
@@ -5131,6 +5147,7 @@
         "nvim-trevJ-lua": "nvim-trevJ-lua",
         "nvim-ts-autotag": "nvim-ts-autotag",
         "nvim-ts-rainbow": "nvim-ts-rainbow",
+        "nvim-ts-rainbow2": "nvim-ts-rainbow2",
         "nvim-ufo": "nvim-ufo",
         "nvim-web-devicons": "nvim-web-devicons",
         "nvim_context_vt": "nvim_context_vt",
@@ -5235,11 +5252,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1681740676,
-        "narHash": "sha256-57RHhik2qAy6c+3S8cpMkaVRlnGZRaGmpHWexScNXF4=",
+        "lastModified": 1681748972,
+        "narHash": "sha256-p6FAG+5dvaCF2ZKMHpGrUmbjcWjJaWWBfAMEXGB2yqo=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "6856dd4dde892b9e89fd941aa9d9fbc6a9d32ce8",
+        "rev": "4fbe36ace274b306530ac0aac7822ab69a107c5b",
         "type": "github"
       },
       "original": {

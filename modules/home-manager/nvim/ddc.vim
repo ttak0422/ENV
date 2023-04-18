@@ -85,14 +85,21 @@ let s:sourceParams['nvim-obsidian-new'] = #{
 let s:filterParams = {}
 let s:filterParams.converter_truncate = { 'maxAbbrWidth': 60, 'maxKindWidth': 10, 'maxMenuWidth': 40 }
 
+let s:cmdlineSources = {
+      \ ':': [ 'necovim', 'cmdline', 'cmdline-history', 'file', 'around' ],
+      \ '@': [],
+      \ '>': [],
+      \ '/': [ 'around', 'line' ],
+      \ '?': [ 'around', 'line' ],
+      \ '-': [],
+      \ '=': [ 'input' ],
+      \ }
+
 let s:patch_global = {}
 let s:patch_global.ui = 'pum'
 let s:patch_global.keywordPattern = '[0-9a-zA-Z_]\w*'
 " let s:patch_global.ui = 'native'
-let s:patch_global.autoCompleteEvents = [
-    \ 'InsertEnter', 'TextChangedI', 'TextChangedP',
-    \ 'CmdlineEnter', 'CmdlineChanged',
-    \ ]
+let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged' ]
 
 " let s:patch_global.autoCompleteDelay = 100
 let s:patch_global.backspaceCompletion = v:true
@@ -100,6 +107,7 @@ let s:patch_global.sources = s:sources
 let s:patch_global.sourceOptions = s:sourceOptions
 let s:patch_global.sourceParams = s:sourceParams
 let s:patch_global.filterParams = s:filterParams
+let s:patch_global.cmdlineSources = s:cmdlineSources
 call ddc#custom#patch_global(s:patch_global)
 
 " for Java
@@ -140,35 +148,13 @@ snoremap <expr> <C-k> vsnip#jumpable(+1) ? '<Plug>(vsnip-jump-next)' : ''
 inoremap <expr> <C-l> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
 snoremap <expr> <C-l> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : ''
 
-" cmdline
-call ddc#custom#patch_global('cmdlineSources', {
-      \ ':': [ 'necovim', 'file', 'cmdline-history', 'cmdline', 'around' ],
-      \ '@': [],
-      \ '>': [],
-      \ '/': [ 'around', 'line' ],
-      \ '?': [ 'around', 'line' ],
-      \ '-': [],
-      \ '=': [ 'input' ],
-      \ })
 function! CommandlinePre() abort
-  if !exists('b:prev_buffer_config')
-    let b:prev_buffer_config = ddc#custom#get_buffer()
-  endif
-
   autocmd User DDCCmdlineLeave ++once call CommandlinePost()
-  autocmd InsertEnter <buffer> ++once call CommandlinePost()
-
   call ddc#enable_cmdline_completion()
 endfunction
 function! CommandlinePost() abort
-  if exists('b:prev_buffer_config')
-    call ddc#custom#set_buffer(b:prev_buffer_config)
-    unlet b:prev_buffer_config
-  else
-    call ddc#custom#set_buffer({})
-  endif
 endfunction
 
-nnoremap : <Cmd>call CommandlinePre()<CR>:
-nnoremap ? <Cmd>call CommandlinePre()<CR>?
-nnoremap / <Cmd>call CommandlinePre()<CR>/
+nnoremap <expr> : '<Cmd>call CommandlinePre()<CR>: '
+nnoremap  ? <Cmd>call CommandlinePre()<CR>?
+nnoremap  / <Cmd>call CommandlinePre()<CR>/

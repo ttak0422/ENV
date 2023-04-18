@@ -19,8 +19,6 @@ local util = require("lspconfig.util")
 local on_attach = dofile(args.on_attach_path)
 local capabilities = dofile(args.capabilities_path)
 local eslint_cmd = args.eslint_cmd
-local tsserver_cmd = args.tsserver_cmd
-local tsserver_path = args.tsserver_path
 
 -- lua
 lspconfig.lua_ls.setup({
@@ -69,24 +67,6 @@ lspconfig.denols.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   root_dir = util.root_pattern("deno.json", "deno.jsonc", "denops"),
-  single_file_support = false,
-})
-
--- node
-lspconfig.tsserver.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = tsserver_cmd,
-  root_dir = util.root_pattern("package.json"),
-  init_options = {
-    hostInfo = "neovim",
-    maxTsServerMemory = 8192,
-    tsserver = {
-      path = tsserver_path,
-      includeCompletionsWithSnippetText = true,
-      includeCompletionsForImportStatements = true,
-    },
-  },
   single_file_support = false,
 })
 

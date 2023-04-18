@@ -466,6 +466,26 @@ let
       filetypes = [ "java" ];
     }
     {
+      # typescript (node)
+      plugin = typescript-nvim;
+      dependBundles = [ "lsp" ];
+      config = {
+        lang = "lua";
+        code = readFile ./typescript.lua;
+        args = {
+          on_attach_path = ./shared/on_attach.lua;
+          capabilities_path = ./shared/capabilities.lua;
+          tsserver_cmd = [
+            "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server"
+            "--stdio"
+          ];
+          tsserver_path =
+            "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/";
+        };
+      };
+      filetypes = [ "typescript" ];
+    }
+    {
       # Rust
       plugin = rust-tools-nvim;
       depends = [ plenary-nvim nvim-dap ];
@@ -560,6 +580,11 @@ let
     }
   ];
   custom = with pkgs.vimPlugins; [
+    {
+      plugin = nvim-dd;
+      config = readFile ./nvim-dd.lua;
+      events = [ "InsertEnter" ];
+    }
     {
       plugin = waitevent-nvim;
       config = readFile ./waitevent.lua;
@@ -786,12 +811,6 @@ let
                 "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server"
                 "--stdio"
               ];
-              tsserver_cmd = [
-                "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server"
-                "--stdio"
-              ];
-              tsserver_path =
-                "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/";
             };
           };
           lazy = true;

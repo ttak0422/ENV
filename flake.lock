@@ -3551,6 +3551,38 @@
         "type": "github"
       }
     },
+    "nvim-window": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1648064093,
+        "narHash": "sha256-3nP/Dxl20g3Q1ojWTUxTE2NUrPq734HsxnzWhH2zttg=",
+        "owner": "yorickpeterse",
+        "repo": "nvim-window",
+        "rev": "dd0a6b230003ef35524853d71e5413f88fd2ba74",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yorickpeterse",
+        "repo": "nvim-window",
+        "type": "github"
+      }
+    },
+    "nvim-yati": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1681274879,
+        "narHash": "sha256-2Sg95t9UzY4s+beSjweKlM5uOHcqPHXen1sHbT9brGQ=",
+        "owner": "yioneko",
+        "repo": "nvim-yati",
+        "rev": "c4307e6855f17ff89f0132787e2daba27495d254",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yioneko",
+        "repo": "nvim-yati",
+        "type": "github"
+      }
+    },
     "nvim_context_vt": {
       "flake": false,
       "locked": {
@@ -5200,6 +5232,8 @@
         "nvim-ts-rainbow2": "nvim-ts-rainbow2",
         "nvim-ufo": "nvim-ufo",
         "nvim-web-devicons": "nvim-web-devicons",
+        "nvim-window": "nvim-window",
+        "nvim-yati": "nvim-yati",
         "nvim_context_vt": "nvim_context_vt",
         "nxvim": "nxvim",
         "obsidian-nvim": "obsidian-nvim",
@@ -5303,11 +5337,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1681836259,
-        "narHash": "sha256-xLFdQVlvv13VcS/1BpIew8MTzyzEvtdK/1TVJpDdaWg=",
+        "lastModified": 1681920147,
+        "narHash": "sha256-hSkB+QZtTn9jHoUPBGtXrNeWWvut0yHG8nR11ZPgojU=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "a6a5df5b8de67bb15b0c44788d9457976b1f6f65",
+        "rev": "fc93f0bc57431afd5acf7480499a73d4cd691ad1",
         "type": "github"
       },
       "original": {

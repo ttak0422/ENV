@@ -51,7 +51,7 @@ local normal_keymaps = {
   -- motion
   {
     "<c-w><c-w>",
-    "<cmd>lua require('chowcho').run()<cr>",
+    "<cmd>lua require('nvim-window').pick()<cr>",
     desc("choose window"),
   },
   {

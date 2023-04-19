@@ -41,10 +41,15 @@ let
       config = readFile ./reacher.lua;
       modules = [ "reacher" ];
     }
+    # {
+    #   plugin = chowcho-nvim;
+    #   config = readFile ./chowcho.lua;
+    #   modules = [ "chowcho" ];
+    # }
     {
-      plugin = chowcho-nvim;
-      config = readFile ./chowcho.lua;
-      modules = [ "chowcho" ];
+      plugin = nvim-window;
+      config = readFile ./nvim-window.lua;
+      modules = [ "nvim-window" ];
     }
     {
       plugin = JABS-nvim;
@@ -580,6 +585,12 @@ let
     }
   ];
   custom = with pkgs.vimPlugins; [
+    {
+      plugin = nvim-yati;
+      depends = [ nvim-treesitter ];
+      config = readFile ./yati.lua;
+      events = [ "InsertEnter" ];
+    }
     {
       plugin = nvim-dd;
       config = readFile ./nvim-dd.lua;

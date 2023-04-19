@@ -16,10 +16,10 @@ let
       plugin = nvim-config-local;
       startup = readFile ./config-local.lua;
     }
-    {
-      plugin = alpha-nvim;
-      startup = readFile ./alpha.lua;
-    }
+    # {
+    #   plugin = alpha-nvim;
+    #   startup = readFile ./alpha.lua;
+    # }
     {
       plugin = stickybuf-nvim;
       startup = readFile ./stickybuf.lua;

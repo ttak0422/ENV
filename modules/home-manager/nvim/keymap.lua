@@ -48,6 +48,13 @@ local normal_keymaps = {
   -- comment
   { "<leader>nc", "<cmd>Neogen class<cr>", desc("class comment") },
   { "<leader>nf", "<cmd>Neogen func<cr>", desc("fn comment") },
+  -- split/join
+  { "<leader>m", "<cmd>lua require('treesj').toggle()<cr>", desc("toggle split/join") },
+  {
+    "<leader>M",
+    "<cmd>lua require('treesj').toggle({ split = { recursive = true } })<cr>",
+    desc("toggle split/join rec"),
+  },
   -- motion
   {
     "<c-w><c-w>",

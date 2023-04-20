@@ -319,6 +319,11 @@ let
   ];
   code = with pkgs.vimPlugins; [
     {
+      plugin = treesj;
+      config = readFile ./treesj.lua;
+      modules = [ "treesj" ];
+    }
+    {
       plugin = neogen;
       depends = [ nvim-treesitter ];
       config = readFile ./neogen.lua;

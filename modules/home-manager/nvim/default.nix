@@ -83,7 +83,6 @@ let
     }
     {
       plugin = nvim-FeMaco-lua;
-      # depends = [ nvim-treesitter' ];
       dependBundles = [ "treesitter" ];
       config = readFile ./femaco.lua;
       commands = [ "FeMaco" ];
@@ -188,7 +187,6 @@ let
     # }
     {
       plugin = nvim-treesitter-context;
-      # depends = [ nvim-treesitter' ];
       dependBundles = [ "treesitter" ];
       config = readFile ./treesitter-context.lua;
       events = [ "CursorMoved" ];
@@ -335,7 +333,6 @@ let
     }
     {
       plugin = neogen;
-      # depends = [ nvim-treesitter' ];
       dependBundles = [ "treesitter" ];
       config = readFile ./neogen.lua;
       commands = [ "Neogen" ];
@@ -370,7 +367,6 @@ let
     }
     {
       plugin = nvim-ts-autotag;
-      # depends = [ nvim-treesitter' ];
       dependBundles = [ "treesitter" ];
       config = readFile ./ts-autotag.lua;
       filetypes = [ "javascript" "typescript" "jsx" "tsx" "vue" "html" ];
@@ -396,7 +392,6 @@ let
     }
     {
       plugin = nvim_context_vt;
-      # depends = [ nvim-treesitter' ];
       dependBundles = [ "treesitter" ];
       config = readFile ./context-vt.lua;
       lazy = true;
@@ -727,18 +722,18 @@ let
     }
   ];
   bundles =
-    #let
-    #  # nvim-treesitter' = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [p.nix]);
-    #  nvim-treesitter' = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
-    # vim.opt.runtimepath:append("${
-    # pkgs.symlinkJoin {
-    #   name = "treesitter-parsers";
-    #   paths = nvim-treesitter'.dependencies;
-    # }
-    # }")
-    #in
+    # let
+    #   nvim-treesitter' = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
+    #   cfg = ''
+    #     vim.opt.runtimepath:append("${
+    #       pkgs.symlinkJoin {
+    #         name = "treesitter-parsers";
+    #         paths = nvim-treesitter'.dependencies;
+    #       }
+    #     }")
+    #   '';
+    # in
     with pkgs.vimPlugins; [
-
       {
         name = "treesitter";
         plugins = [
@@ -748,40 +743,6 @@ let
           vim-matchup
           nvim-treesitter-textobjects
         ];
-
-        # {
-        #   plugin = nvim-treesitter-textobjects;
-        #   # depends = [ nvim-treesitter' ];
-        #   dependBundles = [ "treesitter"];
-        #   config = readFile ./treesitter-textobjects.lua;
-        #   lazy = true;
-        # }
-        # {
-        #   plugin = vim-matchup;
-        #   dependBundles = [ "treesitter"];
-        #   config = readFile ./matchup.lua;
-        #   events = [ "CursorMoved" ];
-        # }
-        # {
-        #   plugin = nvim-yati;
-        #   # depends = [ nvim-treesitter' ];
-        #   dependBundles = [ "treesitter"];
-        #   config = readFile ./yati.lua;
-        #   events = [ "InsertEnter" ];
-        # }
-        # {
-        #   plugin = nvim-treesitter-refactor;
-        #   depends = [ nvim-treesitter ];
-        #   config = readFile ./treesitter-refactor.lua;
-        #   lazy = true;
-        # }
-        # {
-        #   plugin = nvim-ts-rainbow2;
-        #   # depends = [ nvim-treesitter' ];
-        #   dependBundles = [ "treesitter"];
-        #   config = readFile ./ts-rainbow2.lua;
-        #   lazy = true;
-        # }
         config = readFile ./treesitter.lua;
         extraPackages = [ pkgs.tree-sitter ];
         lazy = true;
@@ -1039,32 +1000,6 @@ in {
     '';
     extraPackages = with pkgs; [ delta ];
     optPlugins = motion ++ tool ++ git ++ lang ++ code ++ ui ++ custom;
-    # optPlugins = motion; # ++ tool ++ git ++ lang ++ code ++ ui ++ custom;
-    #    optPlugins =
-    #	with pkgs.vimPlugins; [
-    #    {
-    #      plugin = nvim-treesitter';
-    #      config = let
-    #        nvim-plugintree = (pkgs.vimPlugins.nvim-treesitter.withPlugins
-    #          (p: [ p.c p.lua p.nix p.bash p.cpp p.json p.python p.markdown ]));
-    #        treesitter-parsers = pkgs.symlinkJoin {
-    #          name = "treesitter-parsers";
-    #          paths = nvim-plugintree.dependencies;
-    #        };
-    #      in ''
-    #        vim.opt.runtimepath:append("${treesitter-parsers}");
-    #      '' + readFile ./treesitter.lua;
-    #      extraPackages = [ pkgs.tree-sitter ];
-    #    }];
-
-    # bundles =
-    #     let
-    #       nvim-treesitter' = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
-    #         p.nix
-    #     ]);
-    #     in
-    # with pkgs.vimPlugins; [
-    # 	];
     inherit startPlugins bundles;
   };
 }

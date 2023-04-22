@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.11-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-22.11-darwin";
     darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,6 +54,13 @@
     #   inputs.emacs-overlay.follows = "emacs-overlay";
     # };
     vim-plugins-overlay.url = "github:ttak0422/vim-plugins-overlay";
+    neorg-overlay = {
+      url = "github:nvim-neorg/nixpkgs-neorg-overlay";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
     # vim-plugins-overlay.url = "path:/Users/ttak0422/ghq/github.com/ttak0422/vim-plugins-overlay";
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
@@ -169,12 +176,6 @@
       overlays = {
         pkgs-unstable = final: prev: {
           pkgs-unstable = import inputs.nixpkgs-unstable {
-            inherit (prev.stdenv) system;
-            inherit (nixpkgsConfig) config;
-          };
-        };
-        pkgs-stable = final: prev: {
-          pkgs-stable = import inputs.nixpkgs-stable {
             inherit (prev.stdenv) system;
             inherit (nixpkgsConfig) config;
           };

@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let nixTool = with pkgs; [ nix-prefetch-git nix-prefetch-github ];
 in {
-  home.packages = with pkgs.pkgs-stable;
+  home.packages = with pkgs;
     [
       # WIP
       bat # cat clone

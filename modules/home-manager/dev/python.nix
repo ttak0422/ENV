@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }: {
-  home.packages = with pkgs.pkgs-stable;
+  home.packages = with pkgs;
     [
       # poetry
     ];

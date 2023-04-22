@@ -8,9 +8,7 @@ let
     vim-poslist
     {
       plugin = tokyonight-nvim;
-      startup = ''
-        vim.cmd[[colorscheme tokyonight]]
-      '';
+      startup = "vim.cmd[[colorscheme tokyonight]] ";
     }
     {
       plugin = nvim-config-local;
@@ -70,7 +68,7 @@ let
     {
       plugin = tabout-nvim;
       config = readFile ./tabout.lua;
-      depends = [ nvim-treesitter ];
+      dependBundles = [ "treesitter" ];
       events = [ "InsertEnter" ];
     }
   ];
@@ -85,7 +83,8 @@ let
     }
     {
       plugin = nvim-FeMaco-lua;
-      depends = [ nvim-treesitter ];
+      # depends = [ nvim-treesitter' ];
+      dependBundles = [ "treesitter" ];
       config = readFile ./femaco.lua;
       commands = [ "FeMaco" ];
     }
@@ -177,9 +176,20 @@ let
     }
   ];
   ui = with pkgs.vimPlugins; [
+    # {
+    #   plugin = windows-nvim;
+    #   depends = [ middleclass animation-nvim ];
+    #   config = {
+    #     lang = "lua";
+    #     code = readFile ./windows.lua;
+    #     args = { exclude_ft_path = ./shared/exclude_ft.lua; };
+    #   };
+    #   events = [ "WinNew" ];
+    # }
     {
       plugin = nvim-treesitter-context;
-      depends = [ nvim-treesitter ];
+      # depends = [ nvim-treesitter' ];
+      dependBundles = [ "treesitter" ];
       config = readFile ./treesitter-context.lua;
       events = [ "CursorMoved" ];
     }
@@ -325,23 +335,17 @@ let
     }
     {
       plugin = neogen;
-      depends = [ nvim-treesitter ];
+      # depends = [ nvim-treesitter' ];
+      dependBundles = [ "treesitter" ];
       config = readFile ./neogen.lua;
       commands = [ "Neogen" ];
     }
     # {
     #   plugin = coman-nvim;
-    #   depends = [ nvim-treesitter ];
+    #   depends = [ nvim-treesitter' ];
     #   config = readFile ./coman.lua;
     #   commands = [ "ComComment" "ComAnnotation" ];
     # }
-    {
-      plugin = nvim-autopairs;
-      depends = [ nvim-treesitter ];
-      config = readFile ./autopairs.lua;
-      events = [ "InsertEnter" ];
-      modules = [ "nvim-autopairs" ];
-    }
     {
       plugin = glance-nvim;
       config = readFile ./glance.lua;
@@ -366,7 +370,8 @@ let
     }
     {
       plugin = nvim-ts-autotag;
-      depends = [ nvim-treesitter ];
+      # depends = [ nvim-treesitter' ];
+      dependBundles = [ "treesitter" ];
       config = readFile ./ts-autotag.lua;
       filetypes = [ "javascript" "typescript" "jsx" "tsx" "vue" "html" ];
     }
@@ -391,33 +396,25 @@ let
     }
     {
       plugin = nvim_context_vt;
-      depends = [ nvim-treesitter ];
+      # depends = [ nvim-treesitter' ];
+      dependBundles = [ "treesitter" ];
       config = readFile ./context-vt.lua;
       lazy = true;
     }
-    {
-      plugin = nvim-treesitter;
-      config = readFile ./treesitter.lua;
-      extraPackages = [ pkgs.tree-sitter ];
-    }
     # {
-    #   plugin = nvim-treesitter-refactor;
-    #   depends = [ nvim-treesitter ];
-    #   config = readFile ./treesitter-refactor.lua;
-    #   lazy = true;
+    #   plugin = nvim-treesitter';
+    #   config = let
+    #     nvim-plugintree = (pkgs.vimPlugins.nvim-treesitter.withPlugins
+    #       (p: [ p.c p.lua p.nix p.bash p.cpp p.json p.python p.markdown ]));
+    #     treesitter-parsers = pkgs.symlinkJoin {
+    #       name = "treesitter-parsers";
+    #       paths = nvim-plugintree.dependencies;
+    #     };
+    #   in ''
+    #     vim.opt.runtimepath:append("${treesitter-parsers}");
+    #   '' + readFile ./treesitter.lua;
+    #   extraPackages = [ pkgs.tree-sitter ];
     # }
-    {
-      plugin = nvim-ts-rainbow2;
-      depends = [ nvim-treesitter ];
-      config = readFile ./ts-rainbow2.lua;
-      lazy = true;
-    }
-    {
-      plugin = nvim-treesitter-textobjects;
-      depends = [ nvim-treesitter ];
-      config = readFile ./treesitter-textobjects.lua;
-      lazy = true;
-    }
     {
       plugin = nvim-lint;
       config = {
@@ -441,7 +438,7 @@ let
       plugin = nvim-jdtls;
       depends = [ ];
       dependBundles = [ "lsp" ];
-      config = let jdtLsp = pkgs.jdt-language-server;
+      config = let jdtLsp = pkgs.pkgs-unstable.jdt-language-server;
       in {
         lang = "lua";
         code = readFile ./jdtls.lua;
@@ -515,7 +512,7 @@ let
       plugin = haskell-tools-nvim;
       depends = [ plenary-nvim ];
       dependBundles = [ "lsp" ];
-      extraPackages = with pkgs.pkgs-stable; [
+      extraPackages = with pkgs; [
         haskellPackages.fourmolu
         haskell-language-server
       ];
@@ -591,9 +588,8 @@ let
   ];
   custom = with pkgs.vimPlugins; [
     {
-      plugin = nvim-yati;
-      depends = [ nvim-treesitter ];
-      config = readFile ./yati.lua;
+      plugin = better-escape-nvim;
+      config = readFile ./better-escape.lua;
       events = [ "InsertEnter" ];
     }
     {
@@ -622,7 +618,8 @@ let
     }
     {
       plugin = noice-nvim;
-      depends = [ nui-nvim nvim-treesitter nvim-notify ];
+      depends = [ nui-nvim nvim-notify ];
+      dependBundles = [ "treesitter" ];
       config = {
         lang = "lua";
         code = readFile ./noice.lua;
@@ -674,10 +671,6 @@ let
       lazy = true;
     }
     {
-      plugin = vim-matchup;
-      events = [ "CursorMoved" ];
-    }
-    {
       plugin = nvim-bqf;
       config = readFile ./bqf.lua;
       events = [ "QuickFixCmdPre" ];
@@ -713,7 +706,8 @@ let
     }
     {
       plugin = indent-blankline-nvim;
-      depends = [ nvim-treesitter ];
+      # depends = [ nvim-treesitter' ];
+      dependBundles = [ "treesitter" ];
       config = {
         lang = "lua";
         code = readFile ./indent-blankline.lua;
@@ -722,8 +716,8 @@ let
     }
     {
       plugin = nvim-ufo;
-      depends =
-        [ nvim-treesitter promise-async statuscol-nvim indent-blankline-nvim ];
+      depends = [ promise-async statuscol-nvim indent-blankline-nvim ];
+      dependBundles = [ "treesitter" ];
       config = readFile ./ufo.lua;
       events = [ "BufRead" ];
     }
@@ -732,235 +726,304 @@ let
       config = readFile ./statuscol.lua;
     }
   ];
-  bundles = with pkgs.vimPlugins; [
-    {
-      name = "skk";
-      plugins = [
-        skkeleton
-        {
-          plugin = skkeleton_indicator-nvim;
-          config = readFile ./skk-indicator.lua;
-        }
-      ];
-      depends = [ denops-vim ];
-      config = {
-        lang = "vim";
-        code = readFile ./skk.vim;
-        args = { jisyo_path = "${pkgs.skk-dicts}/share/SKK-JISYO.L"; };
-      };
-      lazy = true;
-    }
-    {
-      name = "telescope";
-      plugins = [
-        telescope-nvim
-        telescope-ui-select-nvim
-        {
-          plugin = telescope-live-grep-args-nvim;
-          extraPackages = with pkgs; [ ripgrep ];
-        }
-        {
-          plugin = telescope-sonictemplate-nvim;
-          depends = [{
-            plugin = vim-sonictemplate.overrideAttrs (old: {
-              src = nix-filter {
-                root = vim-sonictemplate.src;
-                exclude = [ "template/java" "template/make" ];
-              };
-            });
-            preConfig = let
-              templates = stdenv.mkDerivation {
-                name = "sonic-custom-templates";
-                src = ./sonic-template;
-                installPhase = ''
-                  mkdir $out
-                  cp -r ./* $out
-                '';
-              };
-            in ''
-              vim.g.sonictemplate_vim_template_dir = "${templates}"
-              vim.g.sonictemplate_key = 0
-              vim.g.sonictemplate_intelligent_key = 0
-              vim.g.sonictemplate_postfix_key = 0
-            '';
-          }];
-        }
-        {
-          plugin = project-nvim;
-          config = readFile ./project.lua;
-        }
-      ];
-      depends = [ plenary-nvim ];
-      config = readFile ./telescope.lua;
-      commands = [ "Telescope" ];
-    }
-    {
-      name = "lsp";
-      plugins = [
-        {
-          plugin = nvim-lspconfig;
-          # [WIP] dotnet
-          # dotnet tool install --global csharp-ls
-          extraPackages = with pkgs; [
-            dart
-            deno
-            google-java-format
-            gopls
-            nil
-            nodePackages.bash-language-server
-            nodePackages.pyright
-            nodePackages.typescript
-            nodePackages.vscode-langservers-extracted
-            nodePackages.yaml-language-server
-            rubyPackages.solargraph
-            rust-analyzer
-            lua-language-server
-            taplo-cli
-          ];
-          config = {
-            lang = "lua";
-            code = readFile ./lspconfig.lua;
-            args = {
-              on_attach_path = ./shared/on_attach.lua;
-              capabilities_path = ./shared/capabilities.lua;
-              eslint_cmd = [
-                "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server"
-                "--stdio"
-              ];
-            };
-          };
-          lazy = true;
-        }
-        {
-          plugin = actions-preview-nvim;
-          config = readFile ./actions-preview.lua;
-          dependBundles = [ "telescope" ];
-          modules = [ "actions-preview" ];
-        }
-        {
-          plugin = lsp-inlayhints-nvim;
-          config = readFile ./inlayhints.lua;
-        }
-        {
-          plugin = vim-illuminate;
-          config = readFile ./illuminate.lua;
-        }
-        {
-          plugin = hover-nvim;
-          config = readFile ./hover.lua;
-        }
-        # {
-        #   plugin = pretty_hover;
-        #   config = readFile ./pretty-hover.lua;
-        # }
-        noice-nvim
-      ];
-      depends = [{
-        plugin = fidget-nvim;
-        config = readFile ./fidget.lua;
-      }];
-      lazy = true;
-    }
-    {
-      name = "dap";
-      plugins = [
-        nvim-dap
-        nvim-dap-go
-        nvim-dap-ui
-        nvim-dap-virtual-text
-        nvim-treesitter
-      ];
-      config = readFile ./dap.lua;
-      modules = [ "dap" "dapui" ];
-      extraPackages = with pkgs; [ delve ];
-      filetypes = [ "go" "java" ];
-    }
-    {
-      name = "ddc";
-      plugins = [
-        ddc-vim
-        {
-          plugin = ddc-ui-pum;
-          depends = [{
-            plugin = pum-vim;
-            config = {
-              lang = "vim";
-              code = readFile ./pum.vim;
-            };
-          }];
-        }
-        ddc-buffer
-        ddc-converter_remove_overlap
-        ddc-converter_truncate
-        ddc-fuzzy
-        ddc-matcher_head
-        ddc-matcher_length
-        ddc-sorter_itemsize
-        ddc-sorter_rank
-        ddc-source-around
-        ddc-source-cmdline
-        ddc-source-cmdline-history
-        ddc-source-file
-        ddc-source-input
-        ddc-source-line
-        ddc-source-nvim-lsp
-        ddc-tmux
-        ddc-ui-native
-        denops-popup-preview-vim
-        denops-signature_help
-        neco-vim
-        # TODO lazy
-        {
-          plugin = ddc-source-nvim-obsidian;
-          depends = [ obsidian-nvim ];
-        }
-      ];
-      depends = [
-        denops-vim
-        {
-          plugin = vim-vsnip-integ;
-          depends = [ vim-vsnip ];
-        }
-      ];
-      dependBundles = [ "lsp" ];
-      config = {
-        lang = "vim";
-        code = readFile ./ddc.vim;
-      };
-      lazy = true;
-    }
-    # {
-    #   name = "ddu";
-    #   plugins = [
-    #     ddu-vim
-    #     ddu-ui-ff
-    #     ddu-source-file
-    #     ddu-source-file_rec
-    #     ddu-source-buffer
-    #     {
-    #       plugin = ddu-source-file_external;
-    #       extraPackages = [ pkgs.fd ];
-    #     }
-    #     {
-    #       plugin = ddu-source-rg;
-    #       depends = [ kensaku-vim ];
-    #       extraPackages = [ pkgs.ripgrep ];
-    #     }
-    #     ddu-filter-converter_display_word
-    #     ddu-filter-matcher_substring
-    #     ddu-filter-fzf
-    #     ddu-kind-file
-    #   ];
-    #   depends = [ denops-vim ];
-    #   config = {
-    #     lang = "vim";
-    #     code = readFile ./ddu.vim;
-    #   };
-    #   # WIP
-    #   lazy = true;
-    #   commands = [ ];
+  bundles =
+    #let
+    #  # nvim-treesitter' = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [p.nix]);
+    #  nvim-treesitter' = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
+    # vim.opt.runtimepath:append("${
+    # pkgs.symlinkJoin {
+    #   name = "treesitter-parsers";
+    #   paths = nvim-treesitter'.dependencies;
     # }
-  ];
+    # }")
+    #in
+    with pkgs.vimPlugins; [
+
+      {
+        name = "treesitter";
+        plugins = [
+          nvim-treesitter
+          nvim-yati
+          nvim-ts-rainbow2
+          vim-matchup
+          nvim-treesitter-textobjects
+        ];
+
+        # {
+        #   plugin = nvim-treesitter-textobjects;
+        #   # depends = [ nvim-treesitter' ];
+        #   dependBundles = [ "treesitter"];
+        #   config = readFile ./treesitter-textobjects.lua;
+        #   lazy = true;
+        # }
+        # {
+        #   plugin = vim-matchup;
+        #   dependBundles = [ "treesitter"];
+        #   config = readFile ./matchup.lua;
+        #   events = [ "CursorMoved" ];
+        # }
+        # {
+        #   plugin = nvim-yati;
+        #   # depends = [ nvim-treesitter' ];
+        #   dependBundles = [ "treesitter"];
+        #   config = readFile ./yati.lua;
+        #   events = [ "InsertEnter" ];
+        # }
+        # {
+        #   plugin = nvim-treesitter-refactor;
+        #   depends = [ nvim-treesitter ];
+        #   config = readFile ./treesitter-refactor.lua;
+        #   lazy = true;
+        # }
+        # {
+        #   plugin = nvim-ts-rainbow2;
+        #   # depends = [ nvim-treesitter' ];
+        #   dependBundles = [ "treesitter"];
+        #   config = readFile ./ts-rainbow2.lua;
+        #   lazy = true;
+        # }
+        config = readFile ./treesitter.lua;
+        extraPackages = [ pkgs.tree-sitter ];
+        lazy = true;
+      }
+      {
+        name = "skk";
+        plugins = [
+          skkeleton
+          {
+            plugin = skkeleton_indicator-nvim;
+            config = readFile ./skk-indicator.lua;
+          }
+        ];
+        depends = [ denops-vim ];
+        config = {
+          lang = "vim";
+          code = readFile ./skk.vim;
+          args = { jisyo_path = "${pkgs.skk-dicts}/share/SKK-JISYO.L"; };
+        };
+        lazy = true;
+      }
+      {
+        name = "telescope";
+        plugins = [
+          telescope-nvim
+          telescope-ui-select-nvim
+          {
+            plugin = telescope-live-grep-args-nvim;
+            extraPackages = with pkgs; [ ripgrep ];
+          }
+          {
+            plugin = telescope-sonictemplate-nvim;
+            depends = [{
+              plugin = vim-sonictemplate.overrideAttrs (old: {
+                src = nix-filter {
+                  root = vim-sonictemplate.src;
+                  exclude = [ "template/java" "template/make" ];
+                };
+              });
+              preConfig = let
+                templates = stdenv.mkDerivation {
+                  name = "sonic-custom-templates";
+                  src = ./sonic-template;
+                  installPhase = ''
+                    mkdir $out
+                    cp -r ./* $out
+                  '';
+                };
+              in ''
+                vim.g.sonictemplate_vim_template_dir = "${templates}"
+                vim.g.sonictemplate_key = 0
+                vim.g.sonictemplate_intelligent_key = 0
+                vim.g.sonictemplate_postfix_key = 0
+              '';
+            }];
+          }
+          {
+            plugin = project-nvim;
+            config = readFile ./project.lua;
+          }
+        ];
+        depends = [ plenary-nvim ];
+        config = readFile ./telescope.lua;
+        commands = [ "Telescope" ];
+      }
+      {
+        name = "lsp";
+        plugins = [
+          {
+            plugin = nvim-lspconfig;
+            # [WIP] dotnet
+            # dotnet tool install --global csharp-ls
+            extraPackages = (with pkgs; [
+              dart
+              deno
+              google-java-format
+              gopls
+              nil
+              nodePackages.bash-language-server
+              nodePackages.pyright
+              nodePackages.typescript
+              nodePackages.vscode-langservers-extracted
+              nodePackages.yaml-language-server
+              rubyPackages.solargraph
+              rust-analyzer
+              taplo-cli
+            ]) ++ (with pkgs.pkgs-unstable; [ lua-language-server ]);
+            config = {
+              lang = "lua";
+              code = readFile ./lspconfig.lua;
+              args = {
+                on_attach_path = ./shared/on_attach.lua;
+                capabilities_path = ./shared/capabilities.lua;
+                eslint_cmd = [
+                  "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server"
+                  "--stdio"
+                ];
+              };
+            };
+            lazy = true;
+          }
+          {
+            plugin = actions-preview-nvim;
+            config = readFile ./actions-preview.lua;
+            dependBundles = [ "telescope" ];
+            modules = [ "actions-preview" ];
+          }
+          {
+            plugin = lsp-inlayhints-nvim;
+            config = readFile ./inlayhints.lua;
+          }
+          {
+            plugin = vim-illuminate;
+            config = readFile ./illuminate.lua;
+          }
+          {
+            plugin = hover-nvim;
+            config = readFile ./hover.lua;
+          }
+          # {
+          #   plugin = pretty_hover;
+          #   config = readFile ./pretty-hover.lua;
+          # }
+          # noice-nvim
+        ];
+        depends = [{
+          plugin = fidget-nvim;
+          config = readFile ./fidget.lua;
+        }];
+        lazy = true;
+      }
+      {
+        name = "dap";
+        plugins = [
+          nvim-dap
+          nvim-dap-go
+          nvim-dap-ui
+          nvim-dap-virtual-text
+          # nvim-treesitter'
+        ];
+        dependBundles = [ "treesitter" ];
+        config = readFile ./dap.lua;
+        modules = [ "dap" "dapui" ];
+        extraPackages = with pkgs; [ delve ];
+        filetypes = [ "go" "java" ];
+      }
+      {
+        name = "ddc";
+        plugins = [
+          ddc-vim
+          {
+            plugin = ddc-ui-pum;
+            depends = [{
+              plugin = pum-vim;
+              depends = [{
+                plugin = nvim-autopairs;
+                # depends = [ nvim-treesitter' ];
+                dependBundles = [ "treesitter" ];
+                config = readFile ./autopairs.lua;
+                events = [ "InsertEnter" ];
+                modules = [ "nvim-autopairs" ];
+              }
+
+                ];
+              config = {
+                lang = "vim";
+                code = readFile ./pum.vim;
+              };
+            }];
+          }
+          ddc-buffer
+          ddc-converter_remove_overlap
+          ddc-converter_truncate
+          ddc-fuzzy
+          ddc-matcher_head
+          ddc-matcher_length
+          ddc-sorter_itemsize
+          ddc-sorter_rank
+          ddc-source-around
+          ddc-source-cmdline
+          ddc-source-cmdline-history
+          ddc-source-file
+          ddc-source-input
+          ddc-source-line
+          ddc-source-nvim-lsp
+          ddc-tmux
+          ddc-ui-native
+          denops-popup-preview-vim
+          denops-signature_help
+          neco-vim
+          # TODO lazy
+          {
+            plugin = ddc-source-nvim-obsidian;
+            depends = [ obsidian-nvim ];
+          }
+        ];
+        depends = [
+          denops-vim
+          {
+            plugin = vim-vsnip-integ;
+            depends = [ vim-vsnip ];
+          }
+        ];
+        dependBundles = [ "lsp" ];
+        config = {
+          lang = "vim";
+          code = readFile ./ddc.vim;
+        };
+        lazy = true;
+      }
+      # {
+      #   name = "ddu";
+      #   plugins = [
+      #     ddu-vim
+      #     ddu-ui-ff
+      #     ddu-source-file
+      #     ddu-source-file_rec
+      #     ddu-source-buffer
+      #     {
+      #       plugin = ddu-source-file_external;
+      #       extraPackages = [ pkgs.fd ];
+      #     }
+      #     {
+      #       plugin = ddu-source-rg;
+      #       depends = [ kensaku-vim ];
+      #       extraPackages = [ pkgs.ripgrep ];
+      #     }
+      #     ddu-filter-converter_display_word
+      #     ddu-filter-matcher_substring
+      #     ddu-filter-fzf
+      #     ddu-kind-file
+      #   ];
+      #   depends = [ denops-vim ];
+      #   config = {
+      #     lang = "vim";
+      #     code = readFile ./ddu.vim;
+      #   };
+      #   # WIP
+      #   lazy = true;
+      #   commands = [ ];
+      # }
+    ];
 in {
   programs.oboro-nvim = {
     enable = true;
@@ -976,6 +1039,32 @@ in {
     '';
     extraPackages = with pkgs; [ delta ];
     optPlugins = motion ++ tool ++ git ++ lang ++ code ++ ui ++ custom;
+    # optPlugins = motion; # ++ tool ++ git ++ lang ++ code ++ ui ++ custom;
+    #    optPlugins =
+    #	with pkgs.vimPlugins; [
+    #    {
+    #      plugin = nvim-treesitter';
+    #      config = let
+    #        nvim-plugintree = (pkgs.vimPlugins.nvim-treesitter.withPlugins
+    #          (p: [ p.c p.lua p.nix p.bash p.cpp p.json p.python p.markdown ]));
+    #        treesitter-parsers = pkgs.symlinkJoin {
+    #          name = "treesitter-parsers";
+    #          paths = nvim-plugintree.dependencies;
+    #        };
+    #      in ''
+    #        vim.opt.runtimepath:append("${treesitter-parsers}");
+    #      '' + readFile ./treesitter.lua;
+    #      extraPackages = [ pkgs.tree-sitter ];
+    #    }];
+
+    # bundles =
+    #     let
+    #       nvim-treesitter' = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
+    #         p.nix
+    #     ]);
+    #     in
+    # with pkgs.vimPlugins; [
+    # 	];
     inherit startPlugins bundles;
   };
 }

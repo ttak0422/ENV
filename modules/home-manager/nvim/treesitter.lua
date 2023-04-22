@@ -55,29 +55,54 @@ require("nvim-treesitter.configs").setup({
     "org",
   },
   sync_install = false,
+  auto_install = false,
   ignore_install = {},
   parser_install_dir = parser_install_dir,
   highlight = {
     enable = true,
-    ignore_install = { "c" },
-    disable = { "c", "org" },
-    additional_vim_regex_highlighting = { "markdown" },
   },
-  -- rainbow = {
-  --   enable = true,
-  --   extended_mode = true,
-  --   max_file_lines = nil,
-  -- },
-  -- refactor = {
-  --   navigation = {
-  --     enable = true,
-  --     keymaps = {
-  --       goto_definition = "gnd",
-  --       list_definitions = "gnD",
-  --       list_definitions_toc = "gO",
-  --       goto_next_usage = "<a-*>",
-  --       goto_previous_usage = "<a-#>",
-  --     },
-  --   },
-  -- },
+  yati = {
+    enable = true,
+    default_lazy = true,
+    default_fallback = "auto",
+  },
+  indent = {
+    enable = false,
+  },
+  rainbow = {
+    enable = true,
+    query = "rainbow-parens",
+    strategy = require("ts-rainbow").strategy.global,
+  },
+  matchup = {
+    enable = true,
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true,
+      goto_next_start = {
+        ["]f"] = "@function.outer",
+      },
+      goto_next_end = {
+        ["]F"] = "@function.outer",
+      },
+      goto_previous_start = {
+        ["[f"] = "@function.outer",
+      },
+      goto_previous_end = {
+        ["[F"] = "@function.outer",
+      },
+    },
+  },
 })

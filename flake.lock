@@ -2847,6 +2847,22 @@
         "type": "github"
       }
     },
+    "neorg_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1682173858,
+        "narHash": "sha256-h7If9/R74rDDhprVy2r6cgOIF9G/VtYSrtfoGOt+4hc=",
+        "owner": "nvim-neorg",
+        "repo": "neorg",
+        "rev": "d61c4d1dd9442ec34d57e4a296b35a1117e65dbb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-neorg",
+        "repo": "neorg",
+        "type": "github"
+      }
+    },
     "neoscroll-nvim": {
       "flake": false,
       "locked": {
@@ -5548,6 +5564,7 @@
         "neofsharp-vim": "neofsharp-vim",
         "neogen": "neogen",
         "neogit": "neogit",
+        "neorg": "neorg_2",
         "neoscroll-nvim": "neoscroll-nvim",
         "nightfox-nvim": "nightfox-nvim",
         "nixpkgs": "nixpkgs_7",
@@ -5706,11 +5723,11 @@
         "zoomwintab-vim": "zoomwintab-vim"
       },
       "locked": {
-        "lastModified": 1682182859,
-        "narHash": "sha256-TNPZW7bJKgc+Uc1Yvx44i/zAZQ1HFg4snTKy3I9g0EE=",
+        "lastModified": 1682249269,
+        "narHash": "sha256-48keZ4P7aknkJ2uzF2b5QZo4XJ0y9MqBIXwzSUDT03o=",
         "owner": "ttak0422",
         "repo": "vim-plugins-overlay",
-        "rev": "77a2973b7d5022199480927a65b4503bff75a945",
+        "rev": "ff6dc00ef96d3a6c6d16bc4e7ad5d48ae9d4bd0a",
         "type": "github"
       },
       "original": {

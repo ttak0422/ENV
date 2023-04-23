@@ -43,6 +43,8 @@ return function(client, bufnr)
   map("n", "<leader>D", vim.lsp.buf.type_definition, desc("show type"))
   map("n", "<leader>rn", vim.lsp.buf.rename, desc("rename"))
   map("n", "<leader>ca", require("actions-preview").code_actions, desc("code action"))
+  map("n", "<leader>cc", "<cmd>Neogen class<cr>", desc("class comment"))
+  map("n", "<leader>cf", "<cmd>Neogen func<cr>", desc("fn comment"))
   if client.supports_method("textDocument/formatting") then
     map("n", "<leader>cf", "<cmd>Format<cr>", desc("format"))
   end

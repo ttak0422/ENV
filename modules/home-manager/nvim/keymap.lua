@@ -45,9 +45,6 @@ local normal_keymaps = {
   { "<c-w>q", "<cmd>SafeCloseWindow<cr>" },
   { "<c-w><c-q>", "<cmd>SafeCloseWindow<cr>" },
   -- { "<leader>g", "<cmd>JABSOpen<cr>" },
-  -- comment
-  { "<leader>nc", "<cmd>Neogen class<cr>", desc("class comment") },
-  { "<leader>nf", "<cmd>Neogen func<cr>", desc("fn comment") },
   -- split/join
   { "<leader>m", "<cmd>lua require('treesj').toggle()<cr>", desc("toggle split/join") },
   {

@@ -10,6 +10,13 @@ let
       plugin = tokyonight-nvim;
       startup = "vim.cmd[[colorscheme tokyonight]] ";
     }
+    # {
+    #   plugin = monokai-pro-nvim;
+    #   startup = ''
+    #     require("monokai-pro").setup()
+    #     vim.cmd([[colorscheme monokai-pro]])
+    #   '';
+    # }
     {
       plugin = nvim-config-local;
       startup = readFile ./config-local.lua;
@@ -73,6 +80,21 @@ let
     }
   ];
   tool = with pkgs.vimPlugins; [
+    {
+      plugin = neorg;
+      depends = [
+        plenary-nvim
+        {
+          plugin = headlines-nvim;
+          dependBundles = [ "treesitter" ];
+          config = readFile ./headlines.lua;
+        }
+      ];
+      dependBundles = [ "treesitter" ];
+      config = readFile ./neorg.lua;
+      commands = [ "Neorg" ];
+      filetypes = [ "norg" ];
+    }
     {
       plugin = toggleterm-nvim;
       config = {

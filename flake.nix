@@ -99,6 +99,7 @@
         };
         overlays = attrValues self.overlays ++ [
           inputs.neovim-nightly-overlay.overlay
+          # inputs.neorg-overlay.overlays.default
           inputs.vim-plugins-overlay.overlay
           inputs.nix-filter.overlays.default
           # inputs.emacs-overlay.overlay

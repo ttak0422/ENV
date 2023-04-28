@@ -46,7 +46,7 @@ return function(client, bufnr)
   map("n", "<leader>cc", "<cmd>Neogen class<cr>", desc("class comment"))
   map("n", "<leader>cf", "<cmd>Neogen func<cr>", desc("fn comment"))
   if client.supports_method("textDocument/formatting") then
-    map("n", "<leader>cf", "<cmd>Format<cr>", desc("format"))
+    map("n", "<leader>cF", "<cmd>Format<cr>", desc("format"))
   end
 
   -- info

@@ -97,7 +97,7 @@ let s:cmdlineSources = {
 
 let s:patch_global = {}
 let s:patch_global.ui = 'pum'
-let s:patch_global.keywordPattern = '[0-9a-zA-Z_]\w*'
+let s:patch_global.keywordPattern = '[0-9a-zA-Z]\k*'
 " let s:patch_global.ui = 'native'
 let s:patch_global.autoCompleteEvents = [ 'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged' ]
 

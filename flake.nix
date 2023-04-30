@@ -24,11 +24,11 @@
     #   url = "path:/Users/ttak0422/ghq/github.com/ttak0422/rokka-nvim";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    # ddc-source-nvim-obsidian = {
-    #   url =
-    #     "path:/Users/ttak0422/ghq/github.com/ttak0422/ddc-source-nvim-obsidian/";
-    #     flake = false;
-    # };
+    ddc-source-nvim-obsidian = {
+      url =
+        "path:/Users/ttak0422/ghq/github.com/ttak0422/ddc-source-nvim-obsidian/";
+      flake = false;
+    };
     rokka-nvim = {
       url = "github:ttak0422/rokka-nvim";
       inputs = {
@@ -111,11 +111,11 @@
               #   version = "local";
               #   src = inputs.ddc-sorter_itemsize;
               # };
-              # ddc-source-nvim-obsidian = prev.vimUtils.buildVimPluginFrom2Nix {
-              #   pname = "ddc-source-nvim-obsidian";
-              #   version = "local";
-              #   src = inputs.ddc-source-nvim-obsidian;
-              # };
+              ddc-source-nvim-obsidian = prev.vimUtils.buildVimPluginFrom2Nix {
+                pname = "ddc-source-nvim-obsidian";
+                version = "local";
+                src = inputs.ddc-source-nvim-obsidian;
+              };
             };
             tmuxPlugins = prev.tmuxPlugins // {
               tmux-pomodoro-plus = prev.tmuxPlugins.mkTmuxPlugin {

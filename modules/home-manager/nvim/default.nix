@@ -91,6 +91,10 @@ let
         }
       ];
       dependBundles = [ "treesitter" ];
+      startup = {
+        lang = "vim";
+        code = readFile "${neorg}/ftdetect/norg.vim";
+      };
       config = readFile ./neorg.lua;
       commands = [ "Neorg" ];
       filetypes = [ "norg" ];

@@ -5,3 +5,6 @@ vim.o.undodir = vim.fn.stdpath("cache") .. "/undo"
 vim.o.swapfile = false
 vim.o.winwidth = 20
 vim.o.winminwidth = 20
+vim.o.expandtab = true
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2

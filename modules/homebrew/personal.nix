@@ -33,7 +33,7 @@
       "karabiner-elements"
       "keycastr"
       "kitty"
-      "neovide"
+      # "neovide"
       "onedrive"
       "processing"
       "tableplus"

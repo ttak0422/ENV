@@ -1127,19 +1127,6 @@
     "ddc-source-nvim-obsidian": {
       "flake": false,
       "locked": {
-        "lastModified": 1682800309,
-        "narHash": "sha256-PwpE04t5GAe/ALGuwNunWthbFpvJ7X18vGfwnngLai0=",
-        "path": "/Users/ttak0422/ghq/github.com/ttak0422/ddc-source-nvim-obsidian/",
-        "type": "path"
-      },
-      "original": {
-        "path": "/Users/ttak0422/ghq/github.com/ttak0422/ddc-source-nvim-obsidian/",
-        "type": "path"
-      }
-    },
-    "ddc-source-nvim-obsidian_2": {
-      "flake": false,
-      "locked": {
         "lastModified": 1677293564,
         "narHash": "sha256-e5WPhc6Wu/UycdtZ3bzjjivZDGTs/xOPye55KoKoBYI=",
         "owner": "ttak0422",
@@ -3017,11 +3004,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1677655566,
-        "narHash": "sha256-I8G8Lmpp3YduYl4+pkiIJFGT1WKw+8ZMH2QwANkTu2U=",
+        "lastModified": 1683082554,
+        "narHash": "sha256-emO6mChgdBi4RwchtCCtAkvFf/OSkMyOQMqk6EZEPJA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "ae8bdd2de4c23b239b5a771501641d2ef5e027d0",
+        "rev": "0d373d5af960504dd60c3d06c65e553b36ef29d8",
         "type": "github"
       },
       "original": {
@@ -4477,7 +4464,6 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
-        "ddc-source-nvim-obsidian": "ddc-source-nvim-obsidian",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
@@ -5490,7 +5476,7 @@
         "ddc-source-line": "ddc-source-line",
         "ddc-source-nextword": "ddc-source-nextword",
         "ddc-source-nvim-lsp": "ddc-source-nvim-lsp",
-        "ddc-source-nvim-obsidian": "ddc-source-nvim-obsidian_2",
+        "ddc-source-nvim-obsidian": "ddc-source-nvim-obsidian",
         "ddc-tmux": "ddc-tmux",
         "ddc-treesitter": "ddc-treesitter",
         "ddc-ui-native": "ddc-ui-native",

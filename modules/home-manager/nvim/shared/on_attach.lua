@@ -44,6 +44,12 @@ return function(client, bufnr)
   map("n", "<leader>rn", vim.lsp.buf.rename, desc("rename"))
   map("n", "<leader>ca", require("actions-preview").code_actions, desc("code action"))
   map("n", "<leader>cc", "<cmd>Neogen class<cr>", desc("class comment"))
+  map(
+    "n",
+    "<leader>cj",
+    "<cmd>lua require('treesj').toggle({ split = { recursive = true } })<cr>",
+    desc("toggle split/join rec")
+  )
   map("n", "<leader>cf", "<cmd>Neogen func<cr>", desc("fn comment"))
   if client.supports_method("textDocument/formatting") then
     map("n", "<leader>cF", "<cmd>Format<cr>", desc("format"))

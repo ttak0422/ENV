@@ -17,7 +17,7 @@
     # 画しファイル表示
     AppleShowAllFiles = true;
     # keyboardレスポンス改善
-    InitialKeyRepeat = 10;
+    InitialKeyRepeat = 15;
     # keyboard連続入力改善
     KeyRepeat = 2;
     # disable window animation

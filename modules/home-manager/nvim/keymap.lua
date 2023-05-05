@@ -159,6 +159,10 @@ local normal_keymaps = {
     end,
     desc("create new note"),
   },
+  -- neorg
+  { "<leader>nn", "<cmd>Neorg index<cr>" },
+  { "<leader>nt", "<cmd>Neorg journal today<cr>", desc("neorg today") },
+  { "<leader>ny", "<cmd>Neorg journal yesterday<cr>", desc("neorg today") },
 }
 
 for _, keymap in ipairs(normal_keymaps) do

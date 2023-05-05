@@ -13,3 +13,13 @@ require("neorg").setup({
     },
   },
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "**/*.norg" },
+  callback = function()
+    vim.cmd([[
+      setl conceallevel=2
+      setl nowrap
+    ]])
+  end,
+})

@@ -81,6 +81,7 @@ let
   ];
   tool = with pkgs.vimPlugins; [
     {
+      # require ts-parser norg.
       plugin = neorg;
       depends = [
         plenary-nvim

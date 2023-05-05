@@ -92,13 +92,13 @@ let
         }
       ];
       dependBundles = [ "treesitter" ];
-      startup = {
-        lang = "vim";
-        code = readFile "${neorg}/ftdetect/norg.vim";
-      };
+      # startup = {
+      #   lang = "vim";
+      #   code = readFile "${neorg}/ftdetect/norg.vim";
+      # };
       config = readFile ./neorg.lua;
       commands = [ "Neorg" ];
-      filetypes = [ "norg" ];
+      # filetypes = [ "norg" ];
     }
     {
       plugin = toggleterm-nvim;

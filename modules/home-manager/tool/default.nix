@@ -29,6 +29,8 @@ in {
       pwgen # password generator
       ranger # cui filer
       sqlite # db engine
+      taskwarrior
+      taskwarrior-tui
       tealdeer # tldr
       texlive.combined.scheme-full # TeX
       tokei # code count

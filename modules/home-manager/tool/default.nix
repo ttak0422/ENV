@@ -33,6 +33,7 @@ in {
       taskwarrior-tui
       tealdeer # tldr
       texlive.combined.scheme-full # TeX
+      timewarrior
       tokei # code count
       viddy # watch
       wget # GNU Wget

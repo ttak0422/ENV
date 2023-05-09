@@ -7,6 +7,7 @@ require("nvim-treesitter.configs").setup({
   parser_install_dir = parser_install_dir,
   highlight = {
     enable = true,
+    additional_vim_regex_highlighting = false,
   },
   yati = {
     enable = true,

@@ -1,6 +1,1 @@
-{ config, pkgs, lib, ... }: {
-  home.packages = with pkgs;
-    [
-      # poetry
-    ];
-}
+{ config, pkgs, lib, ... }: { home.packages = with pkgs; [ poetry ]; }

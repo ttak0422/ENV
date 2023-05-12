@@ -3,6 +3,11 @@ require("neorg").setup({
   load = {
     ["core.defaults"] = {},
     ["core.export"] = {},
+    ["core.export.markdown"] = {
+      config = {
+        extensions = "all",
+      },
+    },
     ["core.concealer"] = {
       config = {
         dim_code_blocks = {

@@ -6,6 +6,9 @@
       options = "--delete-older-than 10d";
     };
     settings = {
+      experimental-features = ''
+        nix-command flakes
+      '';
       substituters = [
         "https://ttak0422.cachix.org"
         "https://ttak0422-vim-plugins-overlay.cachix.org"

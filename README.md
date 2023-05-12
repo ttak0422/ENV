@@ -20,6 +20,9 @@
 # build
 $ nix --experimental-features 'nix-command flakes' build .#darwinConfigurations.darwinM1.system
 
+# delete nix.conf (first time only)
+sudo rm /etc/nix/nix.conf
+
 # switch (first time only)
 $ ./result/sw/bin/darwin-rebuild switch --flake .#darwinM1
 # switch

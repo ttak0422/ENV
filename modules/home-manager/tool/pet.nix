@@ -45,6 +45,16 @@ let
       tag = [ "rust" ];
       command = "evcxr";
     }
+    {
+      description = "python setup";
+      tag = [ "python" ];
+      command = "python3 -m venv .venv";
+    }
+    {
+      description = "direnv python";
+      tag = [ "python" "direnv" ];
+      command = "echo 'source .venv/bin/activate' >> .envrc";
+    }
   ];
 in {
   home = {

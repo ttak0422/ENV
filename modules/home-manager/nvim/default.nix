@@ -80,6 +80,7 @@ let
     }
   ];
   tool = with pkgs.vimPlugins; [
+    { plugin = vim-jukit; }
     {
       # require ts-parser norg.
       plugin = neorg;

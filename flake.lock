@@ -4010,11 +4010,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1685028696,
-        "narHash": "sha256-juTy7nZc57aZBTX4L260C5Mu9xutJvURuFDR84oI6NQ=",
+        "lastModified": 1685233929,
+        "narHash": "sha256-4JNGOZ0XjQ7gyV2GKl0yN8h/HaVFFJRAsmoBl+pnZN0=",
         "owner": "ttak0422",
         "repo": "oboro-nvim",
-        "rev": "16c26565555c720695464efb69fd8a567286254f",
+        "rev": "3ba911960115626ce2bc05c9670a95fd9baadd29",
         "type": "github"
       },
       "original": {

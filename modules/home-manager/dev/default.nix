@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: {
   imports = [
     ./deno.nix
+    ./dhall.nix
     ./dotnet.nix
     ./elm.nix
     ./go.nix

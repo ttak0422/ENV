@@ -857,6 +857,7 @@ let
               rubyPackages.solargraph
               rust-analyzer
               taplo-cli
+              dhall-lsp-server
             ]) ++ (with pkgs.pkgs-unstable; [ lua-language-server ]);
             config = {
               lang = "lua";
